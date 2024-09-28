@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -44,9 +43,6 @@ public class SessionLog implements Serializable {
     @Column(name = "logout_timestamp")
     @Temporal(TemporalType.TIMESTAMP)
     private Date logoutTimestamp;
-    @Lob
-    @Column(name = "session_duration")
-    private Object sessionDuration;
     @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id")
     @ManyToOne
     private Usuario idUsuarioFk;
@@ -85,14 +81,6 @@ public class SessionLog implements Serializable {
 
     public void setLogoutTimestamp(Date logoutTimestamp) {
         this.logoutTimestamp = logoutTimestamp;
-    }
-
-    public Object getSessionDuration() {
-        return sessionDuration;
-    }
-
-    public void setSessionDuration(Object sessionDuration) {
-        this.sessionDuration = sessionDuration;
     }
 
     public Usuario getIdUsuarioFk() {
