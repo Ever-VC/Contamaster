@@ -49,12 +49,12 @@ public class Cuenta implements Serializable {
     @Column(name = "saldo", precision = 10, scale = 2)
     private BigDecimal saldo;
     @OneToMany(mappedBy = "idCuentaFk")
+    private Collection<Movimiento> movimientoCollection;
+    @OneToMany(mappedBy = "idCuentaFk")
     private Collection<Mayor> mayorCollection;
     @JoinColumn(name = "id_empresa_fk", referencedColumnName = "id")
     @ManyToOne
     private Empresa idEmpresaFk;
-    @OneToMany(mappedBy = "idCuentaFk")
-    private Collection<Asiento> asientoCollection;
 
     public Cuenta() {
     }
@@ -110,6 +110,14 @@ public class Cuenta implements Serializable {
         this.saldo = saldo;
     }
 
+    public Collection<Movimiento> getMovimientoCollection() {
+        return movimientoCollection;
+    }
+
+    public void setMovimientoCollection(Collection<Movimiento> movimientoCollection) {
+        this.movimientoCollection = movimientoCollection;
+    }
+
     public Collection<Mayor> getMayorCollection() {
         return mayorCollection;
     }
@@ -124,14 +132,6 @@ public class Cuenta implements Serializable {
 
     public void setIdEmpresaFk(Empresa idEmpresaFk) {
         this.idEmpresaFk = idEmpresaFk;
-    }
-
-    public Collection<Asiento> getAsientoCollection() {
-        return asientoCollection;
-    }
-
-    public void setAsientoCollection(Collection<Asiento> asientoCollection) {
-        this.asientoCollection = asientoCollection;
     }
 
     @Override
