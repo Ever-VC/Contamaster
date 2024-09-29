@@ -106,31 +106,20 @@ public class Login extends javax.swing.JFrame {
                 
                 int idUsuarioLogin = UsuarioControlador.Instancia().ValidarLogin(usuarioLogin);
                 
-                switch (idUsuarioLogin){
-                    case -1: // Caso de usuario no encontrado
-                        JOptionPane.showMessageDialog(null, "EL USUARIO QUE HA INGRESADO NO EXISTE EN LA BASE DE DATO, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
-                        break;
-                    case -2: // Caso de contraseña incorrecta
-                        JOptionPane.showMessageDialog(null, "LA CONTRASEÑA QUE HA INGRESADO NO COINCIDE CON EL NOMBRE DE USUARIO, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
-                        break;
-                    default:
-                        JOptionPane.showMessageDialog(null, "BIENVENIDO, EL ID DE USUARIO ES: " + idUsuarioLogin, "LOGIN EXITOSO:", JOptionPane.INFORMATION_MESSAGE);
-                        break;
-                }
-                
-                /*
-                Usuario user_login = new Usuario();
-                user_login.setUsername(jtxtUsername.getText());
-                user_login.setPassword(jtxtPassword.getText());
-                
-                if (UsuarioController.Instance().LoginValidate(user_login)) {
-                    Home frmHome = new Home();
-                    this.hide();
-                    frmHome.show();
+                if (idUsuarioLogin == -1) {
+                    // Caso de usuario no encontrado
+                    JOptionPane.showMessageDialog(null, "EL USUARIO QUE HA INGRESADO NO EXISTE EN LA BASE DE DATO, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
+                } else if (idUsuarioLogin == -2) {
+                    // Caso de contraseña incorrecta
+                    JOptionPane.showMessageDialog(null, "LA CONTRASEÑA QUE HA INGRESADO NO COINCIDE CON EL NOMBRE DE USUARIO, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, "EL USUARIO O CONTRASEÑA SON INCORRECTOS.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
+                    Principal frmPrincipal = new Principal();
+                    frmPrincipal.CargarUsuario(idUsuarioLogin);
+                    this.dispose();
+                    frmPrincipal.show();
+
+                    //JOptionPane.showMessageDialog(null, "BIENVENIDO, EL ID DE USUARIO ES: " + idUsuarioLogin, "LOGIN EXITOSO:", JOptionPane.INFORMATION_MESSAGE);
                 }
-                */
             } else {
                 JOptionPane.showMessageDialog(null, "DEBE INGRESAR SU CONTRASEÑA EN EL FORMULARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
             }
