@@ -85,10 +85,10 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jbtnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(314, Short.MAX_VALUE))
+                .addContainerGap(534, Short.MAX_VALUE))
         );
 
-        jpnlFondo.add(jpnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 590));
+        jpnlFondo.add(jpnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 810));
 
         jpnlContenedor.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -96,20 +96,20 @@ public class Principal extends javax.swing.JFrame {
         jpnlContenedor.setLayout(jpnlContenedorLayout);
         jpnlContenedorLayout.setHorizontalGroup(
             jpnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 790, Short.MAX_VALUE)
+            .addGap(0, 980, Short.MAX_VALUE)
         );
         jpnlContenedorLayout.setVerticalGroup(
             jpnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGap(0, 810, Short.MAX_VALUE)
         );
 
-        jpnlFondo.add(jpnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 790, 590));
+        jpnlFondo.add(jpnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 980, 810));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 1181, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
