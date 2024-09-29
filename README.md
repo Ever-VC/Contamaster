@@ -33,7 +33,6 @@ CREATE TABLE session_log (
     id SERIAL PRIMARY KEY,
     login_timestamp TIMESTAMP NOT NULL,
     logout_timestamp TIMESTAMP,
-    session_duration INTERVAL,
     id_usuario_fk INT REFERENCES usuario(id) ON DELETE CASCADE
 );
 
