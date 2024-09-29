@@ -133,24 +133,12 @@ public class Principal extends javax.swing.JFrame {
             _visible = -1;
         }
         */
-        Inicio panel = new Inicio();
-        panel.setSize(jpnlContenedor.getWidth(), jpnlContenedor.getHeight());
-        panel.setLocation(0, 0);
-        jpnlContenedor.removeAll();
-        jpnlContenedor.add(panel, BorderLayout.CENTER);
-        jpnlContenedor.revalidate();
-        jpnlContenedor.repaint();
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new Inicio());
     }//GEN-LAST:event_jbtnInicioActionPerformed
 
     private void jbtnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnUsuariosActionPerformed
         // TODO add your handling code here:
-        GestionUsuario panel = new GestionUsuario();
-        panel.setSize(jpnlContenedor.getWidth(), jpnlContenedor.getHeight());
-        panel.setLocation(0, 0);
-        jpnlContenedor.removeAll();
-        jpnlContenedor.add(panel, BorderLayout.CENTER);
-        jpnlContenedor.revalidate();
-        jpnlContenedor.repaint();
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new GestionUsuario());
     }//GEN-LAST:event_jbtnUsuariosActionPerformed
 
     public void CargarUsuario(int idUsuario) {
