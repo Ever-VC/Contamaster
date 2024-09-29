@@ -95,11 +95,11 @@ public class Login extends javax.swing.JFrame {
                 
                 String username = jtxtUsername.getText();
                 String password = jtxtPassword.getText();
-                /*
-                if ("create".equals(username) && "admin".equals(password)) {
+                
+                /*if ("create".equals(username) && "admin".equals(password)) {
                     UsuarioControlador.Instancia().CrearAdministradorInicial();
-                }
-                */
+                }*/
+                
                 Usuario usuarioLogin = new Usuario();
                 usuarioLogin.setUsername(username);
                 usuarioLogin.setPassword(password);
