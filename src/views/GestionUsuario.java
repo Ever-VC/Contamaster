@@ -4,6 +4,11 @@
  */
 package views;
 
+import controllers.UsuarioControlador;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import models.Usuario;
+
 /**
  *
  * @author ever_vc
@@ -15,8 +20,20 @@ public class GestionUsuario extends javax.swing.JPanel {
      */
     public GestionUsuario() {
         initComponents();
+        CargarUsuarios();
     }
 
+    private void CargarUsuarios() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)jtblUsuarios.getModel();
+        modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
+        List<Usuario> lstUsuarios = UsuarioControlador.Instancia().getListaUsuarios();
+         
+        for (Usuario usuario : lstUsuarios) {
+            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), usuario.getIdRolFk().getNombre(), "Activo"});
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
