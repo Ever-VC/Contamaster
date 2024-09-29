@@ -95,11 +95,11 @@ public class Login extends javax.swing.JFrame {
                 
                 String username = jtxtUsername.getText();
                 String password = jtxtPassword.getText();
-                /*
-                if ("create".equals(username) && "admin".equals(password)) {
+                
+                /*if ("create".equals(username) && "admin".equals(password)) {
                     UsuarioControlador.Instancia().CrearAdministradorInicial();
-                }
-                */
+                }*/
+                
                 Usuario usuarioLogin = new Usuario();
                 usuarioLogin.setUsername(username);
                 usuarioLogin.setPassword(password);
@@ -108,7 +108,7 @@ public class Login extends javax.swing.JFrame {
                 
                 if (idUsuarioLogin == -1) {
                     // Caso de usuario no encontrado
-                    JOptionPane.showMessageDialog(null, "EL USUARIO QUE HA INGRESADO NO EXISTE EN LA BASE DE DATO, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "EL USUARIO QUE HA INGRESADO NO EXISTE EN LA BASE DE DATOS, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
                 } else if (idUsuarioLogin == -2) {
                     // Caso de contraseña incorrecta
                     JOptionPane.showMessageDialog(null, "LA CONTRASEÑA QUE HA INGRESADO NO COINCIDE CON EL NOMBRE DE USUARIO, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
