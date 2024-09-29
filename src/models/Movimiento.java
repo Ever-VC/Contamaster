@@ -28,10 +28,10 @@ import javax.persistence.TemporalType;
  * @author ever_vc
  */
 @Entity
-@Table(name = "asiento", catalog = "contamaster", schema = "public")
+@Table(name = "movimiento", catalog = "contamaster", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "Asiento.findAll", query = "SELECT a FROM Asiento a")})
-public class Asiento implements Serializable {
+    @NamedQuery(name = "Movimiento.findAll", query = "SELECT m FROM Movimiento m")})
+public class Movimiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,35 +43,33 @@ public class Asiento implements Serializable {
     @Column(name = "fecha", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @Basic(optional = false)
-    @Column(name = "descripcion", nullable = false, length = 255)
+    @Column(name = "descripcion", length = 100)
     private String descripcion;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @Column(name = "total_debe", nullable = false, precision = 10, scale = 2)
-    private BigDecimal totalDebe;
+    @Column(name = "debe", nullable = false, precision = 10, scale = 2)
+    private BigDecimal debe;
     @Basic(optional = false)
-    @Column(name = "total_haber", nullable = false, precision = 10, scale = 2)
-    private BigDecimal totalHaber;
-    @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id")
+    @Column(name = "haber", nullable = false, precision = 10, scale = 2)
+    private BigDecimal haber;
+    @JoinColumn(name = "id_cuenta_fk", referencedColumnName = "id")
     @ManyToOne
-    private Usuario idUsuarioFk;
-    @OneToMany(mappedBy = "idAsientoFk")
+    private Cuenta idCuentaFk;
+    @OneToMany(mappedBy = "idMovimientoFk")
     private Collection<DetalleAsiento> detalleAsientoCollection;
 
-    public Asiento() {
+    public Movimiento() {
     }
 
-    public Asiento(Integer id) {
+    public Movimiento(Integer id) {
         this.id = id;
     }
 
-    public Asiento(Integer id, Date fecha, String descripcion, BigDecimal totalDebe, BigDecimal totalHaber) {
+    public Movimiento(Integer id, Date fecha, BigDecimal debe, BigDecimal haber) {
         this.id = id;
         this.fecha = fecha;
-        this.descripcion = descripcion;
-        this.totalDebe = totalDebe;
-        this.totalHaber = totalHaber;
+        this.debe = debe;
+        this.haber = haber;
     }
 
     public Integer getId() {
@@ -98,28 +96,28 @@ public class Asiento implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public BigDecimal getTotalDebe() {
-        return totalDebe;
+    public BigDecimal getDebe() {
+        return debe;
     }
 
-    public void setTotalDebe(BigDecimal totalDebe) {
-        this.totalDebe = totalDebe;
+    public void setDebe(BigDecimal debe) {
+        this.debe = debe;
     }
 
-    public BigDecimal getTotalHaber() {
-        return totalHaber;
+    public BigDecimal getHaber() {
+        return haber;
     }
 
-    public void setTotalHaber(BigDecimal totalHaber) {
-        this.totalHaber = totalHaber;
+    public void setHaber(BigDecimal haber) {
+        this.haber = haber;
     }
 
-    public Usuario getIdUsuarioFk() {
-        return idUsuarioFk;
+    public Cuenta getIdCuentaFk() {
+        return idCuentaFk;
     }
 
-    public void setIdUsuarioFk(Usuario idUsuarioFk) {
-        this.idUsuarioFk = idUsuarioFk;
+    public void setIdCuentaFk(Cuenta idCuentaFk) {
+        this.idCuentaFk = idCuentaFk;
     }
 
     public Collection<DetalleAsiento> getDetalleAsientoCollection() {
@@ -140,10 +138,10 @@ public class Asiento implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Asiento)) {
+        if (!(object instanceof Movimiento)) {
             return false;
         }
-        Asiento other = (Asiento) object;
+        Movimiento other = (Movimiento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -152,7 +150,7 @@ public class Asiento implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Asiento[ id=" + id + " ]";
+        return "models.Movimiento[ id=" + id + " ]";
     }
     
 }

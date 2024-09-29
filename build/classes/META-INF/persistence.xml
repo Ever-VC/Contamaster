@@ -9,6 +9,8 @@
     <class>models.Usuario</class>
     <class>models.Mayor</class>
     <class>models.Asiento</class>
+    <class>models.Movimiento</class>
+    <class>models.DetalleAsiento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/contamaster"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

@@ -5,7 +5,6 @@
 package models;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,18 +16,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
  * @author ever_vc
  */
 @Entity
-@Table(name = "session_log", catalog = "contamaster", schema = "public")
+@Table(name = "detalle_asiento", catalog = "contamaster", schema = "public")
 @NamedQueries({
-    @NamedQuery(name = "SessionLog.findAll", query = "SELECT s FROM SessionLog s")})
-public class SessionLog implements Serializable {
+    @NamedQuery(name = "DetalleAsiento.findAll", query = "SELECT d FROM DetalleAsiento d")})
+public class DetalleAsiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,27 +33,18 @@ public class SessionLog implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "login_timestamp", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date loginTimestamp;
-    @Column(name = "logout_timestamp")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date logoutTimestamp;
-    @JoinColumn(name = "id_usuario_fk", referencedColumnName = "id")
+    @JoinColumn(name = "id_asiento_fk", referencedColumnName = "id")
     @ManyToOne
-    private Usuario idUsuarioFk;
+    private Asiento idAsientoFk;
+    @JoinColumn(name = "id_movimiento_fk", referencedColumnName = "id")
+    @ManyToOne
+    private Movimiento idMovimientoFk;
 
-    public SessionLog() {
+    public DetalleAsiento() {
     }
 
-    public SessionLog(Integer id) {
+    public DetalleAsiento(Integer id) {
         this.id = id;
-    }
-
-    public SessionLog(Integer id, Date loginTimestamp) {
-        this.id = id;
-        this.loginTimestamp = loginTimestamp;
     }
 
     public Integer getId() {
@@ -67,28 +55,20 @@ public class SessionLog implements Serializable {
         this.id = id;
     }
 
-    public Date getLoginTimestamp() {
-        return loginTimestamp;
+    public Asiento getIdAsientoFk() {
+        return idAsientoFk;
     }
 
-    public void setLoginTimestamp(Date loginTimestamp) {
-        this.loginTimestamp = loginTimestamp;
+    public void setIdAsientoFk(Asiento idAsientoFk) {
+        this.idAsientoFk = idAsientoFk;
     }
 
-    public Date getLogoutTimestamp() {
-        return logoutTimestamp;
+    public Movimiento getIdMovimientoFk() {
+        return idMovimientoFk;
     }
 
-    public void setLogoutTimestamp(Date logoutTimestamp) {
-        this.logoutTimestamp = logoutTimestamp;
-    }
-
-    public Usuario getIdUsuarioFk() {
-        return idUsuarioFk;
-    }
-
-    public void setIdUsuarioFk(Usuario idUsuarioFk) {
-        this.idUsuarioFk = idUsuarioFk;
+    public void setIdMovimientoFk(Movimiento idMovimientoFk) {
+        this.idMovimientoFk = idMovimientoFk;
     }
 
     @Override
@@ -101,10 +81,10 @@ public class SessionLog implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SessionLog)) {
+        if (!(object instanceof DetalleAsiento)) {
             return false;
         }
-        SessionLog other = (SessionLog) object;
+        DetalleAsiento other = (DetalleAsiento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -113,7 +93,7 @@ public class SessionLog implements Serializable {
 
     @Override
     public String toString() {
-        return "models.SessionLog[ id=" + id + " ]";
+        return "models.DetalleAsiento[ id=" + id + " ]";
     }
     
 }
