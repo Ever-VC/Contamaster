@@ -32,7 +32,7 @@ public class RolControlador {
         return Conexion.Instancia().getFabrica().createEntityManager();
     }
     
-    public Rol ObtenerRolPorId(Integer id) {
+    public Rol getRolPorId(Integer id) {
         _entityManager = setEntityManager();
         _entityManager.getTransaction().begin();
         Rol rolBuscado = _entityManager.find(Rol.class, id);
