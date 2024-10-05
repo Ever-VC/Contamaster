@@ -35,7 +35,7 @@ public class GestionUsuario extends javax.swing.JPanel {
          
         for (Usuario usuario : lstUsuarios) {
             SessionLog sesionUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(usuario.getId());
-            String infoDesesion = "Activo ahora mismo";
+            String infoDesesion = "Sin inicar sesión";
             if (sesionUsuario != null) {
                 infoDesesion = GetSessionStatus(sesionUsuario.getLogoutTimestamp(), sesionUsuario.getLoginTimestamp());
             }
