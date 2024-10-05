@@ -4,9 +4,13 @@
  */
 package views;
 
+import controllers.SessionLogControlador;
 import controllers.UsuarioControlador;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.swing.table.DefaultTableModel;
+import models.SessionLog;
 import models.Usuario;
 
 /**
@@ -27,10 +31,15 @@ public class GestionUsuario extends javax.swing.JPanel {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo = (DefaultTableModel)jtblUsuarios.getModel();
         modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
-        List<Usuario> lstUsuarios = UsuarioControlador.Instancia().getListaUsuarios();
+        List<Usuario> lstUsuarios = UsuarioControlador.Instancia().GetListaUsuarios();
          
         for (Usuario usuario : lstUsuarios) {
-            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), usuario.getIdRolFk().getNombre(), "Activo"});
+            SessionLog sesionUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(usuario.getId());
+            String infoDesesion = "Activo ahora mismo";
+            if (sesionUsuario != null) {
+                infoDesesion = GetSessionStatus(sesionUsuario.getLogoutTimestamp(), sesionUsuario.getLoginTimestamp());
+            }
+            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), usuario.getIdRolFk().getNombre(), infoDesesion});
         }
     }
     
@@ -128,6 +137,25 @@ public class GestionUsuario extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public String GetSessionStatus(Date logoutTimestamp, Date loginTimestamp) {
+        Date now = new Date();
+
+        if (logoutTimestamp == null || logoutTimestamp.before(loginTimestamp)) {
+            return "Activo ahora mismo";
+        }
+
+        long difInMillis = now.getTime() - logoutTimestamp.getTime();// Calcula la diferencia de hora de cierre de sesión con respecto a la actual (en milisegundos)
+        long difInMinutos = TimeUnit.MILLISECONDS.toMinutes(difInMillis);// Calcula ese tiempo en minutos
+        long difInHours = TimeUnit.MILLISECONDS.toHours(difInMillis);// Calcula ese tiempo en horas
+
+        if (difInHours > 0) {// Si ha pasado al menos una hora
+            return "Activo hace " + difInHours + " hrs";// Muestra hace cuántas horas fue
+        } else if (difInMinutos > 0) {// Si sólo han pasado minutos
+            return "Activo hace " + difInMinutos + " min";// Muestra hace cuántos minutos fue
+        } else {// Sino se cumplen las anteriores, significa que han pasado únicmanete segundos
+            return "Activo hace unos segundos";
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
