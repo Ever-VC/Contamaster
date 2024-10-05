@@ -44,6 +44,9 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "apellidos", nullable = false, length = 100)
     private String apellidos;
+    @Basic(optional = false)
+    @Column(name = "sexo", nullable = false, length = 25)
+    private String sexo;
     @Column(name = "fecha_nacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
@@ -72,10 +75,11 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public Usuario(Integer id, String nombres, String apellidos, String username, String password) {
+    public Usuario(Integer id, String nombres, String apellidos, String sexo, String username, String password) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.sexo = sexo;
         this.username = username;
         this.password = password;
     }
@@ -102,6 +106,14 @@ public class Usuario implements Serializable {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public Date getFechaNacimiento() {
