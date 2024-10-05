@@ -134,6 +134,7 @@ public class Login extends javax.swing.JFrame {
                     UsuarioCache.Id = idUsuarioLogin;
                     UsuarioCache.Nombres = usuarioLogin.getNombres();
                     UsuarioCache.Apellidos = usuarioLogin.getApellidos();
+                    UsuarioCache.Sexo = usuarioLogin.getSexo();
                     UsuarioCache.FechaNacimiento = usuarioLogin.getFechaNacimiento();
                     UsuarioCache.Direccion = usuarioLogin.getDireccion();
                     UsuarioCache.Email = usuarioLogin.getEmail();
