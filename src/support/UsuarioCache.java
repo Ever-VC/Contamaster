@@ -15,6 +15,7 @@ public class UsuarioCache {
     public static int Id;
     public static String Nombres;    
     public static String Apellidos;
+    public static String Sexo;
     public static Date FechaNacimiento;
     public static String Direccion;
     public static String Email;
