@@ -112,10 +112,18 @@ public class UsuarioControlador {
         }
     }
     
-    public List<Usuario> getListaUsuarios() {
+    public List<Usuario> GetListaUsuarios() {
         _entityManager = setEntityManager();
         _entityManager.getTransaction().begin();
         return _entityManager.createQuery("SELECT usrs FROM Usuario usrs").getResultList();
+    }
+    
+    public Usuario GetUsuarioPorId(Integer id) {
+        _entityManager = setEntityManager();
+        _entityManager.getTransaction().begin();
+        Usuario usuarioBuscado = _entityManager.find(Usuario.class, id);
+        _entityManager.close();
+        return usuarioBuscado;
     }
 
 }
