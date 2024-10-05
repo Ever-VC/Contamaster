@@ -6,9 +6,13 @@ package views;
 
 import controllers.SessionLogControlador;
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Date;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import models.SessionLog;
 import support.UsuarioCache;
@@ -35,6 +39,12 @@ public class Principal extends javax.swing.JFrame {
         jpnlContenedor.repaint();
         
         jlblNombreUsuario.setText(nombreApellidoUsuario());
+        String url = "src/assets/avatarUserM.png";
+        /*if (UsuarioCache.) {
+            
+        }*/
+        
+        //SetImagLabel();
         
         // Añade WindowListener para manejar el evento de cierre (Consultar si está seguro de cerrar la app)
         addWindowListener(new WindowAdapter() {
@@ -69,17 +79,16 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpnlFondo = new javax.swing.JPanel();
         jpnlMenu = new javax.swing.JPanel();
         jbtnInicio = new javax.swing.JButton();
         jbtnUsuarios = new javax.swing.JButton();
         jlblNombreUsuario = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jbtnEditarPerfil = new javax.swing.JButton();
+        jimgUsuario = new javax.swing.JLabel();
         jpnlContenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        jpnlFondo.setBackground(new java.awt.Color(0, 153, 153));
-        jpnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpnlMenu.setBackground(new java.awt.Color(24, 30, 54));
 
@@ -105,31 +114,41 @@ public class Principal extends javax.swing.JFrame {
         jlblNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblNombreUsuario.setText("Nombre Usuario");
 
+        jbtnEditarPerfil.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnEditarPerfil.setText("Editar perfil");
+
         javax.swing.GroupLayout jpnlMenuLayout = new javax.swing.GroupLayout(jpnlMenu);
         jpnlMenu.setLayout(jpnlMenuLayout);
         jpnlMenuLayout.setHorizontalGroup(
             jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnlMenuLayout.createSequentialGroup()
+            .addComponent(jSeparator1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnlMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtnInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                    .addComponent(jlblNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jimgUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnUsuarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addComponent(jlblNombreUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnEditarPerfil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpnlMenuLayout.setVerticalGroup(
             jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlMenuLayout.createSequentialGroup()
-                .addGap(124, 124, 124)
+                .addContainerGap()
+                .addComponent(jimgUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jlblNombreUsuario)
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbtnEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jbtnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbtnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(530, Short.MAX_VALUE))
+                .addContainerGap(413, Short.MAX_VALUE))
         );
-
-        jpnlFondo.add(jpnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 810));
 
         jpnlContenedor.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -137,24 +156,29 @@ public class Principal extends javax.swing.JFrame {
         jpnlContenedor.setLayout(jpnlContenedorLayout);
         jpnlContenedorLayout.setHorizontalGroup(
             jpnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 980, Short.MAX_VALUE)
+            .addGap(0, 986, Short.MAX_VALUE)
         );
         jpnlContenedorLayout.setVerticalGroup(
             jpnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 810, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        jpnlFondo.add(jpnlContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 980, 810));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 1181, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jpnlMenu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -250,13 +274,24 @@ public class Principal extends javax.swing.JFrame {
         // Concatena el nombre recortado hasta el "indice1", así mismo el apellido recortado hasta el "indice2"
         return nombre + " " + apellido;
     }
+    
+    public void SetImagLabel(JLabel lblImagen, String urlImagen) {
+        ImageIcon imagen = new ImageIcon(urlImagen);
+        
+        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
+        
+        lblImagen.setIcon(icono);
+        this.repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jbtnEditarPerfil;
     private javax.swing.JButton jbtnInicio;
     private javax.swing.JButton jbtnUsuarios;
+    private javax.swing.JLabel jimgUsuario;
     private javax.swing.JLabel jlblNombreUsuario;
     private javax.swing.JPanel jpnlContenedor;
-    private javax.swing.JPanel jpnlFondo;
     private javax.swing.JPanel jpnlMenu;
     // End of variables declaration//GEN-END:variables
 }
