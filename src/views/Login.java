@@ -4,9 +4,13 @@
  */
 package views;
 
+import controllers.SessionLogControlador;
 import controllers.UsuarioControlador;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import models.SessionLog;
 import models.Usuario;
+import support.UsuarioCache;
 
 /**
  *
@@ -113,6 +117,29 @@ public class Login extends javax.swing.JFrame {
                     // Caso de contraseña incorrecta
                     JOptionPane.showMessageDialog(null, "LA CONTRASEÑA QUE HA INGRESADO NO COINCIDE CON EL NOMBRE DE USUARIO, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
                 } else {
+                    usuarioLogin = UsuarioControlador.Instancia().GetUsuarioPorId(idUsuarioLogin);
+                    SessionLog sesionDeUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(idUsuarioLogin);
+                    if (sesionDeUsuario == null) {
+                        sesionDeUsuario = new SessionLog();
+                        sesionDeUsuario.setIdUsuarioFk(usuarioLogin);
+                        sesionDeUsuario.setLoginTimestamp(new Date());
+                        SessionLogControlador.instancia().CreararInicioDeSesion(sesionDeUsuario);
+                    } else {
+                        System.out.println("Sesion encontrada, ultima conexión a las " + sesionDeUsuario.getLoginTimestamp());
+                        sesionDeUsuario.setLoginTimestamp(new Date());
+                        System.out.println("Nuevo inicio de sesión a las " + sesionDeUsuario.getLoginTimestamp());
+                        SessionLogControlador.instancia().GuardarInicioDeSesion(sesionDeUsuario);
+                    }
+                    
+                    UsuarioCache.Id = idUsuarioLogin;
+                    UsuarioCache.Nombres = usuarioLogin.getNombres();
+                    UsuarioCache.Apellidos = usuarioLogin.getApellidos();
+                    UsuarioCache.FechaNacimiento = usuarioLogin.getFechaNacimiento();
+                    UsuarioCache.Direccion = usuarioLogin.getDireccion();
+                    UsuarioCache.Email = usuarioLogin.getEmail();
+                    UsuarioCache.Username = usuarioLogin.getUsername();
+                    UsuarioCache.RolUsuario = usuarioLogin.getIdRolFk().getNombre();
+                    
                     Principal frmPrincipal = new Principal();
                     frmPrincipal.CargarUsuario(idUsuarioLogin);
                     this.dispose();
