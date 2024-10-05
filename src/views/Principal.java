@@ -4,7 +4,14 @@
  */
 package views;
 
+import controllers.SessionLogControlador;
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import models.SessionLog;
+import support.UsuarioCache;
 
 /**
  *
@@ -26,6 +33,31 @@ public class Principal extends javax.swing.JFrame {
         jpnlContenedor.add(panel, BorderLayout.CENTER);
         jpnlContenedor.revalidate();
         jpnlContenedor.repaint();
+        
+        jlblNombreUsuario.setText(nombreApellidoUsuario());
+        
+        // Añade WindowListener para manejar el evento de cierre (Consultar si está seguro de cerrar la app)
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int response = JOptionPane.showConfirmDialog(
+                    Principal.this,
+                    "Actualmente tiene una sesión iniciada ¿Estás seguro de que deseas salir y cerrar por completo la sesión?",
+                    "ATENCIÓN:",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE
+                );
+
+                if (response == JOptionPane.YES_OPTION) {
+                    // Obtiene la sesion abierta actualmente a través del id del usuario logueado
+                    SessionLog sesionDeUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(UsuarioCache.Id);
+                    sesionDeUsuario.setLogoutTimestamp(new Date());// Almacena la hora de cierre de sesión por parte del usuario
+                    SessionLogControlador.instancia().GuardarCierreDeSesion(sesionDeUsuario);// Guarda la información
+                    System.out.println("Cierre de sesión registrado a las " + sesionDeUsuario.getLogoutTimestamp());
+                    System.exit(0);
+                }
+            }
+        });
     }
 
     /**
@@ -41,9 +73,10 @@ public class Principal extends javax.swing.JFrame {
         jpnlMenu = new javax.swing.JPanel();
         jbtnInicio = new javax.swing.JButton();
         jbtnUsuarios = new javax.swing.JButton();
+        jlblNombreUsuario = new javax.swing.JLabel();
         jpnlContenedor = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jpnlFondo.setBackground(new java.awt.Color(0, 153, 153));
         jpnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -67,6 +100,11 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jlblNombreUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblNombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jlblNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblNombreUsuario.setText("Nombre Usuario");
+
         javax.swing.GroupLayout jpnlMenuLayout = new javax.swing.GroupLayout(jpnlMenu);
         jpnlMenu.setLayout(jpnlMenuLayout);
         jpnlMenuLayout.setHorizontalGroup(
@@ -75,17 +113,20 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbtnInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
+                    .addComponent(jbtnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addComponent(jlblNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpnlMenuLayout.setVerticalGroup(
             jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlMenuLayout.createSequentialGroup()
-                .addGap(192, 192, 192)
+                .addGap(124, 124, 124)
+                .addComponent(jlblNombreUsuario)
+                .addGap(52, 52, 52)
                 .addComponent(jbtnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(534, Short.MAX_VALUE))
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
         jpnlFondo.add(jpnlMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 810));
@@ -179,10 +220,41 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
+    
+    public static String nombreApellidoUsuario() {
+        String nombre = "", apellido = "";
+
+        // Verifica si existe un ' ' (espacio en blanco) dentro del nombre
+        if (UsuarioCache.Nombres.contains(" ")) {
+            // Almacena el índice en donde se encuentra el primer espacio en blanco (Ya que solo quiero el primer nombre)
+            int indice1 = UsuarioCache.Nombres.indexOf(" ");
+            nombre = UsuarioCache.Nombres.substring(0, indice1); // Remueve el resto de la cadena
+        } else {
+            nombre = UsuarioCache.Nombres; // En caso que no exista un espacio (tiene nombre único), deja tal cual el nombre
+        }
+
+        // Verifica si existe un ' ' (espacio en blanco) dentro del apellido
+        if (UsuarioCache.Apellidos.contains(" ")) {
+            // Almacena el índice en donde se encuentra el primer espacio en blanco (Ya que solo quiero el primer apellido)
+            int indice2 = UsuarioCache.Apellidos.indexOf(" ");
+            apellido = UsuarioCache.Apellidos.substring(0, indice2); // Remueve el resto de la cadena
+
+            // Si el "apellido" es "de", significa que es una preposición (por ejemplo: De Hernándes)
+            if (apellido.toLowerCase().equals("de")) {
+                apellido = UsuarioCache.Apellidos; // Deja todo el apellido
+            }
+        } else {
+            apellido = UsuarioCache.Apellidos; // En caso que no exista un espacio (tiene apellido único), deja tal cual el apellido
+        }
+
+        // Concatena el nombre recortado hasta el "indice1", así mismo el apellido recortado hasta el "indice2"
+        return nombre + " " + apellido;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbtnInicio;
     private javax.swing.JButton jbtnUsuarios;
+    private javax.swing.JLabel jlblNombreUsuario;
     private javax.swing.JPanel jpnlContenedor;
     private javax.swing.JPanel jpnlFondo;
     private javax.swing.JPanel jpnlMenu;
