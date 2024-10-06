@@ -63,7 +63,7 @@ public class UsuarioControlador {
         admin.setPassword(hashPassword("admin"));
         
         //Crea un objeto del rol de tipo Administrador
-        Rol rolAdministrador = RolControlador.Instancia().getRolPorId(1);
+        Rol rolAdministrador = RolControlador.Instancia().GetRolPorId(1);
         
         admin.setIdRolFk(rolAdministrador);//Indica el rol
         
