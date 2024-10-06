@@ -25,49 +25,52 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jbtnGuardar" max="32767" attributes="0"/>
-                          <Component id="jtxtNombres" alignment="0" pref="267" max="32767" attributes="0"/>
-                          <Component id="jDateChooser1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jlblFechaNacimiento" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
-                          <Component id="jtxtUsername" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jtxtApellidos" min="-2" pref="267" max="-2" attributes="0"/>
-                                  <Component id="jtxtDireccion" min="-2" pref="267" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jbtnGuardar" max="32767" attributes="0"/>
+                                  <Component id="jtxtNombres" alignment="0" pref="267" max="32767" attributes="0"/>
+                                  <Component id="jDateChooser1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jlblFechaNacimiento" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
+                                  <Component id="jtxtUsername" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jtxtPassword" alignment="1" min="-2" pref="267" max="-2" attributes="0"/>
+                              <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jtxtApellidos" min="-2" pref="267" max="-2" attributes="0"/>
+                                          <Component id="jtxtDireccion" min="-2" pref="267" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jtxtPassword" alignment="1" min="-2" pref="267" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jbtnEliminar" alignment="1" min="-2" pref="267" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jtxtEmail" max="32767" attributes="0"/>
+                                      <Component id="jcmbRol" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jbtnLimpiar" alignment="0" pref="236" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jcmbSexo" min="-2" pref="236" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="67" pref="67" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jbtnEliminar" alignment="1" min="-2" pref="267" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jtxtEmail" max="32767" attributes="0"/>
-                              <Component id="jcmbRol" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jbtnLimpiar" alignment="0" pref="236" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jlblTitulo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jcmbSexo" min="-2" pref="236" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="67" pref="67" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jlblTitulo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
+                      <Component id="jSeparator1" min="-2" pref="527" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
-              <Component id="jSeparator1" min="-2" pref="527" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -205,7 +208,7 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
-            <StringItem index="0" value="SELECCIONAR SEXO"/>
+            <StringItem index="0" value="-- SELECCIONAR SEXO --"/>
             <StringItem index="1" value="MASCULINO"/>
             <StringItem index="2" value="FEMENINO"/>
           </StringArray>
@@ -276,12 +279,12 @@
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Rol del nuevo usuario:"/>
+            <TitledBorder title="Rol del usuario:"/>
           </Border>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnGuardar">
