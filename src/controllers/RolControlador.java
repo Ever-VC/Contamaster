@@ -5,6 +5,7 @@
 package controllers;
 
 import connection.Conexion;
+import java.util.List;
 import javax.persistence.EntityManager;
 import models.Rol;
 
@@ -32,12 +33,18 @@ public class RolControlador {
         return Conexion.Instancia().getFabrica().createEntityManager();
     }
     
-    public Rol ObtenerRolPorId(Integer id) {
+    public Rol GetRolPorId(Integer id) {
         _entityManager = setEntityManager();
         _entityManager.getTransaction().begin();
         Rol rolBuscado = _entityManager.find(Rol.class, id);
         _entityManager.close();
         return rolBuscado;
+    }
+    
+    public List<Rol> GetListaRoles() {
+        _entityManager = setEntityManager();
+        _entityManager.getTransaction().begin();
+        return _entityManager.createQuery("SELECT r FROM Rol r").getResultList();
     }
     
 }

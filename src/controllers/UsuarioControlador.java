@@ -6,6 +6,7 @@ package controllers;
 
 import connection.Conexion;
 import java.security.MessageDigest;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import models.Rol;
@@ -62,7 +63,7 @@ public class UsuarioControlador {
         admin.setPassword(hashPassword("admin"));
         
         //Crea un objeto del rol de tipo Administrador
-        Rol rolAdministrador = RolControlador.Instancia().ObtenerRolPorId(1);
+        Rol rolAdministrador = RolControlador.Instancia().GetRolPorId(1);
         
         admin.setIdRolFk(rolAdministrador);//Indica el rol
         
@@ -109,6 +110,20 @@ public class UsuarioControlador {
             _entityManager.close();
             return -1; // Nombre de usuario no existe
         }
+    }
+    
+    public List<Usuario> GetListaUsuarios() {
+        _entityManager = setEntityManager();
+        _entityManager.getTransaction().begin();
+        return _entityManager.createQuery("SELECT usrs FROM Usuario usrs").getResultList();
+    }
+    
+    public Usuario GetUsuarioPorId(Integer id) {
+        _entityManager = setEntityManager();
+        _entityManager.getTransaction().begin();
+        Usuario usuarioBuscado = _entityManager.find(Usuario.class, id);
+        _entityManager.close();
+        return usuarioBuscado;
     }
 
 }

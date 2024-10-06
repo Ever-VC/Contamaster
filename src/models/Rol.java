@@ -97,7 +97,8 @@ public class Rol implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Rol[ id=" + id + " ]";
+        return nombre;
+        //return "models.Rol[ id=" + id + " ]";
     }
     
 }

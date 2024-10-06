@@ -32,6 +32,7 @@ public class Inicio extends javax.swing.JPanel {
 
         jlbltitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jlbltitulo.setForeground(new java.awt.Color(0, 0, 0));
+        jlbltitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbltitulo.setText("INICIO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
