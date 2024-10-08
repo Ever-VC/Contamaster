@@ -33,39 +33,6 @@ public class GestionUsuario extends javax.swing.JPanel {
         CargarUsuarios();
         CargarRoles();
     }
-
-    private void CargarUsuarios() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo = (DefaultTableModel)jtblUsuarios.getModel();
-        modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
-        List<Usuario> lstUsuarios = UsuarioControlador.Instancia().GetListaUsuarios();
-         
-        for (Usuario usuario : lstUsuarios) {
-            SessionLog sesionUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(usuario.getId());
-            String infoDesesion = "Sin inicar sesión";
-            if (sesionUsuario != null) {
-                infoDesesion = GetSessionStatus(sesionUsuario.getLogoutTimestamp(), sesionUsuario.getLoginTimestamp());
-                if (sesionUsuario.getIdUsuarioFk().getId() == UsuarioCache.Id) {
-                    infoDesesion += " (Tú)";
-                }
-            }
-            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), usuario.getEmail(), usuario.getSexo(), usuario.getIdRolFk().getNombre(), infoDesesion});
-        }
-    }
-    
-    private void CargarDatosDeUsuarioSeleccionado() {
-        if (_idUsuarioSeleccionado != -1) {
-            Usuario usuarioSeleccionado = UsuarioControlador.Instancia().GetUsuarioPorId(_idUsuarioSeleccionado);
-            jtxtNombres.setText(usuarioSeleccionado.getNombres());
-            jtxtApellidos.setText(usuarioSeleccionado.getApellidos());
-            jcmbSexo.setSelectedItem(usuarioSeleccionado.getSexo().toString());
-            jDateChooser1.setDate(usuarioSeleccionado.getFechaNacimiento());
-            jtxtDireccion.setText(usuarioSeleccionado.getDireccion());
-            jtxtEmail.setText(usuarioSeleccionado.getEmail());
-            jtxtUsername.setText(usuarioSeleccionado.getUsername());
-            jcmbRol.setSelectedItem(usuarioSeleccionado.getIdRolFk());
-        }
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -303,13 +270,13 @@ public class GestionUsuario extends javax.swing.JPanel {
             "¿Estás seguro de que deseas eliminar el usuario " + UsuarioControlador.Instancia().GetUsuarioPorId(_idUsuarioSeleccionado).getNombres() + "?",
             "ATENCIÓN:",
             JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE
+            JOptionPane.WARNING_MESSAGE
         );
 
         if (response == JOptionPane.YES_OPTION) {
-            //UsuarioControlador.Instancia()
+            UsuarioControlador.Instancia().EliminarUsuario(_idUsuarioSeleccionado);
+            LimpiarTodo();
         }
-        System.out.println("Id seleccionado: " + _idUsuarioSeleccionado);
     }//GEN-LAST:event_jbtnEliminarActionPerformed
 
     private void jbtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimpiarActionPerformed
@@ -330,6 +297,39 @@ public class GestionUsuario extends javax.swing.JPanel {
         System.out.println("Id seleccionado: " + _idUsuarioSeleccionado);
     }//GEN-LAST:event_formMouseClicked
 
+    private void CargarUsuarios() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)jtblUsuarios.getModel();
+        modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
+        List<Usuario> lstUsuarios = UsuarioControlador.Instancia().GetListaUsuarios();
+         
+        for (Usuario usuario : lstUsuarios) {
+            SessionLog sesionUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(usuario.getId());
+            String infoDesesion = "Sin inicar sesión";
+            if (sesionUsuario != null) {
+                infoDesesion = GetSessionStatus(sesionUsuario.getLogoutTimestamp(), sesionUsuario.getLoginTimestamp());
+                if (sesionUsuario.getIdUsuarioFk().getId() == UsuarioCache.Id) {
+                    infoDesesion += " (Tú)";
+                }
+            }
+            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), usuario.getEmail(), usuario.getSexo(), usuario.getIdRolFk().getNombre(), infoDesesion});
+        }
+    }
+    
+    private void CargarDatosDeUsuarioSeleccionado() {
+        if (_idUsuarioSeleccionado != -1) {
+            Usuario usuarioSeleccionado = UsuarioControlador.Instancia().GetUsuarioPorId(_idUsuarioSeleccionado);
+            jtxtNombres.setText(usuarioSeleccionado.getNombres());
+            jtxtApellidos.setText(usuarioSeleccionado.getApellidos());
+            jcmbSexo.setSelectedItem(usuarioSeleccionado.getSexo().toString());
+            jDateChooser1.setDate(usuarioSeleccionado.getFechaNacimiento());
+            jtxtDireccion.setText(usuarioSeleccionado.getDireccion());
+            jtxtEmail.setText(usuarioSeleccionado.getEmail());
+            jtxtUsername.setText(usuarioSeleccionado.getUsername());
+            jcmbRol.setSelectedItem(usuarioSeleccionado.getIdRolFk());
+        }
+    }
+    
     private void CargarRoles() {
         List<Rol> lstRoles = RolControlador.Instancia().GetListaRoles();
         jcmbRol.addItem("-- SELECCIONAR ROL --");
@@ -368,6 +368,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         jtxtUsername.setText("");
         jcmbRol.setSelectedIndex(0);
         _idUsuarioSeleccionado = -1;
+        jtblUsuarios.clearSelection();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
