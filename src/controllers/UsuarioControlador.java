@@ -125,5 +125,33 @@ public class UsuarioControlador {
         _entityManager.close();
         return usuarioBuscado;
     }
+    
+    public void ActualizarUsuario(Usuario usuarioActualizado) {
+        _entityManager = setEntityManager();
+        _entityManager.getTransaction().begin();
+        Usuario usuarioAEditar =  _entityManager.find(Usuario.class, usuarioActualizado.getId());
+        usuarioAEditar.setNombres(usuarioActualizado.getNombres());
+        usuarioAEditar.setApellidos(usuarioActualizado.getApellidos());
+        usuarioAEditar.setSexo(usuarioActualizado.getSexo());
+        usuarioAEditar.setFechaNacimiento(usuarioActualizado.getFechaNacimiento());
+        usuarioAEditar.setDireccion(usuarioActualizado.getDireccion());
+        usuarioAEditar.setEmail(usuarioActualizado.getEmail());
+        usuarioAEditar.setUsername(usuarioActualizado.getUsername());
+        if (usuarioActualizado.getPassword() != null && hashPassword(usuarioActualizado.getPassword()).equals(usuarioAEditar.getPassword())) {
+            usuarioAEditar.setPassword(hashPassword(usuarioActualizado.getPassword()));
+        }
+        usuarioAEditar.setIdRolFk(usuarioActualizado.getIdRolFk());
+        _entityManager.getTransaction().commit();
+        _entityManager.close();
+    }
+    
+    public void EliminarUsuario(Integer id) {
+        _entityManager = setEntityManager();
+        _entityManager.getTransaction().begin();
+        Usuario usuarioAEliminar =  _entityManager.find(Usuario.class, id);
+        _entityManager.remove(_entityManager.merge(usuarioAEliminar));
+        _entityManager.getTransaction().commit();
+        _entityManager.close();
+    }
 
 }
