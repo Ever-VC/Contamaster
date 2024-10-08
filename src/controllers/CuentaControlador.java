@@ -87,12 +87,12 @@ public class CuentaControlador {
     public void ActualizarCuenta(Cuenta cuentaActualizada) {
         _entityManager = setEntityManager();
         _entityManager.getTransaction().begin();
-        Cuenta cuentaAActualizar = _entityManager.find(Cuenta.class, cuentaActualizada.getId());
-        cuentaAActualizar.setCodigo(cuentaActualizada.getCodigo());
-        cuentaAActualizar.setNombre(cuentaActualizada.getNombre());
-        cuentaAActualizar.setTipo(cuentaActualizada.getTipo());
-        cuentaAActualizar.setSaldo(cuentaActualizada.getSaldo());
-        cuentaAActualizar.setIdEmpresaFk(cuentaActualizada.getIdEmpresaFk());
+        Cuenta cuentaAEditar = _entityManager.find(Cuenta.class, cuentaActualizada.getId());
+        cuentaAEditar.setCodigo(cuentaActualizada.getCodigo());
+        cuentaAEditar.setNombre(cuentaActualizada.getNombre());
+        cuentaAEditar.setTipo(cuentaActualizada.getTipo());
+        cuentaAEditar.setSaldo(cuentaActualizada.getSaldo());
+        cuentaAEditar.setIdEmpresaFk(cuentaActualizada.getIdEmpresaFk());
         _entityManager.getTransaction().commit();
         _entityManager.close();
     }

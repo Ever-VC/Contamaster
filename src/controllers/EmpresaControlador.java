@@ -53,10 +53,10 @@ public class EmpresaControlador {
     public void ActualizarEmpresa(Empresa empresaActualizada) {
         _entityManager = setEntityManager();
         _entityManager.getTransaction().begin();
-        Empresa empresaAActualizar = _entityManager.find(Empresa.class, empresaActualizada.getId());
-        empresaAActualizar.setNombre(empresaActualizada.getNombre());
-        empresaAActualizar.setDireccion(empresaActualizada.getDireccion());
-        empresaAActualizar.setEmail(empresaActualizada.getEmail());
+        Empresa empresaAEditar = _entityManager.find(Empresa.class, empresaActualizada.getId());
+        empresaAEditar.setNombre(empresaActualizada.getNombre());
+        empresaAEditar.setDireccion(empresaActualizada.getDireccion());
+        empresaAEditar.setEmail(empresaActualizada.getEmail());
         _entityManager.getTransaction().commit();
         _entityManager.close();
     }
