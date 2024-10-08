@@ -241,23 +241,41 @@ public class GestionUsuario extends javax.swing.JPanel {
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
         // TODO add your handling code here:
         /**
-         * LAS VALIDACIONES DEBERÁN IR AQUÍ (ANTES DE CREAR EL OBJETO)
-         */
-        Usuario nuevoUsuario = new Usuario();// Crea e instancia el nuevo objeto
-        // Insertando la información del nuevo usuario
-        nuevoUsuario.setNombres(jtxtNombres.getText());
-        nuevoUsuario.setApellidos(jtxtApellidos.getText());
-        nuevoUsuario.setSexo((String) jcmbSexo.getSelectedItem());
-        nuevoUsuario.setFechaNacimiento(jDateChooser1.getDate());
-        nuevoUsuario.setDireccion(jtxtDireccion.getText());
-        nuevoUsuario.setEmail(jtxtEmail.getText());
-        nuevoUsuario.setUsername(jtxtUsername.getText());
-        nuevoUsuario.setPassword(jtxtPassword.getText());
-        nuevoUsuario.setIdRolFk((Rol) jcmbRol.getSelectedItem());
-        
-        UsuarioControlador.Instancia().CrearUsuario(nuevoUsuario);// Manda a crear el nuevo usuario al controlador
-        // Si todo ha salido bien, muestra el mensaje de exito
-        JOptionPane.showMessageDialog(null, "EL USUARIO HA SIDO REGISTRADO EN LA BASE DE DATOS EXITOSAMENTE.","EXCITO:", JOptionPane.INFORMATION_MESSAGE);
+        * LAS VALIDACIONES DEBERÁN IR AQUÍ (SI SE CUMPLE CON TODO, DEBE PROSEGUIR, CASO CONTRARIO DEBERÁ CALCULAR LA EJECUCIÓN DE LA FUNCIÓN)
+        */
+        if (_idUsuarioSeleccionado != -1) { // ACTUALIZAR UN USUARIO SELECCIONADO DESDE LA TABLA
+            Usuario usuarioActualizado = UsuarioControlador.Instancia().GetUsuarioPorId(_idUsuarioSeleccionado);// Crea e instancia el nuevo objeto
+           // Insertando la información del nuevo usuario
+           usuarioActualizado.setNombres(jtxtNombres.getText());
+           usuarioActualizado.setApellidos(jtxtApellidos.getText());
+           usuarioActualizado.setSexo((String) jcmbSexo.getSelectedItem());
+           usuarioActualizado.setFechaNacimiento(jDateChooser1.getDate());
+           usuarioActualizado.setDireccion(jtxtDireccion.getText());
+           usuarioActualizado.setEmail(jtxtEmail.getText());
+           usuarioActualizado.setUsername(jtxtUsername.getText());
+           usuarioActualizado.setPassword(jtxtPassword.getText());
+           usuarioActualizado.setIdRolFk((Rol) jcmbRol.getSelectedItem());
+           
+           UsuarioControlador.Instancia().ActualizarUsuario(usuarioActualizado);// Manda a crear el usuario actualizado al controlador
+           JOptionPane.showMessageDialog(null, "EL USUARIO HA SIDO ACTUALIZADO EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
+            
+        } else { // GUARDAR NUEVO USUARIO
+           Usuario nuevoUsuario = new Usuario();// Crea e instancia el nuevo objeto
+           // Insertando la información del nuevo usuario
+           nuevoUsuario.setNombres(jtxtNombres.getText());
+           nuevoUsuario.setApellidos(jtxtApellidos.getText());
+           nuevoUsuario.setSexo((String) jcmbSexo.getSelectedItem());
+           nuevoUsuario.setFechaNacimiento(jDateChooser1.getDate());
+           nuevoUsuario.setDireccion(jtxtDireccion.getText());
+           nuevoUsuario.setEmail(jtxtEmail.getText());
+           nuevoUsuario.setUsername(jtxtUsername.getText());
+           nuevoUsuario.setPassword(jtxtPassword.getText());
+           nuevoUsuario.setIdRolFk((Rol) jcmbRol.getSelectedItem());
+
+           UsuarioControlador.Instancia().CrearUsuario(nuevoUsuario);// Manda a crear el nuevo usuario al controlador
+           // Si todo ha salido bien, muestra el mensaje de exito
+           JOptionPane.showMessageDialog(null, "EL USUARIO HA SIDO REGISTRADO EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
+        }
         CargarUsuarios();// Recarga la tabla para actualizarla
         LimpiarTodo();// Limpia todos los campos
 
@@ -265,24 +283,31 @@ public class GestionUsuario extends javax.swing.JPanel {
 
     private void jbtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEliminarActionPerformed
         // TODO add your handling code here:
-        int response = JOptionPane.showConfirmDialog(
-            GestionUsuario.this,
-            "¿Estás seguro de que deseas eliminar el usuario " + UsuarioControlador.Instancia().GetUsuarioPorId(_idUsuarioSeleccionado).getNombres() + "?",
-            "ATENCIÓN:",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE
-        );
+        if (_idUsuarioSeleccionado != -1) {
+            Usuario usuarioAEliminar = UsuarioControlador.Instancia().GetUsuarioPorId(_idUsuarioSeleccionado);
+            int response = JOptionPane.showConfirmDialog(
+                GestionUsuario.this,
+                "¿Estás seguro de que deseas eliminar el a " + usuarioAEliminar.getNombres() + " " + usuarioAEliminar.getApellidos() + " de la base de datos? Este proceso no se puede revertir.",
+                "ATENCIÓN:",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+            );
 
-        if (response == JOptionPane.YES_OPTION) {
-            UsuarioControlador.Instancia().EliminarUsuario(_idUsuarioSeleccionado);
-            LimpiarTodo();
+            if (response == JOptionPane.YES_OPTION) {
+                UsuarioControlador.Instancia().EliminarUsuario(_idUsuarioSeleccionado);
+                JOptionPane.showMessageDialog(null, "EL USUARIO HA SIDO ELIMINADO DE LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
+                CargarUsuarios();// Recarga la tabla para actualizarla
+                LimpiarTodo();// Limpia todos los campos
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE DESDE LA TABLA AL USUARIO QUE DESEA ELIMINAR.","LA TAREA FALLO:", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_jbtnEliminarActionPerformed
 
     private void jbtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimpiarActionPerformed
         // TODO add your handling code here:
         LimpiarTodo();
-        System.out.println("Id seleccionado: " + _idUsuarioSeleccionado);
     }//GEN-LAST:event_jbtnLimpiarActionPerformed
 
     private void jtblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblUsuariosMouseClicked
@@ -294,7 +319,6 @@ public class GestionUsuario extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
         LimpiarTodo();
-        System.out.println("Id seleccionado: " + _idUsuarioSeleccionado);
     }//GEN-LAST:event_formMouseClicked
 
     private void CargarUsuarios() {
@@ -366,6 +390,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         jtxtDireccion.setText("");
         jtxtEmail.setText("");
         jtxtUsername.setText("");
+        jtxtPassword.setText("");
         jcmbRol.setSelectedIndex(0);
         _idUsuarioSeleccionado = -1;
         jtblUsuarios.clearSelection();
