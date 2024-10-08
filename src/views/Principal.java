@@ -38,7 +38,7 @@ public class Principal extends javax.swing.JFrame {
         jpnlContenedor.revalidate();
         jpnlContenedor.repaint();
         
-        jlblNombreUsuario.setText(nombreApellidoUsuario());
+        jlblNombreUsuario.setText(UsuarioCache.GetNombreApellidoUsuario());
         String url = "src/assets/avatarUserM.png";
         if (UsuarioCache.Sexo.equals("Femenino")) {
             url = "src/assets/avatarUserW.png";
@@ -288,36 +288,6 @@ public class Principal extends javax.swing.JFrame {
                 new Principal().setVisible(true);
             }
         });
-    }
-    
-    public static String nombreApellidoUsuario() {
-        String nombre = "", apellido = "";
-
-        // Verifica si existe un ' ' (espacio en blanco) dentro del nombre
-        if (UsuarioCache.Nombres.contains(" ")) {
-            // Almacena el índice en donde se encuentra el primer espacio en blanco (Ya que solo quiero el primer nombre)
-            int indice1 = UsuarioCache.Nombres.indexOf(" ");
-            nombre = UsuarioCache.Nombres.substring(0, indice1); // Remueve el resto de la cadena
-        } else {
-            nombre = UsuarioCache.Nombres; // En caso que no exista un espacio (tiene nombre único), deja tal cual el nombre
-        }
-
-        // Verifica si existe un ' ' (espacio en blanco) dentro del apellido
-        if (UsuarioCache.Apellidos.contains(" ")) {
-            // Almacena el índice en donde se encuentra el primer espacio en blanco (Ya que solo quiero el primer apellido)
-            int indice2 = UsuarioCache.Apellidos.indexOf(" ");
-            apellido = UsuarioCache.Apellidos.substring(0, indice2); // Remueve el resto de la cadena
-
-            // Si el "apellido" es "de", significa que es una preposición (por ejemplo: De Hernándes)
-            if (apellido.toLowerCase().equals("de")) {
-                apellido = UsuarioCache.Apellidos; // Deja todo el apellido
-            }
-        } else {
-            apellido = UsuarioCache.Apellidos; // En caso que no exista un espacio (tiene apellido único), deja tal cual el apellido
-        }
-
-        // Concatena el nombre recortado hasta el "indice1", así mismo el apellido recortado hasta el "indice2"
-        return nombre + " " + apellido;
     }
     
     public void SetImagLabel(JLabel lblImagen, String urlImagen) {
