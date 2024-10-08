@@ -137,7 +137,7 @@ public class UsuarioControlador {
         usuarioAEditar.setDireccion(usuarioActualizado.getDireccion());
         usuarioAEditar.setEmail(usuarioActualizado.getEmail());
         usuarioAEditar.setUsername(usuarioActualizado.getUsername());
-        if (usuarioActualizado.getPassword() != null && hashPassword(usuarioActualizado.getPassword()).equals(usuarioAEditar.getPassword())) {
+        if (usuarioActualizado.getPassword() != null && !hashPassword(usuarioActualizado.getPassword()).equals(usuarioAEditar.getPassword())) {
             usuarioAEditar.setPassword(hashPassword(usuarioActualizado.getPassword()));
         }
         usuarioAEditar.setIdRolFk(usuarioActualizado.getIdRolFk());
