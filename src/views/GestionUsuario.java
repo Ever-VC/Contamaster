@@ -22,8 +22,8 @@ import support.UsuarioCache;
  * @author ever_vc
  */
 public class GestionUsuario extends javax.swing.JPanel {
-    
-    private Usuario _usuario;
+
+    private int _idUsuarioSeleccionado = -1;
 
     /**
      * Creates new form GestionUsuarios
@@ -49,7 +49,21 @@ public class GestionUsuario extends javax.swing.JPanel {
                     infoDesesion += " (Tú)";
                 }
             }
-            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), usuario.getIdRolFk().getNombre(), infoDesesion});
+            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), usuario.getEmail(), usuario.getSexo(), usuario.getIdRolFk().getNombre(), infoDesesion});
+        }
+    }
+    
+    private void CargarDatosDeUsuarioSeleccionado() {
+        if (_idUsuarioSeleccionado != -1) {
+            Usuario usuarioSeleccionado = UsuarioControlador.Instancia().GetUsuarioPorId(_idUsuarioSeleccionado);
+            jtxtNombres.setText(usuarioSeleccionado.getNombres());
+            jtxtApellidos.setText(usuarioSeleccionado.getApellidos());
+            jcmbSexo.setSelectedItem(usuarioSeleccionado.getSexo().toString());
+            jDateChooser1.setDate(usuarioSeleccionado.getFechaNacimiento());
+            jtxtDireccion.setText(usuarioSeleccionado.getDireccion());
+            jtxtEmail.setText(usuarioSeleccionado.getEmail());
+            jtxtUsername.setText(usuarioSeleccionado.getUsername());
+            jcmbRol.setSelectedItem(usuarioSeleccionado.getIdRolFk());
         }
     }
     
@@ -82,6 +96,11 @@ public class GestionUsuario extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(980, 810));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jlblTitulo.setForeground(new java.awt.Color(0, 0, 0));
@@ -90,40 +109,49 @@ public class GestionUsuario extends javax.swing.JPanel {
 
         jtblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "NOMBRE", "CARGO", "ULTIMA  CONEXION"
+                "ID", "NOMBRE", "EMAIL", "SEXO", "CARGO", "ULTIMA  CONEXION"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jtblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtblUsuarios);
         if (jtblUsuarios.getColumnModel().getColumnCount() > 0) {
             jtblUsuarios.getColumnModel().getColumn(0).setResizable(false);
-            jtblUsuarios.getColumnModel().getColumn(0).setPreferredWidth(20);
+            jtblUsuarios.getColumnModel().getColumn(0).setPreferredWidth(10);
             jtblUsuarios.getColumnModel().getColumn(1).setResizable(false);
-            jtblUsuarios.getColumnModel().getColumn(1).setPreferredWidth(300);
+            jtblUsuarios.getColumnModel().getColumn(1).setPreferredWidth(200);
             jtblUsuarios.getColumnModel().getColumn(2).setResizable(false);
-            jtblUsuarios.getColumnModel().getColumn(2).setPreferredWidth(20);
+            jtblUsuarios.getColumnModel().getColumn(2).setPreferredWidth(200);
             jtblUsuarios.getColumnModel().getColumn(3).setResizable(false);
-            jtblUsuarios.getColumnModel().getColumn(3).setPreferredWidth(20);
+            jtblUsuarios.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jtblUsuarios.getColumnModel().getColumn(4).setResizable(false);
+            jtblUsuarios.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jtblUsuarios.getColumnModel().getColumn(5).setResizable(false);
+            jtblUsuarios.getColumnModel().getColumn(5).setPreferredWidth(150);
         }
 
         jtxtNombres.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombres:"));
 
         jtxtApellidos.setBorder(javax.swing.BorderFactory.createTitledBorder("Apellidos:"));
 
-        jcmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- SELECCIONAR SEXO --", "MASCULINO", "FEMENINO" }));
+        jcmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- SELECCIONAR SEXO --", "Masculino", "Femenino" }));
         jcmbSexo.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccione el sexo:"));
 
         jlblFechaNacimiento.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -170,40 +198,38 @@ public class GestionUsuario extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbtnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtxtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlblFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtxtUsername))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jbtnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jtxtNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jlblFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtxtUsername))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jtxtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jtxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jtxtPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jbtnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtxtEmail)
-                                        .addComponent(jcmbRol, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jbtnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
-                                    .addComponent(jcmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(67, 67, 67))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jlblTitulo)
-                                .addGap(272, 272, 272))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jtxtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtxtPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jbtnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtxtEmail)
+                                .addComponent(jcmbRol, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbtnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
+                            .addComponent(jcmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jlblTitulo)
+                        .addGap(205, 205, 205)))
+                .addGap(0, 67, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(203, 203, 203))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,31 +274,61 @@ public class GestionUsuario extends javax.swing.JPanel {
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
         // TODO add your handling code here:
         /**
-         * LAS VALIDACIONES DEBERÁN IR AQUÍ
+         * LAS VALIDACIONES DEBERÁN IR AQUÍ (ANTES DE CREAR EL OBJETO)
          */
-        _usuario = new Usuario();
-        _usuario.setNombres(jtxtNombres.getText());
-        _usuario.setApellidos(jtxtApellidos.getText());
-        _usuario.setSexo((String) jcmbSexo.getSelectedItem());
-        _usuario.setFechaNacimiento(jDateChooser1.getDate());
-        _usuario.setDireccion(jtxtDireccion.getText());
-        _usuario.setEmail(jtxtEmail.getText());
-        _usuario.setUsername(jtxtUsername.getText());
-        _usuario.setPassword(jtxtPassword.getText());
-        _usuario.setIdRolFk((Rol) jcmbRol.getSelectedItem());
-        UsuarioControlador.Instancia().CrearUsuario(_usuario);
+        Usuario nuevoUsuario = new Usuario();// Crea e instancia el nuevo objeto
+        // Insertando la información del nuevo usuario
+        nuevoUsuario.setNombres(jtxtNombres.getText());
+        nuevoUsuario.setApellidos(jtxtApellidos.getText());
+        nuevoUsuario.setSexo((String) jcmbSexo.getSelectedItem());
+        nuevoUsuario.setFechaNacimiento(jDateChooser1.getDate());
+        nuevoUsuario.setDireccion(jtxtDireccion.getText());
+        nuevoUsuario.setEmail(jtxtEmail.getText());
+        nuevoUsuario.setUsername(jtxtUsername.getText());
+        nuevoUsuario.setPassword(jtxtPassword.getText());
+        nuevoUsuario.setIdRolFk((Rol) jcmbRol.getSelectedItem());
+        
+        UsuarioControlador.Instancia().CrearUsuario(nuevoUsuario);// Manda a crear el nuevo usuario al controlador
+        // Si todo ha salido bien, muestra el mensaje de exito
         JOptionPane.showMessageDialog(null, "EL USUARIO HA SIDO REGISTRADO EN LA BASE DE DATOS EXITOSAMENTE.","EXCITO:", JOptionPane.INFORMATION_MESSAGE);
-        CargarUsuarios();
+        CargarUsuarios();// Recarga la tabla para actualizarla
+        LimpiarTodo();// Limpia todos los campos
 
     }//GEN-LAST:event_jbtnGuardarActionPerformed
 
     private void jbtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEliminarActionPerformed
         // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(
+            GestionUsuario.this,
+            "¿Estás seguro de que deseas eliminar el usuario " + UsuarioControlador.Instancia().GetUsuarioPorId(_idUsuarioSeleccionado).getNombres() + "?",
+            "ATENCIÓN:",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (response == JOptionPane.YES_OPTION) {
+            //UsuarioControlador.Instancia()
+        }
+        System.out.println("Id seleccionado: " + _idUsuarioSeleccionado);
     }//GEN-LAST:event_jbtnEliminarActionPerformed
 
     private void jbtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimpiarActionPerformed
         // TODO add your handling code here:
+        LimpiarTodo();
+        System.out.println("Id seleccionado: " + _idUsuarioSeleccionado);
     }//GEN-LAST:event_jbtnLimpiarActionPerformed
+
+    private void jtblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblUsuariosMouseClicked
+        // TODO add your handling code here:
+        _idUsuarioSeleccionado = Integer.parseInt(jtblUsuarios.getValueAt(jtblUsuarios.getSelectedRow(), 0).toString());
+        CargarDatosDeUsuarioSeleccionado();
+    }//GEN-LAST:event_jtblUsuariosMouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        LimpiarTodo();
+        System.out.println("Id seleccionado: " + _idUsuarioSeleccionado);
+    }//GEN-LAST:event_formMouseClicked
 
     private void CargarRoles() {
         List<Rol> lstRoles = RolControlador.Instancia().GetListaRoles();
@@ -300,6 +356,18 @@ public class GestionUsuario extends javax.swing.JPanel {
         } else {// Sino se cumplen las anteriores, significa que han pasado únicmanete segundos
             return "Activo hace unos segundos";
         }
+    }
+    
+    private void LimpiarTodo() {
+        jtxtNombres.setText("");
+        jtxtApellidos.setText("");
+        jcmbSexo.setSelectedIndex(0);
+        jDateChooser1.setDate(new Date());
+        jtxtDireccion.setText("");
+        jtxtEmail.setText("");
+        jtxtUsername.setText("");
+        jcmbRol.setSelectedIndex(0);
+        _idUsuarioSeleccionado = -1;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
