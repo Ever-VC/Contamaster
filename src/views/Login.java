@@ -141,10 +141,13 @@ public class Login extends javax.swing.JFrame {
                     UsuarioCache.Username = usuarioLogin.getUsername();
                     UsuarioCache.RolUsuario = usuarioLogin.getIdRolFk().getNombre();
                     
+                    jtxtUsername.setText("");
+                    jtxtPassword.setText("");
+                    
                     Principal frmPrincipal = new Principal();
-                    frmPrincipal.CargarUsuario(idUsuarioLogin);
-                    this.dispose();
-                    frmPrincipal.show();
+                    frmPrincipal.SetFormularioLogin(this);
+                    this.setVisible(false);
+                    frmPrincipal.setVisible(true);
 
                     //JOptionPane.showMessageDialog(null, "BIENVENIDO, EL ID DE USUARIO ES: " + idUsuarioLogin, "LOGIN EXITOSO:", JOptionPane.INFORMATION_MESSAGE);
                 }

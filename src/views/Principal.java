@@ -24,6 +24,7 @@ import support.UsuarioCache;
 public class Principal extends javax.swing.JFrame {
     
     private static int _visible = -1;
+    private Login _frmLogin;
 
     /**
      * Creates new form Principal
@@ -146,6 +147,11 @@ public class Principal extends javax.swing.JFrame {
 
         jbtnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnCerrarSesion.setText("CERRAR SESION");
+        jbtnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCerrarSesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnlMenuLayout = new javax.swing.GroupLayout(jpnlMenu);
         jpnlMenu.setLayout(jpnlMenuLayout);
@@ -263,6 +269,22 @@ public class Principal extends javax.swing.JFrame {
         MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, frmGestionEmpresa);
     }//GEN-LAST:event_jbtnEmpresasActionPerformed
 
+    private void jbtnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCerrarSesionActionPerformed
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(
+            Principal.this,
+            "¿Estás seguro de que deseas cerrar la sesión?",
+            "ATENCIÓN:",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (response == JOptionPane.YES_OPTION) {
+            _frmLogin.setVisible(true);
+            this.dispose();
+        }        
+    }//GEN-LAST:event_jbtnCerrarSesionActionPerformed
+
     public void CargarUsuario(int idUsuario) {
         //Carga la información del usuario logueado
     }
@@ -300,6 +322,10 @@ public class Principal extends javax.swing.JFrame {
                 new Principal().setVisible(true);
             }
         });
+    }
+    
+    public void SetFormularioLogin(Login frmLogin) {
+        this._frmLogin = frmLogin;
     }
     
     public void SetImagLabel(JLabel lblImagen, String urlImagen) {
