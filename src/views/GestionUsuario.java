@@ -293,7 +293,7 @@ public class GestionUsuario extends javax.swing.JPanel {
             Usuario usuarioAEliminar = UsuarioControlador.Instancia().GetUsuarioPorId(_idUsuarioSeleccionado);
             int response = JOptionPane.showConfirmDialog(
                 GestionUsuario.this,
-                "¿Estás seguro de que deseas eliminar el a " + usuarioAEliminar.getNombres() + " " + usuarioAEliminar.getApellidos() + " de la base de datos? Este proceso no se puede revertir.",
+                "¿Estás seguro de que deseas eliminar el usuario " + usuarioAEliminar.getNombres() + " " + usuarioAEliminar.getApellidos() + " de la base de datos? Este proceso no se puede revertir.",
                 "ATENCIÓN:",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE
