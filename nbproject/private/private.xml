@@ -5,6 +5,10 @@
         <group>
             <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/controllers/CuentaControlador.java</file>
             <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/models/Rol.java</file>
+            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/controllers/UsuarioControlador.java</file>
+            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/views/Principal.java</file>
+            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/controllers/EmpresaControlador.java</file>
+            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/support/UsuarioCache.java</file>
             <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/views/GestionUsuario.java</file>
         </group>
     </open-files>
