@@ -129,6 +129,7 @@ public class Principal extends javax.swing.JFrame {
 
         jbtnEmpresas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnEmpresas.setText("GESTION DE EMPRESAS");
+        jbtnEmpresas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnEmpresas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnEmpresasActionPerformed(evt);
@@ -147,6 +148,7 @@ public class Principal extends javax.swing.JFrame {
 
         jbtnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnCerrarSesion.setText("CERRAR SESION");
+        jbtnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnCerrarSesionActionPerformed(evt);
@@ -337,9 +339,10 @@ public class Principal extends javax.swing.JFrame {
         this.repaint();
     }
     
-    public void AbrirCatalogoDeEmpresas(int _idEmpresa) {
-        if (_idEmpresa != -1) {
-            MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new GestionUsuario());
+    public void AbrirCatalogoDeEmpresas(int idEmpresa) {
+        if (idEmpresa != -1) {
+            CatalogoCuentas frmCatalogoCuentas = new CatalogoCuentas(idEmpresa);
+            MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, frmCatalogoCuentas);
         }
     }
 
