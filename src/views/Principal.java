@@ -128,6 +128,11 @@ public class Principal extends javax.swing.JFrame {
 
         jbtnEmpresas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnEmpresas.setText("GESTION DE EMPRESAS");
+        jbtnEmpresas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEmpresasActionPerformed(evt);
+            }
+        });
 
         jbtnAsientos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnAsientos.setText("GESTION CONTABLE");
@@ -251,6 +256,13 @@ public class Principal extends javax.swing.JFrame {
         MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new GestionUsuario());
     }//GEN-LAST:event_jbtnUsuariosActionPerformed
 
+    private void jbtnEmpresasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEmpresasActionPerformed
+        // TODO add your handling code here:
+        GestionEmpresa frmGestionEmpresa = new GestionEmpresa();
+        frmGestionEmpresa.SetFormularioPrincipal(this);
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, frmGestionEmpresa);
+    }//GEN-LAST:event_jbtnEmpresasActionPerformed
+
     public void CargarUsuario(int idUsuario) {
         //Carga la información del usuario logueado
     }
@@ -297,6 +309,12 @@ public class Principal extends javax.swing.JFrame {
         lblImagen.setOpaque(false);
         lblImagen.setIcon(icono);
         this.repaint();
+    }
+    
+    public void AbrirCatalogoDeEmpresas(int _idEmpresa) {
+        if (_idEmpresa != -1) {
+            MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new GestionUsuario());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
