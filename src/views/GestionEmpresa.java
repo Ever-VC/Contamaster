@@ -118,6 +118,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
 
         jbtnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnGuardar.setText("GUARDAR");
+        jbtnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnGuardarActionPerformed(evt);
@@ -126,6 +127,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
 
         jbtnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnEliminar.setText("ELIMINAR");
+        jbtnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnEliminarActionPerformed(evt);
@@ -134,6 +136,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
 
         jbtnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnLimpiar.setText("LIMPIAR CAMPOS");
+        jbtnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnLimpiarActionPerformed(evt);
@@ -144,9 +147,8 @@ public class GestionEmpresa extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jbtnCatalogoCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,14 +170,17 @@ public class GestionEmpresa extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jlblTitulo)
                                 .addGap(153, 153, 153)))
-                        .addGap(163, 163, 163))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jbtnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(27, 27, 27)
-                .addComponent(jbtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jbtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(163, 163, 163))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +211,33 @@ public class GestionEmpresa extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
-        
+        // TODO add your handling code here:
+        /**
+         * Validaciones...
+         */
+        if (_idEmpresaSeleccionada != -1) { // Actualizar información de empresa
+            Empresa empresaActualizada = EmpresaControlador.Instancia().GetEmpresaPorId(_idEmpresaSeleccionada);
+            
+            // Almacena la información actualizada de la empresa
+            empresaActualizada.setNombre(jtxtNombre.getText());
+            empresaActualizada.setDireccion(jtxtDireccion.getText());
+            empresaActualizada.setEmail(jtxtEmail.getText());
+            
+            EmpresaControlador.Instancia().ActualizarEmpresa(empresaActualizada);
+            JOptionPane.showMessageDialog(null, "LA EMPRESA HA SIDO ACTUALIZADA EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
+        } else { // Crear nueva empresa
+            Empresa nuevaEmpresa = new Empresa();
+            
+            // Almacena la información actualizada de la empresa
+            nuevaEmpresa.setNombre(jtxtNombre.getText());
+            nuevaEmpresa.setDireccion(jtxtDireccion.getText());
+            nuevaEmpresa.setEmail(jtxtEmail.getText());
+            
+            EmpresaControlador.Instancia().CrearEmpresa(nuevaEmpresa);
+            JOptionPane.showMessageDialog(null, "LA EMPRESA HA SIDO REGISTRADA EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
+        }
+        LimpiarTodo();
+        CargarEmpresas();
     }//GEN-LAST:event_jbtnGuardarActionPerformed
 
     private void jbtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEliminarActionPerformed
