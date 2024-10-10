@@ -84,6 +84,39 @@ public class CuentaControlador {
         return cuentas;
     }
     
+    public List<Cuenta> GetListaCuentasPorPorEmpresaYtipo(Integer idEmpresa, String tipoCuenta) {
+        _entityManager = setEntityManager();
+        String jpql = "SELECT c FROM Cuenta c WHERE c.idEmpresaFk = :empresa AND c.tipo = :tipo";
+
+        List<Cuenta> cuentas = new ArrayList<>();
+        try {
+            _entityManager.getTransaction().begin();
+
+            // Busca la empresa por el ID
+            Empresa empresa = _entityManager.find(Empresa.class, idEmpresa);
+
+            if (empresa != null) {// Si la empresa no es null
+                cuentas = _entityManager.createQuery(jpql, Cuenta.class)
+                            .setParameter("empresa", empresa)
+                            .setParameter("tipo", tipoCuenta)
+                            .getResultList();// Ejecuta la consulta y obtiene el resultado
+            }
+
+            _entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            if (_entityManager.getTransaction().isActive()) {
+                _entityManager.getTransaction().rollback();// Hace rollback en caso de error
+            }
+            ex.printStackTrace();// Imprime el error para depuración
+        } finally {
+            if (_entityManager != null) {
+                _entityManager.close();// Cierra el EntityManager
+            }
+        }
+
+        return cuentas;
+    }
+    
     public void ActualizarCuenta(Cuenta cuentaActualizada) {
         _entityManager = setEntityManager();
         _entityManager.getTransaction().begin();
