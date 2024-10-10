@@ -156,7 +156,8 @@ public class Cuenta implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Cuenta[ id=" + id + " ]";
+        return nombre;
+        //return "models.Cuenta[ id=" + id + " ]";
     }
     
 }
