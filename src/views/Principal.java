@@ -214,7 +214,7 @@ public class Principal extends javax.swing.JFrame {
         jpnlContenedor.setLayout(jpnlContenedorLayout);
         jpnlContenedorLayout.setHorizontalGroup(
             jpnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 986, Short.MAX_VALUE)
+            .addGap(0, 1051, Short.MAX_VALUE)
         );
         jpnlContenedorLayout.setVerticalGroup(
             jpnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
