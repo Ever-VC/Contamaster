@@ -4,8 +4,12 @@
  */
 package views;
 
+import controllers.CuentaControlador;
 import controllers.EmpresaControlador;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import models.Cuenta;
 import models.Empresa;
 
 /**
@@ -13,6 +17,9 @@ import models.Empresa;
  * @author ever_vc
  */
 public class AsientoContable extends javax.swing.JPanel {
+    
+    private String _tipoCuenta = "";
+    private List<Cuenta> lstCuentasSegunTipo;
 
     /**
      * Creates new form AsientoContable
@@ -44,7 +51,7 @@ public class AsientoContable extends javax.swing.JPanel {
         jpnlCuentas = new javax.swing.JPanel();
         jtxtNombreCuenta = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jlstCuentas = new javax.swing.JList<>();
+        jlstCuentas = new javax.swing.JList();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jbtnGuardar = new javax.swing.JButton();
@@ -67,7 +74,12 @@ public class AsientoContable extends javax.swing.JPanel {
         jLabel1.setText("Fecha de movimiento:");
 
         jcmbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- SELECCIONAR TIPO --", "Activo", "Pasivo", "Capital", "Ingresos", "Gastos", "Retiros" }));
-        jcmbTipoCuenta.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de cuenta:"));
+        jcmbTipoCuenta.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar por tipo de cuenta:"));
+        jcmbTipoCuenta.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcmbTipoCuentaItemStateChanged(evt);
+            }
+        });
 
         jcmbEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder("Empresa:"));
 
@@ -78,6 +90,11 @@ public class AsientoContable extends javax.swing.JPanel {
         jtxtHaber.setBorder(javax.swing.BorderFactory.createTitledBorder("Haber:"));
 
         jbtnListarCuentas.setText("LISTAR CUENTAS");
+        jbtnListarCuentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnListarCuentasActionPerformed(evt);
+            }
+        });
 
         jpnlCuentas.setBackground(new java.awt.Color(255, 255, 255));
         jpnlCuentas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -269,6 +286,38 @@ public class AsientoContable extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtnLimpiarActionPerformed
 
+    private void jbtnListarCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnListarCuentasActionPerformed
+        // TODO add your handling code here:
+        if (jcmbEmpresa.getSelectedItem() != "-- SELECCIONAR EMPRESA --") {
+            // Busca la empresa seleccionada para obtener su catalogo de cuentas completo
+            Empresa empresaSeleccionada = (Empresa) jcmbEmpresa.getSelectedItem();
+            DefaultListModel modeloLista = new DefaultListModel();
+            jlstCuentas.setModel(modeloLista);
+            //modeloLista.setSize(0);// Limpia el modelo de la lista (elimina todos los elementos que hayan)
+            modeloLista.removeAllElements();// Limpia el modelo de la lista (elimina todos los elementos que hayan)
+            if (_tipoCuenta != "") {
+                // Code...
+            } else {
+                lstCuentasSegunTipo = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(empresaSeleccionada.getId());
+                for (Cuenta cuenta : lstCuentasSegunTipo) {
+                    modeloLista.addElement(cuenta);
+                }
+                //modeloLista.addAll(lstCuentasSegunTipo);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA EMPRESA A LA CUAL DESEA CREARLE EL ASIENTO CONTABLE.","ERROR:", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbtnListarCuentasActionPerformed
+
+    private void jcmbTipoCuentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbTipoCuentaItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            String tipoSeleccionado = (String) jcmbTipoCuenta.getSelectedItem();
+            if (tipoSeleccionado != "-- SELECCIONAR TIPO --") {
+                _tipoCuenta = tipoSeleccionado;       
+            }
+        }
+    }//GEN-LAST:event_jcmbTipoCuentaItemStateChanged
 
     private void CargarEmpresas() {
         List<Empresa> lstEmpresas = EmpresaControlador.Instancia().GetListaEmpresas();
@@ -295,7 +344,7 @@ public class AsientoContable extends javax.swing.JPanel {
     private javax.swing.JComboBox jcmbEmpresa;
     private javax.swing.JComboBox<String> jcmbTipoCuenta;
     private javax.swing.JLabel jlblTitulo;
-    private javax.swing.JList<String> jlstCuentas;
+    private javax.swing.JList jlstCuentas;
     private javax.swing.JPanel jpnlCuentas;
     private javax.swing.JTextField jtxtDebe;
     private javax.swing.JTextField jtxtDescripcion;
