@@ -42,6 +42,9 @@ public class AsientoContable extends javax.swing.JPanel {
         jtxtHaber = new javax.swing.JTextField();
         jbtnListarCuentas = new javax.swing.JButton();
         jpnlCuentas = new javax.swing.JPanel();
+        jtxtNombreCuenta = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jlstCuentas = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jbtnGuardar = new javax.swing.JButton();
@@ -79,15 +82,27 @@ public class AsientoContable extends javax.swing.JPanel {
         jpnlCuentas.setBackground(new java.awt.Color(255, 255, 255));
         jpnlCuentas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jScrollPane2.setViewportView(jlstCuentas);
+
         javax.swing.GroupLayout jpnlCuentasLayout = new javax.swing.GroupLayout(jpnlCuentas);
         jpnlCuentas.setLayout(jpnlCuentasLayout);
         jpnlCuentasLayout.setHorizontalGroup(
             jpnlCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 309, Short.MAX_VALUE)
+            .addGroup(jpnlCuentasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpnlCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtxtNombreCuenta)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jpnlCuentasLayout.setVerticalGroup(
             jpnlCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGroup(jpnlCuentasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jtxtNombreCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -267,6 +282,7 @@ public class AsientoContable extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
@@ -279,9 +295,11 @@ public class AsientoContable extends javax.swing.JPanel {
     private javax.swing.JComboBox jcmbEmpresa;
     private javax.swing.JComboBox<String> jcmbTipoCuenta;
     private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JList<String> jlstCuentas;
     private javax.swing.JPanel jpnlCuentas;
     private javax.swing.JTextField jtxtDebe;
     private javax.swing.JTextField jtxtDescripcion;
     private javax.swing.JTextField jtxtHaber;
+    private javax.swing.JTextField jtxtNombreCuenta;
     // End of variables declaration//GEN-END:variables
 }
