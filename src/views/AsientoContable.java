@@ -91,6 +91,11 @@ public class AsientoContable extends javax.swing.JPanel {
         });
 
         jcmbEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder("Empresa:"));
+        jcmbEmpresa.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcmbEmpresaItemStateChanged(evt);
+            }
+        });
 
         jtxtDescripcion.setBorder(javax.swing.BorderFactory.createTitledBorder("Descripción:"));
 
@@ -311,30 +316,7 @@ public class AsientoContable extends javax.swing.JPanel {
     private void jbtnListarCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnListarCuentasActionPerformed
         // TODO add your handling code here:
         if (!jcmbEmpresa.getSelectedItem().equals("-- SELECCIONAR EMPRESA --")) {
-            // Busca la empresa seleccionada para obtener su catalogo de cuentas completo
-            Empresa empresaSeleccionada = (Empresa) jcmbEmpresa.getSelectedItem();
-            
-            //modeloLista.setSize(0);// Limpia el modelo de la lista (elimina todos los elementos que hayan)
-            _modeloLista.removeAllElements();// Limpia el modelo de la lista (elimina todos los elementos que hayan)
-            if (!_tipoCuenta.equals("")) {
-                if (_tipoCuenta.equals("Todas las cuentas")) {
-                    lstCuentasSegunTipo = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(empresaSeleccionada.getId());
-                    for (Cuenta cuenta : lstCuentasSegunTipo) {
-                        _modeloLista.addElement(cuenta);
-                    }
-                } else {
-                    // Code... GetListaCuentasPorPorEmpresaYtipo();
-                    lstCuentasSegunTipo = CuentaControlador.Instancia().GetListaCuentasPorPorEmpresaYtipo(empresaSeleccionada.getId(), _tipoCuenta);
-                    for (Cuenta cuenta : lstCuentasSegunTipo) {
-                        _modeloLista.addElement(cuenta);
-                    }
-                }
-            } else {
-                lstCuentasSegunTipo = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(empresaSeleccionada.getId());
-                for (Cuenta cuenta : lstCuentasSegunTipo) {
-                    _modeloLista.addElement(cuenta);
-                }
-            }
+            CargarCuentas();
         } else {
             JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA EMPRESA A LA CUAL DESEA CREARLE EL ASIENTO CONTABLE.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }
@@ -345,30 +327,7 @@ public class AsientoContable extends javax.swing.JPanel {
         if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
             String tipoSeleccionado = (String) jcmbTipoCuenta.getSelectedItem();
             if (!jcmbEmpresa.getSelectedItem().equals("-- SELECCIONAR EMPRESA --")) {
-                _tipoCuenta = tipoSeleccionado;
-                
-                // Busca la empresa seleccionada para obtener su catalogo de cuentas completo
-                Empresa empresaSeleccionada = (Empresa) jcmbEmpresa.getSelectedItem();
-                _modeloLista.removeAllElements();// Limpia el modelo de la lista (elimina todos los elementos que hayan)
-                if (!_tipoCuenta.equals("")) {
-                    if (_tipoCuenta.equals("Todas las cuentas") || _tipoCuenta.equals("-- SELECCIONAR TIPO --")) {
-                        lstCuentasSegunTipo = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(empresaSeleccionada.getId());
-                        for (Cuenta cuenta : lstCuentasSegunTipo) {
-                            _modeloLista.addElement(cuenta);
-                        }
-                    } else {
-                        // Code... GetListaCuentasPorPorEmpresaYtipo();
-                        lstCuentasSegunTipo = CuentaControlador.Instancia().GetListaCuentasPorPorEmpresaYtipo(empresaSeleccionada.getId(), _tipoCuenta);
-                        for (Cuenta cuenta : lstCuentasSegunTipo) {
-                            _modeloLista.addElement(cuenta);
-                        }
-                    }
-                } else {
-                    lstCuentasSegunTipo = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(empresaSeleccionada.getId());
-                    for (Cuenta cuenta : lstCuentasSegunTipo) {
-                        _modeloLista.addElement(cuenta);
-                    }
-                }
+                CargarCuentas();
             }
         }
     }//GEN-LAST:event_jcmbTipoCuentaItemStateChanged
@@ -412,6 +371,15 @@ public class AsientoContable extends javax.swing.JPanel {
         CaragarMovimientos();
     }//GEN-LAST:event_jbtnGuardarMovimientoActionPerformed
 
+    private void jcmbEmpresaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbEmpresaItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            if (!jcmbEmpresa.getSelectedItem().equals("-- SELECCIONAR EMPRESA --")) {
+                CargarCuentas();
+            }
+        }
+    }//GEN-LAST:event_jcmbEmpresaItemStateChanged
+
     private void CargarEmpresas() {
         List<Empresa> lstEmpresas = EmpresaControlador.Instancia().GetListaEmpresas();
         jcmbEmpresa.addItem("-- SELECCIONAR EMPRESA --");
@@ -446,6 +414,37 @@ public class AsientoContable extends javax.swing.JPanel {
             
             jtxtTotalDebe.setText(String.valueOf(total_debe));
             jtxtTotalHaber.setText(String.valueOf(total_haber));
+        }
+    }
+    
+    private void CargarCuentas() {
+        // Busca la empresa seleccionada para obtener su catálogo de cuentas completo
+        Empresa empresaSeleccionada = (Empresa) jcmbEmpresa.getSelectedItem();
+
+        // Limpia el modelo de la lista (elimina todos los elementos que haya)
+        _modeloLista.removeAllElements();
+        String tipoCuentaSeleccionada = (String) jcmbTipoCuenta.getSelectedItem();
+
+        // Verifica si el JComboBox está vacío (Cosa que no debería pasar xd), tiene "Todas las cuentas" o la opción por defecto
+        if (tipoCuentaSeleccionada == null || tipoCuentaSeleccionada.equals("Todas las cuentas") || tipoCuentaSeleccionada.equals("-- SELECCIONAR TIPO --")) {
+            CargarTodasLasCuentas(empresaSeleccionada);
+        } else {
+            CargarCuentasPorTipo(empresaSeleccionada, tipoCuentaSeleccionada);
+        }
+    }
+
+    
+    private void CargarCuentasPorTipo(Empresa empresaSeleccionada, String tipoCuenta) {
+        lstCuentasSegunTipo = CuentaControlador.Instancia().GetListaCuentasPorPorEmpresaYtipo(empresaSeleccionada.getId(), tipoCuenta);
+        for (Cuenta cuenta : lstCuentasSegunTipo) {
+            _modeloLista.addElement(cuenta);
+        }
+    }
+    
+    private void CargarTodasLasCuentas(Empresa empresaSeleccionada) {
+        lstCuentasSegunTipo = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(empresaSeleccionada.getId());
+        for (Cuenta cuenta : lstCuentasSegunTipo) {
+            _modeloLista.addElement(cuenta);
         }
     }
     
