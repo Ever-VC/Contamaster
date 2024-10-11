@@ -394,7 +394,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         jtxtNombres.setText("");
         jtxtApellidos.setText("");
         jcmbSexo.setSelectedIndex(0);
-        jDateChooser1.setDate(new Date());
+        jDateChooser1.setDate(null);
         jtxtDireccion.setText("");
         jtxtEmail.setText("");
         jtxtUsername.setText("");
