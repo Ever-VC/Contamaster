@@ -4,19 +4,27 @@
  */
 package views;
 
+import controllers.AsientoControlador;
 import controllers.CuentaControlador;
 import controllers.EmpresaControlador;
+import controllers.MovimientoControlador;
+import controllers.UsuarioControlador;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.Asiento;
 import models.Cuenta;
+import models.DetalleAsiento;
 import models.Empresa;
 import models.Movimiento;
+import support.UsuarioCache;
 
 /**
  *
@@ -24,8 +32,7 @@ import models.Movimiento;
  */
 public class AsientoContable extends javax.swing.JPanel {
     
-    DefaultListModel _modeloLista = new DefaultListModel();
-    private String _tipoCuenta = "";
+    private DefaultListModel _modeloLista = new DefaultListModel();
     private List<Cuenta> lstCuentasSegunTipo = null;
     private List<Movimiento> _lstMovimientos = new ArrayList();
 
@@ -103,6 +110,7 @@ public class AsientoContable extends javax.swing.JPanel {
 
         jtxtHaber.setBorder(javax.swing.BorderFactory.createTitledBorder("Haber:"));
 
+        jbtnListarCuentas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnListarCuentas.setText("LISTAR CUENTAS");
         jbtnListarCuentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,6 +206,7 @@ public class AsientoContable extends javax.swing.JPanel {
 
         jtxtTotalHaber.setBorder(javax.swing.BorderFactory.createTitledBorder("TOTAL HABER:"));
 
+        jbtnGuardarMovimiento.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnGuardarMovimiento.setText("GUARDAR");
         jbtnGuardarMovimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,6 +214,7 @@ public class AsientoContable extends javax.swing.JPanel {
             }
         });
 
+        jbtnEliminarMovimiento.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnEliminarMovimiento.setText("ELIMINAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -306,6 +316,26 @@ public class AsientoContable extends javax.swing.JPanel {
         /**
         * Validaciones...
         */
+        String descripcion = JOptionPane.showInputDialog(AsientoContable.this, "Ingrese la descripción del asiento:");
+        if (descripcion == null || descripcion.trim().isEmpty()) {
+            return;
+        }
+        Map<String, Double> totales = CalcularTotales();
+        Asiento nuevoAsiento = CrearAsiento(totales.get("total_debe"), totales.get("total_debe"), descripcion);
+        
+        int response = JOptionPane.showConfirmDialog(
+            AsientoContable.this,
+            "¿Estás seguro de que deseas registrar el asiento cobtable? Es posible que no lo puedas modificar en el futuro, por lo que debes estar seguro que la información esté correcta.",
+            "ATENCIÓN:",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+        
+        if (response == JOptionPane.YES_OPTION) {
+            //Guardar todo
+            RegistrarMovimientos();
+            RegistrarAsiento(nuevoAsiento);
+        }
     }//GEN-LAST:event_jbtnGuardarActionPerformed
 
     private void jbtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimpiarActionPerformed
@@ -369,6 +399,7 @@ public class AsientoContable extends javax.swing.JPanel {
         
         _lstMovimientos.add(nuevoMovimiento);
         CaragarMovimientos();
+        LimpiarTodo();
     }//GEN-LAST:event_jbtnGuardarMovimientoActionPerformed
 
     private void jcmbEmpresaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbEmpresaItemStateChanged
@@ -456,6 +487,48 @@ public class AsientoContable extends javax.swing.JPanel {
         jtxtDebe.setText("");
         jtxtHaber.setText("");
         _modeloLista.removeAllElements();// Limpia el modelo de la lista (elimina todos los elementos que hayan)
+    }
+    
+    private Map<String, Double> CalcularTotales() {
+        double total_debe = 0.00;
+        double total_haber = 0.00;
+        for (Movimiento movimiento : _lstMovimientos) {
+            total_debe += movimiento.getDebe().doubleValue();
+            total_haber += movimiento.getHaber().doubleValue();
+            //MovimientoControlador.Instancia().CrearMovimiento(movimiento);
+        }
+        Map<String, Double> totales = new HashMap<>();
+        totales.put("total_debe", total_debe);
+        totales.put("total_haber", total_haber);
+        return totales;
+    }
+    
+    private Asiento CrearAsiento(Double totalDebe, Double totalHaber, String descripcion) {
+        Asiento nuevoAsiento = new Asiento();
+        nuevoAsiento.setFecha(_lstMovimientos.getFirst().getFecha());
+        nuevoAsiento.setDescripcion(descripcion);
+        nuevoAsiento.setTotalDebe(BigDecimal.valueOf(totalDebe));
+        nuevoAsiento.setTotalHaber(BigDecimal.valueOf(totalHaber));
+        nuevoAsiento.setIdUsuarioFk(UsuarioControlador.Instancia().GetUsuarioPorId(UsuarioCache.Id));
+        return nuevoAsiento;
+    }
+    
+    private void RegistrarMovimientos() {
+        for (Movimiento movimiento : _lstMovimientos) {
+            MovimientoControlador.Instancia().CrearMovimiento(movimiento);
+        }
+    }
+    
+    private void RegistrarAsiento (Asiento nuevoAsiento) {
+        AsientoControlador.Instancia().CrearAsiento(nuevoAsiento);
+    }
+    
+    private void RegistrarDetalleAsiento() {
+        for (Movimiento movimiento : _lstMovimientos) {
+            DetalleAsiento detalleAsiento = new DetalleAsiento();
+            MovimientoControlador.Instancia().CrearMovimiento(movimiento);
+        }
+        
     }
             
     // Variables declaration - do not modify//GEN-BEGIN:variables
