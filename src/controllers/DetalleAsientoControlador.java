@@ -5,8 +5,11 @@
 package controllers;
 
 import connection.Conexion;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import models.DetalleAsiento;
+import models.Movimiento;
 
 /**
  *
@@ -33,5 +36,30 @@ public class DetalleAsientoControlador {
         _entityManager.persist(nuevoDetalleAsiento);
         _entityManager.getTransaction().commit();
         _entityManager.close();
+    }
+    
+    public List<DetalleAsiento> GetAsientosPorMovimiento(Movimiento movimiento) {
+        _entityManager = setEntityManager();
+        List<DetalleAsiento> detallesAsiento = new ArrayList<>();
+        try {
+            _entityManager.getTransaction().begin();
+
+            detallesAsiento = _entityManager.createQuery("SELECT d FROM DetalleAsiento d WHERE d.idMovimientoFk = :movimiento", DetalleAsiento.class)
+                        .setParameter("movimiento", movimiento)
+                        .getResultList();// Ejecuta la consulta y obtiene el resultado
+
+            _entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            if (_entityManager.getTransaction().isActive()) {
+                _entityManager.getTransaction().rollback();// Hace rollback en caso de error
+            }
+            ex.printStackTrace();// Imprime el error para depuración
+        } finally {
+            if (_entityManager != null) {
+                _entityManager.close();// Cierra el EntityManager
+            }
+        }
+
+        return detallesAsiento;
     }
 }
