@@ -6,6 +6,7 @@ package views;
 
 import controllers.AsientoControlador;
 import controllers.CuentaControlador;
+import controllers.DetalleAsientoControlador;
 import controllers.EmpresaControlador;
 import controllers.MovimientoControlador;
 import controllers.UsuarioControlador;
@@ -289,6 +290,7 @@ public class AsientoContable extends javax.swing.JPanel {
         /**
         * Validaciones...
         */
+        /*
         String descripcion = JOptionPane.showInputDialog(AsientoContable.this, "Ingrese la descripción del asiento:");
         if (descripcion == null || descripcion.trim().isEmpty()) {
             return;
@@ -308,6 +310,28 @@ public class AsientoContable extends javax.swing.JPanel {
             //Guardar todo
             RegistrarMovimientos();
             RegistrarAsiento(nuevoAsiento);
+        }*/
+        
+        int response = JOptionPane.showConfirmDialog(
+            AsientoContable.this,
+            "¿Estás seguro de que deseas registrar el asiento cobtable? Es posible que no lo puedas modificar en el futuro, por lo que debes estar seguro que la información esté correcta.",
+            "ATENCIÓN:",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE
+        );
+        
+        if (response == JOptionPane.YES_OPTION) {
+            // Almacena los totales (estan en los JTextField) y la descripcion
+            String descripcion = jtxtDescripcion.getText();
+            BigDecimal totalDebe = new BigDecimal(jtxtTotalDebe.getText());
+            BigDecimal totalHaber = new BigDecimal(jtxtTotalHaber.getText());
+            // Crea el asiento contable
+            Asiento nuevoAsiento = CrearAsiento(totalDebe, totalHaber, descripcion);
+            
+            //Guardar todo
+            RegistrarMovimientos();
+            RegistrarAsiento(nuevoAsiento);
+            RegistrarDetalleAsiento(nuevoAsiento);
         }
     }//GEN-LAST:event_jbtnGuardarActionPerformed
 
@@ -513,12 +537,12 @@ public class AsientoContable extends javax.swing.JPanel {
         return totales;
     }
     
-    private Asiento CrearAsiento(Double totalDebe, Double totalHaber, String descripcion) {
+    private Asiento CrearAsiento(BigDecimal totalDebe, BigDecimal totalHaber, String descripcion) {
         Asiento nuevoAsiento = new Asiento();
         nuevoAsiento.setFecha(_lstMovimientos.getFirst().getFecha());
         nuevoAsiento.setDescripcion(descripcion);
-        nuevoAsiento.setTotalDebe(BigDecimal.valueOf(totalDebe));
-        nuevoAsiento.setTotalHaber(BigDecimal.valueOf(totalHaber));
+        nuevoAsiento.setTotalDebe(totalDebe);
+        nuevoAsiento.setTotalHaber(totalHaber);
         nuevoAsiento.setIdUsuarioFk(UsuarioControlador.Instancia().GetUsuarioPorId(UsuarioCache.Id));
         return nuevoAsiento;
     }
@@ -533,10 +557,12 @@ public class AsientoContable extends javax.swing.JPanel {
         AsientoControlador.Instancia().CrearAsiento(nuevoAsiento);
     }
     
-    private void RegistrarDetalleAsiento() {
+    private void RegistrarDetalleAsiento(Asiento asiento) {
         for (Movimiento movimiento : _lstMovimientos) {
-            DetalleAsiento detalleAsiento = new DetalleAsiento();
-            MovimientoControlador.Instancia().CrearMovimiento(movimiento);
+            DetalleAsiento nuevoDetalleAsiento = new DetalleAsiento();
+            nuevoDetalleAsiento.setIdAsientoFk(asiento);
+            nuevoDetalleAsiento.setIdMovimientoFk(movimiento);
+            DetalleAsientoControlador.Instancia().CrearDetalleMovimiento(nuevoDetalleAsiento);
         }
         
     }
