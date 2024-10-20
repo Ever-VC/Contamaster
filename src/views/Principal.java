@@ -147,6 +147,12 @@ public class Principal extends javax.swing.JFrame {
 
         jbtnLibroDiario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnLibroDiario.setText("LIBRO DIARIO");
+        jbtnLibroDiario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnLibroDiario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnLibroDiarioActionPerformed(evt);
+            }
+        });
 
         jbtnLibroMayor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnLibroMayor.setText("LIBRO MAYOR");
@@ -294,6 +300,11 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new AsientoContable());
     }//GEN-LAST:event_jbtnAsientosActionPerformed
+
+    private void jbtnLibroDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLibroDiarioActionPerformed
+        // TODO add your handling code here:
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new LibroDiario());
+    }//GEN-LAST:event_jbtnLibroDiarioActionPerformed
   
     /**
      * @param args the command line arguments
