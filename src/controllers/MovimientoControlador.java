@@ -5,6 +5,9 @@
 package controllers;
 
 import connection.Conexion;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import models.Movimiento;
 
@@ -33,6 +36,34 @@ public class MovimientoControlador {
         _entityManager.persist(nuevoMovimiento);
         _entityManager.getTransaction().commit();
         _entityManager.close();
+    }
+    
+    public List<Movimiento> GetPorFechaInicioYFin(Date fechaInicio, Date fechaFin) {
+        _entityManager = setEntityManager();
+        String jpql = "SELECT m FROM Movimiento m WHERE m.fecha > :fechaInicio AND m.fecha < :fechaFin";
+        
+        List<Movimiento> movimientos = new ArrayList<>();
+        try {
+            _entityManager.getTransaction().begin();
+
+            movimientos = _entityManager.createQuery(jpql, Movimiento.class)
+                        .setParameter("fechaInicio", fechaInicio)
+                        .setParameter("fechaFin", fechaFin)
+                        .getResultList();// Ejecuta la consulta y obtiene el resultado
+
+            _entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            if (_entityManager.getTransaction().isActive()) {
+                _entityManager.getTransaction().rollback();// Hace rollback en caso de error
+            }
+            ex.printStackTrace();// Imprime el error para depuración
+        } finally {
+            if (_entityManager != null) {
+                _entityManager.close();// Cierra el EntityManager
+            }
+        }
+
+        return movimientos;
     }
     
 }
