@@ -290,27 +290,6 @@ public class AsientoContable extends javax.swing.JPanel {
         /**
         * Validaciones...
         */
-        /*
-        String descripcion = JOptionPane.showInputDialog(AsientoContable.this, "Ingrese la descripción del asiento:");
-        if (descripcion == null || descripcion.trim().isEmpty()) {
-            return;
-        }
-        Map<String, Double> totales = CalcularTotales();
-        Asiento nuevoAsiento = CrearAsiento(totales.get("total_debe"), totales.get("total_debe"), descripcion);
-        
-        int response = JOptionPane.showConfirmDialog(
-            AsientoContable.this,
-            "¿Estás seguro de que deseas registrar el asiento cobtable? Es posible que no lo puedas modificar en el futuro, por lo que debes estar seguro que la información esté correcta.",
-            "ATENCIÓN:",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.WARNING_MESSAGE
-        );
-        
-        if (response == JOptionPane.YES_OPTION) {
-            //Guardar todo
-            RegistrarMovimientos();
-            RegistrarAsiento(nuevoAsiento);
-        }*/
         
         int response = JOptionPane.showConfirmDialog(
             AsientoContable.this,
@@ -332,6 +311,8 @@ public class AsientoContable extends javax.swing.JPanel {
             RegistrarMovimientos();
             RegistrarAsiento(nuevoAsiento);
             RegistrarDetalleAsiento(nuevoAsiento);
+            JOptionPane.showMessageDialog(null, "EL ASIENTO CONTABLE SE HA REGISTRADO EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
+            LimpiarTodo();
         }
     }//GEN-LAST:event_jbtnGuardarActionPerformed
 
@@ -520,21 +501,6 @@ public class AsientoContable extends javax.swing.JPanel {
         _lstMovimientos.add(nuevoMovimiento);
         CaragarMovimientos();
         jlstCuentas.clearSelection();
-        //LimpiarTodo();
-    }
-    
-    private Map<String, Double> CalcularTotales() {
-        double total_debe = 0.00;
-        double total_haber = 0.00;
-        for (Movimiento movimiento : _lstMovimientos) {
-            total_debe += movimiento.getDebe().doubleValue();
-            total_haber += movimiento.getHaber().doubleValue();
-            //MovimientoControlador.Instancia().CrearMovimiento(movimiento);
-        }
-        Map<String, Double> totales = new HashMap<>();
-        totales.put("total_debe", total_debe);
-        totales.put("total_haber", total_haber);
-        return totales;
     }
     
     private Asiento CrearAsiento(BigDecimal totalDebe, BigDecimal totalHaber, String descripcion) {
