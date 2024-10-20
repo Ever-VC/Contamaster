@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
+import models.Empresa;
 import models.Movimiento;
 
 /**
@@ -38,9 +39,9 @@ public class MovimientoControlador {
         _entityManager.close();
     }
     
-    public List<Movimiento> GetPorFechaInicioYFin(Date fechaInicio, Date fechaFin) {
+    public List<Movimiento> GetPorFechaInicioYFin(Date fechaInicio, Date fechaFin, Empresa empresa) {
         _entityManager = setEntityManager();
-        String jpql = "SELECT m FROM Movimiento m WHERE m.fecha > :fechaInicio AND m.fecha < :fechaFin";
+        String jpql = "SELECT m FROM Movimiento m WHERE m.fecha > :fechaInicio AND m.fecha < :fechaFin AND m.idCuentaFk.idEmpresaFk = :empresa";
         
         List<Movimiento> movimientos = new ArrayList<>();
         try {
@@ -49,6 +50,7 @@ public class MovimientoControlador {
             movimientos = _entityManager.createQuery(jpql, Movimiento.class)
                         .setParameter("fechaInicio", fechaInicio)
                         .setParameter("fechaFin", fechaFin)
+                        .setParameter("empresa", empresa)
                         .getResultList();// Ejecuta la consulta y obtiene el resultado
 
             _entityManager.getTransaction().commit();
