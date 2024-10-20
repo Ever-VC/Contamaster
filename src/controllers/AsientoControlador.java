@@ -34,5 +34,5 @@ public class AsientoControlador {
         _entityManager.getTransaction().commit();
         _entityManager.close();
     }
-    
+        
 }
