@@ -200,11 +200,14 @@ public class AsientoContable extends javax.swing.JPanel {
         });
 
         jtxtTotalDebe.setBorder(javax.swing.BorderFactory.createTitledBorder("TOTAL DEBE:"));
+        jtxtTotalDebe.setEnabled(false);
 
         jtxtTotalHaber.setBorder(javax.swing.BorderFactory.createTitledBorder("TOTAL HABER:"));
+        jtxtTotalHaber.setEnabled(false);
 
         jbtnEliminarMovimiento.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnEliminarMovimiento.setText("ELIMINAR MOVIMIENTO");
+        jbtnEliminarMovimiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnEliminarMovimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnEliminarMovimientoActionPerformed(evt);
