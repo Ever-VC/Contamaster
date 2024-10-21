@@ -157,6 +157,12 @@ public class Principal extends javax.swing.JFrame {
         jbtnLibroMayor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnLibroMayor.setText("LIBRO MAYOR");
         jbtnLibroMayor.setToolTipText("");
+        jbtnLibroMayor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnLibroMayor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnLibroMayorActionPerformed(evt);
+            }
+        });
 
         jbtnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnCerrarSesion.setText("CERRAR SESION");
@@ -305,6 +311,11 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new LibroDiario());
     }//GEN-LAST:event_jbtnLibroDiarioActionPerformed
+
+    private void jbtnLibroMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLibroMayorActionPerformed
+        // TODO add your handling code here:
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new LibroMayor());
+    }//GEN-LAST:event_jbtnLibroMayorActionPerformed
   
     /**
      * @param args the command line arguments
