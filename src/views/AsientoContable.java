@@ -158,7 +158,7 @@ public class AsientoContable extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, true, true
+                false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
