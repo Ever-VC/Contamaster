@@ -55,6 +55,9 @@ public class Mayor implements Serializable {
     @Basic(optional = false)
     @Column(name = "saldo", nullable = false, precision = 10, scale = 2)
     private BigDecimal saldo;
+    @Basic(optional = false)
+    @Column(name = "saldo_anterior", nullable = false, precision = 10, scale = 2)
+    private BigDecimal saldoAnterior;
     @JoinColumn(name = "id_cuenta_fk", referencedColumnName = "id")
     @ManyToOne
     private Cuenta idCuentaFk;
@@ -66,13 +69,14 @@ public class Mayor implements Serializable {
         this.id = id;
     }
 
-    public Mayor(Integer id, Date fechaInicio, Date fechaFin, BigDecimal totalDebe, BigDecimal totalHaber, BigDecimal saldo) {
+    public Mayor(Integer id, Date fechaInicio, Date fechaFin, BigDecimal totalDebe, BigDecimal totalHaber, BigDecimal saldo, BigDecimal saldoAnterior) {
         this.id = id;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.totalDebe = totalDebe;
         this.totalHaber = totalHaber;
         this.saldo = saldo;
+        this.saldoAnterior = saldoAnterior;
     }
 
     public Integer getId() {
@@ -121,6 +125,14 @@ public class Mayor implements Serializable {
 
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
+    }
+
+    public BigDecimal getSaldoAnterior() {
+        return saldoAnterior;
+    }
+
+    public void setSaldoAnterior(BigDecimal saldoAnterior) {
+        this.saldoAnterior = saldoAnterior;
     }
 
     public Cuenta getIdCuentaFk() {
