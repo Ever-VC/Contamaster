@@ -92,7 +92,7 @@ public class AsientoContable extends javax.swing.JPanel {
         jlblFecha.setForeground(new java.awt.Color(0, 0, 0));
         jlblFecha.setText("Fecha de movimiento:");
 
-        jcmbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- SELECCIONAR TIPO --", "Todas las cuentas", "Activo", "Pasivo", "Capital", "Ingresos", "Gastos", "Retiros" }));
+        jcmbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- SELECCIONAR TIPO --", "Todas las cuentas", "Activo Normal", "Contra-Cuenta de Activo", "Pasivo", "Capital", "Ingresos", "Gastos", "Retiros" }));
         jcmbTipoCuenta.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar por tipo de cuenta:"));
         jcmbTipoCuenta.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -158,7 +158,7 @@ public class AsientoContable extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -314,6 +314,7 @@ public class AsientoContable extends javax.swing.JPanel {
             RegistrarMovimientos();
             RegistrarAsiento(nuevoAsiento);
             RegistrarDetalleAsiento(nuevoAsiento);
+            _lstMovimientos.clear();
             JOptionPane.showMessageDialog(null, "EL ASIENTO CONTABLE SE HA REGISTRADO EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
             LimpiarTodo();
         }
@@ -322,7 +323,6 @@ public class AsientoContable extends javax.swing.JPanel {
     private void jcmbTipoCuentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbTipoCuentaItemStateChanged
         // TODO add your handling code here:
         if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
-            String tipoSeleccionado = (String) jcmbTipoCuenta.getSelectedItem();
             if (!jcmbEmpresa.getSelectedItem().equals("-- SELECCIONAR EMPRESA --")) {
                 CargarCuentas();
             }
@@ -489,6 +489,9 @@ public class AsientoContable extends javax.swing.JPanel {
         jcmbEmpresa.setSelectedIndex(0);
         jtxtDescripcion.setText("");
         _modeloLista.removeAllElements();// Limpia el modelo de la lista (elimina todos los elementos que hayan)
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)jtblMovimientos.getModel();
+        modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
     }
     
     private void AlmacenarNuevoMovimiento(Cuenta cuentaSeleccionada) {

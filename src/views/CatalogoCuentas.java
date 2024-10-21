@@ -108,7 +108,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
 
         jtxtSaldo.setBorder(javax.swing.BorderFactory.createTitledBorder("Saldo:"));
 
-        jcmbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- SELECCIONAR TIPO --", "Activo", "Pasivo", "Capital", "Ingresos", "Gastos", "Retiros" }));
+        jcmbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- SELECCIONAR TIPO --", "Activo Normal", "Contra-Cuenta de Activo", "Pasivo", "Capital", "Ingresos", "Gastos", "Retiros" }));
 
         jbtnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnGuardar.setText("GUARDAR");

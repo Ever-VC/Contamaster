@@ -215,14 +215,14 @@ public class LibroDiario extends javax.swing.JPanel {
     }//GEN-LAST:event_jcmbEmpresaItemStateChanged
 
     
-    private void CargarLibroDiario(Date fechInicio, Date fechaFin) {
+    private void CargarLibroDiario(Date fechaInicio, Date fechaFin) {
         
         if (_empresaSeleccionada != null) {
             DefaultTableModel modelo = new DefaultTableModel();
             modelo = (DefaultTableModel)jtblLibroDiario.getModel();
             modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
 
-            List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetPorFechaInicioYFin(fechInicio, fechaFin, _empresaSeleccionada);
+            List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorEmpresaYFechaInicioYFin(fechaInicio, fechaFin, _empresaSeleccionada);
 
             Movimiento primerMovimiento = lstMovimientos.getFirst();
 
@@ -233,11 +233,11 @@ public class LibroDiario extends javax.swing.JPanel {
 
             Date fechaDeReferencia = primerMovimiento.getFecha();
             int iterador = 0;
-            double total_debe = 0.00;
-            double total_haber = 0.00;
+            double totalDebe = 0.00;
+            double totalHaber = 0.00;
             for (Movimiento movimiento : lstMovimientos) {
-                total_debe += movimiento.getDebe().doubleValue();
-                total_haber += movimiento.getHaber().doubleValue();
+                totalDebe += movimiento.getDebe().doubleValue();
+                totalHaber += movimiento.getHaber().doubleValue();
                 Date fecha = movimiento.getFecha();
                 String fechaFormateada = "";
                 if (!fechaDeReferencia.equals(fecha) || iterador == 0) {
@@ -256,8 +256,8 @@ public class LibroDiario extends javax.swing.JPanel {
 
                 iterador ++;
             }
-            jtxtTotalDebe.setText(String.valueOf(total_debe));
-            jtxtTotalHaber.setText(String.valueOf(total_haber));
+            jtxtTotalDebe.setText(String.valueOf(totalDebe));
+            jtxtTotalHaber.setText(String.valueOf(totalHaber));
         } else {
             JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA CUENTA DE LA QUE DESEA GENERAR EL LIBRO DIARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }
