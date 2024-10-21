@@ -189,14 +189,15 @@
     <Component class="javax.swing.JComboBox" name="jcmbTipoCuenta">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
+          <StringArray count="8">
             <StringItem index="0" value="-- SELECCIONAR TIPO --"/>
-            <StringItem index="1" value="Activo"/>
-            <StringItem index="2" value="Pasivo"/>
-            <StringItem index="3" value="Capital"/>
-            <StringItem index="4" value="Ingresos"/>
-            <StringItem index="5" value="Gastos"/>
-            <StringItem index="6" value="Retiros"/>
+            <StringItem index="1" value="Activo Normal"/>
+            <StringItem index="2" value="Contra-Cuenta de Activo"/>
+            <StringItem index="3" value="Pasivo"/>
+            <StringItem index="4" value="Capital"/>
+            <StringItem index="5" value="Ingresos"/>
+            <StringItem index="6" value="Gastos"/>
+            <StringItem index="7" value="Retiros"/>
           </StringArray>
         </Property>
       </Properties>
