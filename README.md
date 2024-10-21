@@ -63,6 +63,7 @@ CREATE TABLE mayor (
     fecha_fin DATE NOT NULL,
     total_debe DECIMAL(10, 2) NOT NULL,
     total_haber DECIMAL(10, 2) NOT NULL,
+    saldo_anterior DECIMAL(10, 2) NOT NULL,
     saldo DECIMAL(10, 2) NOT NULL,
     id_cuenta_fk INT REFERENCES cuenta(id) ON DELETE CASCADE
 );
