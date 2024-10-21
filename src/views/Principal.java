@@ -137,14 +137,32 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jbtnAsientos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbtnAsientos.setText("GESTION CONTABLE");
+        jbtnAsientos.setText("ASIENTO CONTABLE");
+        jbtnAsientos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnAsientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAsientosActionPerformed(evt);
+            }
+        });
 
         jbtnLibroDiario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnLibroDiario.setText("LIBRO DIARIO");
+        jbtnLibroDiario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnLibroDiario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnLibroDiarioActionPerformed(evt);
+            }
+        });
 
         jbtnLibroMayor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnLibroMayor.setText("LIBRO MAYOR");
         jbtnLibroMayor.setToolTipText("");
+        jbtnLibroMayor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnLibroMayor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnLibroMayorActionPerformed(evt);
+            }
+        });
 
         jbtnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnCerrarSesion.setText("CERRAR SESION");
@@ -203,7 +221,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jbtnLibroDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbtnLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
                 .addComponent(jbtnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -214,7 +232,7 @@ public class Principal extends javax.swing.JFrame {
         jpnlContenedor.setLayout(jpnlContenedorLayout);
         jpnlContenedorLayout.setHorizontalGroup(
             jpnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 986, Short.MAX_VALUE)
+            .addGap(0, 1051, Short.MAX_VALUE)
         );
         jpnlContenedorLayout.setVerticalGroup(
             jpnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,11 +250,8 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jpnlMenu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jpnlMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -287,10 +302,21 @@ public class Principal extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_jbtnCerrarSesionActionPerformed
 
-    public void CargarUsuario(int idUsuario) {
-        //Carga la información del usuario logueado
-    }
-    
+    private void jbtnAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAsientosActionPerformed
+        // TODO add your handling code here:
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new AsientoContable());
+    }//GEN-LAST:event_jbtnAsientosActionPerformed
+
+    private void jbtnLibroDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLibroDiarioActionPerformed
+        // TODO add your handling code here:
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new LibroDiario());
+    }//GEN-LAST:event_jbtnLibroDiarioActionPerformed
+
+    private void jbtnLibroMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLibroMayorActionPerformed
+        // TODO add your handling code here:
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new LibroMayor());
+    }//GEN-LAST:event_jbtnLibroMayorActionPerformed
+  
     /**
      * @param args the command line arguments
      */
