@@ -14,6 +14,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import models.Cuenta;
 import models.SessionLog;
 import support.UsuarioCache;
 
@@ -314,7 +315,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbtnLibroMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLibroMayorActionPerformed
         // TODO add your handling code here:
-        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new LibroMayor());
+        LibroMayor frmLibroMayor = new LibroMayor();
+        frmLibroMayor.SetFormularioPrincipal(this);
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, frmLibroMayor);
     }//GEN-LAST:event_jbtnLibroMayorActionPerformed
   
     /**
@@ -369,6 +372,13 @@ public class Principal extends javax.swing.JFrame {
         if (idEmpresa != -1) {
             CatalogoCuentas frmCatalogoCuentas = new CatalogoCuentas(idEmpresa);
             MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, frmCatalogoCuentas);
+        }
+    }
+    
+    public void AbrirCuentaT(Cuenta cuenta) {
+        if (cuenta != null) {
+            CuentaT cuentaT = new CuentaT(cuenta);
+            MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, cuentaT);
         }
     }
 

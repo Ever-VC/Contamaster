@@ -15,6 +15,7 @@ import java.time.Month;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Cuenta;
 import models.Empresa;
@@ -28,6 +29,7 @@ import models.Movimiento;
 public class LibroMayor extends javax.swing.JPanel {
     
     private int _idCuenta = -1;
+    private Principal _frmPrincipal;
     private Empresa _empresaSeleccionada = null;
     private Month mes = null; // Almacena el mes que se desea mayorizar
 
@@ -52,8 +54,8 @@ public class LibroMayor extends javax.swing.JPanel {
         jlblTitulo = new javax.swing.JLabel();
         jcmbEmpresa = new javax.swing.JComboBox();
         jbtnMayorizar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbtnCuentaT = new javax.swing.JButton();
+        jbtnBalanzaComprobacion = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblCuentas = new javax.swing.JTable();
         jcmbMesMayorizar = new javax.swing.JComboBox<>();
@@ -80,11 +82,16 @@ public class LibroMayor extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("VER ESTADO DE CUENTA");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnCuentaT.setText("VER ESTADO DE CUENTA");
+        jbtnCuentaT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnCuentaT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCuentaTActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("GENERAR BALACE DE COMPROBACION");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnBalanzaComprobacion.setText("GENERAR BALACE DE COMPROBACION");
+        jbtnBalanzaComprobacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jtblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,9 +148,9 @@ public class LibroMayor extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(156, 156, 156)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtnCuentaT, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbtnBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(236, 236, 236)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,8 +186,8 @@ public class LibroMayor extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnCuentaT, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -242,6 +249,19 @@ public class LibroMayor extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jcmbMesMayorizarItemStateChanged
 
+    private void jbtnCuentaTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCuentaTActionPerformed
+        // TODO add your handling code here:
+        if (_idCuenta != -1) {
+            Cuenta cuenta = CuentaControlador.Instancia().GetCuentaPorId(_idCuenta);
+            _frmPrincipal.AbrirCuentaT(cuenta);
+        } else {
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA CUAL DE LA CUAL DESEA VISUALIZAR EL ESQUEMA DE MAYOR.","ERROR:", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbtnCuentaTActionPerformed
+
+    public void SetFormularioPrincipal(Principal frmPrincipal) {
+        this._frmPrincipal = frmPrincipal;
+    }
     
     private void CargarCuentas() {
         _empresaSeleccionada = (Empresa) jcmbEmpresa.getSelectedItem();
@@ -347,10 +367,10 @@ public class LibroMayor extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jbtnBalanzaComprobacion;
+    private javax.swing.JButton jbtnCuentaT;
     private javax.swing.JButton jbtnMayorizar;
     private javax.swing.JComboBox jcmbEmpresa;
     private javax.swing.JComboBox<String> jcmbMesMayorizar;
