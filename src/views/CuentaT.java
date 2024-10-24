@@ -4,21 +4,32 @@
  */
 package views;
 
+import controllers.MayorControlador;
+import controllers.MovimientoControlador;
+import java.math.BigDecimal;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import models.Cuenta;
+import models.Mayor;
+import models.Movimiento;
 
 /**
  *
  * @author ever_vc
  */
 public class CuentaT extends javax.swing.JPanel {
+    
+    private Cuenta _cuenta = null;
 
     /**
      * Creates new form CuentaT
      */
     public CuentaT(Cuenta cuenta) {
         initComponents();
+        this._cuenta = cuenta;
         this.jlblNombreYTipoCuenta.setText(cuenta.getNombre().toUpperCase() + " - " + cuenta.getTipo().toUpperCase());
-        this.jlblSaldo.setText( this.jlblSaldo.getText() + " " + cuenta.getSaldo());
+        this.jlblSaldo.setText( this.jlblSaldo.getText() + cuenta.getSaldo());
+        CargarMovimientos();
     }
 
     /**
@@ -35,7 +46,7 @@ public class CuentaT extends javax.swing.JPanel {
         jlblNombreYTipoCuenta = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtblCuentaT = new javax.swing.JTable();
         jlblSaldo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -49,7 +60,7 @@ public class CuentaT extends javax.swing.JPanel {
         jlblNombreYTipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
         jlblNombreYTipoCuenta.setText("NOMBRE DE LA CUENTA - TIPO DE CUENTA");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtblCuentaT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -68,12 +79,12 @@ public class CuentaT extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane1.setViewportView(jtblCuentaT);
+        if (jtblCuentaT.getColumnModel().getColumnCount() > 0) {
+            jtblCuentaT.getColumnModel().getColumn(0).setResizable(false);
+            jtblCuentaT.getColumnModel().getColumn(1).setResizable(false);
+            jtblCuentaT.getColumnModel().getColumn(2).setResizable(false);
+            jtblCuentaT.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jlblSaldo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -103,7 +114,7 @@ public class CuentaT extends javax.swing.JPanel {
                         .addGap(327, 327, 327))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jlblNombreYTipoCuenta)
-                        .addGap(349, 349, 349))))
+                        .addGap(365, 365, 365))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,13 +136,174 @@ public class CuentaT extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 
+    private void CargarMovimientos() {
+        // Obtiene el ultimo registro de mayorización de la cuenta (es decir el saldo que tiene)
+        List<Mayor> lstMayorizaciones = MayorControlador.Instancia().GetListaRegistrosAlMayorPorCuenta(_cuenta);
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)jtblCuentaT.getModel();
+        modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
+        
+        String saldoAnterior = "Saldo Inicial: $";
+        if (lstMayorizaciones.size() > 0) {
+            Mayor ultimoRegistroMayorizacion = lstMayorizaciones.getLast();
+            saldoAnterior = "Saldo anterior:";
+            
+            List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorCuentaYFechaInicioYFin(ultimoRegistroMayorizacion.getFechaInicio(), ultimoRegistroMayorizacion.getFechaFin(), _cuenta);
+            
+            //Movimiento primerMovimiento = lstMovimientos.getFirst();
+            
+            switch(_cuenta.getTipo()) {
+                case "Activo Normal":
+                    CargarTipoActivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
+                    break;
+                case "Pasivo":
+                    CargarTipoPasivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
+                    break;
+                case "Contra-Cuenta de Activo":
+                    CargarTipoPasivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
+                    break;
+                case "Capital":
+                    CargarTipoPasivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
+                    break;
+                case "Ingresos":
+                    CargarTipoPasivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
+                    break;
+                case "Gastos":
+                    CargarTipoActivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
+                    break;
+                case "Retiros":
+                    CargarTipoActivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
+                    break;
+            }
+            
+            
+        } else {
+            // Si no hay movimientos, mostrar solo el saldo inicial y los totales
+            System.out.println("Hola Mundo!");
+            modelo.addRow(new Object[]{saldoAnterior, "$" + _cuenta.getSaldo(), "", ""});
+            modelo.addRow(new Object[]{"Total Debe", "$" + _cuenta.getSaldo(), "$0.00", "Total Haber"});
+        }      
+        
+    }
+    
+    private void CargarTipoActivo(DefaultTableModel modelo, String mensaje, BigDecimal saldoAnterior, List<Movimiento> lstMovimientos) {
+        BigDecimal totalDebe = BigDecimal.ZERO;
+        BigDecimal totalHaber = BigDecimal.ZERO;
+        Movimiento primerMovimientoConValor = null;
+
+        // Buscar el primer movimiento con valor en el haber
+        for (Movimiento movimiento : lstMovimientos) {
+            if (movimiento.getHaber() != null && movimiento.getHaber().compareTo(BigDecimal.ZERO) > 0) {
+                primerMovimientoConValor = movimiento;
+                break; // Salimos del bucle en cuanto encontramos el primer movimiento con valor
+            }
+        }
+
+        // Verificar si hay movimientos
+        if (lstMovimientos.size() > 0) {
+            totalDebe = totalDebe.add(saldoAnterior);
+            // Agregar la primera fila con el saldo inicial a la izquierda y el primer movimiento con valor a la derecha
+            if (primerMovimientoConValor != null) {
+                totalHaber = totalHaber.add(primerMovimientoConValor.getHaber());
+                modelo.addRow(new Object[]{mensaje, "$" + saldoAnterior, "$" + primerMovimientoConValor.getHaber(), primerMovimientoConValor.getId()});
+                // Eliminar el primer movimiento con valor para que no se repita en la tabla
+                lstMovimientos.remove(primerMovimientoConValor);
+            } else {
+                // En caso de no haber ningún movimiento con valor, dejamos la columna de Haber en blanco
+                modelo.addRow(new Object[]{mensaje, "$" + saldoAnterior, "", ""});
+            }
+
+            // Iterar sobre los movimientos restantes
+            for (Movimiento movimiento : lstMovimientos) {
+                BigDecimal debe = movimiento.getDebe();
+                BigDecimal haber = movimiento.getHaber();
+
+                // Verificar en qué columna se va a agregar el valor (Debe o Haber)
+                if (debe != null && debe.compareTo(BigDecimal.ZERO) > 0) {
+                    // Si hay valor en el Debe, lo apilamos a la columna del Debe
+                    modelo.addRow(new Object[]{movimiento.getId(), "$" + debe, "", ""});
+                    totalDebe = totalDebe.add(debe); // Sumar al total del Debe
+                } 
+                if (haber != null && haber.compareTo(BigDecimal.ZERO) > 0) {
+                    // Si hay valor en el Haber, lo apilamos a la columna del Haber
+                    modelo.addRow(new Object[]{"", "", "$" + haber, movimiento.getId()});
+                    totalHaber = totalHaber.add(haber); // Sumar al total del Haber
+                }
+            }
+
+            // Agregar la fila final con los totales del Debe y Haber
+            modelo.addRow(new Object[]{"Total Debe", "$" + totalDebe, "$" + totalHaber, "Total Haber"});
+
+        } else {
+            // Si no hay movimientos, mostrar solo el saldo inicial y los totales ACA NO DEBERIA LLEGAR EN NINGUN MOMENTO DEL FLUJO
+            modelo.addRow(new Object[]{mensaje, "$" + _cuenta.getSaldo(), "", _cuenta.getCodigo()});
+            modelo.addRow(new Object[]{"Total Debe", "$" + _cuenta.getSaldo(), "$0.00", "Total Haber"});
+        }
+    }
+    
+    private void CargarTipoPasivo(DefaultTableModel modelo, String mensaje, BigDecimal saldoAnterior, List<Movimiento> lstMovimientos) {
+        BigDecimal totalDebe = BigDecimal.ZERO;
+        BigDecimal totalHaber = BigDecimal.ZERO;
+        Movimiento primerMovimientoConValor = null;
+
+        // Buscar el primer movimiento con valor en el haber
+        for (Movimiento movimiento : lstMovimientos) {
+            if (movimiento.getDebe() != null && movimiento.getDebe().compareTo(BigDecimal.ZERO) > 0) {
+                primerMovimientoConValor = movimiento;
+                break; // Salimos del bucle en cuanto encontramos el primer movimiento con valor
+            }
+        }
+
+        // Verificar si hay movimientos
+        if (lstMovimientos.size() > 0) {
+            totalHaber = totalHaber.add(saldoAnterior);
+            // Agregar la primera fila con el saldo inicial a la izquierda y el primer movimiento con valor a la derecha
+            if (primerMovimientoConValor != null) {
+                totalDebe = totalDebe.add(primerMovimientoConValor.getDebe());
+                modelo.addRow(new Object[]{primerMovimientoConValor.getId(), "$" + primerMovimientoConValor.getDebe(), "$" + saldoAnterior, mensaje});
+                // Eliminar el primer movimiento con valor para que no se repita en la tabla
+                lstMovimientos.remove(primerMovimientoConValor);
+            } else {
+                // En caso de no haber ningún movimiento con valor, dejamos la columna de Haber en blanco
+                modelo.addRow(new Object[]{"", "", "$" + saldoAnterior, mensaje});
+            }
+
+            // Iterar sobre los movimientos restantes
+            for (Movimiento movimiento : lstMovimientos) {
+                BigDecimal debe = movimiento.getDebe();
+                BigDecimal haber = movimiento.getHaber();
+
+                // Verificar en qué columna se va a agregar el valor (Debe o Haber)
+                if (debe != null && debe.compareTo(BigDecimal.ZERO) > 0) {
+                    // Si hay valor en el Debe, lo apilamos a la columna del Debe
+                    modelo.addRow(new Object[]{movimiento.getId(), "$" + debe, "", ""});
+                    totalDebe = totalDebe.add(debe); // Sumar al total del Debe
+                } 
+                if (haber != null && haber.compareTo(BigDecimal.ZERO) > 0) {
+                    // Si hay valor en el Haber, lo apilamos a la columna del Haber
+                    modelo.addRow(new Object[]{"", "", "$" + haber, movimiento.getId()});
+                    totalHaber = totalHaber.add(haber); // Sumar al total del Haber
+                }
+            }
+
+            // Agregar la fila final con los totales del Debe y Haber
+            modelo.addRow(new Object[]{"Total Debe", "$" + totalDebe, "$" + totalHaber, "Total Haber"});
+
+        } else {
+            // Si no hay movimientos, mostrar solo el saldo inicial y los totales ACA NO DEBERIA LLEGAR EN NINGUN MOMENTO DEL FLUJO
+            modelo.addRow(new Object[]{mensaje, "$" + _cuenta.getSaldo(), "", _cuenta.getCodigo()});
+            modelo.addRow(new Object[]{"Total Debe", "$" + _cuenta.getSaldo(), "$0.00", "Total Haber"});
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlblNombreYTipoCuenta;
     private javax.swing.JLabel jlblSaldo;
     private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JTable jtblCuentaT;
     // End of variables declaration//GEN-END:variables
 }
