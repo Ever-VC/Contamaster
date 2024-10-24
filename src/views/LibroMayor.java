@@ -211,11 +211,9 @@ public class LibroMayor extends javax.swing.JPanel {
 
     private void jbtnMayorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMayorizarActionPerformed
         // TODO add your handling code here:
-        System.out.println("Hola Mundo 1");
         System.out.println("Empresa" + _empresaSeleccionada.getNombre());
         System.out.println("Mes: " + mes);
         if (_empresaSeleccionada != null && mes != null) {
-            System.out.println("Hola Mundo 2");
             List<Cuenta> lstCuentas = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(_empresaSeleccionada.getId());
         
             for (Cuenta cuenta : lstCuentas) {
@@ -242,7 +240,7 @@ public class LibroMayor extends javax.swing.JPanel {
                     case "Noviembre": mes = Month.NOVEMBER; break;
                     case "Diciembre": mes = Month.DECEMBER; break;
                     default: return;
-        }
+                }
             } else {
                 mes = null;
             }
@@ -294,7 +292,6 @@ public class LibroMayor extends javax.swing.JPanel {
     }
     
     private void Mayorizar(Cuenta cuenta) {
-        System.out.println("Hola Mundo 3");
         // Calcula la fecha de inicio y fin para la mayorizacion del mes seleccionado
         int annio = LocalDate.now().getYear();
         LocalDate inicio = LocalDate.of(annio, mes, 1);
@@ -339,6 +336,7 @@ public class LibroMayor extends javax.swing.JPanel {
                 break;
             case "Retiros":
                 saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
+                break;
         }
         RegistrarMayorizacion(cuenta, fechaInicio, fechaFin, totalDebe, totalHaber, saldoFinal);
         ActualizarCuenta(cuenta, saldoFinal);
