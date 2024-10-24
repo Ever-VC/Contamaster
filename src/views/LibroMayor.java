@@ -92,6 +92,11 @@ public class LibroMayor extends javax.swing.JPanel {
 
         jbtnBalanzaComprobacion.setText("GENERAR BALACE DE COMPROBACION");
         jbtnBalanzaComprobacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnBalanzaComprobacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBalanzaComprobacionActionPerformed(evt);
+            }
+        });
 
         jtblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -251,11 +256,16 @@ public class LibroMayor extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (_idCuenta != -1) {
             Cuenta cuenta = CuentaControlador.Instancia().GetCuentaPorId(_idCuenta);
-            _frmPrincipal.AbrirCuentaT(cuenta);
+            _frmPrincipal.AbrirSubPanel(new CuentaT(cuenta));
         } else {
             JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA CUAL DE LA CUAL DESEA VISUALIZAR EL ESQUEMA DE MAYOR.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbtnCuentaTActionPerformed
+
+    private void jbtnBalanzaComprobacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBalanzaComprobacionActionPerformed
+        // TODO add your handling code here:
+        // Debe abrir el JPanel
+    }//GEN-LAST:event_jbtnBalanzaComprobacionActionPerformed
 
     public void SetFormularioPrincipal(Principal frmPrincipal) {
         this._frmPrincipal = frmPrincipal;

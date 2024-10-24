@@ -281,7 +281,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
     private void jbtnCatalogoCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCatalogoCuentasActionPerformed
         // TODO add your handling code here:
         if (_idEmpresaSeleccionada != -1) {
-            _frmPrincipal.AbrirCatalogoDeEmpresas(_idEmpresaSeleccionada);
+            _frmPrincipal.AbrirSubPanel(new CatalogoCuentas(_idEmpresaSeleccionada));
         } else {
             JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE DESDE LA TABLA A LA EMPRESA QUE DESEA ADMINISTRARLE EL CATALOGO DE CUENTAS.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }

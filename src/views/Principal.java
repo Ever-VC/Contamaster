@@ -14,6 +14,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import models.Cuenta;
 import models.SessionLog;
 import support.UsuarioCache;
@@ -368,18 +369,8 @@ public class Principal extends javax.swing.JFrame {
         this.repaint();
     }
     
-    public void AbrirCatalogoDeEmpresas(int idEmpresa) {
-        if (idEmpresa != -1) {
-            CatalogoCuentas frmCatalogoCuentas = new CatalogoCuentas(idEmpresa);
-            MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, frmCatalogoCuentas);
-        }
-    }
-    
-    public void AbrirCuentaT(Cuenta cuenta) {
-        if (cuenta != null) {
-            CuentaT cuentaT = new CuentaT(cuenta);
-            MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, cuentaT);
-        }
+    public void AbrirSubPanel(JPanel pnlAbrir) {
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, pnlAbrir);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
