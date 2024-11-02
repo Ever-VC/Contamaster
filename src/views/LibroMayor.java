@@ -10,9 +10,6 @@ import controllers.MayorControlador;
 import controllers.MovimientoControlador;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -58,7 +55,6 @@ public class LibroMayor extends javax.swing.JPanel {
         jbtnBalanzaComprobacion = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblCuentas = new javax.swing.JTable();
-        jcmbMesMayorizar = new javax.swing.JComboBox<>();
         jdcFechaInicio = new com.toedter.calendar.JDateChooser();
         jdcFechaFin = new com.toedter.calendar.JDateChooser();
 
@@ -140,13 +136,6 @@ public class LibroMayor extends javax.swing.JPanel {
             jtblCuentas.getColumnModel().getColumn(5).setPreferredWidth(150);
         }
 
-        jcmbMesMayorizar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--- SELECCIONE EL MES ---", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
-        jcmbMesMayorizar.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcmbMesMayorizarItemStateChanged(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,8 +157,7 @@ public class LibroMayor extends javax.swing.JPanel {
                                 .addGap(73, 73, 73)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jcmbMesMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(286, 286, 286)
                                         .addComponent(jbtnMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,9 +180,7 @@ public class LibroMayor extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jcmbMesMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtnMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbtnMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,32 +234,6 @@ public class LibroMayor extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA EMPRESA DE LA CUAL DESEA REALIZAR LA MAYORIZACIÓN.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbtnMayorizarActionPerformed
-
-    private void jcmbMesMayorizarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbMesMayorizarItemStateChanged
-        // TODO add your handling code here:
-        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
-            /*
-            if (!jcmbMesMayorizar.getSelectedItem().equals("--- SELECCIONE EL MES ---")) {
-                switch (jcmbMesMayorizar.getSelectedItem().toString()) {
-                    case "Enero": mes = Month.JANUARY; break;
-                    case "Febrero": mes = Month.FEBRUARY; break;
-                    case "Marzo": mes = Month.MARCH; break;
-                    case "Abril": mes = Month.APRIL; break;
-                    case "Mayo": mes = Month.MAY; break;
-                    case "Junio": mes = Month.JUNE; break;
-                    case "Julio": mes = Month.JULY; break;
-                    case "Agosto": mes = Month.AUGUST; break;
-                    case "Septiembre": mes = Month.SEPTEMBER; break;
-                    case "Octubre": mes = Month.OCTOBER; break;
-                    case "Noviembre": mes = Month.NOVEMBER; break;
-                    case "Diciembre": mes = Month.DECEMBER; break;
-                    default: return;
-                }
-            } else {
-                mes = null;
-            }*/
-        }
-    }//GEN-LAST:event_jcmbMesMayorizarItemStateChanged
 
     private void jbtnCuentaTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCuentaTActionPerformed
         // TODO add your handling code here:
@@ -404,7 +364,6 @@ public class LibroMayor extends javax.swing.JPanel {
     private javax.swing.JButton jbtnCuentaT;
     private javax.swing.JButton jbtnMayorizar;
     private javax.swing.JComboBox jcmbEmpresa;
-    private javax.swing.JComboBox<String> jcmbMesMayorizar;
     private com.toedter.calendar.JDateChooser jdcFechaFin;
     private com.toedter.calendar.JDateChooser jdcFechaInicio;
     private javax.swing.JLabel jlblTitulo;
