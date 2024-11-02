@@ -30,26 +30,31 @@
                       <Component id="jbtnBalanzaComprobacion" min="-2" pref="274" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jcmbMesMayorizar" min="-2" pref="274" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jbtnMayorizar" min="-2" pref="243" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jSeparator1" alignment="1" min="-2" pref="527" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jlblTitulo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jdcFechaInicio" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jdcFechaFin" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jcmbEmpresa" alignment="1" min="-2" pref="527" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="286" max="-2" attributes="0"/>
+                                      <Component id="jbtnMayorizar" min="-2" pref="243" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jSeparator1" alignment="1" min="-2" pref="527" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jlblTitulo" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jcmbEmpresa" alignment="1" min="-2" pref="527" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
+                          <Component id="jScrollPane1" min="-2" pref="823" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="823" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="156" max="32767" attributes="0"/>
@@ -66,12 +71,19 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jcmbEmpresa" min="-2" pref="60" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jcmbMesMayorizar" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                  <Component id="jbtnMayorizar" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jbtnMayorizar" min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jdcFechaInicio" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jdcFechaFin" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="409" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="401" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbtnCuentaT" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
@@ -144,6 +156,9 @@
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnBalanzaComprobacionActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -208,32 +223,9 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="jcmbMesMayorizar">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="13">
-            <StringItem index="0" value="--- SELECCIONE EL MES ---"/>
-            <StringItem index="1" value="Enero"/>
-            <StringItem index="2" value="Febrero"/>
-            <StringItem index="3" value="Marzo"/>
-            <StringItem index="4" value="Abril"/>
-            <StringItem index="5" value="Mayo"/>
-            <StringItem index="6" value="Junio"/>
-            <StringItem index="7" value="Julio"/>
-            <StringItem index="8" value="Agosto"/>
-            <StringItem index="9" value="Septiembre"/>
-            <StringItem index="10" value="Octubre"/>
-            <StringItem index="11" value="Noviembre"/>
-            <StringItem index="12" value="Diciembre"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcmbMesMayorizarItemStateChanged"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
+    <Component class="com.toedter.calendar.JDateChooser" name="jdcFechaInicio">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jdcFechaFin">
     </Component>
   </SubComponents>
 </Form>
