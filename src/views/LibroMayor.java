@@ -31,7 +31,7 @@ public class LibroMayor extends javax.swing.JPanel {
     private int _idCuenta = -1;
     private Principal _frmPrincipal;
     private Empresa _empresaSeleccionada = null;
-    private Month mes = null; // Almacena el mes que se desea mayorizar
+    private Date ultimaMayorizacion = null; // Almacena la fecha de la mayorización más reciente
 
     /**
      * Creates new form LibroMayor
@@ -231,19 +231,28 @@ public class LibroMayor extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Validar los JDateChooser
         if (_empresaSeleccionada != null) {
-            List<Cuenta> lstCuentas = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(_empresaSeleccionada.getId());
             Date fechaInicio = jdcFechaInicio.getDate();
             Date fechaFin = jdcFechaFin.getDate();
-            for (Cuenta cuenta : lstCuentas) {
-                Mayorizar(cuenta, fechaInicio, fechaFin);
+            // Valida que la fecha de inicio para la nueva mayorización sea después de la última mayorización registrada
+            if (ultimaMayorizacion.after(fechaInicio)) {
+                List<Cuenta> lstCuentas = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(_empresaSeleccionada.getId());
+            
+                for (Cuenta cuenta : lstCuentas) {
+                    Mayorizar(cuenta, fechaInicio, fechaFin);
+                }
+                CargarCuentas();
+            } else {
+                JOptionPane.showMessageDialog(null, "LA FECHA INICIAL DE LA NUEVA MAYORIZACIÓN DEBE SER DESPUÉS DE LA ÚLTIMA MAYORIZACIÓN REGISTRADA.","ERROR:", JOptionPane.ERROR_MESSAGE);
             }
-            CargarCuentas();
+        }  else {
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA EMPRESA DE LA CUAL DESEA REALIZAR LA MAYORIZACIÓN.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbtnMayorizarActionPerformed
 
     private void jcmbMesMayorizarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbMesMayorizarItemStateChanged
         // TODO add your handling code here:
         if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            /*
             if (!jcmbMesMayorizar.getSelectedItem().equals("--- SELECCIONE EL MES ---")) {
                 switch (jcmbMesMayorizar.getSelectedItem().toString()) {
                     case "Enero": mes = Month.JANUARY; break;
@@ -262,7 +271,7 @@ public class LibroMayor extends javax.swing.JPanel {
                 }
             } else {
                 mes = null;
-            }
+            }*/
         }
     }//GEN-LAST:event_jcmbMesMayorizarItemStateChanged
 
@@ -272,7 +281,7 @@ public class LibroMayor extends javax.swing.JPanel {
             Cuenta cuenta = CuentaControlador.Instancia().GetCuentaPorId(_idCuenta);
             _frmPrincipal.AbrirSubPanel(new CuentaT(cuenta));
         } else {
-            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA CUAL DE LA CUAL DESEA VISUALIZAR EL ESQUEMA DE MAYOR.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA CUENTA DE LA CUAL DESEA VISUALIZAR EL ESQUEMA DE MAYOR.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbtnCuentaTActionPerformed
 
@@ -293,13 +302,17 @@ public class LibroMayor extends javax.swing.JPanel {
         modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
         
         List<Cuenta> lstCuentas = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(_empresaSeleccionada.getId());
-        
+        ultimaMayorizacion = MayorControlador.Instancia().GetListaRegistrosAlMayorPorCuenta(lstCuentas.getFirst()).getFirst().getFechaFin();
         for (Cuenta cuenta : lstCuentas) {
             // Muestra la ultima vez de mayorizacion
             List<Mayor> lstRegistrosDeCuentaEnELMayor = MayorControlador.Instancia().GetListaRegistrosAlMayorPorCuenta(cuenta);
             String fechaFormateada = "Sin mayorizar (nueva)";
             if (lstRegistrosDeCuentaEnELMayor.size() > 0) {
                 Date fecha = lstRegistrosDeCuentaEnELMayor.getFirst().getFechaFin();
+                // Calcula la fecha más reciente de mayorización (es la fecha limite iniciar en que puede realizar la mayorización)
+                if (fecha.after(ultimaMayorizacion)) { // Verifica si la fecha de mayorización de la cuenta actual es después de la fecha registrada
+                    ultimaMayorizacion = fecha; // Actualiza a esa fecha (ya que es posible que una cuenta no se haya mayorizado porque en un mes no hubo movimientos)
+                }
                 SimpleDateFormat formatoCorto = new SimpleDateFormat("dd/MM/yyyy");
                 fechaFormateada = formatoCorto.format(fecha);
             }
@@ -316,7 +329,6 @@ public class LibroMayor extends javax.swing.JPanel {
     }
     
     private void Mayorizar(Cuenta cuenta, Date fechaInicio, Date fechaFin) {
-
         // Obtiene la lista de registros en las que se haya un movimiento de la cuenta (dentro del rango de fecha indicado)
         List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorCuentaYFechaInicioYFin(fechaInicio, fechaFin, cuenta);
         
