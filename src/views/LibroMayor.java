@@ -59,6 +59,8 @@ public class LibroMayor extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblCuentas = new javax.swing.JTable();
         jcmbMesMayorizar = new javax.swing.JComboBox<>();
+        jdcFechaInicio = new com.toedter.calendar.JDateChooser();
+        jdcFechaFin = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -157,21 +159,25 @@ public class LibroMayor extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbtnBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(236, 236, 236)
+                        .addGap(78, 78, 78)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcmbMesMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbtnMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jlblTitulo)
-                                    .addGap(138, 138, 138))
-                                .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 823, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(73, 73, 73)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jcmbMesMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jbtnMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jlblTitulo)
+                                            .addGap(138, 138, 138))
+                                        .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 823, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -184,11 +190,18 @@ public class LibroMayor extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcmbMesMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcmbMesMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtnMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnCuentaT, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,14 +229,15 @@ public class LibroMayor extends javax.swing.JPanel {
 
     private void jbtnMayorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMayorizarActionPerformed
         // TODO add your handling code here:
-        System.out.println("Empresa" + _empresaSeleccionada.getNombre());
-        System.out.println("Mes: " + mes);
-        if (_empresaSeleccionada != null && mes != null) {
+        // Validar los JDateChooser
+        if (_empresaSeleccionada != null) {
             List<Cuenta> lstCuentas = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(_empresaSeleccionada.getId());
-        
+            Date fechaInicio = jdcFechaInicio.getDate();
+            Date fechaFin = jdcFechaFin.getDate();
             for (Cuenta cuenta : lstCuentas) {
-                Mayorizar(cuenta);
+                Mayorizar(cuenta, fechaInicio, fechaFin);
             }
+            CargarCuentas();
         }
     }//GEN-LAST:event_jbtnMayorizarActionPerformed
 
@@ -301,55 +315,52 @@ public class LibroMayor extends javax.swing.JPanel {
         }
     }
     
-    private void Mayorizar(Cuenta cuenta) {
-        // Calcula la fecha de inicio y fin para la mayorizacion del mes seleccionado
-        int annio = LocalDate.now().getYear();
-        LocalDate inicio = LocalDate.of(annio, mes, 1);
-        LocalDate fin= inicio.withDayOfMonth(inicio.lengthOfMonth());
-        Date fechaInicio = Date.from(inicio.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Date fechaFin = Date.from(fin.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    private void Mayorizar(Cuenta cuenta, Date fechaInicio, Date fechaFin) {
 
-        // Obtiene la lista de registros en las que se haya un movimiento de la cuenta iniciando desde el 01 del mes indicado hasta el final del mismo
+        // Obtiene la lista de registros en las que se haya un movimiento de la cuenta (dentro del rango de fecha indicado)
         List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorCuentaYFechaInicioYFin(fechaInicio, fechaFin, cuenta);
-
-        // Almacenan el total del debe y haber para posteriormente realizar la respectiva diferencia
-        double totalDebe = 0.00;
-        double totalHaber = 0.00;
-
-        for (Movimiento movimiento : lstMovimientos) {
-            totalDebe += movimiento.getDebe().doubleValue();
-            totalHaber += movimiento.getHaber().doubleValue();
-        }
         
-        double saldoFinal = 0.00;
-        
-        // Realiza la diferencia segun el tipo de la cuenta que se está procesando
-        String tipo = cuenta.getTipo();
-        switch(tipo) {
-            case "Activo Normal":
-                saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
-                break;
-            case "Pasivo":
-                saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
-                break;
-            case "Contra-Cuenta de Activo":
-                saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
-                break;
-            case "Capital":
-                saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
-                break;
-            case "Ingresos":
-                saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
-                break;
-            case "Gastos":
-                saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
-                break;
-            case "Retiros":
-                saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
-                break;
+        // Verifica si esa cuenta ha tenido movimientos durante ese mes (sino tuvo movimientos no es necesario mayorizar) 
+        if (lstMovimientos.size() > 0) {
+            // Almacenan el total del debe y haber para posteriormente realizar la respectiva diferencia
+            double totalDebe = 0.00;
+            double totalHaber = 0.00;
+
+            for (Movimiento movimiento : lstMovimientos) {
+                totalDebe += movimiento.getDebe().doubleValue();
+                totalHaber += movimiento.getHaber().doubleValue();
+            }
+
+            double saldoFinal = 0.00;
+
+            // Realiza la diferencia segun el tipo de la cuenta que se está procesando
+            String tipo = cuenta.getTipo();
+            switch(tipo) {
+                case "Activo Normal":
+                    saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
+                    break;
+                case "Pasivo":
+                    saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
+                    break;
+                case "Contra-Cuenta de Activo":
+                    saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
+                    break;
+                case "Capital":
+                    saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
+                    break;
+                case "Ingresos":
+                    saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
+                    break;
+                case "Gastos":
+                    saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
+                    break;
+                case "Retiros":
+                    saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
+                    break;
+            }
+            RegistrarMayorizacion(cuenta, fechaInicio, fechaFin, totalDebe, totalHaber, saldoFinal);
+            ActualizarCuenta(cuenta, saldoFinal);
         }
-        RegistrarMayorizacion(cuenta, fechaInicio, fechaFin, totalDebe, totalHaber, saldoFinal);
-        ActualizarCuenta(cuenta, saldoFinal);
     }
     
     private void ActualizarCuenta(Cuenta cuenta, double nuevoSaldo) {
@@ -382,6 +393,8 @@ public class LibroMayor extends javax.swing.JPanel {
     private javax.swing.JButton jbtnMayorizar;
     private javax.swing.JComboBox jcmbEmpresa;
     private javax.swing.JComboBox<String> jcmbMesMayorizar;
+    private com.toedter.calendar.JDateChooser jdcFechaFin;
+    private com.toedter.calendar.JDateChooser jdcFechaInicio;
     private javax.swing.JLabel jlblTitulo;
     private javax.swing.JTable jtblCuentas;
     // End of variables declaration//GEN-END:variables
