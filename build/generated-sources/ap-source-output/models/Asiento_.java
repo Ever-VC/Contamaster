@@ -9,7 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import models.DetalleAsiento;
 import models.Usuario;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-10-05T11:44:40", comments="EclipseLink-2.7.12.v20230209-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-11-04T14:16:24", comments="EclipseLink-2.7.12.v20230209-rNA")
 @StaticMetamodel(Asiento.class)
 public class Asiento_ { 
 

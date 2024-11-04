@@ -213,7 +213,6 @@ public class LibroDiario extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jcmbEmpresaItemStateChanged
-
     
     private void CargarLibroDiario(Date fechaInicio, Date fechaFin) {
         

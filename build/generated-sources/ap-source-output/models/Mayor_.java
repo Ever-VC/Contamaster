@@ -7,12 +7,13 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import models.Cuenta;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-10-05T11:44:40", comments="EclipseLink-2.7.12.v20230209-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-11-04T14:16:24", comments="EclipseLink-2.7.12.v20230209-rNA")
 @StaticMetamodel(Mayor.class)
 public class Mayor_ { 
 
     public static volatile SingularAttribute<Mayor, Date> fechaInicio;
     public static volatile SingularAttribute<Mayor, BigDecimal> totalHaber;
+    public static volatile SingularAttribute<Mayor, BigDecimal> saldoAnterior;
     public static volatile SingularAttribute<Mayor, BigDecimal> totalDebe;
     public static volatile SingularAttribute<Mayor, Cuenta> idCuentaFk;
     public static volatile SingularAttribute<Mayor, Integer> id;
