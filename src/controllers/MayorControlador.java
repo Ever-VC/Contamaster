@@ -6,6 +6,7 @@ package controllers;
 
 import connection.Conexion;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import models.Cuenta;
@@ -66,7 +67,36 @@ public class MayorControlador {
         return mayorizaciones;
     }
     
-     public List<Mayor> GetListaRegistrosAlMayor() {
+    public List<Mayor> GetListaRegistrosAlMayorPorCuentaFechaInicioYFin(Date fechaInicio, Date fechaFin, Cuenta cuenta) {
+        _entityManager = setEntityManager();
+        String jpql = "SELECT m FROM Mayor m WHERE m.idCuentaFk = :cuenta AND m.fechaInicio >= :fechaInicio AND m.fechaFin <= :fechaFin";
+
+        List<Mayor> mayorizaciones = new ArrayList<>();
+        try {
+            _entityManager.getTransaction().begin();
+
+            mayorizaciones = _entityManager.createQuery(jpql, Mayor.class)
+                        .setParameter("cuenta", cuenta)
+                        .setParameter("fechaInicio", fechaInicio)
+                        .setParameter("fechaFin", fechaFin)
+                        .getResultList();// Ejecuta la consulta y obtiene el resultado
+
+            _entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            if (_entityManager.getTransaction().isActive()) {
+                _entityManager.getTransaction().rollback();// Hace rollback en caso de error
+            }
+            ex.printStackTrace();// Imprime el error para depuración
+        } finally {
+            if (_entityManager != null) {
+                _entityManager.close();// Cierra el EntityManager
+            }
+        }
+
+        return mayorizaciones;
+    }
+    
+    public List<Mayor> GetListaRegistrosAlMayor() {
         _entityManager = setEntityManager();
         _entityManager.getTransaction().begin();
         return _entityManager.createQuery("SELECT m FROM Mayor m").getResultList();
