@@ -7,7 +7,14 @@ package views;
 import controllers.MayorControlador;
 import controllers.MovimientoControlador;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Cuenta;
 import models.Mayor;
@@ -30,6 +37,7 @@ public class CuentaT extends javax.swing.JPanel {
         this.jlblNombreYTipoCuenta.setText(cuenta.getNombre().toUpperCase() + " - " + cuenta.getTipo().toUpperCase());
         this.jlblSaldo.setText( this.jlblSaldo.getText() + cuenta.getSaldo());
         CargarMovimientos();
+        CargarSaldos(obtenerPrimerDiaDelMes(new Date()), new Date()); // Hay que calcular la fecha de inicio de este mes
     }
 
     /**
@@ -48,6 +56,23 @@ public class CuentaT extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblCuentaT = new javax.swing.JTable();
         jlblSaldo = new javax.swing.JLabel();
+        jlblMesInicio = new javax.swing.JLabel();
+        jmcInicio = new com.toedter.calendar.JMonthChooser();
+        jlblAnnioInicio = new javax.swing.JLabel();
+        jacInicio = new com.toedter.calendar.JYearChooser();
+        jlblMesFin = new javax.swing.JLabel();
+        jmcFin = new com.toedter.calendar.JMonthChooser();
+        jlblAnnioFin = new javax.swing.JLabel();
+        jacFin = new com.toedter.calendar.JYearChooser();
+        jbtnCargar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jlstDebe = new javax.swing.JList();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jlstHaber = new javax.swing.JList();
+        jlblHaber = new javax.swing.JLabel();
+        jlblDebe = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -91,30 +116,105 @@ public class CuentaT extends javax.swing.JPanel {
         jlblSaldo.setForeground(new java.awt.Color(0, 0, 0));
         jlblSaldo.setText("SALDO: $");
 
+        jlblMesInicio.setForeground(new java.awt.Color(0, 0, 0));
+        jlblMesInicio.setText("Desde");
+
+        jlblAnnioInicio.setForeground(new java.awt.Color(0, 0, 0));
+        jlblAnnioInicio.setText("del");
+
+        jlblMesFin.setForeground(new java.awt.Color(0, 0, 0));
+        jlblMesFin.setText("Hasta");
+
+        jlblAnnioFin.setForeground(new java.awt.Color(0, 0, 0));
+        jlblAnnioFin.setText("del");
+
+        jbtnCargar.setText("CARGAR DATOS");
+        jbtnCargar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCargarActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(jlstDebe);
+
+        jScrollPane3.setViewportView(jlstHaber);
+
+        jlblHaber.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblHaber.setForeground(new java.awt.Color(0, 0, 0));
+        jlblHaber.setText("HABER");
+
+        jlblDebe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblDebe.setForeground(new java.awt.Color(0, 0, 0));
+        jlblDebe.setText("DEBE");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(283, 283, 283)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addGap(228, 228, 228)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jlblTitulo)
+                            .addGap(104, 104, 104))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jlblMesInicio)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jmcInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jbtnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jlblAnnioInicio)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jacInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(60, 60, 60)
+                                    .addComponent(jlblMesFin)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jmcFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jlblAnnioFin)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jacFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jlblSaldo)
+                                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(81, 81, 81))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(92, 92, 92)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(34, 34, 34)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(58, 58, 58))))
+                .addContainerGap(267, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jSeparator2)
-                    .addComponent(jlblSaldo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1))
-                .addGap(286, 286, 286))
+                .addComponent(jlblDebe)
+                .addGap(170, 170, 170)
+                .addComponent(jlblHaber)
+                .addGap(416, 416, 416))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jlblTitulo)
-                        .addGap(327, 327, 327))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jlblNombreYTipoCuenta)
-                        .addGap(365, 365, 365))))
+                .addComponent(jlblNombreYTipoCuenta)
+                .addGap(391, 391, 391))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,19 +223,353 @@ public class CuentaT extends javax.swing.JPanel {
                 .addComponent(jlblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(jlblMesInicio))
+                        .addComponent(jlblAnnioInicio, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jacInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlblMesFin, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jmcFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlblAnnioFin, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jacFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jmcInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jbtnCargar)
+                .addGap(39, 39, 39)
                 .addComponent(jlblNombreYTipoCuenta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblHaber)
+                    .addComponent(jlblDebe))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 5, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlblSaldo)
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCargarActionPerformed
+        // TODO add your handling code here:
+        // Validacines de mes y año de inicio y fin
+        int mesInicio = -1;
+        int annioInicio = -1;
+        mesInicio = jmcInicio.getMonth();
+        annioInicio = jacInicio.getYear();
+        if (mesInicio == -1 || annioInicio == -1) {
+            JOptionPane.showMessageDialog(null, "ASEGURATE DE HABER SELECCIONADO CORRECTAMENTE EL MES Y AÑO DE INICIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        int mesFin = -1;
+        int annioFin = -1;
+        
+        mesFin = jmcFin.getMonth();
+        annioFin = jacFin.getYear();
+        
+        if (mesFin == -1 || annioFin == -1) {
+            JOptionPane.showMessageDialog(null, "ASEGURATE DE HABER SELECCIONADO CORRECTAMENTE EL MES Y AÑO DE FIN.","ERROR:", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        Date fechaInicio = CalcularFecha(mesInicio, annioInicio, false);
+        Date fechaFin = CalcularFecha(mesFin, annioFin, true);
+        
+        CargarSaldos(fechaInicio, fechaFin);
+    }//GEN-LAST:event_jbtnCargarActionPerformed
 
+    private Date obtenerPrimerDiaDelMes(Date fecha) {
+        // Convierte Date a LocalDate
+        LocalDate localDate = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        // Obtiene el primer día del mes
+        LocalDate primerDiaDelMes = localDate.withDayOfMonth(1);
+        
+        // Convierte LocalDate de nuevo a Date
+        return Date.from(primerDiaDelMes.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+    
+    private Date CalcularFecha(int mes, int annio, Boolean esFechaFin) {
+        // El mes en java.time.LocalDate empieza en 1 (enero = 1), pero JMonthChooser usa 0 para enero.
+        // Por lo tanto, necesitamos ajustar el mes sumándole 1.
+        LocalDate fecha;
+        
+        if (esFechaFin) {
+            // Obtener el último día del mes especificado
+            fecha = LocalDate.of(annio, mes + 1, 1).withDayOfMonth(LocalDate.of(annio, mes + 1, 1).lengthOfMonth());
+        } else {
+            // Obtener el primer día del mes especificado
+            fecha = LocalDate.of(annio, mes + 1, 1);
+        }
+        
+        // Convertir LocalDate a Date
+        return Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+    
+    private void CargarSaldos(Date fechaInicio, Date fechaFin) {
+        // Obtiene el ultimo registro de mayorización de la cuenta (es decir el saldo que tiene)
+        List<Mayor> lstMayorizaciones = MayorControlador.Instancia().GetListaRegistrosAlMayorPorCuentaFechaInicioYFin(fechaInicio, fechaFin, _cuenta);
+        
+        DefaultListModel modeloListaDebe = new DefaultListModel();
+        modeloListaDebe.removeAllElements(); // Limpia la lista del debe
+        DefaultListModel modeloListaHaber = new DefaultListModel();
+        modeloListaHaber.removeAllElements(); // Limpia la lista del haber
+        
+        String tipoCuenta = _cuenta.getTipo();
+        jlstDebe.setModel(modeloListaDebe);
+        jlstHaber.setModel(modeloListaHaber);
+        
+        if (lstMayorizaciones.size() > 0) { // Si ya se ha realizado la mayorización por lo menos una vez...
+            Mayor ultimaMayorizacion = lstMayorizaciones.getLast(); // Para obtener la lista de movimientos con fecha de inicio y fin que corresponde a la ultima mayorización
+            // Lista de movimientos realizados en la última mayorización
+            List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorCuentaYFechaInicioYFin(ultimaMayorizacion.getFechaInicio(), ultimaMayorizacion.getFechaFin(), _cuenta);
+           
+            
+            // ======> Carga los saldos en la tabla según el tipo de cuenta <======
+            // Tipo Activo
+            if (tipoCuenta.equals("Activo Normal") || tipoCuenta.equals("Gastos") || tipoCuenta.equals("Retiros")) {
+                CargarSaldosTipoActivo(lstMayorizaciones, lstMovimientos, modeloListaDebe, modeloListaHaber);
+            }
+            // Tipo Pasivo
+            if (tipoCuenta.equals("Pasivo") || tipoCuenta.equals("Contra-Cuenta de Activo") || tipoCuenta.equals("Capital") || tipoCuenta.equals("Ingresos")) {
+                
+            }
+        } else { // No se han realizado mayorizaciones, por lo cual solo contiene el saldo inicial de la cuenta
+            if (tipoCuenta.equals("Activo Normal") || tipoCuenta.equals("Gastos") || tipoCuenta.equals("Retiros")) {
+                modeloListaDebe.addElement("Saldo inicial: $" + _cuenta.getSaldo());
+                modeloListaHaber.addElement("$0.00");
+                // Muestra los totales
+                modeloListaDebe.addElement("**********************************");
+                modeloListaHaber.addElement("**********************************");
+                modeloListaDebe.addElement("Total en debe: $" + _cuenta.getSaldo());
+                modeloListaHaber.addElement("Total en haber: $0.00");
+                modeloListaDebe.addElement("************************************");
+                modeloListaHaber.addElement("************************************");
+            }
+            // Tipo Pasivo
+            if (tipoCuenta.equals("Pasivo") || tipoCuenta.equals("Contra-Cuenta de Activo") || tipoCuenta.equals("Capital") || tipoCuenta.equals("Ingresos")) {
+                modeloListaHaber.addElement("Saldo inicial: $" + _cuenta.getSaldo());
+                modeloListaDebe.addElement("Total en haber: $0.00");
+                // Muestra los totales
+                modeloListaDebe.addElement("************************************");
+                modeloListaHaber.addElement("************************************");
+                modeloListaHaber.addElement("Total en debe: $" + _cuenta.getSaldo());
+                modeloListaDebe.addElement("$0.00");
+                modeloListaDebe.addElement("************************************");
+                modeloListaHaber.addElement("************************************");
+            }
+           
+            //modelo.addRow(new Object[]{"Saldo Inicial:", "$" + _cuenta.getSaldo(), "", ""});
+            //modelo.addRow(new Object[]{"Total Debe", "$" + _cuenta.getSaldo(), "$0.00", "Total Haber"});
+        }
+    }
+    
+    private void CargarSaldosTipoActivo(List<Mayor> lstMayorizaciones, List<Movimiento> lstMovimientos, DefaultListModel modeloListaDebe, DefaultListModel modeloListaHaber) {
+        // Variables para totales acumulados
+        BigDecimal totalDebe = BigDecimal.ZERO;
+        BigDecimal totalHaber = BigDecimal.ZERO;
+        
+        List<Movimiento> lstMovimientosEnDebe = new ArrayList();
+        List<Movimiento> lstMovimientosEnHaber = new ArrayList();
+        
+        if (lstMayorizaciones.size() > 1) {
+            List<Mayor> lstMayorizacionesEnDebe = new ArrayList();
+            List<Mayor> lstMayorizacionesEnHaber = new ArrayList();
+
+            int totalElementosEnDebe = 0;
+            int totalElementosEnHaber = 0;
+            totalDebe = totalDebe.add(lstMayorizaciones.getFirst().getSaldoAnterior());
+
+            for (Mayor mayor : lstMayorizaciones) {
+                if (mayor.getTotalDebe() != null && mayor.getTotalDebe().compareTo(BigDecimal.ZERO) > 0) {
+                    totalElementosEnDebe ++;
+                    totalDebe = totalDebe.add(mayor.getTotalDebe());
+                    lstMayorizacionesEnDebe.add(mayor);
+                }
+                if (mayor.getTotalHaber() != null && mayor.getTotalHaber().compareTo(BigDecimal.ZERO) > 0) {
+                    totalElementosEnHaber ++;
+                    totalHaber = totalHaber.add(mayor.getTotalHaber());
+                    lstMayorizacionesEnHaber.add(mayor);
+                }
+            }
+            if (lstMayorizacionesEnDebe.size() > 0) {
+                totalDebe = totalDebe.subtract(lstMayorizacionesEnDebe.getLast().getTotalDebe());
+            }
+
+            for (Movimiento movimiento : lstMovimientos) {
+                if (movimiento.getDebe() != null && movimiento.getDebe().compareTo(BigDecimal.ZERO) > 0) {
+                    totalElementosEnDebe ++;
+                    totalDebe = totalDebe.add(movimiento.getDebe());
+                    lstMovimientosEnDebe.add(movimiento);
+                }
+                if (movimiento.getHaber() != null && movimiento.getHaber().compareTo(BigDecimal.ZERO) > 0) {
+                    totalElementosEnHaber ++;
+                    totalHaber = totalHaber.add(movimiento.getHaber());
+                    lstMovimientosEnHaber.add(movimiento);
+                }
+            }
+
+            // Agrega la primera mayorización par amostrar el saldo inicial de la cuenta
+            modeloListaDebe.addElement("Saldo inicial: $" + lstMayorizaciones.getFirst().getSaldoAnterior());
+            // Muestra los demás saldos
+            if (totalElementosEnDebe >= totalElementosEnHaber) { // Si hay más elementos en debe que en haber (significa que el haber quedará con espacios en blanco)
+                // ==============> MUESTRA LAS MAYORIZACIONES Y MOVIMIENTOS CON VALOR EN EL DEBE <=================
+                // Carga todas las mayorizaciones con valor en el debe
+                int index = 0;
+                for (Mayor mayor : lstMayorizacionesEnDebe) {
+                    if (mayor.equals(lstMayorizacionesEnDebe.getLast())) { // Evita mostrar la info de la ultima mayorización porque se mostrará con los movimientos
+                        break;
+                    }
+                    modeloListaDebe.addElement("Mayor de: " + GetMes(mayor.getFechaFin()) + " $" + mayor.getTotalDebe());
+                    index ++;
+                }
+                // Carga todos los movimientos en el debe
+                for (Movimiento movimiento : lstMovimientosEnDebe) {
+                    modeloListaDebe.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getDebe());
+                }
+                // ==============> MUESTRA LAS MAYORIZACIONES Y MOVIMIENTOS CON VALOR EN EL HABER <=================
+                // Carga todas las mayorizaciones en el haber
+                for (Mayor mayor : lstMayorizacionesEnHaber) {
+                    if (mayor.equals(lstMayorizacionesEnDebe.getLast())) {
+                        break;
+                    }
+                    modeloListaHaber.addElement("Mayor de: " + GetMes(mayor.getFechaFin()) + " $" + mayor.getTotalHaber());
+                }
+                // Carga todos los movimientos en el haber
+                for (Movimiento movimiento : lstMovimientosEnHaber) {
+                    modeloListaHaber.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getHaber());
+                }
+                // ==============> MUESTRA ELEMENTOS VACIOS PARA QUE LOS TOTALES QUEDEN AL LADO <=================
+                // Dado que hay más elementos en el debe que en el haber, mostraremos la cantidad de diferencia con espacios en blanco para mostrar al final los totales
+                int diferencia = totalElementosEnDebe - totalElementosEnHaber;
+                System.out.println("Elementos del debe: " + totalElementosEnDebe);
+                System.out.println("Elementos del haber: " + totalElementosEnHaber);
+                System.out.println("Diferencia: " + diferencia);
+                for (int i = 0; i < diferencia; i++) {
+                    modeloListaHaber.addElement("$0.00");
+                }
+            } else { // Si hay más elementos en haber que en debe (significa que el debe quedará con espacios en blanco)
+                // ==============> MUESTRA LAS MAYORIZACIONES Y MOVIMIENTOS CON VALOR EN EL DEBE <=================
+                // Carga todas las mayorizaciones con valor en el debe
+                int index = 0;
+                for (Mayor mayor : lstMayorizacionesEnDebe) {
+                    if (mayor.equals(lstMayorizacionesEnDebe.getLast())) { // Evita mostrar la info de la ultima mayorización porque se mostrará con los movimientos
+                        break;
+                    }
+                    modeloListaDebe.addElement("Mayor de: " + GetMes(mayor.getFechaFin()) + " $" + mayor.getTotalDebe());
+                    index ++;
+                }
+                // Carga todos los movimientos en el debe
+                for (Movimiento movimiento : lstMovimientosEnDebe) {
+                    modeloListaDebe.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getDebe());
+                }
+                // ==============> MUESTRA LAS MAYORIZACIONES Y MOVIMIENTOS CON VALOR EN EL HABER <=================
+                // Carga todas las mayorizaciones en el haber
+                for (Mayor mayor : lstMayorizacionesEnHaber) {
+                    modeloListaHaber.addElement("Mayor de: " + GetMes(mayor.getFechaFin()) + " $" + mayor.getTotalHaber());
+                }
+                // Carga todos los movimientos en el haber
+                for (Movimiento movimiento : lstMovimientosEnHaber) {
+                    modeloListaHaber.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getHaber());
+                }
+                // ==============> MUESTRA ELEMENTOS VACIOS PARA QUE LOS TOTALES QUEDEN AL LADO <=================
+                // Dado que hay más elementos en el debe que en el haber, mostraremos la cantidad de diferencia con espacios en blanco para mostrar al final los totales
+                int diferencia = totalElementosEnHaber - totalElementosEnDebe;
+                for (int i = 0; i < diferencia; i++) {
+                    modeloListaDebe.addElement("$0.00");
+                }
+            }
+        } else {
+            int totalElementosEnDebe = 1;
+            int totalElementosEnHaber = 0;
+            totalDebe = totalDebe.add(lstMayorizaciones.getFirst().getSaldoAnterior());
+
+            for (Movimiento movimiento : lstMovimientos) {
+                if (movimiento.getDebe() != null && movimiento.getDebe().compareTo(BigDecimal.ZERO) > 0) {
+                    totalElementosEnDebe ++;
+                    totalDebe = totalDebe.add(movimiento.getDebe());
+                    lstMovimientosEnDebe.add(movimiento);
+                }
+                if (movimiento.getHaber() != null && movimiento.getHaber().compareTo(BigDecimal.ZERO) > 0) {
+                    totalElementosEnHaber ++;
+                    totalHaber = totalHaber.add(movimiento.getHaber());
+                    lstMovimientosEnHaber.add(movimiento);
+                }
+            }
+
+            // Agrega la primera mayorización par amostrar el saldo inicial de la cuenta
+            modeloListaDebe.addElement("Saldo inicial: $" + lstMayorizaciones.getFirst().getSaldoAnterior());
+            // Muestra los demás saldos
+            if (totalElementosEnDebe >= totalElementosEnHaber) { // Si hay más elementos en debe que en haber (significa que el haber quedará con espacios en blanco)
+                // ==============> MUESTRA LOS MOVIMIENTOS CON VALOR EN EL DEBE <=================
+                // Carga todos los movimientos en el debe
+                for (Movimiento movimiento : lstMovimientosEnDebe) {
+                    modeloListaDebe.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getDebe());
+                }
+                // ==============> MUESTRA LOS MOVIMIENTOS CON VALOR EN EL HABER <=================
+                // Carga todos los movimientos en el haber
+                for (Movimiento movimiento : lstMovimientosEnHaber) {
+                    modeloListaHaber.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getHaber());
+                }
+                // ==============> MUESTRA ELEMENTOS VACIOS PARA QUE LOS TOTALES QUEDEN AL LADO <=================
+                // Dado que hay más elementos en el debe que en el haber, mostraremos la cantidad de diferencia con espacios en blanco para mostrar al final los totales
+                int diferencia = totalElementosEnDebe - totalElementosEnHaber;
+                for (int i = 0; i < diferencia; i++) {
+                    modeloListaHaber.addElement("$0.00");
+                }
+            } else { // Si hay más elementos en haber que en debe (significa que el debe quedará con espacios en blanco)
+                // ==============> MUESTRA LAS MAYORIZACIONES Y MOVIMIENTOS CON VALOR EN EL DEBE <=================
+                // Carga todas las mayorizaciones con valor en el debe
+                int index = 0;
+                // Carga todos los movimientos en el debe
+                for (Movimiento movimiento : lstMovimientosEnDebe) {
+                    modeloListaDebe.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getDebe());
+                }
+                // ==============> MUESTRA LAS MAYORIZACIONES Y MOVIMIENTOS CON VALOR EN EL HABER <=================
+                // Carga todos los movimientos en el haber
+                for (Movimiento movimiento : lstMovimientosEnHaber) {
+                    modeloListaHaber.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getHaber());
+                }
+                // ==============> MUESTRA ELEMENTOS VACIOS PARA QUE LOS TOTALES QUEDEN AL LADO <=================
+                // Dado que hay más elementos en el debe que en el haber, mostraremos la cantidad de diferencia con espacios en blanco para mostrar al final los totales
+                int diferencia = totalElementosEnHaber - totalElementosEnDebe;
+                System.out.println("Diferencia: " + diferencia);
+                for (int i = 0; i < diferencia; i++) {
+                    modeloListaDebe.addElement("$0.00");
+                }
+            }
+        }        
+        
+        // Muestra los totales
+        modeloListaDebe.addElement("**********************************");
+        modeloListaHaber.addElement("**********************************");
+        modeloListaDebe.addElement("Total en debe: $" + totalDebe);
+        modeloListaHaber.addElement("Total en haber: $" + totalHaber);
+        modeloListaDebe.addElement("**********************************");
+        modeloListaHaber.addElement("**********************************");
+    }
+    
+    private String GetMes(Date fecha) {
+        // Formato de mes ("MMMM" para el nombre completo del mes o "MM" para el número del mes)
+        SimpleDateFormat formatoMes = new SimpleDateFormat("MMMM");
+        
+        // Convierte la fecha a String con solo el mes
+        String mes = formatoMes.format(fecha);
+        // Convertir la primera letra a mayúscula y el resto a minúscula
+        return mes.substring(0, 1).toUpperCase() + mes.substring(1).toLowerCase();
+    }
+    
     private void CargarMovimientos() {
         // Obtiene el ultimo registro de mayorización de la cuenta (es decir el saldo que tiene)
         List<Mayor> lstMayorizaciones = MayorControlador.Instancia().GetListaRegistrosAlMayorPorCuenta(_cuenta);
@@ -151,30 +585,14 @@ public class CuentaT extends javax.swing.JPanel {
             
             List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorCuentaYFechaInicioYFin(ultimoRegistroMayorizacion.getFechaInicio(), ultimoRegistroMayorizacion.getFechaFin(), _cuenta);
             
-            //Movimiento primerMovimiento = lstMovimientos.getFirst();
-            
-            switch(_cuenta.getTipo()) {
-                case "Activo Normal":
-                    CargarTipoActivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
-                    break;
-                case "Pasivo":
-                    CargarTipoPasivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
-                    break;
-                case "Contra-Cuenta de Activo":
-                    CargarTipoPasivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
-                    break;
-                case "Capital":
-                    CargarTipoPasivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
-                    break;
-                case "Ingresos":
-                    CargarTipoPasivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
-                    break;
-                case "Gastos":
-                    CargarTipoActivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
-                    break;
-                case "Retiros":
-                    CargarTipoActivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
-                    break;
+            //Movimiento primerMovimiento = lstMovimientos.getFirst();\
+            String tipoCuenta = _cuenta.getTipo();
+            if (tipoCuenta.equals("Activo Normal") || tipoCuenta.equals("Gastos") || tipoCuenta.equals("Retiros")) {
+                CargarTipoActivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
+            }
+            // Tipo Pasivo
+            if (tipoCuenta.equals("Pasivo") || tipoCuenta.equals("Contra-Cuenta de Activo") || tipoCuenta.equals("Capital") || tipoCuenta.equals("Ingresos")) {
+                CargarTipoPasivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);CargarTipoPasivo(modelo, saldoAnterior, ultimoRegistroMayorizacion.getSaldoAnterior(), lstMovimientos);
             }
             
             
@@ -299,11 +717,28 @@ public class CuentaT extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private com.toedter.calendar.JYearChooser jacFin;
+    private com.toedter.calendar.JYearChooser jacInicio;
+    private javax.swing.JButton jbtnCargar;
+    private javax.swing.JLabel jlblAnnioFin;
+    private javax.swing.JLabel jlblAnnioInicio;
+    private javax.swing.JLabel jlblDebe;
+    private javax.swing.JLabel jlblHaber;
+    private javax.swing.JLabel jlblMesFin;
+    private javax.swing.JLabel jlblMesInicio;
     private javax.swing.JLabel jlblNombreYTipoCuenta;
     private javax.swing.JLabel jlblSaldo;
     private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JList jlstDebe;
+    private javax.swing.JList jlstHaber;
+    private com.toedter.calendar.JMonthChooser jmcFin;
+    private com.toedter.calendar.JMonthChooser jmcInicio;
     private javax.swing.JTable jtblCuentaT;
     // End of variables declaration//GEN-END:variables
 }
