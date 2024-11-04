@@ -235,12 +235,13 @@ public class LibroMayor extends javax.swing.JPanel {
             Date fechaInicio = jdcFechaInicio.getDate();
             Date fechaFin = jdcFechaFin.getDate();
             // Valida que la fecha de inicio para la nueva mayorización sea después de la última mayorización registrada
-            if (ultimaMayorizacion.after(fechaInicio)) {
+            if (fechaInicio.after(ultimaMayorizacion)) {
                 List<Cuenta> lstCuentas = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(_empresaSeleccionada.getId());
             
                 for (Cuenta cuenta : lstCuentas) {
                     Mayorizar(cuenta, fechaInicio, fechaFin);
                 }
+                JOptionPane.showMessageDialog(null, "LAS CUENTAS SE HAN MAYORIZADO EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
                 CargarCuentas();
             } else {
                 JOptionPane.showMessageDialog(null, "LA FECHA INICIAL DE LA NUEVA MAYORIZACIÓN DEBE SER DESPUÉS DE LA ÚLTIMA MAYORIZACIÓN REGISTRADA.","ERROR:", JOptionPane.ERROR_MESSAGE);
@@ -277,13 +278,17 @@ public class LibroMayor extends javax.swing.JPanel {
         modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
         
         List<Cuenta> lstCuentas = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(_empresaSeleccionada.getId());
-        ultimaMayorizacion = MayorControlador.Instancia().GetListaRegistrosAlMayorPorCuenta(lstCuentas.getFirst()).getFirst().getFechaFin();
         for (Cuenta cuenta : lstCuentas) {
             // Muestra la ultima vez de mayorizacion
             List<Mayor> lstRegistrosDeCuentaEnELMayor = MayorControlador.Instancia().GetListaRegistrosAlMayorPorCuenta(cuenta);
             String fechaFormateada = "Sin mayorizar (nueva)";
             if (lstRegistrosDeCuentaEnELMayor.size() > 0) {
-                Date fecha = lstRegistrosDeCuentaEnELMayor.getFirst().getFechaFin();
+                Date fecha = lstRegistrosDeCuentaEnELMayor.getLast().getFechaFin();
+                
+                if (ultimaMayorizacion == null) {
+                    ultimaMayorizacion = fecha;
+                }
+                
                 // Calcula la fecha más reciente de mayorización (es la fecha limite iniciar en que puede realizar la mayorización)
                 if (fecha.after(ultimaMayorizacion)) { // Verifica si la fecha de mayorización de la cuenta actual es después de la fecha registrada
                     ultimaMayorizacion = fecha; // Actualiza a esa fecha (ya que es posible que una cuenta no se haya mayorizado porque en un mes no hubo movimientos)
@@ -293,6 +298,7 @@ public class LibroMayor extends javax.swing.JPanel {
             }
             modelo.addRow(new Object[]{cuenta.getId(), cuenta.getCodigo(), cuenta.getNombre(), cuenta.getTipo(), cuenta.getSaldo(), fechaFormateada});
         }
+        
     }
     
     private void CargarEmpresas() {
