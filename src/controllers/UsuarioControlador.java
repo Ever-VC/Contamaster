@@ -58,6 +58,7 @@ public class UsuarioControlador {
         //Insertamos la información necesaria
         admin.setNombres("Administrador");
         admin.setApellidos("Sistema");
+        admin.setSexo("Masculino");
         admin.setEmail("ever.oficial@gmail.com");
         admin.setUsername("admin");
         admin.setPassword(hashPassword("admin"));
