@@ -20,6 +20,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
     
     private int _idEmpresa = -1;
     private int _idCuenta = -1;
+    private Validaciones validar = new Validaciones();
 
     /**
      * Creates new form CatalogoCuentas
@@ -103,10 +104,25 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         jlblTitulo.setText("CATALOGO DE CUENTAS");
 
         jtxtNombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre:"));
+        jtxtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtNombreKeyTyped(evt);
+            }
+        });
 
         jtxtCodigo.setBorder(javax.swing.BorderFactory.createTitledBorder("Código:"));
+        jtxtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtCodigoKeyTyped(evt);
+            }
+        });
 
         jtxtSaldo.setBorder(javax.swing.BorderFactory.createTitledBorder("Saldo:"));
+        jtxtSaldo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtSaldoKeyTyped(evt);
+            }
+        });
 
         jcmbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- SELECCIONAR TIPO --", "Activo Normal", "Contra-Cuenta de Activo", "Pasivo", "Capital", "Ingresos", "Gastos", "Retiros" }));
 
@@ -193,17 +209,28 @@ public class CatalogoCuentas extends javax.swing.JPanel {
 
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
         // TODO add your handling code here:
-        /**
-        * Validaciones...
-        */
+        String codigo = jtxtCodigo.getText();
+        String nombre = jtxtNombre.getText();
+        String tipo = (String) jcmbTipoCuenta.getSelectedItem();
+        String textoSaldo = jtxtSaldo.getText();
+        
+        // Valida que se hayan ingresado todos los campos obligatorios (menos el saldo, ya que si se deja vacío, el sistema le asignará 0.00)
+        if (!ValidarCamposObligatorios(codigo, nombre, tipo)) {
+            return;
+        }
+        
+        // Sino hay texto en el saldo inicial, entonces se establece por defecto en 0.00
+        if ("".equals(textoSaldo)) {
+            textoSaldo = "0.00";
+        }
+        
         if (_idCuenta != -1) { // Actualizar cuenta
             Cuenta cuentaActualizada = CuentaControlador.Instancia().GetCuentaPorId(_idCuenta);
             
             // Captura y almacena la información
-            cuentaActualizada.setCodigo(jtxtCodigo.getText());
-            cuentaActualizada.setNombre(jtxtNombre.getText());
-            cuentaActualizada.setTipo((String) jcmbTipoCuenta.getSelectedItem());
-            String textoSaldo = jtxtSaldo.getText();
+            cuentaActualizada.setCodigo(codigo);
+            cuentaActualizada.setNombre(nombre);
+            cuentaActualizada.setTipo(tipo);
             BigDecimal saldo = new BigDecimal(textoSaldo);
             cuentaActualizada.setSaldo(saldo);
             
@@ -214,10 +241,9 @@ public class CatalogoCuentas extends javax.swing.JPanel {
             
             // Captura y almacena la información
             nuevaCuenta.setIdEmpresaFk(EmpresaControlador.Instancia().GetEmpresaPorId(_idEmpresa));
-            nuevaCuenta.setCodigo(jtxtCodigo.getText());
-            nuevaCuenta.setNombre(jtxtNombre.getText());
-            nuevaCuenta.setTipo((String) jcmbTipoCuenta.getSelectedItem());
-            String textoSaldo = jtxtSaldo.getText();
+            nuevaCuenta.setCodigo(codigo);
+            nuevaCuenta.setNombre(nombre);
+            nuevaCuenta.setTipo(tipo);
             BigDecimal saldo = new BigDecimal(textoSaldo);
             nuevaCuenta.setSaldo(saldo);
             
@@ -262,11 +288,42 @@ public class CatalogoCuentas extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        jtblCuentas.clearSelection();
-        _idCuenta = -1;
+        if (_idCuenta != -1) {
+            LimpiarTodo();
+        }
     }//GEN-LAST:event_formMouseClicked
 
+    private void jtxtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtCodigoKeyTyped
+        // TODO add your handling code here:
+        validar.ValidarNumerosEnteros(evt);
+    }//GEN-LAST:event_jtxtCodigoKeyTyped
 
+    private void jtxtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtNombreKeyTyped
+        // TODO add your handling code here:
+        validar.ValidarLetrasYEspacios(evt);
+    }//GEN-LAST:event_jtxtNombreKeyTyped
+
+    private void jtxtSaldoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtSaldoKeyTyped
+        // TODO add your handling code here:
+        validar.ValidarNumerosDecimales(evt, jtxtSaldo);
+    }//GEN-LAST:event_jtxtSaldoKeyTyped
+
+    private boolean ValidarCamposObligatorios(String codigo, String nombre, String tipo) {
+        if ("".equals(codigo)) {
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [CODIGO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if ("".equals(nombre)) {
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [NOMBRE], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if ("".equals(tipo) || "-- SELECCIONAR TIPO --".equals(tipo)) {
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [TIPO DE CUENTA], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true; // Retorna verdadero únicamente cuando todos los campos tienen datos
+    }
+    
     private void CargarCuentas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo = (DefaultTableModel)jtblCuentas.getModel();
