@@ -66,7 +66,6 @@ public class Principal extends javax.swing.JFrame {
                     SessionLog sesionDeUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(UsuarioCache.Id);
                     sesionDeUsuario.setLogoutTimestamp(new Date());// Almacena la hora de cierre de sesión por parte del usuario
                     SessionLogControlador.instancia().GuardarCierreDeSesion(sesionDeUsuario);// Guarda la información
-                    System.out.println("Cierre de sesión registrado a las " + sesionDeUsuario.getLogoutTimestamp());
                     System.exit(0);
                 }
             }
@@ -125,6 +124,11 @@ public class Principal extends javax.swing.JFrame {
 
         jbtnEditarPerfil.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnEditarPerfil.setText("Editar perfil");
+        jbtnEditarPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditarPerfilActionPerformed(evt);
+            }
+        });
 
         jimgUsuario.setBackground(new java.awt.Color(51, 51, 255));
         jimgUsuario.setOpaque(true);
@@ -320,6 +324,11 @@ public class Principal extends javax.swing.JFrame {
         frmLibroMayor.SetFormularioPrincipal(this);
         MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, frmLibroMayor);
     }//GEN-LAST:event_jbtnLibroMayorActionPerformed
+
+    private void jbtnEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarPerfilActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "PARECE QUE ESTE MODULO NO HA SIDO IMPLEMENTADO AUN, PERO DESCUIDA, TE NOTIFICAREMOS TAN PRONTO ESTE DISPONIBLE. :)","¡OH POR DIOS!", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_jbtnEditarPerfilActionPerformed
   
     /**
      * @param args the command line arguments
