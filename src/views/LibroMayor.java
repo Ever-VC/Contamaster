@@ -90,7 +90,7 @@ public class LibroMayor extends javax.swing.JPanel {
             }
         });
 
-        jbtnBalanzaComprobacion.setText("GENERAR BALACE DE COMPROBACION");
+        jbtnBalanzaComprobacion.setText("BALANCE DE COMPROBACION (ULTIMA MAYORIZACION)");
         jbtnBalanzaComprobacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnBalanzaComprobacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +154,7 @@ public class LibroMayor extends javax.swing.JPanel {
                         .addGap(156, 156, 156)
                         .addComponent(jbtnCuentaT, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbtnBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbtnBalanzaComprobacion))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(236, 236, 236)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -263,7 +263,7 @@ public class LibroMayor extends javax.swing.JPanel {
 
     private void jbtnBalanzaComprobacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBalanzaComprobacionActionPerformed
         // TODO add your handling code here:
-        // Debe abrir el JPanel
+        JOptionPane.showMessageDialog(null, "PARECE QUE ESTE MODULO NO HA SIDO IMPLEMENTADO AUN, PERO DESCUIDA, TE NOTIFICAREMOS TAN PRONTO ESTE DISPONIBLE. :)","¡OH POR DIOS!", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jbtnBalanzaComprobacionActionPerformed
 
     public void SetFormularioPrincipal(Principal frmPrincipal) {
