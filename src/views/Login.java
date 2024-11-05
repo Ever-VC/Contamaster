@@ -55,6 +55,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jtxtPassword.setBorder(javax.swing.BorderFactory.createTitledBorder("Contraseña:"));
+        jtxtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtPasswordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,71 +98,13 @@ public class Login extends javax.swing.JFrame {
 
     private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLoginActionPerformed
         // TODO add your handling code here:
-        //Valida que los campos no estén vacíos
-        if (!"".equals(jtxtUsername.getText())) {
-            if (!"".equals(jtxtPassword.getText())) {
-                
-                String username = jtxtUsername.getText();
-                String password = jtxtPassword.getText();
-                
-                /*if ("create".equals(username) && "admin".equals(password)) {
-                    UsuarioControlador.Instancia().CrearAdministradorInicial();
-                }*/
-                
-                Usuario usuarioLogin = new Usuario();
-                usuarioLogin.setUsername(username);
-                usuarioLogin.setPassword(password);
-                
-                int idUsuarioLogin = UsuarioControlador.Instancia().ValidarLogin(usuarioLogin);
-                
-                if (idUsuarioLogin == -1) {
-                    // Caso de usuario no encontrado
-                    JOptionPane.showMessageDialog(null, "EL USUARIO QUE HA INGRESADO NO EXISTE EN LA BASE DE DATOS, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
-                } else if (idUsuarioLogin == -2) {
-                    // Caso de contraseña incorrecta
-                    JOptionPane.showMessageDialog(null, "LA CONTRASEÑA QUE HA INGRESADO NO COINCIDE CON EL NOMBRE DE USUARIO, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    usuarioLogin = UsuarioControlador.Instancia().GetUsuarioPorId(idUsuarioLogin);
-                    SessionLog sesionDeUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(idUsuarioLogin);
-                    if (sesionDeUsuario == null) {
-                        sesionDeUsuario = new SessionLog();
-                        sesionDeUsuario.setIdUsuarioFk(usuarioLogin);
-                        sesionDeUsuario.setLoginTimestamp(new Date());
-                        SessionLogControlador.instancia().CreararInicioDeSesion(sesionDeUsuario);
-                    } else {
-                        System.out.println("Sesion encontrada, ultima conexión a las " + sesionDeUsuario.getLoginTimestamp());
-                        sesionDeUsuario.setLoginTimestamp(new Date());
-                        System.out.println("Nuevo inicio de sesión a las " + sesionDeUsuario.getLoginTimestamp());
-                        SessionLogControlador.instancia().GuardarInicioDeSesion(sesionDeUsuario);
-                    }
-                    
-                    UsuarioCache.Id = idUsuarioLogin;
-                    UsuarioCache.Nombres = usuarioLogin.getNombres();
-                    UsuarioCache.Apellidos = usuarioLogin.getApellidos();
-                    UsuarioCache.Sexo = usuarioLogin.getSexo();
-                    UsuarioCache.FechaNacimiento = usuarioLogin.getFechaNacimiento();
-                    UsuarioCache.Direccion = usuarioLogin.getDireccion();
-                    UsuarioCache.Email = usuarioLogin.getEmail();
-                    UsuarioCache.Username = usuarioLogin.getUsername();
-                    UsuarioCache.RolUsuario = usuarioLogin.getIdRolFk().getNombre();
-                    
-                    jtxtUsername.setText("");
-                    jtxtPassword.setText("");
-                    
-                    Principal frmPrincipal = new Principal();
-                    frmPrincipal.SetFormularioLogin(this);
-                    this.setVisible(false);
-                    frmPrincipal.setVisible(true);
-
-                    //JOptionPane.showMessageDialog(null, "BIENVENIDO, EL ID DE USUARIO ES: " + idUsuarioLogin, "LOGIN EXITOSO:", JOptionPane.INFORMATION_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "DEBE INGRESAR SU CONTRASEÑA EN EL FORMULARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "DEBE INGRESAR SU NOMBRE DE USUARIO EN EL FORMULARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
-        }
+        Login();
     }//GEN-LAST:event_jbtnLoginActionPerformed
+
+    private void jtxtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPasswordActionPerformed
+        // TODO add your handling code here:
+        Login();
+    }//GEN-LAST:event_jtxtPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,6 +139,71 @@ public class Login extends javax.swing.JFrame {
                 new Login().setVisible(true);
             }
         });
+    }
+    
+    private void Login() {
+        //Valida que los campos no estén vacíos
+        if (!"".equals(jtxtUsername.getText())) {
+            if (!"".equals(jtxtPassword.getText())) {
+                
+                String username = jtxtUsername.getText();
+                String password = jtxtPassword.getText();
+                
+                /*if ("create".equals(username) && "admin".equals(password)) {
+                    UsuarioControlador.Instancia().CrearAdministradorInicial();
+                }*/
+                
+                Usuario usuarioLogin = new Usuario();
+                usuarioLogin.setUsername(username);
+                usuarioLogin.setPassword(password);
+                
+                int idUsuarioLogin = UsuarioControlador.Instancia().ValidarLogin(usuarioLogin);
+                
+                if (idUsuarioLogin == -1) {
+                    // Caso de usuario no encontrado
+                    JOptionPane.showMessageDialog(null, "EL USUARIO QUE HA INGRESADO NO EXISTE EN LA BASE DE DATOS, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
+                } else if (idUsuarioLogin == -2) {
+                    // Caso de contraseña incorrecta
+                    JOptionPane.showMessageDialog(null, "LA CONTRASEÑA QUE HA INGRESADO NO COINCIDE CON EL NOMBRE DE USUARIO, POR FAVOR ASEGURESE DE HABER INGRESADO CORRECTAMENTE LA INFORMACION.","CREDENCIALES INCORRECTAS:", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    usuarioLogin = UsuarioControlador.Instancia().GetUsuarioPorId(idUsuarioLogin);
+                    SessionLog sesionDeUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(idUsuarioLogin);
+                    if (sesionDeUsuario == null) {
+                        sesionDeUsuario = new SessionLog();
+                        sesionDeUsuario.setIdUsuarioFk(usuarioLogin);
+                        sesionDeUsuario.setLoginTimestamp(new Date());
+                        SessionLogControlador.instancia().CreararInicioDeSesion(sesionDeUsuario);
+                    } else {
+                        sesionDeUsuario.setLoginTimestamp(new Date());
+                        SessionLogControlador.instancia().GuardarInicioDeSesion(sesionDeUsuario);
+                    }
+                    
+                    UsuarioCache.Id = idUsuarioLogin;
+                    UsuarioCache.Nombres = usuarioLogin.getNombres();
+                    UsuarioCache.Apellidos = usuarioLogin.getApellidos();
+                    UsuarioCache.Sexo = usuarioLogin.getSexo();
+                    UsuarioCache.FechaNacimiento = usuarioLogin.getFechaNacimiento();
+                    UsuarioCache.Direccion = usuarioLogin.getDireccion();
+                    UsuarioCache.Email = usuarioLogin.getEmail();
+                    UsuarioCache.Username = usuarioLogin.getUsername();
+                    UsuarioCache.RolUsuario = usuarioLogin.getIdRolFk().getNombre();
+                    
+                    jtxtUsername.setText("");
+                    jtxtPassword.setText("");
+                    
+                    Principal frmPrincipal = new Principal();
+                    frmPrincipal.SetFormularioLogin(this);
+                    this.setVisible(false);
+                    frmPrincipal.setVisible(true);
+
+                    //JOptionPane.showMessageDialog(null, "BIENVENIDO, EL ID DE USUARIO ES: " + idUsuarioLogin, "LOGIN EXITOSO:", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "DEBE INGRESAR SU CONTRASEÑA EN EL FORMULARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "DEBE INGRESAR SU NOMBRE DE USUARIO EN EL FORMULARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
