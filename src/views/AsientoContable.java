@@ -74,6 +74,9 @@ public class AsientoContable extends javax.swing.JPanel {
         jtxtTotalDebe = new javax.swing.JTextField();
         jtxtTotalHaber = new javax.swing.JTextField();
         jbtnEliminarMovimiento = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1051, 835));
@@ -214,6 +217,15 @@ public class AsientoContable extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setText("*");
+
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("*");
+
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("*");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -248,9 +260,16 @@ public class AsientoContable extends javax.swing.JPanel {
                                         .addGroup(layout.createSequentialGroup()
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jlblFecha)
-                                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(119, 119, 119)
-                                            .addComponent(jcmbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGap(98, 98, 98)
+                                            .addComponent(jcmbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jpnlCuentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -269,20 +288,30 @@ public class AsientoContable extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlblFecha)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)))
                             .addComponent(jcmbTipoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtxtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtxtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbtnEliminarMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(46, 46, 46)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jtxtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtxtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbtnEliminarMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1)))
                     .addComponent(jpnlCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
@@ -290,9 +319,15 @@ public class AsientoContable extends javax.swing.JPanel {
 
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
         // TODO add your handling code here:
-        /**
-        * Validaciones...
-        */
+        // Almacena los totales (estan en los JTextField) y la descripcion
+        String descripcion = jtxtDescripcion.getText();
+        BigDecimal totalDebe = new BigDecimal(jtxtTotalDebe.getText());
+        BigDecimal totalHaber = new BigDecimal(jtxtTotalHaber.getText());
+        // verifica que el campo de descripcion no esté vacío
+        if ("".equals(descripcion)) {
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [DESCRIPCION], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
         int response = JOptionPane.showConfirmDialog(
             AsientoContable.this,
@@ -302,11 +337,7 @@ public class AsientoContable extends javax.swing.JPanel {
             JOptionPane.WARNING_MESSAGE
         );
         
-        if (response == JOptionPane.YES_OPTION) {
-            // Almacena los totales (estan en los JTextField) y la descripcion
-            String descripcion = jtxtDescripcion.getText();
-            BigDecimal totalDebe = new BigDecimal(jtxtTotalDebe.getText());
-            BigDecimal totalHaber = new BigDecimal(jtxtTotalHaber.getText());
+        if (response == JOptionPane.YES_OPTION) {            
             // Crea el asiento contable
             Asiento nuevoAsiento = CrearAsiento(totalDebe, totalHaber, descripcion);
             
@@ -362,9 +393,17 @@ public class AsientoContable extends javax.swing.JPanel {
 
     private void jbtnEliminarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEliminarMovimientoActionPerformed
         // TODO add your handling code here:
+        if (_lstMovimientos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "NO HAY MOVIMIENTOS REGISTRADOS, POR LO TANTO NO POSIBLE REALIZAR LA OPERACION.", "ERROR:", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if (_filaSeleccionada != -1) { // verifica que haya una fila seleccionada
             _lstMovimientos.remove(_filaSeleccionada);
+            _filaSeleccionada = -1;
+            jtblMovimientos.clearSelection();
             CaragarMovimientos();
+        } else {
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE DESDE LA TABLA EL REGISTRO DEL MOVIMIENTO QUE DESEA ELIMINAR.", "ERROR:", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbtnEliminarMovimientoActionPerformed
 
@@ -383,25 +422,50 @@ public class AsientoContable extends javax.swing.JPanel {
         if ("tableCellEditor".equals(evt.getPropertyName())) {
             int fila = jtblMovimientos.getEditingRow();
             int columna = jtblMovimientos.getEditingColumn();
-            
+
             if (columna == 3 || columna == 4) {
                 // Acceder al objeto correspondiente de la lista
                 Movimiento movimientoModificado = _lstMovimientos.get(fila);
-                
+
                 // Almacena los nuevos valores de la tabla
-                String textoDebe = jtblMovimientos.getValueAt(fila, 3).toString();
-                BigDecimal debe = new BigDecimal(textoDebe);
-                movimientoModificado.setDebe(debe);
-                String textoHaber = jtblMovimientos.getValueAt(fila, 4).toString();
-                BigDecimal haber = new BigDecimal(textoHaber);
-                movimientoModificado.setHaber(haber);
-                CaragarMovimientos(); // Actualiza la tabla y hace el calculo del debe y haber
+                String texto = jtblMovimientos.getValueAt(fila, columna).toString();
+
+                try {
+                    // Intenta convertir el valor ingresado a BigDecimal
+                    BigDecimal valor = new BigDecimal(texto);
+
+                    // Actualiza el campo correspondiente en el objeto Movimiento
+                    if (columna == 3) {
+                        movimientoModificado.setDebe(valor);
+                    } else {
+                        movimientoModificado.setHaber(valor);
+                    }
+
+                    // Actualiza la tabla y hace el cálculo del debe y haber
+                    CaragarMovimientos();
+
+                } catch (NumberFormatException e) {
+                    // Muestra un mensaje de error si el valor no es numérico decimal
+                    JOptionPane.showMessageDialog(null, "POR FAVOR, INGRESE UN NUMERO ENTERO O DECIMAL VALIDO.", "VALOR INVALIDO:", JOptionPane.ERROR_MESSAGE);
+
+                    // Restaura el valor anterior desde movimientoModificado
+                    if (columna == 3) {
+                        jtblMovimientos.setValueAt(movimientoModificado.getDebe().toString(), fila, columna);
+                    } else {
+                        jtblMovimientos.setValueAt(movimientoModificado.getHaber().toString(), fila, columna);
+                    }
+
+                    // Quita la selección de la fila en la tabla
+                    jtblMovimientos.clearSelection();
+                }
             }
         }
+        _filaSeleccionada = -1;
     }//GEN-LAST:event_jtblMovimientosPropertyChange
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
+        _filaSeleccionada = -1;
         jtblMovimientos.clearSelection();
         jlstCuentas.clearSelection();
     }//GEN-LAST:event_formMouseClicked
@@ -437,7 +501,7 @@ public class AsientoContable extends javax.swing.JPanel {
                 modelo.addRow(new Object[]{movimiento.getIdCuentaFk().getCodigo(), fechaFormateada, movimiento.getDescripcion(), movimiento.getDebe(), movimiento.getHaber()});
             }
             
-            if (total_debe == total_haber) {
+            if (total_debe == total_haber && total_debe != 0.00) { // Verifica que por lo menos ya se hayan modificado los valores del debe y haber
                 jbtnGuardar.setEnabled(true);
             } else {
                 jbtnGuardar.setEnabled(false);
@@ -445,6 +509,7 @@ public class AsientoContable extends javax.swing.JPanel {
             
             jtxtTotalDebe.setText(String.valueOf(total_debe));
             jtxtTotalHaber.setText(String.valueOf(total_haber));
+            _filaSeleccionada = -1;
         } else { // si se han eliminado todos los movmientos y la lista esta vacía, debe mostrar vacía también la tabla
             DefaultTableModel modelo = new DefaultTableModel();
             modelo = (DefaultTableModel)jtblMovimientos.getModel();
@@ -495,8 +560,21 @@ public class AsientoContable extends javax.swing.JPanel {
     }
     
     private void AlmacenarNuevoMovimiento(Cuenta cuentaSeleccionada) {
+        Date fecha = jDateChooser1.getDate();
+        if (fecha == null) { // Verifica que la fecha sea antes de ahora
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [FECHA], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE ESTE CAMPO ANTES DE SELECCIONAR LA CUENTA.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            jlstCuentas.clearSelection();
+            return;
+        }
+        
+        if (fecha.after(new Date())) { // Verifica que la fecha sea antes de ahora
+            JOptionPane.showMessageDialog(null, "HA SELECCIONADO UNA FECHA MAYOR A LA ACTUAL, POR FAVOR ASEGURESE DE INGRESAR LA FECHA CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            jlstCuentas.clearSelection();
+            return;
+        }
+        
         Movimiento nuevoMovimiento = new Movimiento();
-        nuevoMovimiento.setFecha(jDateChooser1.getDate());
+        nuevoMovimiento.setFecha(fecha);
         nuevoMovimiento.setIdCuentaFk(cuentaSeleccionada);
         nuevoMovimiento.setDescripcion(cuentaSeleccionada.getNombre());
         BigDecimal debe = new BigDecimal("0.00");
@@ -541,6 +619,9 @@ public class AsientoContable extends javax.swing.JPanel {
             
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
