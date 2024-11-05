@@ -27,7 +27,7 @@
                       <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                       <Component id="jbtnCuentaT" min="-2" pref="214" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jbtnBalanzaComprobacion" min="-2" pref="274" max="-2" attributes="0"/>
+                      <Component id="jbtnBalanzaComprobacion" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
@@ -158,7 +158,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jbtnBalanzaComprobacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="GENERAR BALACE DE COMPROBACION"/>
+        <Property name="text" type="java.lang.String" value="BALANCE DE COMPROBACION (ULTIMA MAYORIZACION)"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
