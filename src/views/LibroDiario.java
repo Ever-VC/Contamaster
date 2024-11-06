@@ -197,9 +197,18 @@ public class LibroDiario extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Date fechaInicio = jdcFechaInicio.getDate();
-        Date fechaFin = jdcFechaFin.getDate();
-        CargarLibroDiario(fechaInicio, fechaFin);
+        if (_empresaSeleccionada != null) {
+            Date fechaInicio = jdcFechaInicio.getDate();
+            Date fechaFin = jdcFechaFin.getDate();
+
+            if (!ValidarFechas(fechaInicio, fechaFin)) {
+                return;
+            }
+
+            CargarLibroDiario(fechaInicio, fechaFin);
+        } else {
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA EMPRESA DE LA QUE DESEA GENERAR EL LIBRO DIARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jcmbEmpresaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbEmpresaItemStateChanged
@@ -215,14 +224,9 @@ public class LibroDiario extends javax.swing.JPanel {
     }//GEN-LAST:event_jcmbEmpresaItemStateChanged
     
     private void CargarLibroDiario(Date fechaInicio, Date fechaFin) {
+        List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorEmpresaYFechaInicioYFin(fechaInicio, fechaFin, _empresaSeleccionada);
         
-        if (_empresaSeleccionada != null) {
-            DefaultTableModel modelo = new DefaultTableModel();
-            modelo = (DefaultTableModel)jtblLibroDiario.getModel();
-            modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
-
-            List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorEmpresaYFechaInicioYFin(fechaInicio, fechaFin, _empresaSeleccionada);
-
+        if (!lstMovimientos.isEmpty()) {
             Movimiento primerMovimiento = lstMovimientos.getFirst();
 
             // Obtiene el primer registro de la tabla detalle asiento para saber a qué asiento pertenece
@@ -230,36 +234,69 @@ public class LibroDiario extends javax.swing.JPanel {
 
             Asiento asiento = detalleAsiento.getIdAsientoFk();
 
-            Date fechaDeReferencia = primerMovimiento.getFecha();
-            int iterador = 0;
-            double totalDebe = 0.00;
-            double totalHaber = 0.00;
-            for (Movimiento movimiento : lstMovimientos) {
-                totalDebe += movimiento.getDebe().doubleValue();
-                totalHaber += movimiento.getHaber().doubleValue();
-                Date fecha = movimiento.getFecha();
-                String fechaFormateada = "";
-                if (!fechaDeReferencia.equals(fecha) || iterador == 0) {
-                    if (iterador != 0) {
-                        modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
-                    }
-                    fechaDeReferencia = fecha;
-                    SimpleDateFormat formatoCorto = new SimpleDateFormat("dd/MM/yyyy");
-                    fechaFormateada = formatoCorto.format(fecha);
-                }
-                modelo.addRow(new Object[]{fechaFormateada, movimiento.getIdCuentaFk().getCodigo(), movimiento.getDescripcion(), movimiento.getDebe(), movimiento.getHaber()});
-
-                if (iterador == (lstMovimientos.size() - 1)) {
+            Date fechaDeReferencia = primerMovimiento.getFecha(); // Fecha de referencia para mostrar únicamente una vez la fecha en cada asiento
+            
+            CargarMovimientos(lstMovimientos, asiento, fechaDeReferencia);
+        } else {
+            JOptionPane.showMessageDialog(null, "PARECE QUE NO HUBO NINGUN MOVIMIENTO EN EL PERIODO DE TIEMPO QUE HA SELECCIONADO.","INFORMACION:", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    private boolean ValidarFechas(Date fechaInicio, Date fechaFin) {
+        if (fechaInicio == null) {
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [FECHA DE INCIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (fechaInicio.after(new Date())) {
+            JOptionPane.showMessageDialog(null, "EN [FECHA DE INICIO], HA SELECCIONADO UNA FECHA MAYOR A LA ACTUAL, POR FAVOR ASEGURESE DE INGRESAR LA FECHA CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (fechaFin == null) {
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [FECHA DE INCIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (fechaFin.after(new Date())) {
+            JOptionPane.showMessageDialog(null, "EN [FECHA DE FIN], HA SELECCIONADO UNA FECHA MAYOR A LA ACTUAL, POR FAVOR ASEGURESE DE INGRESAR LA FECHA CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (fechaInicio.after(fechaFin)) {
+            JOptionPane.showMessageDialog(null, "LA [FECHA DE INICIO] NO PUEDE SER DESPUÉS DE LA [FECHA DE FIN], POR FAVOR ASEGURESE DE INGRESAR LA FECHA CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    private void CargarMovimientos(List<Movimiento> lstMovimientos, Asiento asiento, Date fechaDeReferencia) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)jtblLibroDiario.getModel();
+        modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
+        
+        int iterador = 0;
+        double totalDebe = 0.00;
+        double totalHaber = 0.00;
+        for (Movimiento movimiento : lstMovimientos) {
+            totalDebe += movimiento.getDebe().doubleValue();
+            totalHaber += movimiento.getHaber().doubleValue();
+            Date fecha = movimiento.getFecha();
+            String fechaFormateada = "";
+            if (!fechaDeReferencia.equals(fecha) || iterador == 0) {
+                if (iterador != 0) {
                     modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
                 }
-
-                iterador ++;
+                fechaDeReferencia = fecha;
+                SimpleDateFormat formatoCorto = new SimpleDateFormat("dd/MM/yyyy");
+                fechaFormateada = formatoCorto.format(fecha);
             }
-            jtxtTotalDebe.setText(String.valueOf(totalDebe));
-            jtxtTotalHaber.setText(String.valueOf(totalHaber));
-        } else {
-            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA CUENTA DE LA QUE DESEA GENERAR EL LIBRO DIARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            modelo.addRow(new Object[]{fechaFormateada, movimiento.getIdCuentaFk().getCodigo(), movimiento.getDescripcion(), movimiento.getDebe(), movimiento.getHaber()});
+
+            if (iterador == (lstMovimientos.size() - 1)) {
+                modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
+            }
+
+            iterador ++;
         }
+        jtxtTotalDebe.setText(String.valueOf(totalDebe));
+        jtxtTotalHaber.setText(String.valueOf(totalHaber));
     }
     
     private void CargarEmpresas() {
