@@ -230,7 +230,7 @@ public class LibroMayor extends javax.swing.JPanel {
     }//GEN-LAST:event_jtblCuentasMouseClicked
 
     private void jbtnMayorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMayorizarActionPerformed
-        // TODO add your handling code here:      
+        // TODO add your handling code here:            
         if (_empresaSeleccionada != null) {
             Date fechaInicio = jdcFechaInicio.getDate();
             Date fechaFin = jdcFechaFin.getDate();
@@ -240,17 +240,27 @@ public class LibroMayor extends javax.swing.JPanel {
             }
             // Valida que la fecha de inicio para la nueva mayorización sea después de la última mayorización registrada
             if (fechaInicio.after(ultimaMayorizacion)) {
-                List<Cuenta> lstCuentas = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(_empresaSeleccionada.getId());
+                int response = JOptionPane.showConfirmDialog(
+                    LibroMayor.this,
+                    "¿ESTAS SEGURO QUE DESEA REALIZAR LA MAYORIZACION DE LAS CUENTAS? ESTE ES UN PROCESO QUE NO SE PUEDE REVERTIR.",
+                    "ATENCIÓN:",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+                );
+
+                if (response == JOptionPane.YES_OPTION){
+                    List<Cuenta> lstCuentas = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(_empresaSeleccionada.getId());
             
-                for (Cuenta cuenta : lstCuentas) {
-                    Mayorizar(cuenta, fechaInicio, fechaFin);
-                }
-                if (huboMayorizacion) {
-                    JOptionPane.showMessageDialog(null, "LAS CUENTAS SE HAN MAYORIZADO EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
-                    CargarCuentas();
-                } else {
-                   JOptionPane.showMessageDialog(null, "PARECE QUE NO HABÍAN MOVIMIENTOS PENDIENTES DE MAYORIZAR EN EN EL PERIODO DE TIEMPO QUE HA SELECCIONADO.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);     
-                }                
+                    for (Cuenta cuenta : lstCuentas) {
+                        Mayorizar(cuenta, fechaInicio, fechaFin);
+                    }
+                    if (huboMayorizacion) {
+                        JOptionPane.showMessageDialog(null, "LAS CUENTAS SE HAN MAYORIZADO EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
+                        CargarCuentas();
+                    } else {
+                       JOptionPane.showMessageDialog(null, "PARECE QUE NO HABÍAN MOVIMIENTOS PENDIENTES DE MAYORIZAR EN EL PERIODO DE TIEMPO QUE HA SELECCIONADO.","RESPUESTA A LA SOLICITUD:", JOptionPane.INFORMATION_MESSAGE);     
+                    }    
+                }            
             } else {
                 JOptionPane.showMessageDialog(null, "LA FECHA INICIAL DE LA NUEVA MAYORIZACIÓN DEBE SER DESPUÉS DE LA ÚLTIMA MAYORIZACIÓN REGISTRADA.","ERROR:", JOptionPane.ERROR_MESSAGE);
             }
