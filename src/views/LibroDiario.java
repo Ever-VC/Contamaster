@@ -47,7 +47,7 @@ public class LibroDiario extends javax.swing.JPanel {
         jlblTitulo = new javax.swing.JLabel();
         jlblFechaInicio = new javax.swing.JLabel();
         jlblFechaFin = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbtnMostrarMovimientos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblLibroDiario = new javax.swing.JTable();
         jdcFechaInicio = new com.toedter.calendar.JDateChooser();
@@ -70,12 +70,12 @@ public class LibroDiario extends javax.swing.JPanel {
         jlblFechaFin.setForeground(new java.awt.Color(0, 0, 0));
         jlblFechaFin.setText("Fecha de fin:");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setText("GENERAR");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtnMostrarMovimientos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnMostrarMovimientos.setText("GENERAR");
+        jbtnMostrarMovimientos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnMostrarMovimientos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtnMostrarMovimientosActionPerformed(evt);
             }
         });
 
@@ -157,7 +157,7 @@ public class LibroDiario extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtnMostrarMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -181,7 +181,7 @@ public class LibroDiario extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlblFechaFin)
                     .addComponent(jlblFechaInicio)
-                    .addComponent(jButton1)
+                    .addComponent(jbtnMostrarMovimientos)
                     .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
@@ -195,7 +195,7 @@ public class LibroDiario extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtnMostrarMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMostrarMovimientosActionPerformed
         // TODO add your handling code here:
         if (_empresaSeleccionada != null) {
             Date fechaInicio = jdcFechaInicio.getDate();
@@ -209,7 +209,7 @@ public class LibroDiario extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA EMPRESA DE LA QUE DESEA GENERAR EL LIBRO DIARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbtnMostrarMovimientosActionPerformed
 
     private void jcmbEmpresaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbEmpresaItemStateChanged
         // TODO add your handling code here:
@@ -284,9 +284,9 @@ public class LibroDiario extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jbtnMostrarMovimientos;
     private javax.swing.JComboBox jcmbEmpresa;
     private com.toedter.calendar.JDateChooser jdcFechaFin;
     private com.toedter.calendar.JDateChooser jdcFechaInicio;
