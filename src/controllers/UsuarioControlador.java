@@ -72,6 +72,7 @@ public class UsuarioControlador {
     }
     
     public void CrearUsuario(Usuario nuevo_usuario) {
+        nuevo_usuario.setPassword(hashPassword(nuevo_usuario.getPassword()));
         _entityManager = setEntityManager();
         _entityManager.getTransaction().begin();
         _entityManager.persist(nuevo_usuario);
