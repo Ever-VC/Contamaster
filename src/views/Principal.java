@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import models.Cuenta;
 import models.SessionLog;
+import support.Roles;
 import support.UsuarioCache;
 
 /**
@@ -27,27 +28,33 @@ public class Principal extends javax.swing.JFrame {
     
     private static int _visible = -1;
     private Login _frmLogin;
+    private Roles rolUsuario = new Roles();
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-        Inicio panel = new Inicio();
-        panel.setSize(jpnlContenedor.getWidth(), jpnlContenedor.getHeight());
-        panel.setLocation(0, 0);
-        jpnlContenedor.removeAll();
-        jpnlContenedor.add(panel, BorderLayout.CENTER);
-        jpnlContenedor.revalidate();
-        jpnlContenedor.repaint();
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new Inicio());
         
         jlblNombreUsuario.setText(UsuarioCache.GetNombreApellidoUsuario());
         String url = "src/assets/avatarUserM.png";
         if (UsuarioCache.Sexo.equals("Femenino")) {
             url = "src/assets/avatarUserW.png";
         }
-        
         SetImagLabel(jimgUsuario, url);
+        
+        // Define los permisos
+        if (UsuarioCache.RolUsuario.equals(rolUsuario.CONTADOR) || UsuarioCache.RolUsuario.equals(rolUsuario.AUXILIAR) || UsuarioCache.RolUsuario.equals(rolUsuario.GERENTE)) {
+            jbtnUsuarios.setVisible(false);
+            jbtnEmpresas.setVisible(false);
+        }
+        
+        if (UsuarioCache.RolUsuario.equals(rolUsuario.GERENTE)) {
+            jbtnAsientos.setVisible(false);
+            jbtnLibroDiario.setVisible(false);
+            jbtnLibroMayor.setVisible(false);
+        }
         
         // Añade WindowListener para manejar el evento de cierre (Consultar si está seguro de cerrar la app)
         addWindowListener(new WindowAdapter() {
@@ -93,11 +100,13 @@ public class Principal extends javax.swing.JFrame {
         jbtnLibroDiario = new javax.swing.JButton();
         jbtnLibroMayor = new javax.swing.JButton();
         jbtnCerrarSesion = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jpnlContenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jpnlMenu.setBackground(new java.awt.Color(0, 51, 51));
+        jpnlMenu.setMinimumSize(new java.awt.Dimension(203, 0));
 
         jbtnInicio.setBackground(new java.awt.Color(255, 255, 255));
         jbtnInicio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -138,6 +147,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jimgUsuario.setBackground(new java.awt.Color(51, 51, 255));
+        jimgUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jimgUsuario.setOpaque(true);
 
         jbtnEmpresas.setBackground(new java.awt.Color(255, 255, 255));
@@ -196,6 +206,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 51, 51));
+        jButton1.setText("ESTADOS FINANCIEROS");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         javax.swing.GroupLayout jpnlMenuLayout = new javax.swing.GroupLayout(jpnlMenu);
         jpnlMenu.setLayout(jpnlMenuLayout);
         jpnlMenuLayout.setHorizontalGroup(
@@ -210,13 +226,14 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnlMenuLayout.createSequentialGroup()
                         .addGroup(jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                             .addComponent(jbtnCerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbtnLibroMayor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbtnLibroDiario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbtnAsientos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbtnEmpresas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbtnInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbtnUsuarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                            .addComponent(jbtnUsuarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlblNombreUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbtnEditarPerfil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
@@ -232,19 +249,21 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jbtnEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnLibroDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(jbtnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -267,7 +286,7 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jpnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpnlMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpnlContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -400,6 +419,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnAsientos;
     private javax.swing.JButton jbtnCerrarSesion;
