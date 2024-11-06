@@ -34,7 +34,7 @@ public class CuentaT extends javax.swing.JPanel {
     public CuentaT(Cuenta cuenta) {
         initComponents();
         this._cuenta = cuenta;
-        this.jlblNombreYTipoCuenta.setText(cuenta.getNombre().toUpperCase() + " - " + cuenta.getTipo().toUpperCase());
+        this.jlblNombreYTipoCuenta.setText(cuenta.getNombre().toUpperCase() + " - " + cuenta.getTipo().toUpperCase() + " => $" + cuenta.getSaldo());
         this.jlblSaldo.setText( this.jlblSaldo.getText() + cuenta.getSaldo());
         //CargarMovimientos();
         CargarSaldos(obtenerPrimerDiaDelMes(new Date()), new Date(), true); // Hay que calcular la fecha de inicio de este mes
@@ -303,7 +303,6 @@ public class CuentaT extends javax.swing.JPanel {
         String tipoCuenta = _cuenta.getTipo();
         jlstDebe.setModel(modeloListaDebe);
         jlstHaber.setModel(modeloListaHaber);
-        
         if (lstMayorizaciones.size() > 0) { // Si ya se ha realizado la mayorización por lo menos una vez...
             Mayor ultimaMayorizacion = lstMayorizaciones.getLast(); // Para obtener la lista de movimientos con fecha de inicio y fin que corresponde a la ultima mayorización
             // Lista de movimientos realizados en la última mayorización
@@ -313,11 +312,11 @@ public class CuentaT extends javax.swing.JPanel {
             // ======> Carga los saldos en la tabla según el tipo de cuenta <======
             // Tipo Activo
             if (tipoCuenta.equals("Activo Normal") || tipoCuenta.equals("Gastos") || tipoCuenta.equals("Retiros")) {
-                CargarSaldosTipoActivo(lstMayorizaciones, lstMovimientos, modeloListaDebe, modeloListaHaber);
+                CargarSaldosTipoActivo(lstMayorizaciones, lstMovimientos, modeloListaDebe, modeloListaHaber, true);
             }
             // Tipo Pasivo
             if (tipoCuenta.equals("Pasivo") || tipoCuenta.equals("Contra-Cuenta de Activo") || tipoCuenta.equals("Capital") || tipoCuenta.equals("Ingresos")) {
-                
+                CargarSaldosTipoActivo(lstMayorizaciones, lstMovimientos, modeloListaDebe, modeloListaHaber, false);
             }
         } else { // No se han realizado mayorizaciones, por lo cual solo contiene el saldo inicial de la cuenta
             if (!inicioApp) {
@@ -339,7 +338,7 @@ public class CuentaT extends javax.swing.JPanel {
         }
     }
     
-    private void CargarSaldosTipoActivo(List<Mayor> lstMayorizaciones, List<Movimiento> lstMovimientos, DefaultListModel modeloListaDebe, DefaultListModel modeloListaHaber) {
+    private void CargarSaldosTipoActivo(List<Mayor> lstMayorizaciones, List<Movimiento> lstMovimientos, DefaultListModel modeloListaDebe, DefaultListModel modeloListaHaber, boolean esTipoActivo) {
         // Variables para totales acumulados
         BigDecimal totalDebe = BigDecimal.ZERO;
         BigDecimal totalHaber = BigDecimal.ZERO;
@@ -350,10 +349,19 @@ public class CuentaT extends javax.swing.JPanel {
         if (lstMayorizaciones.size() > 1) {
             List<Mayor> lstMayorizacionesEnDebe = new ArrayList();
             List<Mayor> lstMayorizacionesEnHaber = new ArrayList();
-
+            
+            // Agrega la primera mayorización par amostrar el saldo inicial de la cuenta
+            if (esTipoActivo) {
+                modeloListaDebe.addElement("Saldo anterior: $" + lstMayorizaciones.getFirst().getSaldoAnterior());
+                totalDebe = totalDebe.add(lstMayorizaciones.getFirst().getSaldoAnterior());
+            } else {
+                modeloListaHaber.addElement("Saldo anterior: $" + lstMayorizaciones.getFirst().getSaldoAnterior());
+                totalHaber = totalHaber.add(lstMayorizaciones.getFirst().getSaldoAnterior());
+            }
+            
             int totalElementosEnDebe = 0;
             int totalElementosEnHaber = 0;
-            totalDebe = totalDebe.add(lstMayorizaciones.getFirst().getSaldoAnterior());
+            
 
             for (Mayor mayor : lstMayorizaciones) {
                 if (mayor.getTotalDebe() != null && mayor.getTotalDebe().compareTo(BigDecimal.ZERO) > 0) {
@@ -383,9 +391,7 @@ public class CuentaT extends javax.swing.JPanel {
                     lstMovimientosEnHaber.add(movimiento);
                 }
             }
-
-            // Agrega la primera mayorización par amostrar el saldo inicial de la cuenta
-            modeloListaDebe.addElement("Saldo inicial: $" + lstMayorizaciones.getFirst().getSaldoAnterior());
+            
             // Muestra los demás saldos
             if (totalElementosEnDebe >= totalElementosEnHaber) { // Si hay más elementos en debe que en haber (significa que el haber quedará con espacios en blanco)
                 // ==============> MUESTRA LAS MAYORIZACIONES Y MOVIMIENTOS CON VALOR EN EL DEBE <=================
@@ -395,12 +401,12 @@ public class CuentaT extends javax.swing.JPanel {
                     if (mayor.equals(lstMayorizacionesEnDebe.getLast())) { // Evita mostrar la info de la ultima mayorización porque se mostrará con los movimientos
                         break;
                     }
-                    modeloListaDebe.addElement("Mayor de: " + GetMes(mayor.getFechaFin()) + " $" + mayor.getTotalDebe());
+                    modeloListaDebe.addElement("MYR-" + GetMes(mayor.getFechaFin()).toUpperCase() + ": $" + mayor.getTotalDebe());
                     index ++;
                 }
                 // Carga todos los movimientos en el debe
                 for (Movimiento movimiento : lstMovimientosEnDebe) {
-                    modeloListaDebe.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getDebe());
+                    modeloListaDebe.addElement("CM-" + movimiento.getId() + ": $" + movimiento.getDebe());
                 }
                 // ==============> MUESTRA LAS MAYORIZACIONES Y MOVIMIENTOS CON VALOR EN EL HABER <=================
                 // Carga todas las mayorizaciones en el haber
@@ -408,18 +414,15 @@ public class CuentaT extends javax.swing.JPanel {
                     if (mayor.equals(lstMayorizacionesEnDebe.getLast())) {
                         break;
                     }
-                    modeloListaHaber.addElement("Mayor de: " + GetMes(mayor.getFechaFin()) + " $" + mayor.getTotalHaber());
+                    modeloListaHaber.addElement("MYR-" + GetMes(mayor.getFechaFin()).toUpperCase() + ": $" + mayor.getTotalHaber());
                 }
                 // Carga todos los movimientos en el haber
                 for (Movimiento movimiento : lstMovimientosEnHaber) {
-                    modeloListaHaber.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getHaber());
+                    modeloListaHaber.addElement("CM-" + movimiento.getId() + ": $" + movimiento.getHaber());
                 }
                 // ==============> MUESTRA ELEMENTOS VACIOS PARA QUE LOS TOTALES QUEDEN AL LADO <=================
                 // Dado que hay más elementos en el debe que en el haber, mostraremos la cantidad de diferencia con espacios en blanco para mostrar al final los totales
                 int diferencia = totalElementosEnDebe - totalElementosEnHaber;
-                System.out.println("Elementos del debe: " + totalElementosEnDebe);
-                System.out.println("Elementos del haber: " + totalElementosEnHaber);
-                System.out.println("Diferencia: " + diferencia);
                 for (int i = 0; i < diferencia; i++) {
                     modeloListaHaber.addElement("$0.00");
                 }
@@ -431,21 +434,21 @@ public class CuentaT extends javax.swing.JPanel {
                     if (mayor.equals(lstMayorizacionesEnDebe.getLast())) { // Evita mostrar la info de la ultima mayorización porque se mostrará con los movimientos
                         break;
                     }
-                    modeloListaDebe.addElement("Mayor de: " + GetMes(mayor.getFechaFin()) + " $" + mayor.getTotalDebe());
+                    modeloListaDebe.addElement("MYR-" + GetMes(mayor.getFechaFin()).toUpperCase() + ": $" + mayor.getTotalDebe());
                     index ++;
                 }
                 // Carga todos los movimientos en el debe
                 for (Movimiento movimiento : lstMovimientosEnDebe) {
-                    modeloListaDebe.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getDebe());
+                    modeloListaDebe.addElement("CM-" + movimiento.getId() + ": $" + movimiento.getDebe());
                 }
                 // ==============> MUESTRA LAS MAYORIZACIONES Y MOVIMIENTOS CON VALOR EN EL HABER <=================
                 // Carga todas las mayorizaciones en el haber
                 for (Mayor mayor : lstMayorizacionesEnHaber) {
-                    modeloListaHaber.addElement("Mayor de: " + GetMes(mayor.getFechaFin()) + " $" + mayor.getTotalHaber());
+                    modeloListaHaber.addElement("MYR-" + GetMes(mayor.getFechaFin()).toUpperCase() + ": $" + mayor.getTotalHaber());
                 }
                 // Carga todos los movimientos en el haber
                 for (Movimiento movimiento : lstMovimientosEnHaber) {
-                    modeloListaHaber.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getHaber());
+                    modeloListaHaber.addElement("CM-" + movimiento.getId() + ": $" + movimiento.getHaber());
                 }
                 // ==============> MUESTRA ELEMENTOS VACIOS PARA QUE LOS TOTALES QUEDEN AL LADO <=================
                 // Dado que hay más elementos en el debe que en el haber, mostraremos la cantidad de diferencia con espacios en blanco para mostrar al final los totales
@@ -455,9 +458,20 @@ public class CuentaT extends javax.swing.JPanel {
                 }
             }
         } else {
-            int totalElementosEnDebe = 1;
+            // ============================= HAY QUE ESTUDIAR POR QUÉ DICE QUE HAY MÁS ELEMENTOS EN EL HABER
+            int totalElementosEnDebe = 0;
             int totalElementosEnHaber = 0;
-            totalDebe = totalDebe.add(lstMayorizaciones.getFirst().getSaldoAnterior());
+            //totalDebe = totalDebe.add(lstMayorizaciones.getFirst().getSaldoAnterior());
+            // Agrega la primera mayorización par amostrar el saldo inicial de la cuenta
+            if (esTipoActivo) {
+                totalElementosEnDebe ++;
+                modeloListaDebe.addElement("Saldo anterior: $" + lstMayorizaciones.getFirst().getSaldoAnterior());
+                totalDebe = totalDebe.add(lstMayorizaciones.getFirst().getSaldoAnterior());
+            } else {
+                totalElementosEnHaber ++;
+                modeloListaHaber.addElement("Saldo anterior: $" + lstMayorizaciones.getFirst().getSaldoAnterior());
+                totalHaber = totalHaber.add(lstMayorizaciones.getFirst().getSaldoAnterior());
+            }
 
             for (Movimiento movimiento : lstMovimientos) {
                 if (movimiento.getDebe() != null && movimiento.getDebe().compareTo(BigDecimal.ZERO) > 0) {
@@ -471,20 +485,18 @@ public class CuentaT extends javax.swing.JPanel {
                     lstMovimientosEnHaber.add(movimiento);
                 }
             }
-
-            // Agrega la primera mayorización par amostrar el saldo inicial de la cuenta
-            modeloListaDebe.addElement("Saldo inicial: $" + lstMayorizaciones.getFirst().getSaldoAnterior());
+            
             // Muestra los demás saldos
             if (totalElementosEnDebe >= totalElementosEnHaber) { // Si hay más elementos en debe que en haber (significa que el haber quedará con espacios en blanco)
                 // ==============> MUESTRA LOS MOVIMIENTOS CON VALOR EN EL DEBE <=================
                 // Carga todos los movimientos en el debe
                 for (Movimiento movimiento : lstMovimientosEnDebe) {
-                    modeloListaDebe.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getDebe());
+                    modeloListaDebe.addElement("CM-" + movimiento.getId() + ": $" + movimiento.getDebe());
                 }
                 // ==============> MUESTRA LOS MOVIMIENTOS CON VALOR EN EL HABER <=================
                 // Carga todos los movimientos en el haber
                 for (Movimiento movimiento : lstMovimientosEnHaber) {
-                    modeloListaHaber.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getHaber());
+                    modeloListaHaber.addElement("CM-" + movimiento.getId() + ": $" + movimiento.getHaber());
                 }
                 // ==============> MUESTRA ELEMENTOS VACIOS PARA QUE LOS TOTALES QUEDEN AL LADO <=================
                 // Dado que hay más elementos en el debe que en el haber, mostraremos la cantidad de diferencia con espacios en blanco para mostrar al final los totales
@@ -498,23 +510,22 @@ public class CuentaT extends javax.swing.JPanel {
                 int index = 0;
                 // Carga todos los movimientos en el debe
                 for (Movimiento movimiento : lstMovimientosEnDebe) {
-                    modeloListaDebe.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getDebe());
+                    modeloListaDebe.addElement("CM-" + movimiento.getId() + "; $" + movimiento.getDebe());
                 }
                 // ==============> MUESTRA LAS MAYORIZACIONES Y MOVIMIENTOS CON VALOR EN EL HABER <=================
                 // Carga todos los movimientos en el haber
                 for (Movimiento movimiento : lstMovimientosEnHaber) {
-                    modeloListaHaber.addElement("Movimiento: " + movimiento.getId() + " $" + movimiento.getHaber());
+                    modeloListaHaber.addElement("CM-" + movimiento.getId() + ": $" + movimiento.getHaber());
                 }
                 // ==============> MUESTRA ELEMENTOS VACIOS PARA QUE LOS TOTALES QUEDEN AL LADO <=================
                 // Dado que hay más elementos en el debe que en el haber, mostraremos la cantidad de diferencia con espacios en blanco para mostrar al final los totales
                 int diferencia = totalElementosEnHaber - totalElementosEnDebe;
-                System.out.println("Diferencia: " + diferencia);
                 for (int i = 0; i < diferencia; i++) {
                     modeloListaDebe.addElement("$0.00");
                 }
             }
         }
-        
+        ActualizarSaldo(esTipoActivo, totalDebe.doubleValue(), totalHaber.doubleValue());
         MostrarTotales(modeloListaDebe, modeloListaHaber, totalDebe, totalHaber);
     }
     
@@ -526,6 +537,14 @@ public class CuentaT extends javax.swing.JPanel {
         modeloListaHaber.addElement("Total en haber: $" + totalHaber);
         modeloListaDebe.addElement("**********************************");
         modeloListaHaber.addElement("**********************************");
+    }
+    
+    private void ActualizarSaldo(boolean esTipoActivo, double totalDebe, double totalHaber) {
+        if (esTipoActivo) {
+            this.jlblSaldo.setText( this.jlblSaldo.getText() + (totalDebe - totalHaber));
+        } else {
+            this.jlblSaldo.setText( this.jlblSaldo.getText() + (totalHaber - totalDebe));
+        }
     }
     
     private String GetMes(Date fecha) {
