@@ -23,7 +23,7 @@ import models.Movimiento;
  * @author ever_vc
  */
 public class LibroDiario extends javax.swing.JPanel {
-    
+    private Validaciones validar = new Validaciones();
     private Empresa _empresaSeleccionada = null;
 
     /**
@@ -201,7 +201,7 @@ public class LibroDiario extends javax.swing.JPanel {
             Date fechaInicio = jdcFechaInicio.getDate();
             Date fechaFin = jdcFechaFin.getDate();
 
-            if (!ValidarFechas(fechaInicio, fechaFin)) {
+            if (!validar.ValidarFechas(fechaInicio, fechaFin)) {
                 return;
             }
 
@@ -240,30 +240,6 @@ public class LibroDiario extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "PARECE QUE NO HUBO NINGUN MOVIMIENTO EN EL PERIODO DE TIEMPO QUE HA SELECCIONADO.","INFORMACION:", JOptionPane.INFORMATION_MESSAGE);
         }
-    }
-    
-    private boolean ValidarFechas(Date fechaInicio, Date fechaFin) {
-        if (fechaInicio == null) {
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [FECHA DE INCIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (fechaInicio.after(new Date())) {
-            JOptionPane.showMessageDialog(null, "EN [FECHA DE INICIO], HA SELECCIONADO UNA FECHA MAYOR A LA ACTUAL, POR FAVOR ASEGURESE DE INGRESAR LA FECHA CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (fechaFin == null) {
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [FECHA DE INCIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (fechaFin.after(new Date())) {
-            JOptionPane.showMessageDialog(null, "EN [FECHA DE FIN], HA SELECCIONADO UNA FECHA MAYOR A LA ACTUAL, POR FAVOR ASEGURESE DE INGRESAR LA FECHA CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if (fechaInicio.after(fechaFin)) {
-            JOptionPane.showMessageDialog(null, "LA [FECHA DE INICIO] NO PUEDE SER DESPUÉS DE LA [FECHA DE FIN], POR FAVOR ASEGURESE DE INGRESAR LA FECHA CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
     }
     
     private void CargarMovimientos(List<Movimiento> lstMovimientos, Asiento asiento, Date fechaDeReferencia) {

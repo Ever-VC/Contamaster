@@ -87,4 +87,28 @@ public class Validaciones {
             evt.consume();  // Si ya hay un punto, cancelar el evento
         }
     }
+    
+    public boolean ValidarFechas(Date fechaInicio, Date fechaFin) {
+        if (fechaInicio == null) {
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [FECHA DE INCIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (fechaInicio.after(new Date())) {
+            JOptionPane.showMessageDialog(null, "EN [FECHA DE INICIO], HA SELECCIONADO UNA FECHA MAYOR A LA ACTUAL, POR FAVOR ASEGURESE DE INGRESAR LA FECHA CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (fechaFin == null) {
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [FECHA DE INCIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (fechaFin.after(new Date())) {
+            JOptionPane.showMessageDialog(null, "EN [FECHA DE FIN], HA SELECCIONADO UNA FECHA MAYOR A LA ACTUAL, POR FAVOR ASEGURESE DE INGRESAR LA FECHA CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (fechaInicio.after(fechaFin)) {
+            JOptionPane.showMessageDialog(null, "LA [FECHA DE INICIO] NO PUEDE SER DESPUÉS DE LA [FECHA DE FIN], POR FAVOR ASEGURESE DE INGRESAR LA FECHA CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
 }
