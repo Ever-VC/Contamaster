@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/views/LibroDiario.java</file>
-            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/models/Mayor.java</file>
+            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/views/GestionEmpresa.java</file>
             <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/views/AsientoContable.java</file>
-            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/views/CuentaT.java</file>
             <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/views/GestionUsuario.java</file>
-            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/controllers/MovimientoControlador.java</file>
+            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/views/LibroMayor.java</file>
+            <file>file:/C:/Users/ever_vc/Documents/GitHub/Contamaster/src/views/Validaciones.java</file>
         </group>
     </open-files>
 </project-private>
