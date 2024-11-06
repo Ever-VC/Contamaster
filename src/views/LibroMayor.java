@@ -24,11 +24,12 @@ import models.Movimiento;
  * @author ever_vc
  */
 public class LibroMayor extends javax.swing.JPanel {
-    
+    private Validaciones validar = new Validaciones();
     private int _idCuenta = -1;
     private Principal _frmPrincipal;
     private Empresa _empresaSeleccionada = null;
     private Date ultimaMayorizacion = null; // Almacena la fecha de la mayorización más reciente
+    private boolean huboMayorizacion = false; // Permite validar si hubo alguna mayorización (es decir que habían movimientos pendientes de mayorizar)
 
     /**
      * Creates new form LibroMayor
@@ -229,11 +230,14 @@ public class LibroMayor extends javax.swing.JPanel {
     }//GEN-LAST:event_jtblCuentasMouseClicked
 
     private void jbtnMayorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMayorizarActionPerformed
-        // TODO add your handling code here:
-        // Validar los JDateChooser
+        // TODO add your handling code here:      
         if (_empresaSeleccionada != null) {
             Date fechaInicio = jdcFechaInicio.getDate();
             Date fechaFin = jdcFechaFin.getDate();
+
+            if (!validar.ValidarFechas(fechaInicio, fechaFin)) {
+                return;
+            }
             // Valida que la fecha de inicio para la nueva mayorización sea después de la última mayorización registrada
             if (fechaInicio.after(ultimaMayorizacion)) {
                 List<Cuenta> lstCuentas = CuentaControlador.Instancia().GetListaCuentasPorEmpresa(_empresaSeleccionada.getId());
@@ -241,8 +245,12 @@ public class LibroMayor extends javax.swing.JPanel {
                 for (Cuenta cuenta : lstCuentas) {
                     Mayorizar(cuenta, fechaInicio, fechaFin);
                 }
-                JOptionPane.showMessageDialog(null, "LAS CUENTAS SE HAN MAYORIZADO EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
-                CargarCuentas();
+                if (huboMayorizacion) {
+                    JOptionPane.showMessageDialog(null, "LAS CUENTAS SE HAN MAYORIZADO EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
+                    CargarCuentas();
+                } else {
+                   JOptionPane.showMessageDialog(null, "PARECE QUE NO HABÍAN MOVIMIENTOS PENDIENTES DE MAYORIZAR EN EN EL PERIODO DE TIEMPO QUE HA SELECCIONADO.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);     
+                }                
             } else {
                 JOptionPane.showMessageDialog(null, "LA FECHA INICIAL DE LA NUEVA MAYORIZACIÓN DEBE SER DESPUÉS DE LA ÚLTIMA MAYORIZACIÓN REGISTRADA.","ERROR:", JOptionPane.ERROR_MESSAGE);
             }
@@ -326,33 +334,17 @@ public class LibroMayor extends javax.swing.JPanel {
 
             double saldoFinal = 0.00;
 
-            // Realiza la diferencia segun el tipo de la cuenta que se está procesando
+            // Realiza la diferencia según el tipo de la cuenta que se está procesando
             String tipo = cuenta.getTipo();
-            switch(tipo) {
-                case "Activo Normal":
-                    saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
-                    break;
-                case "Pasivo":
-                    saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
-                    break;
-                case "Contra-Cuenta de Activo":
-                    saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
-                    break;
-                case "Capital":
-                    saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
-                    break;
-                case "Ingresos":
-                    saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
-                    break;
-                case "Gastos":
-                    saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
-                    break;
-                case "Retiros":
-                    saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
-                    break;
+
+            if (tipo.equals("Activo Normal") || tipo.equals("Gastos") || tipo.equals("Retiros")) {
+                saldoFinal = cuenta.getSaldo().doubleValue() + totalDebe - totalHaber;
+            } else if (tipo.equals("Pasivo") || tipo.equals("Contra-Cuenta de Activo") || tipo.equals("Capital") || tipo.equals("Ingresos")) {
+                saldoFinal = cuenta.getSaldo().doubleValue() + totalHaber - totalDebe;
             }
             RegistrarMayorizacion(cuenta, fechaInicio, fechaFin, totalDebe, totalHaber, saldoFinal);
             ActualizarCuenta(cuenta, saldoFinal);
+            huboMayorizacion = true;
         }
     }
     
