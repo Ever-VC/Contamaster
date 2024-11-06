@@ -97,9 +97,11 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        jpnlMenu.setBackground(new java.awt.Color(24, 30, 54));
+        jpnlMenu.setBackground(new java.awt.Color(0, 51, 51));
 
+        jbtnInicio.setBackground(new java.awt.Color(255, 255, 255));
         jbtnInicio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnInicio.setForeground(new java.awt.Color(0, 51, 51));
         jbtnInicio.setText("INICIO");
         jbtnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnInicio.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +110,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jbtnUsuarios.setBackground(new java.awt.Color(255, 255, 255));
         jbtnUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnUsuarios.setForeground(new java.awt.Color(0, 51, 51));
         jbtnUsuarios.setText("GESTION DE USUARIOS");
         jbtnUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -122,8 +126,11 @@ public class Principal extends javax.swing.JFrame {
         jlblNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblNombreUsuario.setText("Nombre Usuario");
 
+        jbtnEditarPerfil.setBackground(new java.awt.Color(255, 255, 255));
         jbtnEditarPerfil.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnEditarPerfil.setForeground(new java.awt.Color(0, 0, 0));
         jbtnEditarPerfil.setText("Editar perfil");
+        jbtnEditarPerfil.setBorderPainted(false);
         jbtnEditarPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnEditarPerfilActionPerformed(evt);
@@ -133,7 +140,9 @@ public class Principal extends javax.swing.JFrame {
         jimgUsuario.setBackground(new java.awt.Color(51, 51, 255));
         jimgUsuario.setOpaque(true);
 
+        jbtnEmpresas.setBackground(new java.awt.Color(255, 255, 255));
         jbtnEmpresas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnEmpresas.setForeground(new java.awt.Color(0, 51, 51));
         jbtnEmpresas.setText("GESTION DE EMPRESAS");
         jbtnEmpresas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnEmpresas.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +151,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jbtnAsientos.setBackground(new java.awt.Color(255, 255, 255));
         jbtnAsientos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnAsientos.setForeground(new java.awt.Color(0, 51, 51));
         jbtnAsientos.setText("ASIENTO CONTABLE");
         jbtnAsientos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnAsientos.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +162,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jbtnLibroDiario.setBackground(new java.awt.Color(255, 255, 255));
         jbtnLibroDiario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnLibroDiario.setForeground(new java.awt.Color(0, 51, 51));
         jbtnLibroDiario.setText("LIBRO DIARIO");
         jbtnLibroDiario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnLibroDiario.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +173,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jbtnLibroMayor.setBackground(new java.awt.Color(255, 255, 255));
         jbtnLibroMayor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnLibroMayor.setForeground(new java.awt.Color(0, 51, 51));
         jbtnLibroMayor.setText("LIBRO MAYOR");
         jbtnLibroMayor.setToolTipText("");
         jbtnLibroMayor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -170,7 +185,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jbtnCerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
         jbtnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnCerrarSesion.setForeground(new java.awt.Color(0, 51, 51));
         jbtnCerrarSesion.setText("CERRAR SESION");
         jbtnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
