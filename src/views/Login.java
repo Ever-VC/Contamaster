@@ -304,10 +304,6 @@ public class Login extends javax.swing.JFrame {
             jtxtUsername.setText("");
             jtxtUsername.setForeground(Color.gray);
         }
-        if (String.valueOf(jtxtPassword.getPassword()).isEmpty()) {
-            jtxtPassword.setText("CONTRASEÑA");
-            jtxtPassword.setForeground(new java.awt.Color(204, 204, 204));
-        }
     }//GEN-LAST:event_jtxtUsernameFocusGained
 
     private void jtxtUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtUsernameFocusLost
@@ -324,10 +320,6 @@ public class Login extends javax.swing.JFrame {
             jtxtPassword.setText("");
             jtxtPassword.setForeground(Color.gray);
         }
-        if (jtxtUsername.getText().isEmpty()) {
-            jtxtUsername.setText("USUARIO");
-            jtxtUsername.setForeground(new java.awt.Color(204, 204, 204));
-        } 
     }//GEN-LAST:event_jtxtPasswordFocusGained
 
     private void jtxtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPasswordFocusLost
@@ -420,14 +412,14 @@ public class Login extends javax.swing.JFrame {
                     UsuarioCache.Username = usuarioLogin.getUsername();
                     UsuarioCache.RolUsuario = usuarioLogin.getIdRolFk().getNombre();
                     
-                    jtxtUsername.setText("");
-                    jtxtPassword.setText("");
+                    jtxtUsername.setText("USUARIO");
+                    jtxtPassword.setText("CONTRASEÑA");
                     
                     Principal frmPrincipal = new Principal();
                     frmPrincipal.SetFormularioLogin(this);
                     this.setVisible(false);
                     frmPrincipal.setVisible(true);
-
+                    jlblTitulo.requestFocusInWindow();
                     //JOptionPane.showMessageDialog(null, "BIENVENIDO, EL ID DE USUARIO ES: " + idUsuarioLogin, "LOGIN EXITOSO:", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
