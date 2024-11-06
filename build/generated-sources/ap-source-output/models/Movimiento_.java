@@ -9,7 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import models.Cuenta;
 import models.DetalleAsiento;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-11-06T11:38:37", comments="EclipseLink-2.7.12.v20230209-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-11-06T15:42:32", comments="EclipseLink-2.7.12.v20230209-rNA")
 @StaticMetamodel(Movimiento.class)
 public class Movimiento_ { 
 
