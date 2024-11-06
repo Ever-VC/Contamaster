@@ -26,6 +26,7 @@ import models.Movimiento;
 public class CuentaT extends javax.swing.JPanel {
     
     private Cuenta _cuenta = null;
+    private Validaciones validar = new Validaciones();
 
     /**
      * Creates new form CuentaT
@@ -36,7 +37,7 @@ public class CuentaT extends javax.swing.JPanel {
         this.jlblNombreYTipoCuenta.setText(cuenta.getNombre().toUpperCase() + " - " + cuenta.getTipo().toUpperCase());
         this.jlblSaldo.setText( this.jlblSaldo.getText() + cuenta.getSaldo());
         //CargarMovimientos();
-        CargarSaldos(obtenerPrimerDiaDelMes(new Date()), new Date()); // Hay que calcular la fecha de inicio de este mes
+        CargarSaldos(obtenerPrimerDiaDelMes(new Date()), new Date(), true); // Hay que calcular la fecha de inicio de este mes
     }
 
     /**
@@ -230,7 +231,6 @@ public class CuentaT extends javax.swing.JPanel {
 
     private void jbtnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCargarActionPerformed
         // TODO add your handling code here:
-        // Validacines de mes y año de inicio y fin
         int mesInicio = -1;
         int annioInicio = -1;
         mesInicio = jmcInicio.getMonth();
@@ -238,21 +238,29 @@ public class CuentaT extends javax.swing.JPanel {
         if (mesInicio == -1 || annioInicio == -1) {
             JOptionPane.showMessageDialog(null, "ASEGURATE DE HABER SELECCIONADO CORRECTAMENTE EL MES Y AÑO DE INICIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         int mesFin = -1;
         int annioFin = -1;
-        
+
         mesFin = jmcFin.getMonth();
         annioFin = jacFin.getYear();
-        
+
         if (mesFin == -1 || annioFin == -1) {
             JOptionPane.showMessageDialog(null, "ASEGURATE DE HABER SELECCIONADO CORRECTAMENTE EL MES Y AÑO DE FIN.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         Date fechaInicio = CalcularFecha(mesInicio, annioInicio, false);
         Date fechaFin = CalcularFecha(mesFin, annioFin, true);
         
-        CargarSaldos(fechaInicio, fechaFin);
+        if (GetMes(fechaFin).equals(GetMes(new Date()))) { // Verifica si la fecha fin es igual a la fecha actual (unicamente compara el nombre del mes, ya que eso no debe ser posble)
+            fechaFin = new Date(); // Si es así, establace la fecha fin como la fecha actual
+        }
+
+        if (!validar.ValidarFechas(fechaInicio, fechaFin)) {
+            return;
+        }
+
+        CargarSaldos(fechaInicio, fechaFin, false);
     }//GEN-LAST:event_jbtnCargarActionPerformed
 
     private Date obtenerPrimerDiaDelMes(Date fecha) {
@@ -283,7 +291,7 @@ public class CuentaT extends javax.swing.JPanel {
         return Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
     
-    private void CargarSaldos(Date fechaInicio, Date fechaFin) {
+    private void CargarSaldos(Date fechaInicio, Date fechaFin, boolean inicioApp) {
         // Obtiene el ultimo registro de mayorización de la cuenta (es decir el saldo que tiene)
         List<Mayor> lstMayorizaciones = MayorControlador.Instancia().GetListaRegistrosAlMayorPorCuentaFechaInicioYFin(fechaInicio, fechaFin, _cuenta);
         
@@ -312,28 +320,21 @@ public class CuentaT extends javax.swing.JPanel {
                 
             }
         } else { // No se han realizado mayorizaciones, por lo cual solo contiene el saldo inicial de la cuenta
+            if (!inicioApp) {
+                JOptionPane.showMessageDialog(null, "PARECE QUE NO SE HAN REALIZADO MAYORIZACIONES EN EL PERIODO DE TIEMPO QUE HA SELECCIONADO.","RESPUESTA A LA SOLICITUD:", JOptionPane.INFORMATION_MESSAGE);     
+            }
             if (tipoCuenta.equals("Activo Normal") || tipoCuenta.equals("Gastos") || tipoCuenta.equals("Retiros")) {
                 modeloListaDebe.addElement("Saldo inicial: $" + _cuenta.getSaldo());
                 modeloListaHaber.addElement("$0.00");
                 // Muestra los totales
-                modeloListaDebe.addElement("**********************************");
-                modeloListaHaber.addElement("**********************************");
-                modeloListaDebe.addElement("Total en debe: $" + _cuenta.getSaldo());
-                modeloListaHaber.addElement("Total en haber: $0.00");
-                modeloListaDebe.addElement("************************************");
-                modeloListaHaber.addElement("************************************");
+                MostrarTotales(modeloListaDebe, modeloListaHaber, _cuenta.getSaldo(), BigDecimal.ZERO);
             }
             // Tipo Pasivo
             if (tipoCuenta.equals("Pasivo") || tipoCuenta.equals("Contra-Cuenta de Activo") || tipoCuenta.equals("Capital") || tipoCuenta.equals("Ingresos")) {
                 modeloListaHaber.addElement("Saldo inicial: $" + _cuenta.getSaldo());
-                modeloListaDebe.addElement("Total en haber: $0.00");
-                // Muestra los totales
-                modeloListaDebe.addElement("************************************");
-                modeloListaHaber.addElement("************************************");
-                modeloListaHaber.addElement("Total en debe: $" + _cuenta.getSaldo());
                 modeloListaDebe.addElement("$0.00");
-                modeloListaDebe.addElement("************************************");
-                modeloListaHaber.addElement("************************************");
+                // Muestra los totales
+                MostrarTotales(modeloListaDebe, modeloListaHaber, BigDecimal.ZERO, _cuenta.getSaldo());
             }
         }
     }
@@ -512,8 +513,12 @@ public class CuentaT extends javax.swing.JPanel {
                     modeloListaDebe.addElement("$0.00");
                 }
             }
-        }        
+        }
         
+        MostrarTotales(modeloListaDebe, modeloListaHaber, totalDebe, totalHaber);
+    }
+    
+    private void MostrarTotales(DefaultListModel modeloListaDebe, DefaultListModel modeloListaHaber, BigDecimal totalDebe, BigDecimal totalHaber) {
         // Muestra los totales
         modeloListaDebe.addElement("**********************************");
         modeloListaHaber.addElement("**********************************");
