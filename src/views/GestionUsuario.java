@@ -8,11 +8,14 @@ import controllers.RolControlador;
 import controllers.SessionLogControlador;
 import controllers.UsuarioControlador;
 import java.awt.Color;
+import java.awt.Font;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import models.Rol;
@@ -37,13 +40,25 @@ public class GestionUsuario extends javax.swing.JPanel {
         CargarUsuarios();
         CargarRoles();
         
-        // Diseño de la tabla
-        //JTableHeader jtblEncabezado = jtblUsuarios.getTableHeader();
-        //jtblEncabezado.setBackground(Color.red);//new java.awt.Color(0,51,51)
-        //jtblEncabezado.setForeground(Color.white);
-        jtblUsuarios.setOpaque(false);
-        jtblUsuarios.getTableHeader().setBackground(Color.red);
-        jtblUsuarios.getTableHeader().setBackground(Color.white);
+        // Diseño de la tabla => Crea un renderer para personalizar el encabezado
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(new java.awt.Color(0,51,51)); // Cambia el color de fondo del encabezado al del diseño principal new java.awt.Color(0,51,51)
+        headerRenderer.setForeground(Color.WHITE); // Cambia el color de la fuente del encabezado
+        //headerRenderer.setFont(headerRenderer.getFont().deriveFont(Font.BOLD)); // Aplica la fuente en negrita
+        //Font fuenteEncabezado = new Font("Geoe UI", Font.ITALIC, 8);
+        //headerRenderer.setFont(fuenteEncabezado);
+
+        // Asigna el renderer a cada columna del encabezado
+        for (int i = 0; i < jtblUsuarios.getColumnModel().getColumnCount(); i++) {
+            jtblUsuarios.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+        
+        // Cambia el fondo de la tabla
+        jtblUsuarios.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        // Cambia el fondo del área vacía de la tabla
+        jtblUsuarios.setFillsViewportHeight(true);
+        jtblUsuarios.getParent().setBackground(Color.WHITE); // Fondo del viewport
+
     }
     
     /**
@@ -125,9 +140,8 @@ public class GestionUsuario extends javax.swing.JPanel {
             }
         });
         jtblUsuarios.setGridColor(new java.awt.Color(0, 51, 51));
-        jtblUsuarios.setOpaque(false);
         jtblUsuarios.setRowHeight(25);
-        jtblUsuarios.setSelectionBackground(new java.awt.Color(0, 51, 51));
+        jtblUsuarios.setSelectionBackground(new java.awt.Color(26, 173, 220));
         jtblUsuarios.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jtblUsuarios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtblUsuarios.setShowGrid(true);
@@ -179,7 +193,15 @@ public class GestionUsuario extends javax.swing.JPanel {
         jtxtNombres.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtNombres.setForeground(new java.awt.Color(0, 51, 51));
         jtxtNombres.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtNombres.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 51), 1, true));
+        jtxtNombres.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtNombres.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtNombresFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtNombresFocusLost(evt);
+            }
+        });
         jtxtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtNombresKeyTyped(evt);
@@ -197,7 +219,15 @@ public class GestionUsuario extends javax.swing.JPanel {
         jtxtApellidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtApellidos.setForeground(new java.awt.Color(0, 51, 51));
         jtxtApellidos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtApellidos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 51), 1, true));
+        jtxtApellidos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtApellidos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtApellidosFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtApellidosFocusLost(evt);
+            }
+        });
         jtxtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtApellidosKeyTyped(evt);
@@ -230,7 +260,15 @@ public class GestionUsuario extends javax.swing.JPanel {
         jtxtDireccion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtDireccion.setForeground(new java.awt.Color(0, 51, 51));
         jtxtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtDireccion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 51), 1, true));
+        jtxtDireccion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtDireccionFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtDireccionFocusLost(evt);
+            }
+        });
 
         jlblPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlblPassword.setForeground(new java.awt.Color(0, 51, 51));
@@ -239,7 +277,15 @@ public class GestionUsuario extends javax.swing.JPanel {
         jtxtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtEmail.setForeground(new java.awt.Color(0, 51, 51));
         jtxtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 51), 1, true));
+        jtxtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtEmailFocusLost(evt);
+            }
+        });
         jtxtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtEmailKeyTyped(evt);
@@ -253,7 +299,15 @@ public class GestionUsuario extends javax.swing.JPanel {
         jtxtUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtUsername.setForeground(new java.awt.Color(0, 51, 51));
         jtxtUsername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 51), 1, true));
+        jtxtUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtUsernameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtUsernameFocusLost(evt);
+            }
+        });
         jtxtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtUsernameKeyTyped(evt);
@@ -263,7 +317,15 @@ public class GestionUsuario extends javax.swing.JPanel {
         jtxtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtPassword.setForeground(new java.awt.Color(0, 51, 51));
         jtxtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtPassword.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 51), 1, true));
+        jtxtPassword.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtPasswordFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtPasswordFocusLost(evt);
+            }
+        });
         jtxtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtPasswordKeyTyped(evt);
@@ -339,7 +401,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         jpnlFormLayout.setVerticalGroup(
             jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlFormLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jlblNombres)
@@ -354,7 +416,7 @@ public class GestionUsuario extends javax.swing.JPanel {
                     .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jtxtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jtxtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jcmbSexo))
+                    .addComponent(jcmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblDireccion)
@@ -362,9 +424,9 @@ public class GestionUsuario extends javax.swing.JPanel {
                     .addComponent(jlblFechaNacimiento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtxtDireccion)
-                    .addComponent(jtxtEmail))
+                    .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblUsername)
@@ -385,7 +447,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         jpnlBotones.setBackground(new java.awt.Color(255, 255, 255));
         jpnlBotones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jbtnGuardar.setBackground(new java.awt.Color(0, 51, 51));
+        jbtnGuardar.setBackground(new java.awt.Color(0, 102, 0));
         jbtnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnGuardar.setText("GUARDAR");
@@ -396,7 +458,7 @@ public class GestionUsuario extends javax.swing.JPanel {
             }
         });
 
-        jbtnEliminar.setBackground(new java.awt.Color(0, 51, 51));
+        jbtnEliminar.setBackground(new java.awt.Color(153, 0, 0));
         jbtnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnEliminar.setText("ELIMINAR");
@@ -471,8 +533,8 @@ public class GestionUsuario extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jpnlForm, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addComponent(jpnlForm, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
                 .addComponent(jpnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -515,23 +577,29 @@ public class GestionUsuario extends javax.swing.JPanel {
         
         if (_idUsuarioSeleccionado != -1) { // ACTUALIZAR UN USUARIO SELECCIONADO DESDE LA TABLA
             Usuario usuarioActualizado = UsuarioControlador.Instancia().GetUsuarioPorId(_idUsuarioSeleccionado);// Crea e instancia el nuevo objeto
-           // Insertando la información del nuevo usuario
-           usuarioActualizado.setNombres(nombres);
-           usuarioActualizado.setApellidos(apellidos);
-           usuarioActualizado.setSexo(sexo);
-           usuarioActualizado.setFechaNacimiento(fechaNacimiento);
-           usuarioActualizado.setDireccion(direccion);
-           usuarioActualizado.setEmail(email);
-           usuarioActualizado.setUsername(username);
-           usuarioActualizado.setPassword(password);
-           usuarioActualizado.setIdRolFk(rolUsuario);
-           
-           UsuarioControlador.Instancia().ActualizarUsuario(usuarioActualizado);// Manda a crear el usuario actualizado al controlador
-           JOptionPane.showMessageDialog(null, "EL USUARIO HA SIDO ACTUALIZADO EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
+            // Insertando la información del nuevo usuario
+            usuarioActualizado.setNombres(nombres);
+            usuarioActualizado.setApellidos(apellidos);
+            usuarioActualizado.setSexo(sexo);
+            usuarioActualizado.setFechaNacimiento(fechaNacimiento);
+            usuarioActualizado.setDireccion(direccion);
+            usuarioActualizado.setEmail(email);
+            usuarioActualizado.setUsername(username);
+            if (password.equals("")) {
+                usuarioActualizado.setPassword(null);
+            } else {
+                usuarioActualizado.setPassword(password);
+            }
+
+            usuarioActualizado.setIdRolFk(rolUsuario);
+
+            UsuarioControlador.Instancia().ActualizarUsuario(usuarioActualizado);// Manda a crear el usuario actualizado al controlador
+            JOptionPane.showMessageDialog(null, "EL USUARIO HA SIDO ACTUALIZADO EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
             
         } else { // GUARDAR NUEVO USUARIO
             
             if ("".equals(password)) { // Si es un usuario nuevo, entonces sí o sí debe ingresar una contraseña
+                jtxtPassword.setBorder(BorderFactory.createLineBorder(Color.red, 1, true));
                 JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [CONTRASEÑA], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -587,14 +655,20 @@ public class GestionUsuario extends javax.swing.JPanel {
 
     private void jtblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblUsuariosMouseClicked
         // TODO add your handling code here:
-        _idUsuarioSeleccionado = Integer.parseInt(jtblUsuarios.getValueAt(jtblUsuarios.getSelectedRow(), 0).toString());
-        CargarDatosDeUsuarioSeleccionado();
+        int selectedRow = jtblUsuarios.getSelectedRow();
+    
+        // Verifica que una fila válida esté seleccionada (Es decir que no haya dado click en un espacio vacío)
+        if (selectedRow >= 0) {
+            _idUsuarioSeleccionado = Integer.parseInt(jtblUsuarios.getValueAt(selectedRow, 0).toString());        
+            CargarDatosDeUsuarioSeleccionado();
+        }
     }//GEN-LAST:event_jtblUsuariosMouseClicked
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        _idUsuarioSeleccionado = -1;
-        jtblUsuarios.clearSelection();
+        if (_idUsuarioSeleccionado != -1) {
+            LimpiarTodo();
+        }
     }//GEN-LAST:event_formMouseClicked
 
     private void jtxtNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtNombresKeyTyped
@@ -621,13 +695,83 @@ public class GestionUsuario extends javax.swing.JPanel {
         // TODO add your handling code here:
         validar.ValidarTodoMenosEspacios(evt);
     }//GEN-LAST:event_jtxtPasswordKeyTyped
+
+    private void jtxtNombresFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombresFocusGained
+        // TODO add your handling code here:
+        CambiarColor(jtxtNombres, true);
+    }//GEN-LAST:event_jtxtNombresFocusGained
+
+    private void jtxtNombresFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombresFocusLost
+        // TODO add your handling code here:
+        CambiarColor(jtxtNombres, false);
+    }//GEN-LAST:event_jtxtNombresFocusLost
+
+    private void jtxtApellidosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtApellidosFocusGained
+        // TODO add your handling code here:
+        CambiarColor(jtxtApellidos, true);
+    }//GEN-LAST:event_jtxtApellidosFocusGained
+
+    private void jtxtApellidosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtApellidosFocusLost
+        // TODO add your handling code here:
+        CambiarColor(jtxtApellidos, false);
+    }//GEN-LAST:event_jtxtApellidosFocusLost
+
+    private void jtxtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDireccionFocusGained
+        // TODO add your handling code here:
+        CambiarColor(jtxtDireccion, true);
+    }//GEN-LAST:event_jtxtDireccionFocusGained
+
+    private void jtxtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDireccionFocusLost
+        // TODO add your handling code here:
+        CambiarColor(jtxtDireccion, false);
+    }//GEN-LAST:event_jtxtDireccionFocusLost
+
+    private void jtxtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtEmailFocusGained
+        // TODO add your handling code here:
+        CambiarColor(jtxtEmail, true);
+    }//GEN-LAST:event_jtxtEmailFocusGained
+
+    private void jtxtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtEmailFocusLost
+        // TODO add your handling code here:
+        CambiarColor(jtxtEmail, false);
+    }//GEN-LAST:event_jtxtEmailFocusLost
+
+    private void jtxtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtUsernameFocusGained
+        // TODO add your handling code here:
+        CambiarColor(jtxtUsername, true);
+    }//GEN-LAST:event_jtxtUsernameFocusGained
+
+    private void jtxtUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtUsernameFocusLost
+        // TODO add your handling code here:
+        CambiarColor(jtxtUsername, false);
+    }//GEN-LAST:event_jtxtUsernameFocusLost
+
+    private void jtxtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPasswordFocusGained
+        // TODO add your handling code here:
+        CambiarColor(jtxtPassword, true);
+    }//GEN-LAST:event_jtxtPasswordFocusGained
+
+    private void jtxtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPasswordFocusLost
+        // TODO add your handling code here:
+        CambiarColor(jtxtPassword, false);
+    }//GEN-LAST:event_jtxtPasswordFocusLost
+    
+    private void CambiarColor(javax.swing.JTextField jtxt, boolean esFoco) {
+        if (esFoco) {
+            jtxt.setBorder(BorderFactory.createLineBorder(new Color(0, 153, 255), 1, true));
+        } else {
+            jtxt.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
+        }        
+    }
     
     private boolean ValidarCamposObligatorios(String nombres, String apellidos, String sexo, String username, String rol) {
         if ("".equals(nombres)) {
+            jtxtNombres.setBorder(BorderFactory.createLineBorder(Color.red, 1, true));
             JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [NOMBRES], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if ("".equals(apellidos)) {
+            jtxtApellidos.setBorder(BorderFactory.createLineBorder(Color.red, 1, true));
             JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [APELLIDOS], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -636,6 +780,7 @@ public class GestionUsuario extends javax.swing.JPanel {
             return false;
         }
         if ("".equals(username)) {
+            jtxtUsername.setBorder(BorderFactory.createLineBorder(Color.red, 1, true));
             JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [USUARIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -719,6 +864,16 @@ public class GestionUsuario extends javax.swing.JPanel {
         jcmbRol.setSelectedIndex(0);
         _idUsuarioSeleccionado = -1;
         jtblUsuarios.clearSelection();
+        JtxtFinFoco();
+    }
+    
+    private void JtxtFinFoco() {
+        jtxtApellidos.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
+        jtxtDireccion.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
+        jtxtEmail.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
+        jtxtUsername.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
+        jtxtPassword.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
+        jtxtNombres.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
