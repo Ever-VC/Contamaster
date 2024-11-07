@@ -553,7 +553,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         String username = jtxtUsername.getText();
         String password = jtxtPassword.getText();
         // Valida que todos los campos obligatorios tengan datos
-        if (!ValidarCamposObligatorios(nombres, apellidos, sexo, username, jcmbRol.getSelectedItem().toString())) {
+        if (!ValidarCamposObligatorios(nombres, apellidos, sexo, username, password, jcmbRol.getSelectedItem().toString())) {
             return;
         }
         
@@ -595,14 +595,7 @@ public class GestionUsuario extends javax.swing.JPanel {
 
             UsuarioControlador.Instancia().ActualizarUsuario(usuarioActualizado);// Manda a crear el usuario actualizado al controlador
             JOptionPane.showMessageDialog(null, "EL USUARIO HA SIDO ACTUALIZADO EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
-            
         } else { // GUARDAR NUEVO USUARIO
-            
-            if ("".equals(password)) { // Si es un usuario nuevo, entonces sí o sí debe ingresar una contraseña
-                jtxtPassword.setBorder(BorderFactory.createLineBorder(Color.red, 1, true));
-                JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [CONTRASEÑA], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
            Usuario nuevoUsuario = new Usuario();// Crea e instancia el nuevo objeto
            // Insertando la información del nuevo usuario
            nuevoUsuario.setNombres(nombres);
@@ -758,31 +751,53 @@ public class GestionUsuario extends javax.swing.JPanel {
     
     
     
-    private boolean ValidarCamposObligatorios(String nombres, String apellidos, String sexo, String username, String rol) {
+    private boolean ValidarCamposObligatorios(String nombres, String apellidos, String sexo, String username, String password, String rol) {
+        boolean sonValidos = true;
+        int cantidadCamposInvalidos = 0;
+        String camposNoValidos = "";
         if ("".equals(nombres)) {
             validar.JtxtErrorColor(jtxtNombres);
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [NOMBRES], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            cantidadCamposInvalidos ++;
+            camposNoValidos += "\n~ NOMBRES";
+            sonValidos = false;
         }
         if ("".equals(apellidos)) {
             validar.JtxtErrorColor(jtxtApellidos);
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [APELLIDOS], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            cantidadCamposInvalidos ++;
+            camposNoValidos += "\n~ APELLIDOS";
+            sonValidos = false;
         }
         if ("".equals(sexo) || "-- SELECCIONAR SEXO --".equals(sexo)) {
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [SEXO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            cantidadCamposInvalidos ++;
+            camposNoValidos += "\n~ SEXO";
+            sonValidos = false;
         }
         if ("".equals(username)) {
             validar.JtxtErrorColor(jtxtUsername);
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [USUARIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            cantidadCamposInvalidos ++;
+            camposNoValidos += "\n~ USUARIO";
+            sonValidos = false;
+        }
+        if (_idUsuarioSeleccionado == -1) {
+            if ("".equals(password)) { // Si es un usuario nuevo, entonces sí o sí debe ingresar una contraseña
+                validar.JtxtErrorColor(jtxtPassword);
+                cantidadCamposInvalidos ++;
+                camposNoValidos += "\n~ CONTRASEÑA";
+                sonValidos = false;
+            }
         }
         if ("".equals(rol) || "-- SELECCIONAR ROL --".equals(rol)) {
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [ROL DEL USUARIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            cantidadCamposInvalidos ++;
+            camposNoValidos += "\n~ ROL DE USUARIO";
+            sonValidos = false;
         }
-        return true; // Retorna verdadero únicamente cuando todos los campos tienen datos
+        
+        if (cantidadCamposInvalidos > 1) {
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR LOS CAMPOS: " + camposNoValidos + "\nPOR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE: " + camposNoValidos + "\nPOR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+        }
+        return sonValidos; // Retorna verdadero únicamente cuando todos los campos tienen datos
     }
     
     private void CargarUsuarios() {
