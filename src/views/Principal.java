@@ -104,6 +104,7 @@ public class Principal extends javax.swing.JFrame {
         jpnlContenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
 
         jpnlMenu.setBackground(new java.awt.Color(0, 51, 51));
         jpnlMenu.setMinimumSize(new java.awt.Dimension(203, 0));
