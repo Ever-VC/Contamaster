@@ -203,10 +203,7 @@ public class AsientoContable extends javax.swing.JPanel {
         jtblMovimientos.setForeground(new java.awt.Color(0, 51, 51));
         jtblMovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "CODIGO", "FECHA", "DESCRIPCION", "DEBE", "HABER"

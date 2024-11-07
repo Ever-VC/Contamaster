@@ -81,6 +81,11 @@ public class LibroDiario extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1051, 835));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jlblTitulo.setForeground(new java.awt.Color(0, 51, 51));
@@ -111,10 +116,7 @@ public class LibroDiario extends javax.swing.JPanel {
         jtblLibroDiario.setForeground(new java.awt.Color(0, 51, 51));
         jtblLibroDiario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "FECHA", "CODIGO", "DESCRIPCION", "DEBE", "HABER"
@@ -132,6 +134,7 @@ public class LibroDiario extends javax.swing.JPanel {
         jtblLibroDiario.setSelectionBackground(new java.awt.Color(26, 173, 220));
         jtblLibroDiario.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jtblLibroDiario.setShowGrid(true);
+        jtblLibroDiario.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jtblLibroDiario);
         if (jtblLibroDiario.getColumnModel().getColumnCount() > 0) {
             jtblLibroDiario.getColumnModel().getColumn(0).setResizable(false);
@@ -314,6 +317,11 @@ public class LibroDiario extends javax.swing.JPanel {
         jdcFechaInicio.setDate(null);
         jdcFechaFin.setDate(null);
     }//GEN-LAST:event_jbtnlLimpiarActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        jtblLibroDiario.clearSelection();
+    }//GEN-LAST:event_formMouseClicked
     
     private void CargarLibroDiario(Date fechaInicio, Date fechaFin) {
         List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorEmpresaYFechaInicioYFin(fechaInicio, fechaFin, _empresaSeleccionada);
@@ -356,7 +364,7 @@ public class LibroDiario extends javax.swing.JPanel {
                 fechaFormateada = formatoCorto.format(fecha);
             }
             modelo.addRow(new Object[]{fechaFormateada, movimiento.getIdCuentaFk().getCodigo(), movimiento.getDescripcion(), movimiento.getDebe(), movimiento.getHaber()});
-
+            
             if (iterador == (lstMovimientos.size() - 1)) {
                 modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
             }
