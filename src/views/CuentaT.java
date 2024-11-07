@@ -74,29 +74,33 @@ public class CuentaT extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jlblTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        jlblTitulo.setForeground(new java.awt.Color(0, 51, 51));
         jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblTitulo.setText("ESQUEMA DE MAYOR");
 
         jlblNombreYTipoCuenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jlblNombreYTipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
+        jlblNombreYTipoCuenta.setForeground(new java.awt.Color(0, 51, 51));
         jlblNombreYTipoCuenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblNombreYTipoCuenta.setText("NOMBRE DE LA CUENTA - TIPO DE CUENTA");
 
         jlblSaldo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jlblSaldo.setForeground(new java.awt.Color(0, 0, 0));
+        jlblSaldo.setForeground(new java.awt.Color(0, 51, 51));
         jlblSaldo.setText("SALDO: $");
 
-        jlblMesInicio.setForeground(new java.awt.Color(0, 0, 0));
+        jlblMesInicio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblMesInicio.setForeground(new java.awt.Color(0, 51, 51));
         jlblMesInicio.setText("Desde");
 
-        jlblAnnioInicio.setForeground(new java.awt.Color(0, 0, 0));
+        jlblAnnioInicio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblAnnioInicio.setForeground(new java.awt.Color(0, 51, 51));
         jlblAnnioInicio.setText("del");
 
-        jlblMesFin.setForeground(new java.awt.Color(0, 0, 0));
+        jlblMesFin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblMesFin.setForeground(new java.awt.Color(0, 51, 51));
         jlblMesFin.setText("Hasta");
 
-        jlblAnnioFin.setForeground(new java.awt.Color(0, 0, 0));
+        jlblAnnioFin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblAnnioFin.setForeground(new java.awt.Color(0, 51, 51));
         jlblAnnioFin.setText("del");
 
         jbtnCargar.setText("CARGAR DATOS");
@@ -108,17 +112,19 @@ public class CuentaT extends javax.swing.JPanel {
         });
 
         jlblHaber.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jlblHaber.setForeground(new java.awt.Color(0, 0, 0));
+        jlblHaber.setForeground(new java.awt.Color(0, 51, 51));
         jlblHaber.setText("HABER");
 
         jlblDebe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jlblDebe.setForeground(new java.awt.Color(0, 0, 0));
+        jlblDebe.setForeground(new java.awt.Color(0, 51, 51));
         jlblDebe.setText("DEBE");
 
         jpnlDebeYHaber.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jlstDebe.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jScrollPane2.setViewportView(jlstDebe);
 
+        jlstHaber.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jScrollPane3.setViewportView(jlstHaber);
 
         javax.swing.GroupLayout jpnlDebeYHaberLayout = new javax.swing.GroupLayout(jpnlDebeYHaber);
@@ -126,9 +132,9 @@ public class CuentaT extends javax.swing.JPanel {
         jpnlDebeYHaberLayout.setHorizontalGroup(
             jpnlDebeYHaberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlDebeYHaberLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jpnlDebeYHaberLayout.setVerticalGroup(
             jpnlDebeYHaberLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,21 +149,22 @@ public class CuentaT extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jlblDebe)
-                .addGap(153, 153, 153)
+                .addGap(188, 188, 188)
                 .addComponent(jlblHaber)
-                .addGap(442, 442, 442))
+                .addGap(425, 425, 425))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(228, 228, 228)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(228, 228, 228)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jlblTitulo)
+                            .addGap(104, 104, 104))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jlblMesInicio)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jlblTitulo)
-                                    .addGap(104, 104, 104))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jlblMesInicio)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jpnlDebeYHaber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(jmcInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,28 +180,24 @@ public class CuentaT extends javax.swing.JPanel {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jlblAnnioFin)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jacFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(jacFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jlblSaldo))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(11, 11, 11)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(11, 11, 11)
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(40, 40, 40))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jlblNombreYTipoCuenta)
-                                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(58, 58, 58)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(306, 306, 306)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlblSaldo)
-                            .addComponent(jpnlDebeYHaber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(267, Short.MAX_VALUE))
+                                .addComponent(jlblNombreYTipoCuenta)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(58, 58, 58))))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(40, 40, 40)
                 .addComponent(jlblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,7 +228,7 @@ public class CuentaT extends javax.swing.JPanel {
                 .addComponent(jpnlDebeYHaber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlblSaldo)
-                .addGap(0, 294, Short.MAX_VALUE))
+                .addGap(0, 300, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

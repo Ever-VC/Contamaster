@@ -168,7 +168,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         }
 
         jpnlForm.setBackground(new java.awt.Color(255, 255, 255));
-        jpnlForm.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jpnlForm.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jpnlForm.setPreferredSize(new java.awt.Dimension(849, 102));
 
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
@@ -447,7 +447,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         jpnlBotones.setBackground(new java.awt.Color(255, 255, 255));
         jpnlBotones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jbtnGuardar.setBackground(new java.awt.Color(0, 102, 0));
+        jbtnGuardar.setBackground(new java.awt.Color(0, 51, 0));
         jbtnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnGuardar.setText("GUARDAR");
@@ -458,7 +458,7 @@ public class GestionUsuario extends javax.swing.JPanel {
             }
         });
 
-        jbtnEliminar.setBackground(new java.awt.Color(153, 0, 0));
+        jbtnEliminar.setBackground(new java.awt.Color(51, 0, 0));
         jbtnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnEliminar.setText("ELIMINAR");
@@ -791,12 +791,14 @@ public class GestionUsuario extends javax.swing.JPanel {
             camposNoValidos += "\n~ ROL DE USUARIO";
             sonValidos = false;
         }
-        
-        if (cantidadCamposInvalidos > 1) {
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR LOS CAMPOS: " + camposNoValidos + "\nPOR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE: " + camposNoValidos + "\nPOR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+        if (!sonValidos) {
+            if (cantidadCamposInvalidos > 1) {
+                JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR LOS CAMPOS: " + camposNoValidos + "\nPOR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE: " + camposNoValidos + "\nPOR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            }
         }
+        
         return sonValidos; // Retorna verdadero únicamente cuando todos los campos tienen datos
     }
     

@@ -5,8 +5,10 @@
 package views;
 
 import controllers.EmpresaControlador;
+import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import models.Empresa;
 
@@ -26,6 +28,21 @@ public class GestionEmpresa extends javax.swing.JPanel {
     public GestionEmpresa() {
         initComponents();
         CargarEmpresas();// Carga las empresas en la tabla
+        // Diseño de la tabla => Crea un renderer para personalizar el encabezado
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(new java.awt.Color(0,51,51)); // Cambia el color de fondo del encabezado al del diseño principal new java.awt.Color(0,51,51)
+        headerRenderer.setForeground(Color.WHITE); // Cambia el color de la fuente del encabezado
+
+        // Asigna el renderer a cada columna del encabezado
+        for (int i = 0; i < jtblEmpresas.getColumnModel().getColumnCount(); i++) {
+            jtblEmpresas.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+        
+        // Cambia el fondo de la tabla
+        jtblEmpresas.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        // Cambia el fondo del área vacía de la tabla
+        jtblEmpresas.setFillsViewportHeight(true);
+        jtblEmpresas.getParent().setBackground(Color.WHITE); // Fondo del viewport
     }
 
     /**
@@ -39,20 +56,25 @@ public class GestionEmpresa extends javax.swing.JPanel {
 
         jlblTitulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jtxtNombre = new javax.swing.JTextField();
-        jtxtPropietario = new javax.swing.JTextField();
-        jtxtDireccion = new javax.swing.JTextField();
-        jtxtEmail = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblEmpresas = new javax.swing.JTable();
         jbtnCatalogoCuentas = new javax.swing.JButton();
         jbtnGuardar = new javax.swing.JButton();
         jbtnEliminar = new javax.swing.JButton();
         jbtnLimpiar = new javax.swing.JButton();
+        jpnlForm = new javax.swing.JPanel();
+        jlblDireccion = new javax.swing.JLabel();
+        jlblEmail = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jtxtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jtxtPropietario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jtxtDireccion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jtxtEmail = new javax.swing.JTextField();
+        jlblNombreEmpresa = new javax.swing.JLabel();
+        jlblPropietario = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1051, 835));
@@ -63,33 +85,13 @@ public class GestionEmpresa extends javax.swing.JPanel {
         });
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jlblTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        jlblTitulo.setForeground(new java.awt.Color(0, 51, 51));
         jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblTitulo.setText("GESTION DE EMPRESAS");
 
-        jtxtNombre.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre:"));
-        jtxtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtNombreKeyTyped(evt);
-            }
-        });
-
-        jtxtPropietario.setBorder(javax.swing.BorderFactory.createTitledBorder("Propietario:"));
-        jtxtPropietario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtPropietarioKeyTyped(evt);
-            }
-        });
-
-        jtxtDireccion.setBorder(javax.swing.BorderFactory.createTitledBorder("Dirección:"));
-
-        jtxtEmail.setBorder(javax.swing.BorderFactory.createTitledBorder("Email:"));
-        jtxtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtEmailKeyTyped(evt);
-            }
-        });
-
+        jtblEmpresas.setBackground(new java.awt.Color(255, 255, 255));
+        jtblEmpresas.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        jtblEmpresas.setForeground(new java.awt.Color(0, 51, 51));
         jtblEmpresas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -109,6 +111,12 @@ public class GestionEmpresa extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jtblEmpresas.setGridColor(new java.awt.Color(0, 51, 51));
+        jtblEmpresas.setRowHeight(25);
+        jtblEmpresas.setSelectionBackground(new java.awt.Color(26, 173, 220));
+        jtblEmpresas.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jtblEmpresas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jtblEmpresas.setShowGrid(true);
         jtblEmpresas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtblEmpresasMouseClicked(evt);
@@ -128,7 +136,9 @@ public class GestionEmpresa extends javax.swing.JPanel {
             jtblEmpresas.getColumnModel().getColumn(4).setPreferredWidth(250);
         }
 
+        jbtnCatalogoCuentas.setBackground(new java.awt.Color(0, 51, 51));
         jbtnCatalogoCuentas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbtnCatalogoCuentas.setForeground(new java.awt.Color(255, 255, 255));
         jbtnCatalogoCuentas.setText("ABRIR CATALOGO DE CUENTAS");
         jbtnCatalogoCuentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnCatalogoCuentas.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +147,9 @@ public class GestionEmpresa extends javax.swing.JPanel {
             }
         });
 
+        jbtnGuardar.setBackground(new java.awt.Color(0, 51, 0));
         jbtnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnGuardar.setText("GUARDAR");
         jbtnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +158,9 @@ public class GestionEmpresa extends javax.swing.JPanel {
             }
         });
 
+        jbtnEliminar.setBackground(new java.awt.Color(51, 0, 0));
         jbtnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnEliminar.setText("ELIMINAR");
         jbtnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +169,9 @@ public class GestionEmpresa extends javax.swing.JPanel {
             }
         });
 
+        jbtnLimpiar.setBackground(new java.awt.Color(0, 51, 51));
         jbtnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnLimpiar.setText("LIMPIAR CAMPOS");
         jbtnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -164,108 +180,213 @@ public class GestionEmpresa extends javax.swing.JPanel {
             }
         });
 
+        jpnlForm.setBackground(new java.awt.Color(255, 255, 255));
+        jpnlForm.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jlblDireccion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblDireccion.setForeground(new java.awt.Color(0, 51, 51));
+        jlblDireccion.setText("Dirección:");
+
+        jlblEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblEmail.setForeground(new java.awt.Color(0, 51, 51));
+        jlblEmail.setText("Corrreo electrónico:");
+
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("*");
+
+        jtxtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtxtNombre.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtNombreFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtNombreFocusLost(evt);
+            }
+        });
+        jtxtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtNombreKeyTyped(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("*");
 
+        jtxtPropietario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtxtPropietario.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtPropietario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtPropietario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtPropietario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtPropietarioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtPropietarioFocusLost(evt);
+            }
+        });
+        jtxtPropietario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtPropietarioKeyTyped(evt);
+            }
+        });
+
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("*");
 
+        jtxtDireccion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtxtDireccion.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtDireccion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtDireccionFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtDireccionFocusLost(evt);
+            }
+        });
+
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("*");
+
+        jtxtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtxtEmail.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtEmailFocusLost(evt);
+            }
+        });
+        jtxtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtEmailKeyTyped(evt);
+            }
+        });
+
+        jlblNombreEmpresa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblNombreEmpresa.setForeground(new java.awt.Color(0, 51, 51));
+        jlblNombreEmpresa.setText("Nombre de la empresa:");
+
+        jlblPropietario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblPropietario.setForeground(new java.awt.Color(0, 51, 51));
+        jlblPropietario.setText("Nombre del propietario:");
+
+        javax.swing.GroupLayout jpnlFormLayout = new javax.swing.GroupLayout(jpnlForm);
+        jpnlForm.setLayout(jpnlFormLayout);
+        jpnlFormLayout.setHorizontalGroup(
+            jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlFormLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jtxtDireccion)
+                        .addComponent(jtxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpnlFormLayout.createSequentialGroup()
+                        .addComponent(jlblNombreEmpresa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpnlFormLayout.createSequentialGroup()
+                        .addComponent(jlblDireccion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(89, 89, 89)
+                .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtxtPropietario)
+                    .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpnlFormLayout.createSequentialGroup()
+                        .addComponent(jlblPropietario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpnlFormLayout.createSequentialGroup()
+                        .addComponent(jlblEmail)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jpnlFormLayout.setVerticalGroup(
+            jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnlFormLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblNombreEmpresa)
+                    .addComponent(jLabel1)
+                    .addComponent(jlblPropietario)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblDireccion)
+                    .addComponent(jLabel4)
+                    .addComponent(jlblEmail)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jbtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jbtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbtnCatalogoCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(214, 214, 214))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtxtDireccion)
-                                    .addComponent(jtxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(69, 69, 69)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtxtPropietario)
-                                    .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(150, 150, 150))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jlblTitulo)
-                        .addGap(295, 295, 295))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(233, 233, 233))))
+                                .addGap(289, 289, 289))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(260, 260, 260)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 128, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpnlForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(203, 203, 203))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(325, 325, 325)
+                .addComponent(jlblTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(40, 40, 40)
                 .addComponent(jlblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtxtPropietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jLabel2)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jtxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel3)))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addGap(39, 39, 39)))
+                .addGap(18, 18, 18)
+                .addComponent(jpnlForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jbtnCatalogoCuentas)
                 .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -281,6 +402,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
         }
         
         if (!validar.ValidarEmail(email)) { // Valida que el email contenga el formato
+            validar.JtxtErrorColor(jtxtEmail);
             JOptionPane.showMessageDialog(null, "EL [EMAIL] QUE HA INGRESADO NO ES VALIDO, ASEGURESE DE HABERLO ESCRITO CORRECTAMENTE.","ERROR:", JOptionPane.ERROR_MESSAGE);
             return; // Sino coincide, entonces retorna
         }
@@ -296,16 +418,6 @@ public class GestionEmpresa extends javax.swing.JPanel {
             EmpresaControlador.Instancia().ActualizarEmpresa(empresaActualizada);
             JOptionPane.showMessageDialog(null, "LA EMPRESA HA SIDO ACTUALIZADA EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
         } else { // Crear nueva empresa
-            
-            if ("".equals(nombreEmpresa)) {
-                JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [NOMBRES], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            if ("".equals(propietario)) {
-                JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [PROPIETARIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
             Empresa nuevaEmpresa = new Empresa();
             
             // Almacena la información actualizada de la empresa
@@ -339,7 +451,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
                 LimpiarTodo();// Limpia todos los campos
             }
         } else {
-            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE DESDE LA TABLA A LA EMPRESA QUE DESEA ELIMINAR.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE DESDE LA TABLA LA EMPRESA QUE DESEA ELIMINAR.","ERROR:", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbtnEliminarActionPerformed
 
@@ -350,8 +462,15 @@ public class GestionEmpresa extends javax.swing.JPanel {
 
     private void jtblEmpresasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblEmpresasMouseClicked
         // TODO add your handling code here:
-        _idEmpresaSeleccionada = Integer.parseInt(jtblEmpresas.getValueAt(jtblEmpresas.getSelectedRow(), 0).toString());
-        CargarDatosDeEmpresaSeleccionada();
+        int selectedRow = jtblEmpresas.getSelectedRow();
+    
+        // Verifica que una fila válida esté seleccionada (Es decir que no haya dado click en un espacio vacío)
+        if (selectedRow >= 0) {
+            _idEmpresaSeleccionada = Integer.parseInt(jtblEmpresas.getValueAt(selectedRow, 0).toString());        
+            CargarDatosDeEmpresaSeleccionada();
+        }
+        //_idEmpresaSeleccionada = Integer.parseInt(jtblEmpresas.getValueAt(jtblEmpresas.getSelectedRow(), 0).toString());
+        //CargarDatosDeEmpresaSeleccionada();
     }//GEN-LAST:event_jtblEmpresasMouseClicked
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -385,28 +504,92 @@ public class GestionEmpresa extends javax.swing.JPanel {
         validar.ValidarTodoMenosEspacios(evt);
     }//GEN-LAST:event_jtxtEmailKeyTyped
 
+    private void jtxtNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombreFocusGained
+        // TODO add your handling code here:
+        validar.JtxtFocoCambiarColor(jtxtNombre, true);
+    }//GEN-LAST:event_jtxtNombreFocusGained
+
+    private void jtxtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombreFocusLost
+        // TODO add your handling code here:
+        validar.JtxtFocoCambiarColor(jtxtNombre, false);
+    }//GEN-LAST:event_jtxtNombreFocusLost
+
+    private void jtxtPropietarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPropietarioFocusGained
+        // TODO add your handling code here:
+        validar.JtxtFocoCambiarColor(jtxtPropietario, true);
+    }//GEN-LAST:event_jtxtPropietarioFocusGained
+
+    private void jtxtPropietarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPropietarioFocusLost
+        // TODO add your handling code here:
+        validar.JtxtFocoCambiarColor(jtxtPropietario, false);
+    }//GEN-LAST:event_jtxtPropietarioFocusLost
+
+    private void jtxtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDireccionFocusGained
+        // TODO add your handling code here:
+        validar.JtxtFocoCambiarColor(jtxtDireccion, true);
+    }//GEN-LAST:event_jtxtDireccionFocusGained
+
+    private void jtxtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDireccionFocusLost
+        // TODO add your handling code here:
+        validar.JtxtFocoCambiarColor(jtxtDireccion, false);
+    }//GEN-LAST:event_jtxtDireccionFocusLost
+
+    private void jtxtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtEmailFocusGained
+        // TODO add your handling code here:
+        validar.JtxtFocoCambiarColor(jtxtEmail, true);
+    }//GEN-LAST:event_jtxtEmailFocusGained
+
+    private void jtxtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtEmailFocusLost
+        // TODO add your handling code here:
+        validar.JtxtFocoCambiarColor(jtxtEmail, false);
+    }//GEN-LAST:event_jtxtEmailFocusLost
+
     public void SetFormularioPrincipal(Principal frmPrincipal) {
         this._frmPrincipal = frmPrincipal;
     }
     
     private boolean ValidarCamposObligatorios(String nombre, String propietario, String direccion, String email) {
+        boolean sonValidos = true;
+        int cantidadCamposInvalidos = 0;
+        String camposNoValidos = "";
         if ("".equals(nombre)) {
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [NOMBRE], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            validar.JtxtErrorColor(jtxtNombre);
+            cantidadCamposInvalidos ++;
+            camposNoValidos += "\n~ NOMBRE DE LA EMPRESA";
+            
+            //JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [NOMBRE], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            sonValidos = false;
         }
         if ("".equals(propietario)) {
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [PROPIETARIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            validar.JtxtErrorColor(jtxtPropietario);
+            cantidadCamposInvalidos ++;
+            camposNoValidos += "\n~ NOMBRE DEL PROPIETARIO";
+            //JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [PROPIETARIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            sonValidos = false;
         }
         if ("".equals(direccion)) {
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [DIRECCION], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            validar.JtxtErrorColor(jtxtDireccion);
+            cantidadCamposInvalidos ++;
+            camposNoValidos += "\n~ DIRECCIÓN";
+            //JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [DIRECCION], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            sonValidos = false;
         }
         if ("".equals(email)) {
-            JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [EMAIL], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
-            return false;
+            validar.JtxtErrorColor(jtxtEmail);
+            cantidadCamposInvalidos ++;
+            camposNoValidos += "\n~ CORREO";
+            sonValidos = false;
         }
-        return true; // Retorna verdadero únicamente cuando todos los campos tienen datos
+        
+        if (!sonValidos) {
+            if (cantidadCamposInvalidos > 1) {
+                JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR LOS CAMPOS: " + camposNoValidos + "\nPOR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE: " + camposNoValidos + "\nPOR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
+            }
+        }   
+        
+        return sonValidos; // Retorna verdadero únicamente cuando todos los campos tienen datos
     }
     
     private void CargarEmpresas() {
@@ -437,6 +620,14 @@ public class GestionEmpresa extends javax.swing.JPanel {
         jtxtEmail.setText("");
         _idEmpresaSeleccionada = -1;
         jtblEmpresas.clearSelection();
+        JtxtFinFoco();
+    }
+    
+    private void JtxtFinFoco() {
+        validar.JtxtColorInicial(jtxtNombre);
+        validar.JtxtColorInicial(jtxtPropietario);
+        validar.JtxtColorInicial(jtxtDireccion);
+        validar.JtxtColorInicial(jtxtEmail);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -450,7 +641,12 @@ public class GestionEmpresa extends javax.swing.JPanel {
     private javax.swing.JButton jbtnEliminar;
     private javax.swing.JButton jbtnGuardar;
     private javax.swing.JButton jbtnLimpiar;
+    private javax.swing.JLabel jlblDireccion;
+    private javax.swing.JLabel jlblEmail;
+    private javax.swing.JLabel jlblNombreEmpresa;
+    private javax.swing.JLabel jlblPropietario;
     private javax.swing.JLabel jlblTitulo;
+    private javax.swing.JPanel jpnlForm;
     private javax.swing.JTable jtblEmpresas;
     private javax.swing.JTextField jtxtDireccion;
     private javax.swing.JTextField jtxtEmail;
