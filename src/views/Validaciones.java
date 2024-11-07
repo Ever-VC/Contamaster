@@ -4,8 +4,10 @@
  */
 package views;
 
+import java.awt.Color;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
 /**
@@ -110,5 +112,27 @@ public class Validaciones {
             return false;
         }
         return true;
+    }
+    
+    public void JtxtFocoCambiarColor(javax.swing.JTextField jtxt, boolean esFoco) {
+        if (esFoco) {
+            jtxt.setBorder(BorderFactory.createLineBorder(new Color(0, 153, 255), 1, true));
+        } else {
+            jtxt.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
+        }        
+    }
+    
+    public void JtxtErrorColor(javax.swing.JTextField jtxt) {
+        jtxt.setBorder(BorderFactory.createLineBorder(Color.red, 1, true));
+    }
+    
+    public void JtxtColorInicial(javax.swing.JTextField jtxt) {
+        jtxt.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
+    }
+    
+    public String ConcatenarCamposInvalidos(String camposNoValidos) {
+        
+        
+        return null;
     }
 }

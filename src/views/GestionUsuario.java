@@ -509,12 +509,12 @@ public class GestionUsuario extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(107, Short.MAX_VALUE)
+                .addContainerGap(104, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jpnlForm, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
                     .addComponent(jpnlBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(101, 101, 101))
+                .addGap(104, 104, 104))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -698,80 +698,74 @@ public class GestionUsuario extends javax.swing.JPanel {
 
     private void jtxtNombresFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombresFocusGained
         // TODO add your handling code here:
-        CambiarColor(jtxtNombres, true);
+        validar.JtxtFocoCambiarColor(jtxtNombres, true);
     }//GEN-LAST:event_jtxtNombresFocusGained
 
     private void jtxtNombresFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombresFocusLost
         // TODO add your handling code here:
-        CambiarColor(jtxtNombres, false);
+        validar.JtxtFocoCambiarColor(jtxtNombres, false);
     }//GEN-LAST:event_jtxtNombresFocusLost
 
     private void jtxtApellidosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtApellidosFocusGained
         // TODO add your handling code here:
-        CambiarColor(jtxtApellidos, true);
+        validar.JtxtFocoCambiarColor(jtxtApellidos, true);
     }//GEN-LAST:event_jtxtApellidosFocusGained
 
     private void jtxtApellidosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtApellidosFocusLost
         // TODO add your handling code here:
-        CambiarColor(jtxtApellidos, false);
+        validar.JtxtFocoCambiarColor(jtxtApellidos, false);
     }//GEN-LAST:event_jtxtApellidosFocusLost
 
     private void jtxtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDireccionFocusGained
         // TODO add your handling code here:
-        CambiarColor(jtxtDireccion, true);
+        validar.JtxtFocoCambiarColor(jtxtDireccion, true);
     }//GEN-LAST:event_jtxtDireccionFocusGained
 
     private void jtxtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDireccionFocusLost
         // TODO add your handling code here:
-        CambiarColor(jtxtDireccion, false);
+        validar.JtxtFocoCambiarColor(jtxtDireccion, false);
     }//GEN-LAST:event_jtxtDireccionFocusLost
 
     private void jtxtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtEmailFocusGained
         // TODO add your handling code here:
-        CambiarColor(jtxtEmail, true);
+        validar.JtxtFocoCambiarColor(jtxtEmail, true);
     }//GEN-LAST:event_jtxtEmailFocusGained
 
     private void jtxtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtEmailFocusLost
         // TODO add your handling code here:
-        CambiarColor(jtxtEmail, false);
+        validar.JtxtFocoCambiarColor(jtxtEmail, false);
     }//GEN-LAST:event_jtxtEmailFocusLost
 
     private void jtxtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtUsernameFocusGained
         // TODO add your handling code here:
-        CambiarColor(jtxtUsername, true);
+        validar.JtxtFocoCambiarColor(jtxtUsername, true);
     }//GEN-LAST:event_jtxtUsernameFocusGained
 
     private void jtxtUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtUsernameFocusLost
         // TODO add your handling code here:
-        CambiarColor(jtxtUsername, false);
+        validar.JtxtFocoCambiarColor(jtxtUsername, false);
     }//GEN-LAST:event_jtxtUsernameFocusLost
 
     private void jtxtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPasswordFocusGained
         // TODO add your handling code here:
-        CambiarColor(jtxtPassword, true);
+        validar.JtxtFocoCambiarColor(jtxtPassword, true);
     }//GEN-LAST:event_jtxtPasswordFocusGained
 
     private void jtxtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPasswordFocusLost
         // TODO add your handling code here:
-        CambiarColor(jtxtPassword, false);
+        validar.JtxtFocoCambiarColor(jtxtPassword, false);
     }//GEN-LAST:event_jtxtPasswordFocusLost
     
-    private void CambiarColor(javax.swing.JTextField jtxt, boolean esFoco) {
-        if (esFoco) {
-            jtxt.setBorder(BorderFactory.createLineBorder(new Color(0, 153, 255), 1, true));
-        } else {
-            jtxt.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
-        }        
-    }
+    
     
     private boolean ValidarCamposObligatorios(String nombres, String apellidos, String sexo, String username, String rol) {
         if ("".equals(nombres)) {
-            jtxtNombres.setBorder(BorderFactory.createLineBorder(Color.red, 1, true));
+            validar.JtxtErrorColor(jtxtNombres);
             JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [NOMBRES], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if ("".equals(apellidos)) {
-            jtxtApellidos.setBorder(BorderFactory.createLineBorder(Color.red, 1, true));
+            validar.JtxtErrorColor(jtxtApellidos);
             JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [APELLIDOS], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -780,7 +774,7 @@ public class GestionUsuario extends javax.swing.JPanel {
             return false;
         }
         if ("".equals(username)) {
-            jtxtUsername.setBorder(BorderFactory.createLineBorder(Color.red, 1, true));
+            validar.JtxtErrorColor(jtxtUsername);
             JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [USUARIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -868,12 +862,12 @@ public class GestionUsuario extends javax.swing.JPanel {
     }
     
     private void JtxtFinFoco() {
-        jtxtApellidos.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
-        jtxtDireccion.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
-        jtxtEmail.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
-        jtxtUsername.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
-        jtxtPassword.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
-        jtxtNombres.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
+        validar.JtxtColorInicial(jtxtApellidos);
+        validar.JtxtColorInicial(jtxtDireccion);
+        validar.JtxtColorInicial(jtxtEmail);
+        validar.JtxtColorInicial(jtxtUsername);
+        validar.JtxtColorInicial(jtxtPassword);
+        validar.JtxtColorInicial(jtxtNombres);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
