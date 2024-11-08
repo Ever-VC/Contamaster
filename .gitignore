@@ -1,1 +1,12 @@
 /dist/
+# Ignorar la carpeta de compilación
+/build/
+
+# Ignorar archivos de configuración generados por IDEs
+nbproject/private/
+*.class
+*.log
+
+# Ignorar archivos temporales del sistema operativo
+.DS_Store
+Thumbs.db
