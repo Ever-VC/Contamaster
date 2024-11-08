@@ -112,7 +112,6 @@ public class LibroDiario extends javax.swing.JPanel {
         });
 
         jtblLibroDiario.setBackground(new java.awt.Color(255, 255, 255));
-        jtblLibroDiario.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jtblLibroDiario.setForeground(new java.awt.Color(0, 51, 51));
         jtblLibroDiario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,8 +132,7 @@ public class LibroDiario extends javax.swing.JPanel {
         jtblLibroDiario.setRowHeight(25);
         jtblLibroDiario.setSelectionBackground(new java.awt.Color(26, 173, 220));
         jtblLibroDiario.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        jtblLibroDiario.setShowGrid(true);
-        jtblLibroDiario.setShowVerticalLines(false);
+        jtblLibroDiario.setShowGrid(false);
         jScrollPane1.setViewportView(jtblLibroDiario);
         if (jtblLibroDiario.getColumnModel().getColumnCount() > 0) {
             jtblLibroDiario.getColumnModel().getColumn(0).setResizable(false);
@@ -330,19 +328,19 @@ public class LibroDiario extends javax.swing.JPanel {
             Movimiento primerMovimiento = lstMovimientos.getFirst();
 
             // Obtiene el primer registro de la tabla detalle asiento para saber a qué asiento pertenece
-            DetalleAsiento detalleAsiento = DetalleAsientoControlador.Instancia().GetAsientosPorMovimiento(primerMovimiento).getFirst();
+            //DetalleAsiento detalleAsiento = DetalleAsientoControlador.Instancia().GetAsientosPorMovimiento(primerMovimiento).getFirst();
 
-            Asiento asiento = detalleAsiento.getIdAsientoFk();
+            //Asiento asiento = detalleAsiento.getIdAsientoFk();
 
             Date fechaDeReferencia = primerMovimiento.getFecha(); // Fecha de referencia para mostrar únicamente una vez la fecha en cada asiento
             
-            CargarMovimientos(lstMovimientos, asiento, fechaDeReferencia);
+            CargarMovimientos(lstMovimientos, /*asiento,*/ fechaDeReferencia);
         } else {
             JOptionPane.showMessageDialog(null, "PARECE QUE NO HUBO NINGUN MOVIMIENTO EN EL PERIODO DE TIEMPO QUE HA SELECCIONADO.","INFORMACION:", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
-    private void CargarMovimientos(List<Movimiento> lstMovimientos, Asiento asiento, Date fechaDeReferencia) {
+    private void CargarMovimientos(List<Movimiento> lstMovimientos, /*Asiento asiento,*/ Date fechaDeReferencia) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo = (DefaultTableModel)jtblLibroDiario.getModel();
         modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
@@ -354,10 +352,15 @@ public class LibroDiario extends javax.swing.JPanel {
             totalDebe += movimiento.getDebe().doubleValue();
             totalHaber += movimiento.getHaber().doubleValue();
             Date fecha = movimiento.getFecha();
+            // Obtiene el primer registro de la tabla detalle asiento para saber a qué asiento pertenece
+            DetalleAsiento detalleAsiento = DetalleAsientoControlador.Instancia().GetAsientosPorMovimiento(movimiento).getFirst();
+
+            Asiento asiento = detalleAsiento.getIdAsientoFk();
             String fechaFormateada = "";
             if (!fechaDeReferencia.equals(fecha) || iterador == 0) {
-                if (iterador != 0) {
+                if (iterador != 0) { // Si es la primer fila, establece la fehca del primer asiento, caso contrario muestra espacio vacío
                     modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
+                    modelo.addRow(new Object[]{"_________________________", "_______________", "_________________________________________________________________", "_______________", "_______________"});
                 }
                 fechaDeReferencia = fecha;
                 SimpleDateFormat formatoCorto = new SimpleDateFormat("dd/MM/yyyy");
@@ -365,7 +368,7 @@ public class LibroDiario extends javax.swing.JPanel {
             }
             modelo.addRow(new Object[]{fechaFormateada, movimiento.getIdCuentaFk().getCodigo(), movimiento.getDescripcion(), movimiento.getDebe(), movimiento.getHaber()});
             
-            if (iterador == (lstMovimientos.size() - 1)) {
+            if (iterador == (lstMovimientos.size() - 1)) { // Si es el último movimiento, muestra la descripción del asiento
                 modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
             }
 
