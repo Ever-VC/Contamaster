@@ -19,7 +19,7 @@ CREATE TABLE usuario (
     id SERIAL PRIMARY KEY,
     nombres VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
-    --sexo VARCHAR(25) NOT NULL,
+    sexo VARCHAR(25) NOT NULL,
     fecha_nacimiento DATE,
     direccion VARCHAR(255),
     email VARCHAR(100),
