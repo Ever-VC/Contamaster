@@ -10,3 +10,6 @@ nbproject/private/
 # Ignorar archivos temporales del sistema operativo
 .DS_Store
 Thumbs.db
+
+# Ignorar el archivo de persistencia de la base de datos
+src/META-INF/persistence.xml
