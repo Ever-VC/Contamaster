@@ -59,7 +59,7 @@ public class UsuarioControlador {
         admin.setNombres("Administrador");
         admin.setApellidos("Sistema");
         admin.setSexo("Masculino");
-        admin.setEmail("ever.oficial@gmail.com");
+        admin.setEmail("admin@admin.com");
         admin.setUsername("admin");
         admin.setPassword(hashPassword("admin"));
         
