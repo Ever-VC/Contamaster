@@ -13,6 +13,3 @@ Thumbs.db
 
 # Ignorar el archivo de persistencia de la base de datos
 src/META-INF/persistence.xml
-
-# Ignora el archivo de ejemplo de configuración de la base de datos
-src/META-INF/persistence.xml.example
