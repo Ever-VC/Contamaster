@@ -8,10 +8,12 @@ import controllers.AsientoControlador;
 import controllers.DetalleAsientoControlador;
 import controllers.EmpresaControlador;
 import controllers.MovimientoControlador;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import models.Asiento;
 import models.DetalleAsiento;
@@ -23,7 +25,7 @@ import models.Movimiento;
  * @author ever_vc
  */
 public class LibroDiario extends javax.swing.JPanel {
-    
+    private Validaciones validar = new Validaciones();
     private Empresa _empresaSeleccionada = null;
 
     /**
@@ -32,6 +34,21 @@ public class LibroDiario extends javax.swing.JPanel {
     public LibroDiario() {
         initComponents();
         CargarEmpresas();
+        // Diseño de la tabla => Crea un renderer para personalizar el encabezado
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(new java.awt.Color(0, 148, 25 )); // Cambia el color de fondo del encabezado al del diseño principal new java.awt.Color(0,51,51)
+        headerRenderer.setForeground(Color.WHITE); // Cambia el color de la fuente del encabezado
+
+        // Asigna el renderer a cada columna del encabezado
+        for (int i = 0; i < jtblLibroDiario.getColumnModel().getColumnCount(); i++) {
+            jtblLibroDiario.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+        
+        // Cambia el fondo de la tabla
+        jtblLibroDiario.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        // Cambia el fondo del área vacía de la tabla
+        jtblLibroDiario.setFillsViewportHeight(true);
+        jtblLibroDiario.getParent().setBackground(Color.WHITE); // Fondo del viewport
     }
 
     /**
@@ -47,7 +64,7 @@ public class LibroDiario extends javax.swing.JPanel {
         jlblTitulo = new javax.swing.JLabel();
         jlblFechaInicio = new javax.swing.JLabel();
         jlblFechaFin = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbtnMostrarMovimientos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblLibroDiario = new javax.swing.JTable();
         jdcFechaInicio = new com.toedter.calendar.JDateChooser();
@@ -56,35 +73,49 @@ public class LibroDiario extends javax.swing.JPanel {
         jtxtTotalDebe = new javax.swing.JTextField();
         jtxtTotalHaber = new javax.swing.JTextField();
         jcmbEmpresa = new javax.swing.JComboBox();
+        jlblEmpresa = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jbtnlLimpiar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jlblTitulo.setForeground(new java.awt.Color(0, 0, 0));
-        jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlblTitulo.setText("LIBRO DIARIO");
-
-        jlblFechaInicio.setForeground(new java.awt.Color(0, 0, 0));
-        jlblFechaInicio.setText("Fecha de inicio:");
-
-        jlblFechaFin.setForeground(new java.awt.Color(0, 0, 0));
-        jlblFechaFin.setText("Fecha de fin:");
-
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setText("GENERAR");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        setPreferredSize(new java.awt.Dimension(1051, 835));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
             }
         });
 
+        jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jlblTitulo.setForeground(new java.awt.Color(0, 51, 51));
+        jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblTitulo.setText("LIBRO DIARIO");
+
+        jlblFechaInicio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblFechaInicio.setForeground(new java.awt.Color(0, 51, 51));
+        jlblFechaInicio.setText("Fecha de inicio:");
+
+        jlblFechaFin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblFechaFin.setForeground(new java.awt.Color(0, 51, 51));
+        jlblFechaFin.setText("Fecha de fin:");
+
+        jbtnMostrarMovimientos.setBackground(new java.awt.Color(0, 51, 0));
+        jbtnMostrarMovimientos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnMostrarMovimientos.setForeground(new java.awt.Color(255, 255, 255));
+        jbtnMostrarMovimientos.setText("GENERAR");
+        jbtnMostrarMovimientos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnMostrarMovimientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnMostrarMovimientosActionPerformed(evt);
+            }
+        });
+
+        jtblLibroDiario.setBackground(new java.awt.Color(255, 255, 255));
+        jtblLibroDiario.setForeground(new java.awt.Color(0, 51, 51));
         jtblLibroDiario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "FECHA", "CODIGO", "DESCRIPCION", "DEBE", "HABER"
@@ -98,6 +129,10 @@ public class LibroDiario extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jtblLibroDiario.setRowHeight(25);
+        jtblLibroDiario.setSelectionBackground(new java.awt.Color(26, 173, 220));
+        jtblLibroDiario.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jtblLibroDiario.setShowGrid(false);
         jScrollPane1.setViewportView(jtblLibroDiario);
         if (jtblLibroDiario.getColumnModel().getColumnCount() > 0) {
             jtblLibroDiario.getColumnModel().getColumn(0).setResizable(false);
@@ -114,7 +149,7 @@ public class LibroDiario extends javax.swing.JPanel {
 
         jlblTotales.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlblTotales.setForeground(new java.awt.Color(0, 0, 0));
-        jlblTotales.setText("TOTALES");
+        jlblTotales.setText("TOTALES:");
 
         jtxtTotalDebe.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jtxtTotalDebe.setEnabled(false);
@@ -122,10 +157,35 @@ public class LibroDiario extends javax.swing.JPanel {
         jtxtTotalHaber.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jtxtTotalHaber.setEnabled(false);
 
-        jcmbEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder("Empresa:"));
+        jcmbEmpresa.setForeground(new java.awt.Color(0, 51, 51));
+        jcmbEmpresa.setBorder(null);
         jcmbEmpresa.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcmbEmpresaItemStateChanged(evt);
+            }
+        });
+
+        jlblEmpresa.setBackground(new java.awt.Color(0, 0, 0));
+        jlblEmpresa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblEmpresa.setForeground(new java.awt.Color(0, 51, 51));
+        jlblEmpresa.setText("Seleccione la empresa:");
+
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3.setText("*");
+
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel4.setText("*");
+
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText("*");
+
+        jbtnlLimpiar.setBackground(new java.awt.Color(0, 51, 51));
+        jbtnlLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnlLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        jbtnlLimpiar.setText("LIMPIAR");
+        jbtnlLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnlLimpiarActionPerformed(evt);
             }
         });
 
@@ -133,74 +193,107 @@ public class LibroDiario extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(145, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(499, 499, 499)
+                        .addComponent(jlblTotales)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(248, 248, 248)
+                        .addComponent(jlblTitulo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlblTitulo)
-                                .addGap(138, 138, 138)))))
-                .addContainerGap(124, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(jlblFechaInicio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jlblFechaFin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jlblTotales)
-                .addGap(18, 18, 18)
-                .addComponent(jtxtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jtxtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(176, 176, 176))
+                                .addComponent(jlblEmpresa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jlblFechaInicio)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jlblFechaFin)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jbtnMostrarMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jbtnlLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(144, 144, 144))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jlblTitulo)
+                .addGap(40, 40, 40)
+                .addComponent(jlblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jlblEmpresa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblFechaFin)
                     .addComponent(jlblFechaInicio)
-                    .addComponent(jButton1)
-                    .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblTotales)
-                    .addComponent(jtxtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlblTotales)
+                            .addComponent(jtxtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtxtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtnMostrarMovimientos)
+                            .addComponent(jbtnlLimpiar))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtnMostrarMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMostrarMovimientosActionPerformed
         // TODO add your handling code here:
-        Date fechaInicio = jdcFechaInicio.getDate();
-        Date fechaFin = jdcFechaFin.getDate();
-        CargarLibroDiario(fechaInicio, fechaFin);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (_empresaSeleccionada != null) {
+            Date fechaInicio = jdcFechaInicio.getDate();
+            Date fechaFin = jdcFechaFin.getDate();
+
+            if (!validar.ValidarFechas(fechaInicio, fechaFin)) {
+                return;
+            }
+
+            CargarLibroDiario(fechaInicio, fechaFin);
+        } else {
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA EMPRESA DE LA QUE DESEA GENERAR EL LIBRO DIARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbtnMostrarMovimientosActionPerformed
 
     private void jcmbEmpresaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmbEmpresaItemStateChanged
         // TODO add your handling code here:
@@ -213,53 +306,76 @@ public class LibroDiario extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jcmbEmpresaItemStateChanged
+
+    private void jbtnlLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnlLimpiarActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)jtblLibroDiario.getModel();
+        modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
+        jdcFechaInicio.setDate(null);
+        jdcFechaFin.setDate(null);
+    }//GEN-LAST:event_jbtnlLimpiarActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        jtblLibroDiario.clearSelection();
+    }//GEN-LAST:event_formMouseClicked
     
     private void CargarLibroDiario(Date fechaInicio, Date fechaFin) {
+        List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorEmpresaYFechaInicioYFin(fechaInicio, fechaFin, _empresaSeleccionada);
         
-        if (_empresaSeleccionada != null) {
-            DefaultTableModel modelo = new DefaultTableModel();
-            modelo = (DefaultTableModel)jtblLibroDiario.getModel();
-            modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
-
-            List<Movimiento> lstMovimientos = MovimientoControlador.Instancia().GetMovimientosPorEmpresaYFechaInicioYFin(fechaInicio, fechaFin, _empresaSeleccionada);
-
+        if (!lstMovimientos.isEmpty()) {
             Movimiento primerMovimiento = lstMovimientos.getFirst();
 
             // Obtiene el primer registro de la tabla detalle asiento para saber a qué asiento pertenece
-            DetalleAsiento detalleAsiento = DetalleAsientoControlador.Instancia().GetAsientosPorMovimiento(primerMovimiento).getFirst();
+            //DetalleAsiento detalleAsiento = DetalleAsientoControlador.Instancia().GetAsientosPorMovimiento(primerMovimiento).getFirst();
+
+            //Asiento asiento = detalleAsiento.getIdAsientoFk();
+
+            Date fechaDeReferencia = primerMovimiento.getFecha(); // Fecha de referencia para mostrar únicamente una vez la fecha en cada asiento
+            
+            CargarMovimientos(lstMovimientos, /*asiento,*/ fechaDeReferencia);
+        } else {
+            JOptionPane.showMessageDialog(null, "PARECE QUE NO HUBO NINGUN MOVIMIENTO EN EL PERIODO DE TIEMPO QUE HA SELECCIONADO.","INFORMACION:", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    private void CargarMovimientos(List<Movimiento> lstMovimientos, /*Asiento asiento,*/ Date fechaDeReferencia) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)jtblLibroDiario.getModel();
+        modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
+        
+        int iterador = 0;
+        double totalDebe = 0.00;
+        double totalHaber = 0.00;
+        for (Movimiento movimiento : lstMovimientos) {
+            totalDebe += movimiento.getDebe().doubleValue();
+            totalHaber += movimiento.getHaber().doubleValue();
+            Date fecha = movimiento.getFecha();
+            // Obtiene el primer registro de la tabla detalle asiento para saber a qué asiento pertenece
+            DetalleAsiento detalleAsiento = DetalleAsientoControlador.Instancia().GetAsientosPorMovimiento(movimiento).getFirst();
 
             Asiento asiento = detalleAsiento.getIdAsientoFk();
-
-            Date fechaDeReferencia = primerMovimiento.getFecha();
-            int iterador = 0;
-            double totalDebe = 0.00;
-            double totalHaber = 0.00;
-            for (Movimiento movimiento : lstMovimientos) {
-                totalDebe += movimiento.getDebe().doubleValue();
-                totalHaber += movimiento.getHaber().doubleValue();
-                Date fecha = movimiento.getFecha();
-                String fechaFormateada = "";
-                if (!fechaDeReferencia.equals(fecha) || iterador == 0) {
-                    if (iterador != 0) {
-                        modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
-                    }
-                    fechaDeReferencia = fecha;
-                    SimpleDateFormat formatoCorto = new SimpleDateFormat("dd/MM/yyyy");
-                    fechaFormateada = formatoCorto.format(fecha);
-                }
-                modelo.addRow(new Object[]{fechaFormateada, movimiento.getIdCuentaFk().getCodigo(), movimiento.getDescripcion(), movimiento.getDebe(), movimiento.getHaber()});
-
-                if (iterador == (lstMovimientos.size() - 1)) {
+            String fechaFormateada = "";
+            if (!fechaDeReferencia.equals(fecha) || iterador == 0) {
+                if (iterador != 0) { // Si es la primer fila, establece la fehca del primer asiento, caso contrario muestra espacio vacío
                     modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
+                    modelo.addRow(new Object[]{"__________________", "___________", "______________________________________________", "___________", "___________"});
                 }
-
-                iterador ++;
+                fechaDeReferencia = fecha;
+                SimpleDateFormat formatoCorto = new SimpleDateFormat("dd/MM/yyyy");
+                fechaFormateada = formatoCorto.format(fecha);
             }
-            jtxtTotalDebe.setText(String.valueOf(totalDebe));
-            jtxtTotalHaber.setText(String.valueOf(totalHaber));
-        } else {
-            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA CUENTA DE LA QUE DESEA GENERAR EL LIBRO DIARIO.","ERROR:", JOptionPane.ERROR_MESSAGE);
+            modelo.addRow(new Object[]{fechaFormateada, movimiento.getIdCuentaFk().getCodigo(), movimiento.getDescripcion(), movimiento.getDebe(), movimiento.getHaber()});
+            
+            if (iterador == (lstMovimientos.size() - 1)) { // Si es el último movimiento, muestra la descripción del asiento
+                modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
+            }
+
+            iterador ++;
         }
+        jtxtTotalDebe.setText(String.valueOf(totalDebe));
+        jtxtTotalHaber.setText(String.valueOf(totalHaber));
     }
     
     private void CargarEmpresas() {
@@ -271,12 +387,17 @@ public class LibroDiario extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jbtnMostrarMovimientos;
+    private javax.swing.JButton jbtnlLimpiar;
     private javax.swing.JComboBox jcmbEmpresa;
     private com.toedter.calendar.JDateChooser jdcFechaFin;
     private com.toedter.calendar.JDateChooser jdcFechaInicio;
+    private javax.swing.JLabel jlblEmpresa;
     private javax.swing.JLabel jlblFechaFin;
     private javax.swing.JLabel jlblFechaInicio;
     private javax.swing.JLabel jlblTitulo;

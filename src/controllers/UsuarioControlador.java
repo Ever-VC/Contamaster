@@ -58,6 +58,7 @@ public class UsuarioControlador {
         //Insertamos la información necesaria
         admin.setNombres("Administrador");
         admin.setApellidos("Sistema");
+        admin.setSexo("Masculino");
         admin.setEmail("ever.oficial@gmail.com");
         admin.setUsername("admin");
         admin.setPassword(hashPassword("admin"));
@@ -71,6 +72,7 @@ public class UsuarioControlador {
     }
     
     public void CrearUsuario(Usuario nuevo_usuario) {
+        nuevo_usuario.setPassword(hashPassword(nuevo_usuario.getPassword()));
         _entityManager = setEntityManager();
         _entityManager.getTransaction().begin();
         _entityManager.persist(nuevo_usuario);
@@ -137,7 +139,7 @@ public class UsuarioControlador {
         usuarioAEditar.setDireccion(usuarioActualizado.getDireccion());
         usuarioAEditar.setEmail(usuarioActualizado.getEmail());
         usuarioAEditar.setUsername(usuarioActualizado.getUsername());
-        if (usuarioActualizado.getPassword() != null && !hashPassword(usuarioActualizado.getPassword()).equals(usuarioAEditar.getPassword())) {
+        if (usuarioActualizado.getPassword() != null && !hashPassword(usuarioActualizado.getPassword()).equals(usuarioAEditar.getPassword()) && !usuarioActualizado.getPassword().equals("")) {
             usuarioAEditar.setPassword(hashPassword(usuarioActualizado.getPassword()));
         }
         usuarioAEditar.setIdRolFk(usuarioActualizado.getIdRolFk());
