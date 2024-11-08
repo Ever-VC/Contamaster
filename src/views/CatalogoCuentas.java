@@ -87,7 +87,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         });
 
         jtblCuentas.setBackground(new java.awt.Color(255, 255, 255));
-        jtblCuentas.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        jtblCuentas.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtblCuentas.setForeground(new java.awt.Color(0, 51, 51));
         jtblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

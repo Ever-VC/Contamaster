@@ -90,7 +90,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
         jlblTitulo.setText("GESTION DE EMPRESAS");
 
         jtblEmpresas.setBackground(new java.awt.Color(255, 255, 255));
-        jtblEmpresas.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        jtblEmpresas.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtblEmpresas.setForeground(new java.awt.Color(0, 51, 51));
         jtblEmpresas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

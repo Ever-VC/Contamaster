@@ -118,7 +118,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         jlblTitulo.setText("GESTION DE USUARIOS");
 
         jtblUsuarios.setBackground(new java.awt.Color(255, 255, 255));
-        jtblUsuarios.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        jtblUsuarios.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtblUsuarios.setForeground(new java.awt.Color(0, 51, 51));
         jtblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

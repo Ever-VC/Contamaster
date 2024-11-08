@@ -121,7 +121,6 @@ public class LibroMayor extends javax.swing.JPanel {
         });
 
         jtblCuentas.setBackground(new java.awt.Color(255, 255, 255));
-        jtblCuentas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtblCuentas.setForeground(new java.awt.Color(0, 51, 51));
         jtblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -225,7 +224,7 @@ public class LibroMayor extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(40, 40, 40)
                 .addComponent(jlblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)

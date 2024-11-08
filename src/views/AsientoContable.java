@@ -158,7 +158,6 @@ public class AsientoContable extends javax.swing.JPanel {
             }
         });
 
-        jlstCuentas.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jlstCuentas.setForeground(new java.awt.Color(0, 51, 51));
         jlstCuentas.setSelectionBackground(new java.awt.Color(26, 173, 220));
         jlstCuentas.setSelectionForeground(new java.awt.Color(255, 255, 255));
@@ -199,7 +198,6 @@ public class AsientoContable extends javax.swing.JPanel {
         );
 
         jtblMovimientos.setBackground(new java.awt.Color(255, 255, 255));
-        jtblMovimientos.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jtblMovimientos.setForeground(new java.awt.Color(0, 51, 51));
         jtblMovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

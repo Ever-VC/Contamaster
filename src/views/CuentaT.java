@@ -121,10 +121,10 @@ public class CuentaT extends javax.swing.JPanel {
 
         jpnlDebeYHaber.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jlstDebe.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jlstDebe.setForeground(new java.awt.Color(0, 51, 51));
         jScrollPane2.setViewportView(jlstDebe);
 
-        jlstHaber.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jlstHaber.setForeground(new java.awt.Color(0, 51, 51));
         jScrollPane3.setViewportView(jlstHaber);
 
         javax.swing.GroupLayout jpnlDebeYHaberLayout = new javax.swing.GroupLayout(jpnlDebeYHaber);
@@ -149,9 +149,9 @@ public class CuentaT extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jlblDebe)
-                .addGap(188, 188, 188)
+                .addGap(197, 197, 197)
                 .addComponent(jlblHaber)
-                .addGap(425, 425, 425))
+                .addGap(416, 416, 416))
             .addGroup(layout.createSequentialGroup()
                 .addGap(228, 228, 228)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -544,9 +544,9 @@ public class CuentaT extends javax.swing.JPanel {
     
     private void ActualizarSaldo(boolean esTipoActivo, double totalDebe, double totalHaber) {
         if (esTipoActivo) {
-            this.jlblSaldo.setText( this.jlblSaldo.getText() + (totalDebe - totalHaber));
+            this.jlblSaldo.setText( "SALDO: $" + (totalDebe - totalHaber));
         } else {
-            this.jlblSaldo.setText( this.jlblSaldo.getText() + (totalHaber - totalDebe));
+            this.jlblSaldo.setText( "SALDO: $" + (totalHaber - totalDebe));
         }
     }
     
