@@ -360,7 +360,7 @@ public class LibroDiario extends javax.swing.JPanel {
             if (!fechaDeReferencia.equals(fecha) || iterador == 0) {
                 if (iterador != 0) { // Si es la primer fila, establece la fehca del primer asiento, caso contrario muestra espacio vacío
                     modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
-                    modelo.addRow(new Object[]{"_________________________", "_______________", "_________________________________________________________________", "_______________", "_______________"});
+                    modelo.addRow(new Object[]{"__________________", "___________", "______________________________________________", "___________", "___________"});
                 }
                 fechaDeReferencia = fecha;
                 SimpleDateFormat formatoCorto = new SimpleDateFormat("dd/MM/yyyy");

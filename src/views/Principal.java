@@ -138,7 +138,7 @@ public class Principal extends javax.swing.JFrame {
 
         jbtnEditarPerfil.setBackground(new java.awt.Color(255, 255, 255));
         jbtnEditarPerfil.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbtnEditarPerfil.setForeground(new java.awt.Color(0, 0, 0));
+        jbtnEditarPerfil.setForeground(new java.awt.Color(0, 51, 51));
         jbtnEditarPerfil.setText("Editar perfil");
         jbtnEditarPerfil.setBorderPainted(false);
         jbtnEditarPerfil.addActionListener(new java.awt.event.ActionListener() {
@@ -196,9 +196,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jbtnCerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
+        jbtnCerrarSesion.setBackground(new java.awt.Color(3, 140, 208));
         jbtnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbtnCerrarSesion.setForeground(new java.awt.Color(0, 51, 51));
+        jbtnCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
         jbtnCerrarSesion.setText("CERRAR SESION");
         jbtnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
