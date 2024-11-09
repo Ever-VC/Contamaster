@@ -27,7 +27,7 @@ public class MayorizacionDeCuenta extends javax.swing.JPanel {
     public MayorizacionDeCuenta(Cuenta cuenta) {
         initComponents();
         this._cuenta = cuenta;
-        jlblCuenta.setText(jlblCuenta.getText() + " - Tipo: " + _cuenta.getTipo());
+        jlblCuenta.setText(jlblCuenta.getText() + _cuenta.getNombre() + " -- Tipo: " + _cuenta.getTipo());
         ConfigurarJTable();
         CargarMayorizaciones();
     }
