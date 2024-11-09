@@ -31,22 +31,8 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         this._idEmpresa = idEmpresa;
         initComponents();
         CargarCuentas();
+        ConfigurarJTable();
         
-        // Diseño de la tabla => Crea un renderer para personalizar el encabezado
-        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-        headerRenderer.setBackground(new java.awt.Color(0,51,51)); // Cambia el color de fondo del encabezado al del diseño principal new java.awt.Color(0,51,51)
-        headerRenderer.setForeground(Color.WHITE); // Cambia el color de la fuente del encabezado
-
-        // Asigna el renderer a cada columna del encabezado
-        for (int i = 0; i < jtblCuentas.getColumnModel().getColumnCount(); i++) {
-            jtblCuentas.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
-        }
-        
-        // Cambia el fondo de la tabla
-        jtblCuentas.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
-        // Cambia el fondo del área vacía de la tabla
-        jtblCuentas.setFillsViewportHeight(true);
-        jtblCuentas.getParent().setBackground(Color.WHITE); // Fondo del viewport
     }
 
     /**
@@ -562,6 +548,24 @@ public class CatalogoCuentas extends javax.swing.JPanel {
             jcmbTipoCuenta.setSelectedItem(cuentaSeleccionada.getTipo());
             jtxtSaldo.setText(cuentaSeleccionada.getSaldo().toString());            
         }
+    }
+    
+    private void ConfigurarJTable() {
+        // Diseño de la tabla => Crea un renderer para personalizar el encabezado
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(new java.awt.Color(0,51,51)); // Cambia el color de fondo del encabezado al del diseño principal new java.awt.Color(0,51,51)
+        headerRenderer.setForeground(Color.WHITE); // Cambia el color de la fuente del encabezado
+
+        // Asigna el renderer a cada columna del encabezado
+        for (int i = 0; i < jtblCuentas.getColumnModel().getColumnCount(); i++) {
+            jtblCuentas.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+        
+        // Cambia el fondo de la tabla
+        jtblCuentas.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        // Cambia el fondo del área vacía de la tabla
+        jtblCuentas.setFillsViewportHeight(true);
+        jtblCuentas.getParent().setBackground(Color.WHITE); // Fondo del viewport
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
