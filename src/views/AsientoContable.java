@@ -41,6 +41,7 @@ public class AsientoContable extends javax.swing.JPanel {
     private List<Movimiento> _lstMovimientos = new ArrayList();
     private int _filaSeleccionada = -1;
     private Validaciones validar = new Validaciones();
+    private Principal _frmPrincipal;
 
     /**
      * Creates new form AsientoContable
@@ -465,7 +466,11 @@ public class AsientoContable extends javax.swing.JPanel {
                         _modeloLista.addElement(cuenta);
                     }
                 }
+                _modeloLista.addElement("¿No ves la cuenta que buscas?");
             }
+        } else {
+            jtxtNombreCuenta.setText("");
+            JOptionPane.showMessageDialog(null, "PARA CARGAR EL LISTADO DE CUENTAS, PRIMERO DEBE SELECCIONAR LA EMPRESA.", "ERROR:", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jtxtNombreCuentaKeyReleased
 
@@ -500,9 +505,18 @@ public class AsientoContable extends javax.swing.JPanel {
     private void jlstCuentasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlstCuentasValueChanged
         // TODO add your handling code here:
         if (!evt.getValueIsAdjusting()) { // Valida que el usuario ya haya completado su selección (y así no manejar multiples eventos)
-            Cuenta cuentaSeleccionada = (Cuenta) jlstCuentas.getSelectedValue();
-            if (cuentaSeleccionada != null) {
-                AlmacenarNuevoMovimiento(cuentaSeleccionada);
+            String seleccion = jlstCuentas.getSelectedValue().toString();
+            if (seleccion.equals("¿No ves la cuenta que buscas?")) {
+                String nombreCuenta = jtxtNombreCuenta.getText();
+                // Busca la empresa seleccionada para obtener su id
+                Empresa empresaSeleccionada = (Empresa) jcmbEmpresa.getSelectedItem();
+                // Llama al formulario Catalogo de cuentas
+                _frmPrincipal.AbrirSubPanel(new CatalogoCuentas(empresaSeleccionada.getId(), nombreCuenta));
+            } else {
+                Cuenta cuentaSeleccionada = (Cuenta) jlstCuentas.getSelectedValue();
+                if (cuentaSeleccionada != null) {
+                    AlmacenarNuevoMovimiento(cuentaSeleccionada);
+                }
             }
         }
     }//GEN-LAST:event_jlstCuentasValueChanged
@@ -580,7 +594,11 @@ public class AsientoContable extends javax.swing.JPanel {
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtDescripcion, false);
     }//GEN-LAST:event_jtxtDescripcionFocusLost
-
+    
+    public void SetFormularioPrincipal(Principal frmPrincipal) {
+        this._frmPrincipal = frmPrincipal;
+    }
+    
     private void CargarEmpresas() {
         List<Empresa> lstEmpresas = EmpresaControlador.Instancia().GetListaEmpresas();
         jcmbEmpresa.addItem("-- SELECCIONAR EMPRESA --");
@@ -720,7 +738,6 @@ public class AsientoContable extends javax.swing.JPanel {
             nuevoDetalleAsiento.setIdMovimientoFk(movimiento);
             DetalleAsientoControlador.Instancia().CrearDetalleMovimiento(nuevoDetalleAsiento);
         }
-        
     }
             
     // Variables declaration - do not modify//GEN-BEGIN:variables

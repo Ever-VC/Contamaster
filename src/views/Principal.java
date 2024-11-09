@@ -347,7 +347,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbtnAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAsientosActionPerformed
         // TODO add your handling code here:
-        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new AsientoContable());
+        AsientoContable frmAsientoContable = new AsientoContable();
+        frmAsientoContable.SetFormularioPrincipal(this);
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, frmAsientoContable);
     }//GEN-LAST:event_jbtnAsientosActionPerformed
 
     private void jbtnLibroDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLibroDiarioActionPerformed
