@@ -309,12 +309,7 @@ public class LibroDiario extends javax.swing.JPanel {
 
     private void jbtnlLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnlLimpiarActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo = (DefaultTableModel)jtblLibroDiario.getModel();
-        modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
-        jdcFechaInicio.setDate(null);
-        jdcFechaFin.setDate(null);
-        jcmbEmpresa.setSelectedIndex(0);
+        LimpiarTodo();
     }//GEN-LAST:event_jbtnlLimpiarActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -385,6 +380,15 @@ public class LibroDiario extends javax.swing.JPanel {
         for (Empresa empresa : lstEmpresas) {
             jcmbEmpresa.addItem(empresa);
         }
+    }
+    
+    private void LimpiarTodo() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel)jtblLibroDiario.getModel();
+        modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
+        jdcFechaInicio.setDate(null);
+        jdcFechaFin.setDate(null);
+        jcmbEmpresa.setSelectedIndex(0);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
