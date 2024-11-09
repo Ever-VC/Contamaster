@@ -114,15 +114,15 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtblCuentas);
         if (jtblCuentas.getColumnModel().getColumnCount() > 0) {
             jtblCuentas.getColumnModel().getColumn(0).setResizable(false);
-            jtblCuentas.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jtblCuentas.getColumnModel().getColumn(0).setPreferredWidth(20);
             jtblCuentas.getColumnModel().getColumn(1).setResizable(false);
-            jtblCuentas.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jtblCuentas.getColumnModel().getColumn(1).setPreferredWidth(60);
             jtblCuentas.getColumnModel().getColumn(2).setResizable(false);
-            jtblCuentas.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jtblCuentas.getColumnModel().getColumn(2).setPreferredWidth(360);
             jtblCuentas.getColumnModel().getColumn(3).setResizable(false);
-            jtblCuentas.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jtblCuentas.getColumnModel().getColumn(3).setPreferredWidth(210);
             jtblCuentas.getColumnModel().getColumn(4).setResizable(false);
-            jtblCuentas.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jtblCuentas.getColumnModel().getColumn(4).setPreferredWidth(80);
         }
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
