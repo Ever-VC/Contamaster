@@ -32,7 +32,14 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         initComponents();
         CargarCuentas();
         ConfigurarJTable();
-        
+    }
+    
+    public CatalogoCuentas(int idEmpresa, String nombreDeLaCuenta) {
+        this._idEmpresa = idEmpresa;
+        initComponents();
+        CargarCuentas();
+        ConfigurarJTable();
+        jtxtNombre.setText(nombreDeLaCuenta);
     }
 
     /**
