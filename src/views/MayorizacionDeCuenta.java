@@ -6,6 +6,7 @@ package views;
 
 import controllers.MayorControlador;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -137,9 +138,13 @@ public class MayorizacionDeCuenta extends javax.swing.JPanel {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo = (DefaultTableModel)jtblMayorizaciones.getModel();
         modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
-        
+        String fechaInicioFormateada = "";
+        String fechaFinFormateada = "";
         for (Mayor mayor : lstMayorizaciones) {
-            modelo.addRow(new Object[]{mayor.getId(), mayor.getFechaInicio(), mayor.getFechaFin(), "$" + mayor.getSaldoAnterior(), "$" + mayor.getTotalDebe(), "$" + mayor.getTotalHaber(), "$" + mayor.getSaldo()});
+            SimpleDateFormat formatoCorto = new SimpleDateFormat("dd/MM/yyyy");
+            fechaInicioFormateada = formatoCorto.format(mayor.getFechaInicio());
+            fechaFinFormateada = formatoCorto.format(mayor.getFechaFin());
+            modelo.addRow(new Object[]{mayor.getId(), fechaInicioFormateada, fechaFinFormateada, "$" + mayor.getSaldoAnterior(), "$" + mayor.getTotalDebe(), "$" + mayor.getTotalHaber(), "$" + mayor.getSaldo()});
         }
     }
     
