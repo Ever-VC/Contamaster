@@ -5,7 +5,9 @@
 package views;
 
 import controllers.MayorControlador;
+import java.awt.Color;
 import java.util.List;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import models.Cuenta;
 import models.Mayor;
@@ -25,6 +27,8 @@ public class MayorizacionDeCuenta extends javax.swing.JPanel {
         initComponents();
         this._cuenta = cuenta;
         jlblCuenta.setText(jlblCuenta.getText() + " - Tipo: " + _cuenta.getTipo());
+        ConfigurarJTable();
+        CargarMayorizaciones();
     }
 
     /**
@@ -137,6 +141,24 @@ public class MayorizacionDeCuenta extends javax.swing.JPanel {
         for (Mayor mayor : lstMayorizaciones) {
             modelo.addRow(new Object[]{mayor.getId(), mayor.getFechaInicio(), mayor.getFechaFin(), "$" + mayor.getSaldoAnterior(), "$" + mayor.getTotalDebe(), "$" + mayor.getTotalHaber(), "$" + mayor.getSaldo()});
         }
+    }
+    
+    private void ConfigurarJTable() {
+        // Diseño de la tabla => Crea un renderer para personalizar el encabezado
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(new java.awt.Color(0,51,51)); // Cambia el color de fondo del encabezado al del diseño principal new java.awt.Color(0,51,51)
+        headerRenderer.setForeground(Color.WHITE); // Cambia el color de la fuente del encabezado
+
+        // Asigna el renderer a cada columna del encabezado
+        for (int i = 0; i < jtblMayorizaciones.getColumnModel().getColumnCount(); i++) {
+            jtblMayorizaciones.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+        
+        // Cambia el fondo de la tabla
+        jtblMayorizaciones.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        // Cambia el fondo del área vacía de la tabla
+        jtblMayorizaciones.setFillsViewportHeight(true);
+        jtblMayorizaciones.getParent().setBackground(Color.WHITE); // Fondo del viewport
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
