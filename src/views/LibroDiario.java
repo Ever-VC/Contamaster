@@ -314,6 +314,7 @@ public class LibroDiario extends javax.swing.JPanel {
         modelo.setRowCount(0);//Limpia todas los registros de la tabla (indicando que no quiere ninguna fila)
         jdcFechaInicio.setDate(null);
         jdcFechaFin.setDate(null);
+        jcmbEmpresa.setSelectedIndex(0);
     }//GEN-LAST:event_jbtnlLimpiarActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
