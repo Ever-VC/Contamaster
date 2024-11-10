@@ -51,10 +51,10 @@ public class LibroMayor extends javax.swing.JPanel {
         }
         
         // Cambia el fondo de la tabla
-        jtblCuentas.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        jtblCuentas.setBackground(new java.awt.Color(242,247,251)); // Fondo de la tabla (celdas)
         // Cambia el fondo del área vacía de la tabla
         jtblCuentas.setFillsViewportHeight(true);
-        jtblCuentas.getParent().setBackground(Color.WHITE); // Fondo del viewport
+        jtblCuentas.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
     }
 
     /**
@@ -80,8 +80,9 @@ public class LibroMayor extends javax.swing.JPanel {
         jlblFechaFin = new javax.swing.JLabel();
         jlblEmpresa = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jbtnMayorizacionesPorCuenta = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 247, 251));
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jlblTitulo.setForeground(new java.awt.Color(0, 0, 0));
@@ -104,6 +105,9 @@ public class LibroMayor extends javax.swing.JPanel {
             }
         });
 
+        jbtnCuentaT.setBackground(new java.awt.Color(0, 51, 0));
+        jbtnCuentaT.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnCuentaT.setForeground(new java.awt.Color(255, 255, 255));
         jbtnCuentaT.setText("VER ESTADO DE CUENTA");
         jbtnCuentaT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnCuentaT.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +116,9 @@ public class LibroMayor extends javax.swing.JPanel {
             }
         });
 
+        jbtnBalanzaComprobacion.setBackground(new java.awt.Color(0, 0, 51));
+        jbtnBalanzaComprobacion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnBalanzaComprobacion.setForeground(new java.awt.Color(255, 255, 255));
         jbtnBalanzaComprobacion.setText("BALANCE DE COMPROBACION (ULTIMA MAYORIZACION)");
         jbtnBalanzaComprobacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnBalanzaComprobacion.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +127,7 @@ public class LibroMayor extends javax.swing.JPanel {
             }
         });
 
-        jtblCuentas.setBackground(new java.awt.Color(255, 255, 255));
+        jtblCuentas.setBackground(new java.awt.Color(242, 247, 251));
         jtblCuentas.setForeground(new java.awt.Color(0, 51, 51));
         jtblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,6 +186,17 @@ public class LibroMayor extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("*");
 
+        jbtnMayorizacionesPorCuenta.setBackground(new java.awt.Color(0, 51, 51));
+        jbtnMayorizacionesPorCuenta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnMayorizacionesPorCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        jbtnMayorizacionesPorCuenta.setText("MAYORIZACIONES DE CUENTA");
+        jbtnMayorizacionesPorCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnMayorizacionesPorCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnMayorizacionesPorCuentaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,14 +204,27 @@ public class LibroMayor extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(jbtnCuentaT, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbtnBalanzaComprobacion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
+                        .addGap(109, 109, 109)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 823, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(158, 158, 158)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlblEmpresa)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel3))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jlblTitulo)
+                                            .addGap(138, 138, 138))
+                                        .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbtnCuentaT, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbtnBalanzaComprobacion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbtnMayorizacionesPorCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(90, 90, 90)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,19 +238,9 @@ public class LibroMayor extends javax.swing.JPanel {
                                         .addGap(35, 35, 35)
                                         .addComponent(jbtnMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(236, 236, 236)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlblEmpresa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jlblTitulo)
-                                    .addGap(138, 138, 138))
-                                .addComponent(jcmbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(156, Short.MAX_VALUE))
+                        .addGap(94, 94, 94)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 863, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,11 +269,12 @@ public class LibroMayor extends javax.swing.JPanel {
                             .addComponent(jdcFechaInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbtnMayorizar, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnCuentaT, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnMayorizacionesPorCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -362,6 +384,21 @@ public class LibroMayor extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "PARECE QUE ESTE MODULO NO HA SIDO IMPLEMENTADO AUN, PERO DESCUIDA, TE NOTIFICAREMOS TAN PRONTO ESTE DISPONIBLE. :)","¡OH POR DIOS!", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jbtnBalanzaComprobacionActionPerformed
 
+    private void jbtnMayorizacionesPorCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMayorizacionesPorCuentaActionPerformed
+        // TODO add your handling code here:
+        if (_idCuenta != -1) {
+            Cuenta cuenta = CuentaControlador.Instancia().GetCuentaPorId(_idCuenta);
+            List<Mayor> lstMayorizaciones = MayorControlador.Instancia().GetListaRegistrosAlMayorPorCuenta(cuenta);
+            if (lstMayorizaciones.size() > 0) {
+                _frmPrincipal.AbrirSubPanel(new MayorizacionDeCuenta(cuenta));
+            } else {
+                JOptionPane.showMessageDialog(null, "LA CUENTA ES NUEVA O AUN NO SE HA MAYORIZADO, POR LO TANTO NO HAY DETALLE DE MAYORIZACIONES.","ERROR:", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA CUENTA DE LA CUAL DESEA VISUALIZAR EL DETALLE DE TODAS LAS MAYORIZACIONES.","ERROR:", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbtnMayorizacionesPorCuentaActionPerformed
+
     public void SetFormularioPrincipal(Principal frmPrincipal) {
         this._frmPrincipal = frmPrincipal;
     }
@@ -464,6 +501,7 @@ public class LibroMayor extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnBalanzaComprobacion;
     private javax.swing.JButton jbtnCuentaT;
+    private javax.swing.JButton jbtnMayorizacionesPorCuenta;
     private javax.swing.JButton jbtnMayorizar;
     private javax.swing.JComboBox jcmbEmpresa;
     private com.toedter.calendar.JDateChooser jdcFechaFin;

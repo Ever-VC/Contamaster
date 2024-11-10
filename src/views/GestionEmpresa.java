@@ -39,10 +39,10 @@ public class GestionEmpresa extends javax.swing.JPanel {
         }
         
         // Cambia el fondo de la tabla
-        jtblEmpresas.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        jtblEmpresas.setBackground(new java.awt.Color(242,247,251)); // Fondo de la tabla (celdas)
         // Cambia el fondo del área vacía de la tabla
         jtblEmpresas.setFillsViewportHeight(true);
-        jtblEmpresas.getParent().setBackground(Color.WHITE); // Fondo del viewport
+        jtblEmpresas.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
     }
 
     /**
@@ -76,7 +76,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
         jlblNombreEmpresa = new javax.swing.JLabel();
         jlblPropietario = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 247, 251));
         setPreferredSize(new java.awt.Dimension(1051, 835));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -89,7 +89,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
         jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblTitulo.setText("GESTION DE EMPRESAS");
 
-        jtblEmpresas.setBackground(new java.awt.Color(255, 255, 255));
+        jtblEmpresas.setBackground(new java.awt.Color(242, 247, 251));
         jtblEmpresas.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtblEmpresas.setForeground(new java.awt.Color(0, 51, 51));
         jtblEmpresas.setModel(new javax.swing.table.DefaultTableModel(
@@ -180,7 +180,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
             }
         });
 
-        jpnlForm.setBackground(new java.awt.Color(255, 255, 255));
+        jpnlForm.setBackground(new java.awt.Color(242, 247, 251));
         jpnlForm.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jlblDireccion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -194,10 +194,12 @@ public class GestionEmpresa extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("*");
 
+        jtxtNombre.setBackground(new java.awt.Color(242, 247, 251));
         jtxtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtNombre.setForeground(new java.awt.Color(0, 51, 51));
         jtxtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtNombre.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtNombreFocusGained(evt);
@@ -215,10 +217,12 @@ public class GestionEmpresa extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("*");
 
+        jtxtPropietario.setBackground(new java.awt.Color(242, 247, 251));
         jtxtPropietario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtPropietario.setForeground(new java.awt.Color(0, 51, 51));
         jtxtPropietario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtPropietario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtPropietario.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtPropietario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtPropietarioFocusGained(evt);
@@ -236,10 +240,12 @@ public class GestionEmpresa extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("*");
 
+        jtxtDireccion.setBackground(new java.awt.Color(242, 247, 251));
         jtxtDireccion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtDireccion.setForeground(new java.awt.Color(0, 51, 51));
         jtxtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtDireccion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtDireccion.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtDireccionFocusGained(evt);
@@ -252,10 +258,12 @@ public class GestionEmpresa extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("*");
 
+        jtxtEmail.setBackground(new java.awt.Color(242, 247, 251));
         jtxtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtEmail.setForeground(new java.awt.Color(0, 51, 51));
         jtxtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtEmail.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtEmailFocusGained(evt);
@@ -353,8 +361,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jbtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jbtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(260, 260, 260)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -366,6 +373,10 @@ public class GestionEmpresa extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(325, 325, 325)
                 .addComponent(jlblTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

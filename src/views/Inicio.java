@@ -29,7 +29,7 @@ public class Inicio extends javax.swing.JPanel {
         jlbltitulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 247, 251));
 
         jlbltitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jlbltitulo.setForeground(new java.awt.Color(0, 0, 0));
