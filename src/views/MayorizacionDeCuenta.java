@@ -47,14 +47,14 @@ public class MayorizacionDeCuenta extends javax.swing.JPanel {
         jtblMayorizaciones = new javax.swing.JTable();
         jlblCuenta = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 247, 251));
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jlblTitulo.setForeground(new java.awt.Color(0, 51, 51));
         jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblTitulo.setText("LISTADO DE MAYORIZACIONES");
 
-        jtblMayorizaciones.setBackground(new java.awt.Color(255, 255, 255));
+        jtblMayorizaciones.setBackground(new java.awt.Color(242, 247, 251));
         jtblMayorizaciones.setForeground(new java.awt.Color(0, 51, 51));
         jtblMayorizaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,10 +160,10 @@ public class MayorizacionDeCuenta extends javax.swing.JPanel {
         }
         
         // Cambia el fondo de la tabla
-        jtblMayorizaciones.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        jtblMayorizaciones.setBackground(new java.awt.Color(242,247,251)); // Fondo de la tabla (celdas)
         // Cambia el fondo del área vacía de la tabla
         jtblMayorizaciones.setFillsViewportHeight(true);
-        jtblMayorizaciones.getParent().setBackground(Color.WHITE); // Fondo del viewport
+        jtblMayorizaciones.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

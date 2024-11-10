@@ -71,7 +71,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 247, 251));
         setPreferredSize(new java.awt.Dimension(1051, 835));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -79,7 +79,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
             }
         });
 
-        jtblCuentas.setBackground(new java.awt.Color(255, 255, 255));
+        jtblCuentas.setBackground(new java.awt.Color(242, 247, 251));
         jtblCuentas.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtblCuentas.setForeground(new java.awt.Color(0, 51, 51));
         jtblCuentas.setModel(new javax.swing.table.DefaultTableModel(
@@ -163,7 +163,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
             }
         });
 
-        jpnlForm.setBackground(new java.awt.Color(255, 255, 255));
+        jpnlForm.setBackground(new java.awt.Color(242, 247, 251));
         jpnlForm.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jlblTipo1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -174,10 +174,12 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         jlblNombre.setForeground(new java.awt.Color(0, 51, 51));
         jlblNombre.setText("Nombre:");
 
+        jtxtCodigo.setBackground(new java.awt.Color(242, 247, 251));
         jtxtCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtCodigo.setForeground(new java.awt.Color(0, 51, 51));
         jtxtCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtCodigo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtCodigo.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtCodigoFocusGained(evt);
@@ -196,10 +198,12 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         jcmbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- SELECCIONAR TIPO --", "Activo Normal", "Contra-Cuenta de Activo", "Pasivo", "Capital", "Ingresos", "Gastos", "Retiros" }));
         jcmbTipoCuenta.setBorder(null);
 
+        jtxtNombre.setBackground(new java.awt.Color(242, 247, 251));
         jtxtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtNombre.setForeground(new java.awt.Color(0, 51, 51));
         jtxtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtNombre.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtNombreFocusGained(evt);
@@ -218,10 +222,12 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         jlblCodigo.setForeground(new java.awt.Color(0, 51, 51));
         jlblCodigo.setText("Código de la cuenta:");
 
+        jtxtSaldo.setBackground(new java.awt.Color(242, 247, 251));
         jtxtSaldo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtSaldo.setForeground(new java.awt.Color(0, 51, 51));
         jtxtSaldo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtSaldo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtSaldo.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtSaldo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtSaldoFocusGained(evt);
@@ -569,10 +575,10 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         }
         
         // Cambia el fondo de la tabla
-        jtblCuentas.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        jtblCuentas.setBackground(new java.awt.Color(242,247,251)); // Fondo de la tabla (celdas)
         // Cambia el fondo del área vacía de la tabla
         jtblCuentas.setFillsViewportHeight(true);
-        jtblCuentas.getParent().setBackground(Color.WHITE); // Fondo del viewport
+        jtblCuentas.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

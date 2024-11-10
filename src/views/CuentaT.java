@@ -71,7 +71,7 @@ public class CuentaT extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         jlstHaber = new javax.swing.JList();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 247, 251));
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jlblTitulo.setForeground(new java.awt.Color(0, 51, 51));

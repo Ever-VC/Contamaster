@@ -51,10 +51,10 @@ public class LibroMayor extends javax.swing.JPanel {
         }
         
         // Cambia el fondo de la tabla
-        jtblCuentas.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        jtblCuentas.setBackground(new java.awt.Color(242,247,251)); // Fondo de la tabla (celdas)
         // Cambia el fondo del área vacía de la tabla
         jtblCuentas.setFillsViewportHeight(true);
-        jtblCuentas.getParent().setBackground(Color.WHITE); // Fondo del viewport
+        jtblCuentas.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
     }
 
     /**
@@ -82,7 +82,7 @@ public class LibroMayor extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jbtnMayorizacionesPorCuenta = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 247, 251));
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jlblTitulo.setForeground(new java.awt.Color(0, 0, 0));
@@ -127,7 +127,7 @@ public class LibroMayor extends javax.swing.JPanel {
             }
         });
 
-        jtblCuentas.setBackground(new java.awt.Color(255, 255, 255));
+        jtblCuentas.setBackground(new java.awt.Color(242, 247, 251));
         jtblCuentas.setForeground(new java.awt.Color(0, 51, 51));
         jtblCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

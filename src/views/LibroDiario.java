@@ -45,10 +45,10 @@ public class LibroDiario extends javax.swing.JPanel {
         }
         
         // Cambia el fondo de la tabla
-        jtblLibroDiario.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        jtblLibroDiario.setBackground(new java.awt.Color(242,247,251)); // Fondo de la tabla (celdas)
         // Cambia el fondo del área vacía de la tabla
         jtblLibroDiario.setFillsViewportHeight(true);
-        jtblLibroDiario.getParent().setBackground(Color.WHITE); // Fondo del viewport
+        jtblLibroDiario.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
     }
 
     /**
@@ -80,7 +80,7 @@ public class LibroDiario extends javax.swing.JPanel {
         jdcFechaInicio = new com.toedter.calendar.JDateChooser();
         jdcFechaFin = new com.toedter.calendar.JDateChooser();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 247, 251));
         setPreferredSize(new java.awt.Dimension(1051, 835));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -93,7 +93,7 @@ public class LibroDiario extends javax.swing.JPanel {
         jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblTitulo.setText("LIBRO DIARIO");
 
-        jtblLibroDiario.setBackground(new java.awt.Color(255, 255, 255));
+        jtblLibroDiario.setBackground(new java.awt.Color(242, 247, 251));
         jtblLibroDiario.setForeground(new java.awt.Color(0, 51, 51));
         jtblLibroDiario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,7 +139,7 @@ public class LibroDiario extends javax.swing.JPanel {
         jtxtTotalHaber.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jtxtTotalHaber.setEnabled(false);
 
-        jpnlForm.setBackground(new java.awt.Color(255, 255, 255));
+        jpnlForm.setBackground(new java.awt.Color(242, 247, 251));
         jpnlForm.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 51), 1, true));
 
         jcmbEmpresa.setForeground(new java.awt.Color(0, 51, 51));
@@ -244,11 +244,8 @@ public class LibroDiario extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addGap(7, 7, 7)
                 .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnlFormLayout.createSequentialGroup()
-                        .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1))
+                    .addComponent(jdcFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jbtnMostrarMovimientos)
                         .addComponent(jbtnlLimpiar)))
@@ -260,6 +257,7 @@ public class LibroDiario extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(116, 116, 116)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlblTotales)
@@ -267,9 +265,7 @@ public class LibroDiario extends javax.swing.JPanel {
                         .addComponent(jtxtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtxtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(114, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)

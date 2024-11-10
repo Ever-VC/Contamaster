@@ -62,10 +62,10 @@ public class AsientoContable extends javax.swing.JPanel {
         }
         
         // Cambia el fondo de la tabla
-        jtblMovimientos.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        jtblMovimientos.setBackground(new java.awt.Color(242,247,251)); // Fondo de la tabla (celdas)
         // Cambia el fondo del área vacía de la tabla
         jtblMovimientos.setFillsViewportHeight(true);
-        jtblMovimientos.getParent().setBackground(Color.WHITE); // Fondo del viewport
+        jtblMovimientos.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
     }
 
     /**
@@ -103,7 +103,7 @@ public class AsientoContable extends javax.swing.JPanel {
         jlblDescripcion = new javax.swing.JLabel();
         jlblTipoCuenta3 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 247, 251));
         setPreferredSize(new java.awt.Dimension(1051, 835));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -138,9 +138,11 @@ public class AsientoContable extends javax.swing.JPanel {
             }
         });
 
+        jtxtDescripcion.setBackground(new java.awt.Color(242, 247, 251));
         jtxtDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtDescripcion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtDescripcion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtDescripcion.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtDescripcionFocusGained(evt);
@@ -150,9 +152,11 @@ public class AsientoContable extends javax.swing.JPanel {
             }
         });
 
-        jpnlCuentas.setBackground(new java.awt.Color(255, 255, 255));
+        jpnlCuentas.setBackground(new java.awt.Color(242, 247, 251));
         jpnlCuentas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jtxtNombreCuenta.setBackground(new java.awt.Color(242, 247, 251));
+        jtxtNombreCuenta.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtNombreCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtxtNombreCuentaKeyReleased(evt);
@@ -198,7 +202,7 @@ public class AsientoContable extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jtblMovimientos.setBackground(new java.awt.Color(255, 255, 255));
+        jtblMovimientos.setBackground(new java.awt.Color(242, 247, 251));
         jtblMovimientos.setForeground(new java.awt.Color(0, 51, 51));
         jtblMovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
