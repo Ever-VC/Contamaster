@@ -833,7 +833,12 @@ public class GestionUsuario extends javax.swing.JPanel {
                     infoDesesion += " (Tú)";
                 }
             }
-            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), usuario.getEmail(), usuario.getSexo(), usuario.getIdRolFk().getNombre(), infoDesesion});
+            String email = usuario.getEmail();
+            if (email == null || email.isEmpty()) {
+                email = "-- Sin definir --";
+            }
+            
+            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), email, usuario.getSexo(), usuario.getIdRolFk().getNombre(), infoDesesion});
         }
     }
     
