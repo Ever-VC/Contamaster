@@ -86,3 +86,6 @@ CREATE TABLE detalle_asiento (
 
 -- Insertar los roles por defecto
 INSERT INTO rol (nombre) VALUES ('Administrador'), ('Contador'), ('Auxiliar'), ('Gerente');
+
+-- Crear un usuario por defecto
+INSERT INTO usuario (nombres, apellidos, sexo, email, username, password, id_rol_fk) VALUES ('Administrador', 'Sistema', 'Masculino', 'admin@admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1);
