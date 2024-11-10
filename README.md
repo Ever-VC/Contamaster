@@ -103,7 +103,7 @@ Luego das click en ***close***.
 
 4. **Configurar la contraseña de la base de datos**
    
-Abre el archivo persistence.xml (el archivo que acabas de renombrar).
+Abre el archivo **persistence.xml** (el archivo que acabas de renombrar). Luego das click en ***source***.
 
 ![config-img-12](https://github.com/user-attachments/assets/15e8a67c-426e-4ae5-bc1d-bb97e10f212a)
 
