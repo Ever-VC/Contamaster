@@ -70,10 +70,7 @@ public class Principal extends javax.swing.JFrame {
                 );
 
                 if (response == JOptionPane.YES_OPTION) {
-                    // Obtiene la sesion abierta actualmente a través del id del usuario logueado
-                    SessionLog sesionDeUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(UsuarioCache.Id);
-                    sesionDeUsuario.setLogoutTimestamp(new Date());// Almacena la hora de cierre de sesión por parte del usuario
-                    SessionLogControlador.instancia().GuardarCierreDeSesion(sesionDeUsuario);// Guarda la información
+                    CerrarSesion();
                     System.exit(0);
                 }
             }
@@ -370,6 +367,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         if (response == JOptionPane.YES_OPTION) {
+            CerrarSesion();
             _frmLogin.setVisible(true);
             this.dispose();
         }        
@@ -444,6 +442,13 @@ public class Principal extends javax.swing.JFrame {
     
     public void AbrirSubPanel(JPanel pnlAbrir) {
         MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, pnlAbrir);
+    }
+    
+    private void CerrarSesion() {
+        // Obtiene la sesion abierta actualmente a través del id del usuario logueado
+        SessionLog sesionDeUsuario = SessionLogControlador.instancia().ObtenerSesionPorUsuario(UsuarioCache.Id);
+        sesionDeUsuario.setLogoutTimestamp(new Date());// Almacena la hora de cierre de sesión por parte del usuario
+        SessionLogControlador.instancia().GuardarCierreDeSesion(sesionDeUsuario);// Guarda la información
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
