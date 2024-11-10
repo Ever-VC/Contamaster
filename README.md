@@ -72,7 +72,7 @@ Para empezar a trabajar con **Contamaster**, sigue estos pasos para instalar las
    git clone https://github.com/Ever-VC/Contamaster.git
    ```
 ## Configuración 👨🏽‍💻
-Una vez clonado el repositorio de CONTAMASTER, sigue estos pasos para configurar el proyecto y ejecutarlo correctamente en tu entorno local:
+Una vez clonado el repositorio de Contamaster, sigue estos pasos para configurar el proyecto y ejecutarlo correctamente en tu entorno local:
 
 1. **Ejecutar el script de creación de base de datos**
    
