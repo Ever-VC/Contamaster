@@ -54,10 +54,10 @@ public class GestionUsuario extends javax.swing.JPanel {
         }
         
         // Cambia el fondo de la tabla
-        jtblUsuarios.setBackground(Color.WHITE); // Fondo de la tabla (celdas)
+        jtblUsuarios.setBackground(new java.awt.Color(242,247,251)); // Fondo de la tabla (celdas)
         // Cambia el fondo del área vacía de la tabla
         jtblUsuarios.setFillsViewportHeight(true);
-        jtblUsuarios.getParent().setBackground(Color.WHITE); // Fondo del viewport
+        jtblUsuarios.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
 
     }
     
@@ -104,7 +104,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         jbtnEliminar = new javax.swing.JButton();
         jbtnLimpiar = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(242, 247, 251));
         setPreferredSize(new java.awt.Dimension(1051, 835));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -117,7 +117,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblTitulo.setText("GESTION DE USUARIOS");
 
-        jtblUsuarios.setBackground(new java.awt.Color(255, 255, 255));
+        jtblUsuarios.setBackground(new java.awt.Color(242, 247, 251));
         jtblUsuarios.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtblUsuarios.setForeground(new java.awt.Color(0, 51, 51));
         jtblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
@@ -167,7 +167,7 @@ public class GestionUsuario extends javax.swing.JPanel {
             jtblUsuarios.getColumnModel().getColumn(5).setPreferredWidth(150);
         }
 
-        jpnlForm.setBackground(new java.awt.Color(255, 255, 255));
+        jpnlForm.setBackground(new java.awt.Color(242, 247, 251));
         jpnlForm.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jpnlForm.setPreferredSize(new java.awt.Dimension(849, 102));
 
@@ -190,10 +190,12 @@ public class GestionUsuario extends javax.swing.JPanel {
         jlblNombres.setForeground(new java.awt.Color(0, 51, 51));
         jlblNombres.setText("Nombres:");
 
+        jtxtNombres.setBackground(new java.awt.Color(242, 247, 251));
         jtxtNombres.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtNombres.setForeground(new java.awt.Color(0, 51, 51));
         jtxtNombres.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtNombres.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtNombres.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtNombres.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtNombresFocusGained(evt);
@@ -216,10 +218,12 @@ public class GestionUsuario extends javax.swing.JPanel {
         jlblSexo.setForeground(new java.awt.Color(0, 51, 51));
         jlblSexo.setText("Sexo:");
 
+        jtxtApellidos.setBackground(new java.awt.Color(242, 247, 251));
         jtxtApellidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtApellidos.setForeground(new java.awt.Color(0, 51, 51));
         jtxtApellidos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtApellidos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtApellidos.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtApellidos.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtApellidosFocusGained(evt);
@@ -257,10 +261,12 @@ public class GestionUsuario extends javax.swing.JPanel {
         jlblUsername.setForeground(new java.awt.Color(0, 51, 51));
         jlblUsername.setText("Usuario:");
 
+        jtxtDireccion.setBackground(new java.awt.Color(242, 247, 251));
         jtxtDireccion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtDireccion.setForeground(new java.awt.Color(0, 51, 51));
         jtxtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtDireccion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtDireccion.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtDireccionFocusGained(evt);
@@ -274,10 +280,12 @@ public class GestionUsuario extends javax.swing.JPanel {
         jlblPassword.setForeground(new java.awt.Color(0, 51, 51));
         jlblPassword.setText("Contraseña:");
 
+        jtxtEmail.setBackground(new java.awt.Color(242, 247, 251));
         jtxtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtEmail.setForeground(new java.awt.Color(0, 51, 51));
         jtxtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtEmail.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtEmailFocusGained(evt);
@@ -296,10 +304,12 @@ public class GestionUsuario extends javax.swing.JPanel {
         jlblRol.setForeground(new java.awt.Color(0, 51, 51));
         jlblRol.setText("Rol del usuario:");
 
+        jtxtUsername.setBackground(new java.awt.Color(242, 247, 251));
         jtxtUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtUsername.setForeground(new java.awt.Color(0, 51, 51));
         jtxtUsername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtUsername.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtUsernameFocusGained(evt);
@@ -314,10 +324,12 @@ public class GestionUsuario extends javax.swing.JPanel {
             }
         });
 
+        jtxtPassword.setBackground(new java.awt.Color(242, 247, 251));
         jtxtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtxtPassword.setForeground(new java.awt.Color(0, 51, 51));
         jtxtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtPassword.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jtxtPassword.setCaretColor(new java.awt.Color(242, 247, 251));
         jtxtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtPasswordFocusGained(evt);
@@ -509,20 +521,24 @@ public class GestionUsuario extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jpnlForm, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
-                    .addComponent(jpnlBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(104, 104, 104))
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jpnlForm, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
+                            .addComponent(jpnlBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(104, 104, 104))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(327, 327, 327)
-                        .addComponent(jlblTitulo))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(233, 233, 233)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(305, 305, 305)
+                        .addComponent(jlblTitulo)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -817,7 +833,12 @@ public class GestionUsuario extends javax.swing.JPanel {
                     infoDesesion += " (Tú)";
                 }
             }
-            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), usuario.getEmail(), usuario.getSexo(), usuario.getIdRolFk().getNombre(), infoDesesion});
+            String email = usuario.getEmail();
+            if (email == null || email.isEmpty()) {
+                email = "-- Sin definir --";
+            }
+            
+            modelo.addRow(new Object[]{usuario.getId(), usuario.getNombres() + " " + usuario.getApellidos(), email, usuario.getSexo(), usuario.getIdRolFk().getNombre(), infoDesesion});
         }
     }
     
