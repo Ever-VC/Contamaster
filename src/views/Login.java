@@ -450,9 +450,7 @@ public class Login extends javax.swing.JFrame {
                                     frmPrincipal.SetFormularioLogin(this);
                                     frmPrincipal.setVisible(true); 
                                 }
-
                             } catch (InterruptedException ex) {
-                                System.out.println("Error: " + ex.getMessage());
                                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }

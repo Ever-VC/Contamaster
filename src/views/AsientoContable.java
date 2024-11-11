@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -523,7 +525,12 @@ public class AsientoContable extends javax.swing.JPanel {
     private void jlstCuentasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlstCuentasValueChanged
         // TODO add your handling code here:
         if (!evt.getValueIsAdjusting()) { // Valida que el usuario ya haya completado su selección (y así no manejar multiples eventos)
-            String seleccion = jlstCuentas.getSelectedValue().toString();
+            String seleccion = "";
+            try {
+                seleccion = jlstCuentas.getSelectedValue().toString();
+            } catch (Exception ex) {
+                // Excepción ignorada intencionalmente
+            }
             if (seleccion.equals("¿No ves la cuenta que buscas?")) {
                 
                 int response = JOptionPane.showConfirmDialog(
