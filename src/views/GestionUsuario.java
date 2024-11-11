@@ -31,6 +31,7 @@ public class GestionUsuario extends javax.swing.JPanel {
 
     private int _idUsuarioSeleccionado = -1;
     private Validaciones validar = new Validaciones();
+    javax.swing.JTextField[] _jtxts;
 
     /**
      * Creates new form GestionUsuarios
@@ -58,6 +59,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         // Cambia el fondo del área vacía de la tabla
         jtblUsuarios.setFillsViewportHeight(true);
         jtblUsuarios.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
+        _jtxts = new javax.swing.JTextField[] {jtxtNombres, jtxtApellidos, jtxtDireccion, jtxtEmail, jtxtUsername};
 
     }
     
@@ -192,10 +194,11 @@ public class GestionUsuario extends javax.swing.JPanel {
 
         jtxtNombres.setBackground(new java.awt.Color(242, 247, 251));
         jtxtNombres.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtNombres.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtNombres.setForeground(new java.awt.Color(204, 204, 204));
         jtxtNombres.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtNombres.setText("Ingrese los nombres...");
         jtxtNombres.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtNombres.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtNombres.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtNombres.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtNombresFocusGained(evt);
@@ -220,10 +223,11 @@ public class GestionUsuario extends javax.swing.JPanel {
 
         jtxtApellidos.setBackground(new java.awt.Color(242, 247, 251));
         jtxtApellidos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtApellidos.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtApellidos.setForeground(new java.awt.Color(204, 204, 204));
         jtxtApellidos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtApellidos.setText("Ingrese los apellidos...");
         jtxtApellidos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtApellidos.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtApellidos.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtApellidos.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtApellidosFocusGained(evt);
@@ -263,10 +267,11 @@ public class GestionUsuario extends javax.swing.JPanel {
 
         jtxtDireccion.setBackground(new java.awt.Color(242, 247, 251));
         jtxtDireccion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtDireccion.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtDireccion.setForeground(new java.awt.Color(204, 204, 204));
         jtxtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtDireccion.setText("Ingrese la dirección...");
         jtxtDireccion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtDireccion.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtDireccion.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtDireccionFocusGained(evt);
@@ -282,10 +287,11 @@ public class GestionUsuario extends javax.swing.JPanel {
 
         jtxtEmail.setBackground(new java.awt.Color(242, 247, 251));
         jtxtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtEmail.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtEmail.setForeground(new java.awt.Color(204, 204, 204));
         jtxtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtEmail.setText("Ingrese el correo electrónico...");
         jtxtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtEmail.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtEmail.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtEmailFocusGained(evt);
@@ -306,10 +312,11 @@ public class GestionUsuario extends javax.swing.JPanel {
 
         jtxtUsername.setBackground(new java.awt.Color(242, 247, 251));
         jtxtUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtUsername.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtUsername.setForeground(new java.awt.Color(204, 204, 204));
         jtxtUsername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtUsername.setText("Ingrese el usuario...");
         jtxtUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtUsername.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtUsername.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtUsernameFocusGained(evt);
@@ -326,10 +333,11 @@ public class GestionUsuario extends javax.swing.JPanel {
 
         jtxtPassword.setBackground(new java.awt.Color(242, 247, 251));
         jtxtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtPassword.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtPassword.setForeground(new java.awt.Color(204, 204, 204));
         jtxtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtPassword.setText("Ingrese la contraseña...");
         jtxtPassword.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtPassword.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtPassword.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtPasswordFocusGained(evt);
@@ -560,12 +568,16 @@ public class GestionUsuario extends javax.swing.JPanel {
 
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
         // TODO add your handling code here:
+        // Textos predeterminados para cada JTextField de campos no obligatorios
+        String placeholderDireccion = "Ingrese la dirección...";
+        String placeholderEmail = "Ingrese el correo electrónico...";
+        
         String nombres = jtxtNombres.getText();
         String apellidos = jtxtApellidos.getText();
         String sexo = (String) jcmbSexo.getSelectedItem();
         Date fechaNacimiento = jDateChooser1.getDate();
-        String direccion = jtxtDireccion.getText();
-        String email = jtxtEmail.getText();
+        String direccion = jtxtDireccion.getText().equals(placeholderDireccion) ? "" : jtxtDireccion.getText(); // Si el campo contiene el texto del placeholder (significa que no desea asignar el atreibuto), deja vacia la cadena
+        String email = jtxtEmail.getText().equals(placeholderEmail) ? "" : jtxtEmail.getText(); // Si el campo contiene el texto del placeholder (significa que no desea asignar el atreibuto), deja vacia la cadena
         String username = jtxtUsername.getText();
         String password = jtxtPassword.getText();
         // Valida que todos los campos obligatorios tengan datos
@@ -668,7 +680,8 @@ public class GestionUsuario extends javax.swing.JPanel {
     
         // Verifica que una fila válida esté seleccionada (Es decir que no haya dado click en un espacio vacío)
         if (selectedRow >= 0) {
-            _idUsuarioSeleccionado = Integer.parseInt(jtblUsuarios.getValueAt(selectedRow, 0).toString());        
+            _idUsuarioSeleccionado = Integer.parseInt(jtblUsuarios.getValueAt(selectedRow, 0).toString());
+            validar.JtxtColorInicialTexto(_jtxts, new java.awt.Color(0,51,51));
             CargarDatosDeUsuarioSeleccionado();
         }
     }//GEN-LAST:event_jtblUsuariosMouseClicked
@@ -708,76 +721,86 @@ public class GestionUsuario extends javax.swing.JPanel {
     private void jtxtNombresFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombresFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtNombres, true);
+        validar.JtxtEfectoPlaceHolder(jtxtNombres, "Ingrese los nombres...", true);
     }//GEN-LAST:event_jtxtNombresFocusGained
 
     private void jtxtNombresFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombresFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtNombres, false);
+        validar.JtxtEfectoPlaceHolder(jtxtNombres, "Ingrese los nombres...", false);
     }//GEN-LAST:event_jtxtNombresFocusLost
 
     private void jtxtApellidosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtApellidosFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtApellidos, true);
+        validar.JtxtEfectoPlaceHolder(jtxtApellidos, "Ingrese los apellidos...", true);
     }//GEN-LAST:event_jtxtApellidosFocusGained
 
     private void jtxtApellidosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtApellidosFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtApellidos, false);
+        validar.JtxtEfectoPlaceHolder(jtxtApellidos, "Ingrese los apellidos...", false);
     }//GEN-LAST:event_jtxtApellidosFocusLost
 
     private void jtxtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDireccionFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtDireccion, true);
+        validar.JtxtEfectoPlaceHolder(jtxtDireccion, "Ingrese la dirección...", true);
     }//GEN-LAST:event_jtxtDireccionFocusGained
 
     private void jtxtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDireccionFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtDireccion, false);
+        validar.JtxtEfectoPlaceHolder(jtxtDireccion, "Ingrese la dirección...", false);
     }//GEN-LAST:event_jtxtDireccionFocusLost
 
     private void jtxtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtEmailFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtEmail, true);
+        validar.JtxtEfectoPlaceHolder(jtxtEmail, "Ingrese el correo electrónico...", true);
     }//GEN-LAST:event_jtxtEmailFocusGained
 
     private void jtxtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtEmailFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtEmail, false);
+        validar.JtxtEfectoPlaceHolder(jtxtEmail, "Ingrese el correo electrónico...", false);
     }//GEN-LAST:event_jtxtEmailFocusLost
 
     private void jtxtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtUsernameFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtUsername, true);
+        validar.JtxtEfectoPlaceHolder(jtxtUsername, "Ingrese el usuario...", true);
     }//GEN-LAST:event_jtxtUsernameFocusGained
 
     private void jtxtUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtUsernameFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtUsername, false);
+        validar.JtxtEfectoPlaceHolder(jtxtUsername, "Ingrese el usuario...", false);
     }//GEN-LAST:event_jtxtUsernameFocusLost
 
     private void jtxtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPasswordFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtPassword, true);
+        validar.JtxtEfectoPlaceHolder(jtxtPassword, "Ingrese la contraseña...", true);
     }//GEN-LAST:event_jtxtPasswordFocusGained
 
     private void jtxtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPasswordFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtPassword, false);
+        validar.JtxtEfectoPlaceHolder(jtxtPassword, "Ingrese la contraseña...", false);
     }//GEN-LAST:event_jtxtPasswordFocusLost
-    
-    
     
     private boolean ValidarCamposObligatorios(String nombres, String apellidos, String sexo, String username, String password, String rol) {
         boolean sonValidos = true;
         int cantidadCamposInvalidos = 0;
         String camposNoValidos = "";
-        if ("".equals(nombres)) {
+        if ("Ingrese los nombres...".equals(nombres)) {
             validar.JtxtErrorColor(jtxtNombres);
             cantidadCamposInvalidos ++;
             camposNoValidos += "\n~ NOMBRES";
             sonValidos = false;
         }
-        if ("".equals(apellidos)) {
+        if ("Ingrese los apellidos...".equals(apellidos)) {
             validar.JtxtErrorColor(jtxtApellidos);
             cantidadCamposInvalidos ++;
             camposNoValidos += "\n~ APELLIDOS";
@@ -788,14 +811,14 @@ public class GestionUsuario extends javax.swing.JPanel {
             camposNoValidos += "\n~ SEXO";
             sonValidos = false;
         }
-        if ("".equals(username)) {
+        if ("Ingrese el usuario...".equals(username)) {
             validar.JtxtErrorColor(jtxtUsername);
             cantidadCamposInvalidos ++;
             camposNoValidos += "\n~ USUARIO";
             sonValidos = false;
         }
         if (_idUsuarioSeleccionado == -1) {
-            if ("".equals(password)) { // Si es un usuario nuevo, entonces sí o sí debe ingresar una contraseña
+            if ("Ingrese la contraseña...".equals(password)) { // Si es un usuario nuevo, entonces sí o sí debe ingresar una contraseña
                 validar.JtxtErrorColor(jtxtPassword);
                 cantidadCamposInvalidos ++;
                 camposNoValidos += "\n~ CONTRASEÑA";
@@ -885,18 +908,20 @@ public class GestionUsuario extends javax.swing.JPanel {
     }
     
     private void LimpiarTodo() {
-        jtxtNombres.setText("");
-        jtxtApellidos.setText("");
+        jtxtNombres.setText("Ingrese los nombres...");
+        jtxtApellidos.setText("Ingrese los apellidos...");
         jcmbSexo.setSelectedIndex(0);
         jDateChooser1.setDate(null);
-        jtxtDireccion.setText("");
-        jtxtEmail.setText("");
-        jtxtUsername.setText("");
-        jtxtPassword.setText("");
+        jtxtDireccion.setText("Ingrese la dirección...");
+        jtxtEmail.setText("Ingrese el correo electrónico...");
+        jtxtUsername.setText("Ingrese el usuario...");
+        jtxtPassword.setText("Ingrese la contraseña...");
         jcmbRol.setSelectedIndex(0);
         _idUsuarioSeleccionado = -1;
         jtblUsuarios.clearSelection();
         JtxtFinFoco();
+        validar.JtxtColorInicialTexto(_jtxts, new java.awt.Color(204, 204, 204));
+        jtxtPassword.setForeground(new java.awt.Color(204, 204, 204));
     }
     
     private void JtxtFinFoco() {

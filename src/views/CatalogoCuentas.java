@@ -23,6 +23,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
     private int _idEmpresa = -1;
     private int _idCuenta = -1;
     private Validaciones validar = new Validaciones();
+    javax.swing.JTextField[] _jtxts;
 
     /**
      * Creates new form CatalogoCuentas
@@ -32,6 +33,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         initComponents();
         CargarCuentas();
         ConfigurarJTable();
+        _jtxts = new javax.swing.JTextField[] {jtxtCodigo, jtxtNombre, jtxtSaldo};
     }
     
     public CatalogoCuentas(int idEmpresa, String nombreDeLaCuenta) {
@@ -40,6 +42,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         CargarCuentas();
         ConfigurarJTable();
         jtxtNombre.setText(nombreDeLaCuenta);
+        _jtxts = new javax.swing.JTextField[] {jtxtCodigo, jtxtNombre, jtxtSaldo};
     }
 
     /**
@@ -176,10 +179,11 @@ public class CatalogoCuentas extends javax.swing.JPanel {
 
         jtxtCodigo.setBackground(new java.awt.Color(242, 247, 251));
         jtxtCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtCodigo.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtCodigo.setForeground(new java.awt.Color(204, 204, 204));
         jtxtCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtCodigo.setText("Ingrese el código...");
         jtxtCodigo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtCodigo.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtCodigo.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtCodigoFocusGained(evt);
@@ -200,10 +204,11 @@ public class CatalogoCuentas extends javax.swing.JPanel {
 
         jtxtNombre.setBackground(new java.awt.Color(242, 247, 251));
         jtxtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtNombre.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtNombre.setForeground(new java.awt.Color(204, 204, 204));
         jtxtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtNombre.setText("Ingrese el nombre...");
         jtxtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtNombre.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtNombre.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtNombreFocusGained(evt);
@@ -224,10 +229,11 @@ public class CatalogoCuentas extends javax.swing.JPanel {
 
         jtxtSaldo.setBackground(new java.awt.Color(242, 247, 251));
         jtxtSaldo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtSaldo.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtSaldo.setForeground(new java.awt.Color(204, 204, 204));
         jtxtSaldo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtSaldo.setText("Ingrese el saldo...");
         jtxtSaldo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtSaldo.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtSaldo.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtSaldo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtSaldoFocusGained(evt);
@@ -367,7 +373,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         }
         
         // Sino hay texto en el saldo inicial, entonces se establece por defecto en 0.00
-        if ("".equals(textoSaldo)) {
+        if ("Ingrese el saldo...".equals(textoSaldo)) {
             textoSaldo = "0.00";
         }
         
@@ -435,7 +441,8 @@ public class CatalogoCuentas extends javax.swing.JPanel {
     
         // Verifica que una fila válida esté seleccionada (Es decir que no haya dado click en un espacio vacío)
         if (selectedRow >= 0) {
-            _idCuenta = Integer.parseInt(jtblCuentas.getValueAt(selectedRow, 0).toString());        
+            _idCuenta = Integer.parseInt(jtblCuentas.getValueAt(selectedRow, 0).toString());
+            validar.JtxtColorInicialTexto(_jtxts, new java.awt.Color(0,51,51));
             CargarDatosDeCuentaSeleccionada();
         }
         //_idCuenta = Integer.parseInt(jtblCuentas.getValueAt(jtblCuentas.getSelectedRow(), 0).toString());
@@ -461,50 +468,58 @@ public class CatalogoCuentas extends javax.swing.JPanel {
 
     private void jtxtSaldoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtSaldoKeyTyped
         // TODO add your handling code here:
-        validar.ValidarNumerosDecimales(evt, jtxtSaldo);
+        if (!jtxtSaldo.getText().equals("Ingrese el saldo...")) {
+            validar.ValidarNumerosDecimales(evt, jtxtSaldo);
+        }
     }//GEN-LAST:event_jtxtSaldoKeyTyped
 
     private void jtxtCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtCodigoFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtCodigo, true);
+        validar.JtxtEfectoPlaceHolder(jtxtCodigo, "Ingrese el código...", true);
     }//GEN-LAST:event_jtxtCodigoFocusGained
 
     private void jtxtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtCodigoFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtCodigo, false);
+        validar.JtxtEfectoPlaceHolder(jtxtCodigo, "Ingrese el código...", false);
     }//GEN-LAST:event_jtxtCodigoFocusLost
 
     private void jtxtNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombreFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtNombre, true);
+        validar.JtxtEfectoPlaceHolder(jtxtNombre, "Ingrese el nombre...", true);
     }//GEN-LAST:event_jtxtNombreFocusGained
 
     private void jtxtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombreFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtNombre, false);
+        validar.JtxtEfectoPlaceHolder(jtxtNombre, "Ingrese el nombre...", false);
     }//GEN-LAST:event_jtxtNombreFocusLost
 
     private void jtxtSaldoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtSaldoFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtSaldo, true);
+        validar.JtxtEfectoPlaceHolder(jtxtSaldo, "Ingrese el saldo...", true);
     }//GEN-LAST:event_jtxtSaldoFocusGained
 
     private void jtxtSaldoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtSaldoFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtSaldo, false);
+        validar.JtxtEfectoPlaceHolder(jtxtSaldo, "Ingrese el saldo...", false);
     }//GEN-LAST:event_jtxtSaldoFocusLost
 
     private boolean ValidarCamposObligatorios(String codigo, String nombre, String tipo) {
         boolean sonValidos = true;
         int cantidadCamposInvalidos = 0;
         String camposNoValidos = "";
-        if ("".equals(codigo)) {
+        if ("Ingrese el código...".equals(codigo)) {
             validar.JtxtErrorColor(jtxtCodigo);
             cantidadCamposInvalidos ++;
             camposNoValidos += "\n~ CODIGO DE LA CUENTA";
             sonValidos = false;
         }
-        if ("".equals(nombre)) {
+        if ("Ingrese el nombre...".equals(nombre)) {
             validar.JtxtErrorColor(jtxtNombre);
             cantidadCamposInvalidos ++;
             camposNoValidos += "\n~ NOMBRE";
@@ -538,13 +553,14 @@ public class CatalogoCuentas extends javax.swing.JPanel {
     }
     
     private void LimpiarTodo() {
-        jtxtCodigo.setText("");
-        jtxtNombre.setText("");
+        jtxtCodigo.setText("Ingrese el código...");
+        jtxtNombre.setText("Ingrese el nombre...");
         jcmbTipoCuenta.setSelectedIndex(0);
-        jtxtSaldo.setText("");
+        jtxtSaldo.setText("Ingrese el saldo...");
         jtblCuentas.clearSelection();
         _idCuenta = -1;
         JtxtFinFoco();
+        validar.JtxtColorInicialTexto(_jtxts, new java.awt.Color(204, 204, 204));
     }
     
     private void JtxtFinFoco() {
