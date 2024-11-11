@@ -8,7 +8,10 @@ import controllers.SessionLogControlador;
 import controllers.UsuarioControlador;
 import java.awt.Color;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import models.SessionLog;
 import models.Usuario;
 import support.UsuarioCache;
@@ -415,10 +418,49 @@ public class Login extends javax.swing.JFrame {
                     jtxtUsername.setText("USUARIO");
                     jtxtPassword.setText("CONTRASEÑA");
                     
-                    Principal frmPrincipal = new Principal();
-                    frmPrincipal.SetFormularioLogin(this);
-                    this.setVisible(false);
-                    frmPrincipal.setVisible(true);
+                    // Crear y mostrar el JFrame de la barra de progreso
+                    BarraDeProgreso frmBarra = new BarraDeProgreso();
+                    this.setVisible(false); // Oculta el formulario de login
+                    frmBarra.setVisible(true);
+
+                    // Crear un nuevo hilo para la barra de progreso
+                    Thread progresoThread = new Thread(() -> {
+                        for (int i = 1; i <= 100; i++) {
+                            try {
+                                Thread.sleep(20); // Simula tiempo de espera para cada paso
+
+                                // Actualizar la barra de progreso en el hilo de la interfaz gráfica (EDT)
+                                final int progress = i;
+                                SwingUtilities.invokeLater(() -> {
+                                    frmBarra.jProgressBar.setValue(progress);
+                                    if (progress % 25 == 0) {
+                                        frmBarra.jlblProgreso.setText("Por favor espere..");
+                                    } else {
+                                        frmBarra.jlblProgreso.setText("Por favor espere...");
+                                    }
+                                });
+
+                                // Cuando llega al 100% cierra la barra y muestra el formulario principal
+                                if (i == 100) {
+                                    frmBarra.setVisible(false);
+                                    frmBarra.dispose(); // Elimina la instancia del objeto
+                                    
+                                    // Crea y abre un objeto del formulario principal
+                                    Principal frmPrincipal = new Principal();
+                                    frmPrincipal.SetFormularioLogin(this);
+                                    frmPrincipal.setVisible(true); 
+                                }
+
+                            } catch (InterruptedException ex) {
+                                System.out.println("Error: " + ex.getMessage());
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    });
+
+                    // Iniciar el hilo de progreso
+                    progresoThread.start();
+
                     jlblTitulo.requestFocusInWindow();
                     //JOptionPane.showMessageDialog(null, "BIENVENIDO, EL ID DE USUARIO ES: " + idUsuarioLogin, "LOGIN EXITOSO:", JOptionPane.INFORMATION_MESSAGE);
                 }
