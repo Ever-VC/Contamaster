@@ -485,6 +485,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
         if (selectedRow >= 0) {
             _idEmpresaSeleccionada = Integer.parseInt(jtblEmpresas.getValueAt(selectedRow, 0).toString());
             validar.JtxtColorInicialTexto(_jtxts, new java.awt.Color(0,51,51));
+            JtxtFinFoco();
             CargarDatosDeEmpresaSeleccionada();
         }
         //_idEmpresaSeleccionada = Integer.parseInt(jtblEmpresas.getValueAt(jtblEmpresas.getSelectedRow(), 0).toString());

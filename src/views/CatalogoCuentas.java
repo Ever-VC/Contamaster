@@ -43,6 +43,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         ConfigurarJTable();
         jtxtNombre.setText(nombreDeLaCuenta);
         _jtxts = new javax.swing.JTextField[] {jtxtCodigo, jtxtNombre, jtxtSaldo};
+        jtxtNombre.setForeground(new java.awt.Color(0,51,51));
     }
 
     /**
@@ -443,6 +444,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         if (selectedRow >= 0) {
             _idCuenta = Integer.parseInt(jtblCuentas.getValueAt(selectedRow, 0).toString());
             validar.JtxtColorInicialTexto(_jtxts, new java.awt.Color(0,51,51));
+            JtxtFinFoco();
             CargarDatosDeCuentaSeleccionada();
         }
         //_idCuenta = Integer.parseInt(jtblCuentas.getValueAt(jtblCuentas.getSelectedRow(), 0).toString());

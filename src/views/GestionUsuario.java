@@ -682,6 +682,7 @@ public class GestionUsuario extends javax.swing.JPanel {
         if (selectedRow >= 0) {
             _idUsuarioSeleccionado = Integer.parseInt(jtblUsuarios.getValueAt(selectedRow, 0).toString());
             validar.JtxtColorInicialTexto(_jtxts, new java.awt.Color(0,51,51));
+            JtxtFinFoco();
             CargarDatosDeUsuarioSeleccionado();
         }
     }//GEN-LAST:event_jtblUsuariosMouseClicked
