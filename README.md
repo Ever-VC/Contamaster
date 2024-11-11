@@ -44,7 +44,7 @@ Características principales:
 1. [Requisitos 🖋](#requisitos-)
 4. [Descarga 🎯](#descarga-)
 5. [Configuración 👨🏽‍💻](#configuración-)
-6. [Error de Compilación 📛](#error-de-compilación-)
+6. [Problemas de Compilación 📛](#problemas-de-compilación-)
 7. [Desarrolladores 👾](#desarrolladores-)
 8. [Licencia 🗒](#licencia-)
 
@@ -56,6 +56,9 @@ Para ejecutar y compilar Contamaster, asegúrate de cumplir con los siguientes r
 
 ## Descarga 🎯
 Para empezar a trabajar con **Contamaster**, sigue estos pasos para instalar las dependencias y clonar el repositorio:
+
+> [!NOTE]  
+> Los pasos y archivos de instalación y configuración son exclusivamente para el sistema operativo Windows.
 
 1. **Instalar Java Development Kit (JDK) 23**  
    Descarga e instala la última versión del JDK 23 desde el siguiente enlace:  
@@ -89,7 +92,7 @@ Dirígete a la carpeta ***src/META-INF/*** en el proyecto. Allí encontrarás un
 
 ![config-img-8](https://github.com/user-attachments/assets/6044df1e-ef8a-4d74-a260-51a7888d0619)
 
-Darás click derecho y luego en ***Properties***.
+Debes seleccionarlo, luego dar click derecho y seleccionar ***Properties***.
 
 ![config-img-9](https://github.com/user-attachments/assets/2b3c2193-b5b5-49c8-9b7b-3aa548bcb365)
 
@@ -107,7 +110,7 @@ Abre el archivo **persistence.xml** (el archivo que acabas de renombrar). Luego 
 
 ![config-img-12](https://github.com/user-attachments/assets/15e8a67c-426e-4ae5-bc1d-bb97e10f212a)
 
-Dentro del archivo, buscas el apartado de ***javax.persistence.jdbc.password*** y en su atriuto **value** debes cambiar el texto ***your_password*** por la contraseña correspondiente al usuario postgres en tu entorno local.
+Dentro de **source**, busca el apartado de ***javax.persistence.jdbc.password*** y en su atributo **value** debes cambiar el texto ***your_password*** por la contraseña correspondiente al usuario postgres en tu entorno local.
 
 ![config-img-13](https://github.com/user-attachments/assets/a379a955-d73c-49de-b03f-a2bb377f1af0)
 
@@ -120,12 +123,13 @@ Con las configuraciones completas, recompila el proyecto desde tu IDE (NetBeans)
 
 ![config-img-14](https://github.com/user-attachments/assets/234a882e-9f2c-45d6-bb37-eb5d296a20d4)
 
+Si experimentas problemas al compilar el proyecto en NetBeans, ve a [solucionar problemas de Compilación](#problemas-de-compilación-).
+
 6. **Ejecutar el proyecto**
    
 Finalmente, ejecuta Contamaster y verifica que todos los módulos y la conexión a la base de datos funcionen correctamente. Para lograr esto, lo que debes hacer es abrir cualquier JFrame o JPanel (para este caso abriremos el JFrame de Login) y luego, desde la barra superior, dar click en el botón de **Run Project** o bien, precionar la tecla **F6**.
 
 ![config-img-15](https://github.com/user-attachments/assets/2e40043c-57bf-4604-96e1-fa9787825669)
-
 
 Con esto, tu proyecto se debería estar ejecutando sin problemas y mostrarte el formulario de Inicio de Sesión.
 
@@ -135,10 +139,49 @@ Con esto, tu proyecto se debería estar ejecutando sin problemas y mostrarte el 
 > [!IMPORTANT]
 > Asegúrate de que PostgreSQL esté en funcionamiento y de que la base de datos esté configurada de acuerdo con los requisitos antes de ejecutar la aplicación.
 
-## Error de Compilación 📛
+## Problemas de Compilación 📛
+
+Si al momento de compilar el proyecto tienes un error como el siguiente:
+> invalid source release 23 with --enable-preview
+
+Es posible que el entorno esté usando una versión de JDK diferente a la configurada en el proyecto. A continuación, se describe cómo solucionar este problema:
+
+1. **Verificar la versión de JDK en NetBeans**
+
+Para solucionar este problema, debemos agregar manualmente el JDK 23 e indicarle a Apache NetBeans que este será el usado como versión de compilación, ya que el proyecto está configurado para esta versión. A continuación tendrás los pasos para lograrlo.
+
+Para acceder a la configuración debes dar click en **Tools** desde el menu superior de Apache NetBeans. Luego dar click en **Java Platforms**, tal como se muestra a continuación:
+
+![config-img-2](https://github.com/user-attachments/assets/33c39383-07e7-4eb0-84d8-7033ede4270d)
+
+Si en el listado de **Platforms > Java SE** ya se encuentra el JDK 23, entonces deberás seleccionarlo desde el apartado de **Platform Name**, luego dar click en **Close** y listo. De este modo, ya estará seleccionada la versión de compilación y puedes volver a [compilar el proyecto](#configuración-) para poder ejecutarlo. En caso contrario, si no se encuentra el **JDK 23** en el listado, entonces deberás dar click en **Add Platform...**.
+
+![config-img-3](https://github.com/user-attachments/assets/2f07992d-3542-4cc0-9b2c-1b31e47f6050)
+
+2. **Actualizar la configuración del proyecto**
+
+Se te mostrará la siguiente pantalla, en donde debes seleccionar la prierma opción, la cual es **Java Standar Edition**, seguido de eso, deberás dar click en **Next >**.
+
+![config-img-4](https://github.com/user-attachments/assets/2cb69d8a-4244-4fcb-9d25-d1355af896fd)
+
+Lo siguiente es buscar la carpeta de instalación del JDK 23, la cual, por lo general, para acceder a esta es dando click en **Este equipo**, luego desplegar el listado de carpetas de **Windows (C:)**, luego deberás acceder a la carpeta **Archivos de programa** y explorar hasta llegar al directorio llamado **Java**, dentro de este encontrarás el JDK 23, lo debes seleccionar y asegurarte que en el apartado de **File Name** tengas una ruta igual a la imagen. Luego debes dar click en **Next >**
+
+![config-img-5](https://github.com/user-attachments/assets/11fc9091-ddc1-4b04-9530-d72b67eabc89)
+
+> [!IMPORTANT]  
+> Si personalizaste la instalación del JDK 23, debes buscar la ruta personalizada y desde ahí seleccionar el directorio que lo contiene.
+
+
+por último, debes dar click en **Finish**.
+
+![config-img-6](https://github.com/user-attachments/assets/01d51a36-bd7f-4f8d-8553-b47830eaaed9)
+
+Si por defecto no te selecciona el JDK 23, lo unico que debes hacer es seleccionarlo desde el listado en **Platforms > Java SE** y dar click en **Close** y listo. De este modo, ya estará seleccionada la versión de compilación y puedes volver a [compilar el proyecto](#configuración-) para poder ejecutarlo.
+
+Con estos pasos, NetBeans utilizará la versión correcta del JDK, y el proyecto debería compilarse sin inconvenientes.
 
 ## Desarrolladores 👾
-| Nombres                           | Carnet   |
+| Nombres                           | Carnet  |
 | --------------------------------- | ------- |
 | Batres Rivas, Marvin Josué        | BR20028 |
 | Hernández Del Cid, Carlos Orlando | HC21027 |
@@ -146,3 +189,7 @@ Con esto, tu proyecto se debería estar ejecutando sin problemas y mostrarte el 
 | Vásquez Canales Ever Samuel       | VC21033 |
 
 ## Licencia 🗒
+
+Este proyecto está licenciado bajo los términos de la Apache License 2.0. Esto significa que puedes usar, modificar y distribuir el código, siempre que cumplas con los términos de la licencia.
+
+Puedes ver la licencia completa en el archivo [LICENSE](./LICENSE) o en el siguiente enlace: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
