@@ -186,9 +186,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jbtnCerrarSesion.setBackground(new java.awt.Color(24, 72, 137));
+        jbtnCerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
         jbtnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbtnCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        jbtnCerrarSesion.setForeground(new java.awt.Color(0, 102, 153));
         jbtnCerrarSesion.setText("CERRAR SESION");
         jbtnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbtnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
