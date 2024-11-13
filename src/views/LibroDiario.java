@@ -364,18 +364,31 @@ public class LibroDiario extends javax.swing.JPanel {
         int iterador = 0;
         double totalDebe = 0.00;
         double totalHaber = 0.00;
+        Asiento asientoAnterior = null;
         for (Movimiento movimiento : lstMovimientos) {
             totalDebe += movimiento.getDebe().doubleValue();
             totalHaber += movimiento.getHaber().doubleValue();
             Date fecha = movimiento.getFecha();
             // Obtiene el primer registro de la tabla detalle asiento para saber a qué asiento pertenece
             DetalleAsiento detalleAsiento = DetalleAsientoControlador.Instancia().GetAsientosPorMovimiento(movimiento).getFirst();
-
             Asiento asiento = detalleAsiento.getIdAsientoFk();
             String fechaFormateada = "";
+            if (fechaDeReferencia.equals(fecha) && iterador != 0) {
+                if (!asientoAnterior.equals(asiento)) {
+                    System.out.println("En teoria este es el caso xd");
+                    System.out.println("El anterior asiento: " + asientoAnterior.getDescripcion());
+                    System.out.println("El nuevo asiento es: " + asiento.getDescripcion());
+                    modelo.addRow(new Object[]{fechaFormateada, "", asientoAnterior.getDescripcion(), "", ""});
+                    modelo.addRow(new Object[]{"__________________", "___________", "______________________________________________", "___________", "___________"});
+                    fechaDeReferencia = fecha;
+                SimpleDateFormat formatoCorto = new SimpleDateFormat("dd/MM/yyyy");
+                fechaFormateada = formatoCorto.format(fecha);
+                }
+            }
+            
             if (!fechaDeReferencia.equals(fecha) || iterador == 0) {
                 if (iterador != 0) { // Si es la primer fila, establece la fehca del primer asiento, caso contrario muestra espacio vacío
-                    modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
+                    modelo.addRow(new Object[]{fechaFormateada, "", asientoAnterior.getDescripcion(), "", ""});
                     modelo.addRow(new Object[]{"__________________", "___________", "______________________________________________", "___________", "___________"});
                 }
                 fechaDeReferencia = fecha;
@@ -383,7 +396,7 @@ public class LibroDiario extends javax.swing.JPanel {
                 fechaFormateada = formatoCorto.format(fecha);
             }
             modelo.addRow(new Object[]{fechaFormateada, movimiento.getIdCuentaFk().getCodigo(), movimiento.getDescripcion(), movimiento.getDebe(), movimiento.getHaber()});
-            
+            asientoAnterior = asiento;
             if (iterador == (lstMovimientos.size() - 1)) { // Si es el último movimiento, muestra la descripción del asiento
                 modelo.addRow(new Object[]{fechaFormateada, "", asiento.getDescripcion(), "", ""});
             }
