@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -116,6 +118,8 @@ public class AsientoContable extends javax.swing.JPanel {
         jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblTitulo.setText("ASIENTOS CONTABLES");
 
+        jDateChooser1.setBackground(new java.awt.Color(242, 247, 251));
+
         jlblFecha.setBackground(new java.awt.Color(0, 0, 0));
         jlblFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlblFecha.setForeground(new java.awt.Color(0, 51, 51));
@@ -140,9 +144,11 @@ public class AsientoContable extends javax.swing.JPanel {
 
         jtxtDescripcion.setBackground(new java.awt.Color(242, 247, 251));
         jtxtDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jtxtDescripcion.setForeground(new java.awt.Color(204, 204, 204));
         jtxtDescripcion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtDescripcion.setText("Ingrese la descripción del asiento contable...");
         jtxtDescripcion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtDescripcion.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtDescripcion.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtDescripcion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtDescripcionFocusGained(evt);
@@ -156,7 +162,17 @@ public class AsientoContable extends javax.swing.JPanel {
         jpnlCuentas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jtxtNombreCuenta.setBackground(new java.awt.Color(242, 247, 251));
-        jtxtNombreCuenta.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtNombreCuenta.setForeground(new java.awt.Color(204, 204, 204));
+        jtxtNombreCuenta.setText("Buscar cuenta...");
+        jtxtNombreCuenta.setCaretColor(new java.awt.Color(0, 51, 51));
+        jtxtNombreCuenta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtxtNombreCuentaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtxtNombreCuentaFocusLost(evt);
+            }
+        });
         jtxtNombreCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtxtNombreCuentaKeyReleased(evt);
@@ -314,10 +330,10 @@ public class AsientoContable extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnEliminarMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addComponent(jbtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnEliminarMovimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jlblTipoCuenta3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtxtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -418,7 +434,7 @@ public class AsientoContable extends javax.swing.JPanel {
         BigDecimal totalDebe = new BigDecimal(jtxtTotalDebe.getText());
         BigDecimal totalHaber = new BigDecimal(jtxtTotalHaber.getText());
         // verifica que el campo de descripcion no esté vacío
-        if ("".equals(descripcion)) {
+        if ("Ingrese la descripción del asiento contable...".equals(descripcion)) {
             validar.JtxtErrorColor(jtxtDescripcion);
             JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE DESCRIPCION, POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
             return;
@@ -459,7 +475,7 @@ public class AsientoContable extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (jcmbEmpresa.getSelectedItem() != "-- SELECCIONAR EMPRESA --" && lstCuentasSegunTipo != null) {
             _modeloLista.removeAllElements();// Limpia el modelo de la lista (elimina todos los elementos que hayan)
-            if ("".equals(jtxtNombreCuenta.getText())) {
+            if ("Buscar cuenta...".equals(jtxtNombreCuenta.getText())) {
                 for (Cuenta cuenta : lstCuentasSegunTipo) {
                     _modeloLista.addElement(cuenta);
                 }
@@ -509,13 +525,29 @@ public class AsientoContable extends javax.swing.JPanel {
     private void jlstCuentasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jlstCuentasValueChanged
         // TODO add your handling code here:
         if (!evt.getValueIsAdjusting()) { // Valida que el usuario ya haya completado su selección (y así no manejar multiples eventos)
-            String seleccion = jlstCuentas.getSelectedValue().toString();
+            String seleccion = "";
+            try {
+                seleccion = jlstCuentas.getSelectedValue().toString();
+            } catch (Exception ex) {
+                // Excepción ignorada intencionalmente
+            }
             if (seleccion.equals("¿No ves la cuenta que buscas?")) {
-                String nombreCuenta = jtxtNombreCuenta.getText();
-                // Busca la empresa seleccionada para obtener su id
-                Empresa empresaSeleccionada = (Empresa) jcmbEmpresa.getSelectedItem();
-                // Llama al formulario Catalogo de cuentas
-                _frmPrincipal.AbrirSubPanel(new CatalogoCuentas(empresaSeleccionada.getId(), nombreCuenta));
+                
+                int response = JOptionPane.showConfirmDialog(
+                    AsientoContable.this,
+                    "¿Estás seguro de que deseas salir del formulario actual para crear la nueva cuenta? La información registrada se perderá.",
+                    "ATENCIÓN:",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+                );
+
+                if (response == JOptionPane.YES_OPTION) {
+                    String nombreCuenta = jtxtNombreCuenta.getText();
+                    // Busca la empresa seleccionada para obtener su id
+                    Empresa empresaSeleccionada = (Empresa) jcmbEmpresa.getSelectedItem();
+                    // Llama al formulario Catalogo de cuentas
+                    _frmPrincipal.AbrirSubPanel(new CatalogoCuentas(empresaSeleccionada.getId(), nombreCuenta));
+                }
             } else {
                 Cuenta cuentaSeleccionada = (Cuenta) jlstCuentas.getSelectedValue();
                 if (cuentaSeleccionada != null) {
@@ -592,12 +624,24 @@ public class AsientoContable extends javax.swing.JPanel {
     private void jtxtDescripcionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDescripcionFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtDescripcion, true);
+        validar.JtxtEfectoPlaceHolder(jtxtDescripcion, "Ingrese la descripción del asiento contable...", true);
     }//GEN-LAST:event_jtxtDescripcionFocusGained
 
     private void jtxtDescripcionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDescripcionFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtDescripcion, false);
+        validar.JtxtEfectoPlaceHolder(jtxtDescripcion, "Ingrese la descripción del asiento contable...", false);
     }//GEN-LAST:event_jtxtDescripcionFocusLost
+
+    private void jtxtNombreCuentaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombreCuentaFocusGained
+        // TODO add your handling code here:
+        validar.JtxtEfectoPlaceHolder(jtxtNombreCuenta, "Buscar cuenta...", true);
+    }//GEN-LAST:event_jtxtNombreCuentaFocusGained
+
+    private void jtxtNombreCuentaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombreCuentaFocusLost
+        // TODO add your handling code here:
+        validar.JtxtEfectoPlaceHolder(jtxtNombreCuenta, "Buscar cuenta...", false);
+    }//GEN-LAST:event_jtxtNombreCuentaFocusLost
     
     public void SetFormularioPrincipal(Principal frmPrincipal) {
         this._frmPrincipal = frmPrincipal;
@@ -680,7 +724,8 @@ public class AsientoContable extends javax.swing.JPanel {
         jDateChooser1.setDate(null);
         jcmbTipoCuenta.setSelectedIndex(0);
         jcmbEmpresa.setSelectedIndex(0);
-        jtxtDescripcion.setText("");
+        jtxtDescripcion.setText("Ingrese la descripción del asiento contable...");
+        validar.JtxtColorInicialTexto(new javax.swing.JTextField[] {jtxtDescripcion}, new java.awt.Color(204, 204, 204));
         _modeloLista.removeAllElements();// Limpia el modelo de la lista (elimina todos los elementos que hayan)
         DefaultTableModel modelo = new DefaultTableModel();
         modelo = (DefaultTableModel)jtblMovimientos.getModel();

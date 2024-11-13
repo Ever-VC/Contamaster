@@ -129,4 +129,24 @@ public class Validaciones {
     public void JtxtColorInicial(javax.swing.JTextField jtxt) {
         jtxt.setBorder(BorderFactory.createLineBorder(new Color(204,204,204), 1, true));
     }
+    
+    public void JtxtEfectoPlaceHolder(javax.swing.JTextField jtxt, String texto, boolean esFoco) {
+        if (esFoco) {
+            if (jtxt.getText().equals(texto)) {
+                jtxt.setText("");
+                jtxt.setForeground(new java.awt.Color(0,51,51));
+            }
+        } else {
+            if (jtxt.getText().isEmpty()) {
+                jtxt.setText(texto);
+                jtxt.setForeground(new java.awt.Color(204, 204, 204));
+            }
+        }
+    }
+    
+    public void JtxtColorInicialTexto(javax.swing.JTextField[] jtxts, java.awt.Color color) {
+        for (int i = 0; i < jtxts.length; i++) {
+            jtxts[i].setForeground(color);
+        }
+    }
 }

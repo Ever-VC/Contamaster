@@ -21,6 +21,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
     private int _idEmpresaSeleccionada = -1;
     private Principal _frmPrincipal;
     private Validaciones validar = new Validaciones();
+    javax.swing.JTextField[] _jtxts;
 
     /**
      * Creates new form GestionEmpresa
@@ -43,6 +44,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
         // Cambia el fondo del área vacía de la tabla
         jtblEmpresas.setFillsViewportHeight(true);
         jtblEmpresas.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
+        _jtxts = new javax.swing.JTextField[] {jtxtNombre, jtxtPropietario, jtxtDireccion, jtxtEmail};
     }
 
     /**
@@ -196,10 +198,11 @@ public class GestionEmpresa extends javax.swing.JPanel {
 
         jtxtNombre.setBackground(new java.awt.Color(242, 247, 251));
         jtxtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtNombre.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtNombre.setForeground(new java.awt.Color(204, 204, 204));
         jtxtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtNombre.setText("Ingrese el nombre...");
         jtxtNombre.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtNombre.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtNombre.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtNombreFocusGained(evt);
@@ -219,10 +222,11 @@ public class GestionEmpresa extends javax.swing.JPanel {
 
         jtxtPropietario.setBackground(new java.awt.Color(242, 247, 251));
         jtxtPropietario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtPropietario.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtPropietario.setForeground(new java.awt.Color(204, 204, 204));
         jtxtPropietario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtPropietario.setText("Ingrese el nombre del propietario...");
         jtxtPropietario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtPropietario.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtPropietario.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtPropietario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtPropietarioFocusGained(evt);
@@ -242,10 +246,11 @@ public class GestionEmpresa extends javax.swing.JPanel {
 
         jtxtDireccion.setBackground(new java.awt.Color(242, 247, 251));
         jtxtDireccion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtDireccion.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtDireccion.setForeground(new java.awt.Color(204, 204, 204));
         jtxtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtDireccion.setText("Ingrese la dirección...");
         jtxtDireccion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtDireccion.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtDireccion.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtDireccion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtDireccionFocusGained(evt);
@@ -260,10 +265,11 @@ public class GestionEmpresa extends javax.swing.JPanel {
 
         jtxtEmail.setBackground(new java.awt.Color(242, 247, 251));
         jtxtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jtxtEmail.setForeground(new java.awt.Color(0, 51, 51));
+        jtxtEmail.setForeground(new java.awt.Color(204, 204, 204));
         jtxtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtEmail.setText("Ingrese el correo electrónico...");
         jtxtEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jtxtEmail.setCaretColor(new java.awt.Color(242, 247, 251));
+        jtxtEmail.setCaretColor(new java.awt.Color(0, 51, 51));
         jtxtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtxtEmailFocusGained(evt);
@@ -352,16 +358,11 @@ public class GestionEmpresa extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(129, 129, 129)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbtnCatalogoCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(289, 289, 289))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jbtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbtnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(260, 260, 260)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -377,6 +378,10 @@ public class GestionEmpresa extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(369, 369, 369)
+                .addComponent(jbtnCatalogoCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -477,7 +482,9 @@ public class GestionEmpresa extends javax.swing.JPanel {
     
         // Verifica que una fila válida esté seleccionada (Es decir que no haya dado click en un espacio vacío)
         if (selectedRow >= 0) {
-            _idEmpresaSeleccionada = Integer.parseInt(jtblEmpresas.getValueAt(selectedRow, 0).toString());        
+            _idEmpresaSeleccionada = Integer.parseInt(jtblEmpresas.getValueAt(selectedRow, 0).toString());
+            validar.JtxtColorInicialTexto(_jtxts, new java.awt.Color(0,51,51));
+            JtxtFinFoco();
             CargarDatosDeEmpresaSeleccionada();
         }
         //_idEmpresaSeleccionada = Integer.parseInt(jtblEmpresas.getValueAt(jtblEmpresas.getSelectedRow(), 0).toString());
@@ -518,41 +525,49 @@ public class GestionEmpresa extends javax.swing.JPanel {
     private void jtxtNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombreFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtNombre, true);
+        validar.JtxtEfectoPlaceHolder(jtxtNombre, "Ingrese el nombre...", true);
     }//GEN-LAST:event_jtxtNombreFocusGained
 
     private void jtxtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtNombreFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtNombre, false);
+        validar.JtxtEfectoPlaceHolder(jtxtNombre, "Ingrese el nombre...", false);
     }//GEN-LAST:event_jtxtNombreFocusLost
 
     private void jtxtPropietarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPropietarioFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtPropietario, true);
+        validar.JtxtEfectoPlaceHolder(jtxtPropietario, "Ingrese el nombre del propietario...", true);
     }//GEN-LAST:event_jtxtPropietarioFocusGained
 
     private void jtxtPropietarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtPropietarioFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtPropietario, false);
+        validar.JtxtEfectoPlaceHolder(jtxtPropietario, "Ingrese el nombre del propietario...", false);
     }//GEN-LAST:event_jtxtPropietarioFocusLost
 
     private void jtxtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDireccionFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtDireccion, true);
+        validar.JtxtEfectoPlaceHolder(jtxtDireccion, "Ingrese la dirección...", true);
     }//GEN-LAST:event_jtxtDireccionFocusGained
 
     private void jtxtDireccionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtDireccionFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtDireccion, false);
+        validar.JtxtEfectoPlaceHolder(jtxtDireccion, "Ingrese la dirección...", false);
     }//GEN-LAST:event_jtxtDireccionFocusLost
 
     private void jtxtEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtEmailFocusGained
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtEmail, true);
+        validar.JtxtEfectoPlaceHolder(jtxtEmail, "Ingrese el correo electrónico...", true);
     }//GEN-LAST:event_jtxtEmailFocusGained
 
     private void jtxtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtxtEmailFocusLost
         // TODO add your handling code here:
         validar.JtxtFocoCambiarColor(jtxtEmail, false);
+        validar.JtxtEfectoPlaceHolder(jtxtEmail, "Ingrese el correo electrónico...", false);
     }//GEN-LAST:event_jtxtEmailFocusLost
 
     public void SetFormularioPrincipal(Principal frmPrincipal) {
@@ -563,7 +578,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
         boolean sonValidos = true;
         int cantidadCamposInvalidos = 0;
         String camposNoValidos = "";
-        if ("".equals(nombre)) {
+        if ("Ingrese el nombre...".equals(nombre)) {
             validar.JtxtErrorColor(jtxtNombre);
             cantidadCamposInvalidos ++;
             camposNoValidos += "\n~ NOMBRE DE LA EMPRESA";
@@ -571,21 +586,21 @@ public class GestionEmpresa extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [NOMBRE], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
             sonValidos = false;
         }
-        if ("".equals(propietario)) {
+        if ("Ingrese el nombre del propietario...".equals(propietario)) {
             validar.JtxtErrorColor(jtxtPropietario);
             cantidadCamposInvalidos ++;
             camposNoValidos += "\n~ NOMBRE DEL PROPIETARIO";
             //JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO LLENAR EL CAMPO DE [PROPIETARIO], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
             sonValidos = false;
         }
-        if ("".equals(direccion)) {
+        if ("Ingrese la dirección...".equals(direccion)) {
             validar.JtxtErrorColor(jtxtDireccion);
             cantidadCamposInvalidos ++;
             camposNoValidos += "\n~ DIRECCIÓN";
             //JOptionPane.showMessageDialog(null, "PARECE QUE HA OLVIDADO SELECCIONAR EL CAMPO DE [DIRECCION], POR FAVOR ASEGURESE DE LLENAR CORRECTAMENTE TODOS LOS CAMPOS QUE CONTIENEN UN [*].","ERROR:", JOptionPane.ERROR_MESSAGE);
             sonValidos = false;
         }
-        if ("".equals(email)) {
+        if ("Ingrese el correo electrónico...".equals(email)) {
             validar.JtxtErrorColor(jtxtEmail);
             cantidadCamposInvalidos ++;
             camposNoValidos += "\n~ CORREO";
@@ -625,13 +640,14 @@ public class GestionEmpresa extends javax.swing.JPanel {
     }
     
     private void LimpiarTodo() {
-        jtxtNombre.setText("");
-        jtxtPropietario.setText("");
-        jtxtDireccion.setText("");
-        jtxtEmail.setText("");
+        jtxtNombre.setText("Ingrese el nombre...");
+        jtxtPropietario.setText("Ingrese el nombre del propietario...");
+        jtxtDireccion.setText("Ingrese la dirección...");
+        jtxtEmail.setText("Ingrese el correo electrónico...");
         _idEmpresaSeleccionada = -1;
         jtblEmpresas.clearSelection();
         JtxtFinFoco();
+        validar.JtxtColorInicialTexto(_jtxts, new java.awt.Color(204, 204, 204));
     }
     
     private void JtxtFinFoco() {
