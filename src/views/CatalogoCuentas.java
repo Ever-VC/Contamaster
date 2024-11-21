@@ -110,6 +110,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         jtblCuentas.setSelectionBackground(new java.awt.Color(26, 173, 220));
         jtblCuentas.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jtblCuentas.setShowGrid(true);
+        jtblCuentas.getTableHeader().setReorderingAllowed(false);
         jtblCuentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtblCuentasMouseClicked(evt);
@@ -130,7 +131,7 @@ public class CatalogoCuentas extends javax.swing.JPanel {
         }
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jlblTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        jlblTitulo.setForeground(new java.awt.Color(0, 51, 51));
         jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblTitulo.setText("CATALOGO DE CUENTAS");
 

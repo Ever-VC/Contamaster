@@ -85,7 +85,7 @@ public class LibroMayor extends javax.swing.JPanel {
         setBackground(new java.awt.Color(242, 247, 251));
 
         jlblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jlblTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        jlblTitulo.setForeground(new java.awt.Color(0, 51, 51));
         jlblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblTitulo.setText("LIBRO MAYOR");
 
@@ -149,6 +149,7 @@ public class LibroMayor extends javax.swing.JPanel {
         jtblCuentas.setSelectionBackground(new java.awt.Color(26, 173, 220));
         jtblCuentas.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jtblCuentas.setShowGrid(true);
+        jtblCuentas.getTableHeader().setReorderingAllowed(false);
         jtblCuentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtblCuentasMouseClicked(evt);
@@ -381,7 +382,16 @@ public class LibroMayor extends javax.swing.JPanel {
 
     private void jbtnBalanzaComprobacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBalanzaComprobacionActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "PARECE QUE ESTE MODULO NO HA SIDO IMPLEMENTADO AUN, PERO DESCUIDA, TE NOTIFICAREMOS TAN PRONTO ESTE DISPONIBLE. :)","¡OH POR DIOS!", JOptionPane.ERROR_MESSAGE);
+        //JOptionPane.showMessageDialog(null, "PARECE QUE ESTE MODULO NO HA SIDO IMPLEMENTADO AUN, PERO DESCUIDA, TE NOTIFICAREMOS TAN PRONTO ESTE DISPONIBLE. :)","¡OH POR DIOS!", JOptionPane.ERROR_MESSAGE);
+        if (_empresaSeleccionada != null) {
+            if (ultimaMayorizacion != null) {
+                _frmPrincipal.AbrirSubPanel(new BalanzaComprobacion(_empresaSeleccionada, ultimaMayorizacion));
+            } else {
+                _frmPrincipal.AbrirSubPanel(new BalanzaComprobacion(_empresaSeleccionada));
+            }            
+        } else {
+            JOptionPane.showMessageDialog(null, "POR FAVOR SELECCIONE LA EMPRESA DE LA CUAL DESEA VER LA BALANZA DE COMPROBACION.","ERROR:", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jbtnBalanzaComprobacionActionPerformed
 
     private void jbtnMayorizacionesPorCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMayorizacionesPorCuentaActionPerformed

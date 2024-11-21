@@ -119,6 +119,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
         jtblEmpresas.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jtblEmpresas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jtblEmpresas.setShowGrid(true);
+        jtblEmpresas.getTableHeader().setReorderingAllowed(false);
         jtblEmpresas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtblEmpresasMouseClicked(evt);
