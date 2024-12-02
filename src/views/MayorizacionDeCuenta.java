@@ -76,6 +76,7 @@ public class MayorizacionDeCuenta extends javax.swing.JPanel {
         jtblMayorizaciones.setSelectionBackground(new java.awt.Color(26, 173, 220));
         jtblMayorizaciones.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jtblMayorizaciones.setShowGrid(true);
+        jtblMayorizaciones.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jtblMayorizaciones);
         if (jtblMayorizaciones.getColumnModel().getColumnCount() > 0) {
             jtblMayorizaciones.getColumnModel().getColumn(0).setResizable(false);

@@ -100,6 +100,6 @@ public class MayorControlador {
         _entityManager = setEntityManager();
         _entityManager.getTransaction().begin();
         return _entityManager.createQuery("SELECT m FROM Mayor m").getResultList();
-     }
+    }
     
 }

@@ -64,7 +64,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jbtnInicio" max="32767" attributes="0"/>
-                      <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jbtnEstadosFinancieros" alignment="0" max="32767" attributes="0"/>
                       <Component id="jbtnCerrarSesion" alignment="0" max="32767" attributes="0"/>
                       <Component id="jbtnLibroMayor" alignment="0" max="32767" attributes="0"/>
                       <Component id="jbtnLibroDiario" alignment="0" max="32767" attributes="0"/>
@@ -104,7 +104,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jbtnLibroMayor" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="jbtnEstadosFinancieros" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jbtnCerrarSesion" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -280,7 +280,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnCerrarSesionActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="jbtnEstadosFinancieros">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -296,6 +296,9 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnEstadosFinancierosActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -350,7 +353,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jimgUsuario" min="-2" pref="48" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jlblNombreUsuario1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblNombreUsuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -359,7 +362,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="jlblNombreUsuario1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblNombreUsuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
               <Component id="jimgUsuario" alignment="1" max="32767" attributes="0"/>
@@ -367,7 +370,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jlblNombreUsuario1">
+        <Component class="javax.swing.JLabel" name="jlblNombreUsuario">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="0" red="0" type="rgb"/>
@@ -385,6 +388,9 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlblNombreUsuarioMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jimgUsuario">
           <Properties>

@@ -5,7 +5,6 @@
 package models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
- * @author ever_vc
+ * @author Ever Vásquez
  */
 @Entity
 @Table(name = "empresa", catalog = "contamaster", schema = "public")
@@ -40,8 +38,8 @@ public class Empresa implements Serializable {
     private String direccion;
     @Column(name = "email", length = 100)
     private String email;
-    @OneToMany(mappedBy = "idEmpresaFk")
-    private Collection<Cuenta> cuentaCollection;
+    @Column(name = "propietario", length = 100)
+    private String propietario;
 
     public Empresa() {
     }
@@ -87,12 +85,12 @@ public class Empresa implements Serializable {
         this.email = email;
     }
 
-    public Collection<Cuenta> getCuentaCollection() {
-        return cuentaCollection;
+    public String getPropietario() {
+        return propietario;
     }
 
-    public void setCuentaCollection(Collection<Cuenta> cuentaCollection) {
-        this.cuentaCollection = cuentaCollection;
+    public void setPropietario(String propietario) {
+        this.propietario = propietario;
     }
 
     @Override
@@ -117,8 +115,9 @@ public class Empresa implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
         //return "models.Empresa[ id=" + id + " ]";
+    
+        return this.nombre;
     }
     
 }
