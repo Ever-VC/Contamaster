@@ -6,9 +6,11 @@ package views;
 
 import controllers.CuentaControlador;
 import controllers.MayorControlador;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import models.Cuenta;
 import models.Empresa;
@@ -27,6 +29,7 @@ public class BalanzaComprobacion extends javax.swing.JPanel {
     public BalanzaComprobacion() {
         initComponents();
         CargarBalanza();
+        ModeloTabla();
     }
     
     public BalanzaComprobacion(Empresa empresa) {
@@ -35,6 +38,7 @@ public class BalanzaComprobacion extends javax.swing.JPanel {
         jlblNombreEmpresa.setText(empresa.getNombre().toUpperCase());
         jlblFechaBalance.setText("Actualidad (sin mayorizar)");
         CargarBalanza();
+        ModeloTabla();
     }
     
     public BalanzaComprobacion(Empresa empresa, Date ultimaMayorizacion) {
@@ -45,6 +49,7 @@ public class BalanzaComprobacion extends javax.swing.JPanel {
         String fecha = formatoLargo.format(ultimaMayorizacion);
         jlblFechaBalance.setText(fecha);
         CargarBalanza();
+        ModeloTabla();
     }
 
     /**
@@ -115,6 +120,7 @@ public class BalanzaComprobacion extends javax.swing.JPanel {
         );
 
         jtblBanlanceComprobacion.setBackground(new java.awt.Color(242, 247, 251));
+        jtblBanlanceComprobacion.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jtblBanlanceComprobacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -134,6 +140,9 @@ public class BalanzaComprobacion extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jtblBanlanceComprobacion.setRowHeight(25);
+        jtblBanlanceComprobacion.setSelectionBackground(new java.awt.Color(26, 173, 220));
+        jtblBanlanceComprobacion.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jtblBanlanceComprobacion.setShowGrid(true);
         jtblBanlanceComprobacion.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jtblBanlanceComprobacion);
@@ -174,8 +183,8 @@ public class BalanzaComprobacion extends javax.swing.JPanel {
                 .addGap(80, 80, 80)
                 .addComponent(jpnlEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -214,6 +223,24 @@ public class BalanzaComprobacion extends javax.swing.JPanel {
             }*/
         }
         modelo.addRow(new Object[]{"Total", "$" + totalDebe, "$" + totalHaber}); 
+    }
+    
+    private void ModeloTabla() {
+        // Diseño de la tabla => Crea un renderer para personalizar el encabezado
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(new java.awt.Color(0,51,51)); // Cambia el color de fondo del encabezado al del diseño principal new java.awt.Color(0,51,51)
+        headerRenderer.setForeground(Color.WHITE); // Cambia el color de la fuente del encabezado
+
+        // Asigna el renderer a cada columna del encabezado
+        for (int i = 0; i < jtblBanlanceComprobacion.getColumnModel().getColumnCount(); i++) {
+            jtblBanlanceComprobacion.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
+        
+        // Cambia el fondo de la tabla
+        jtblBanlanceComprobacion.setBackground(new java.awt.Color(242,247,251)); // Fondo de la tabla (celdas)
+        // Cambia el fondo del área vacía de la tabla
+        jtblBanlanceComprobacion.setFillsViewportHeight(true);
+        jtblBanlanceComprobacion.getParent().setBackground(new java.awt.Color(242,247,251)); // Fondo del viewport
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

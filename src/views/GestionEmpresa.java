@@ -431,6 +431,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
             empresaActualizada.setNombre(nombreEmpresa);
             empresaActualizada.setDireccion(direccion);
             empresaActualizada.setEmail(email);
+            empresaActualizada.setPropietario(propietario);
             
             EmpresaControlador.Instancia().ActualizarEmpresa(empresaActualizada);
             JOptionPane.showMessageDialog(null, "LA EMPRESA HA SIDO ACTUALIZADA EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
@@ -441,6 +442,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
             nuevaEmpresa.setNombre(nombreEmpresa);
             nuevaEmpresa.setDireccion(direccion);
             nuevaEmpresa.setEmail(email);
+            nuevaEmpresa.setPropietario(propietario);
             
             EmpresaControlador.Instancia().CrearEmpresa(nuevaEmpresa);
             JOptionPane.showMessageDialog(null, "LA EMPRESA HA SIDO REGISTRADA EN LA BASE DE DATOS EXITOSAMENTE.","TAREA REALIZADA CON EXITO:", JOptionPane.INFORMATION_MESSAGE);
@@ -626,7 +628,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
         List<Empresa> lstEmpresas = EmpresaControlador.Instancia().GetListaEmpresas();
         
         for (Empresa empresa : lstEmpresas) {
-            modelo.addRow(new Object[]{empresa.getId(), empresa.getNombre(), empresa.getDireccion(), "-- Sin definir --", empresa.getEmail()});
+            modelo.addRow(new Object[]{empresa.getId(), empresa.getNombre(), empresa.getDireccion(), empresa.getPropietario(), empresa.getEmail()});
         }
     }
     
@@ -634,7 +636,7 @@ public class GestionEmpresa extends javax.swing.JPanel {
         if (_idEmpresaSeleccionada != -1) {
             Empresa empresaSeleccionada = EmpresaControlador.Instancia().GetEmpresaPorId(_idEmpresaSeleccionada);
             jtxtNombre.setText(empresaSeleccionada.getNombre());
-            jtxtPropietario.setText("-- Sin definir --");
+            jtxtPropietario.setText(empresaSeleccionada.getPropietario());
             jtxtDireccion.setText(empresaSeleccionada.getDireccion());
             jtxtEmail.setText(empresaSeleccionada.getEmail());
         }

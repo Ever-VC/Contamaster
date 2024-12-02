@@ -2,7 +2,7 @@
 CREATE TABLE empresa (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    --propietario VARCHAR(100) NOT NULL,
+    propietario VARCHAR(100) NOT NULL,
     direccion VARCHAR(255),
     email VARCHAR(100)
 );

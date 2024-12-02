@@ -57,6 +57,7 @@ public class EmpresaControlador {
         empresaAEditar.setNombre(empresaActualizada.getNombre());
         empresaAEditar.setDireccion(empresaActualizada.getDireccion());
         empresaAEditar.setEmail(empresaActualizada.getEmail());
+        empresaAEditar.setPropietario(empresaActualizada.getPropietario());
         _entityManager.getTransaction().commit();
         _entityManager.close();
     }

@@ -91,7 +91,7 @@ public class Principal extends javax.swing.JFrame {
         jbtnLibroDiario = new javax.swing.JButton();
         jbtnLibroMayor = new javax.swing.JButton();
         jbtnCerrarSesion = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbtnEstadosFinancieros = new javax.swing.JButton();
         jpnlContenedor = new javax.swing.JPanel();
         jpnlTop = new javax.swing.JPanel();
         jlblNombreUsuario = new javax.swing.JLabel();
@@ -191,11 +191,16 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 51, 51));
-        jButton1.setText("ESTADOS FINANCIEROS");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnEstadosFinancieros.setBackground(new java.awt.Color(255, 255, 255));
+        jbtnEstadosFinancieros.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnEstadosFinancieros.setForeground(new java.awt.Color(0, 51, 51));
+        jbtnEstadosFinancieros.setText("ESTADOS FINANCIEROS");
+        jbtnEstadosFinancieros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnEstadosFinancieros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEstadosFinancierosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnlMenuLayout = new javax.swing.GroupLayout(jpnlMenu);
         jpnlMenu.setLayout(jpnlMenuLayout);
@@ -206,7 +211,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbtnInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnEstadosFinancieros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtnCerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtnLibroMayor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtnLibroDiario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -242,7 +247,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtnEstadosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -395,6 +400,11 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new EditarPerfil());
     }//GEN-LAST:event_jlblNombreUsuarioMouseClicked
+
+    private void jbtnEstadosFinancierosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEstadosFinancierosActionPerformed
+        // TODO add your handling code here:
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new EstadosFinancieros());
+    }//GEN-LAST:event_jbtnEstadosFinancierosActionPerformed
   
     /**
      * @param args the command line arguments
@@ -466,11 +476,11 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnAsientos;
     private javax.swing.JButton jbtnCerrarSesion;
     private javax.swing.JButton jbtnEmpresas;
+    private javax.swing.JButton jbtnEstadosFinancieros;
     private javax.swing.JButton jbtnInicio;
     private javax.swing.JButton jbtnLibroDiario;
     private javax.swing.JButton jbtnLibroMayor;
