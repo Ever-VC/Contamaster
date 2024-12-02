@@ -115,7 +115,9 @@ public class Empresa implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Empresa[ id=" + id + " ]";
+        //return "models.Empresa[ id=" + id + " ]";
+    
+        return this.nombre;
     }
     
 }
