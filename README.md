@@ -82,7 +82,7 @@ Una vez clonado el repositorio de Contamaster, sigue estos pasos para configurar
 Lo primero que debes hacer es crear una nueva base de datos con el nombre de ***contamaster***, luego, debes navegar a la carpeta ***database/*** en el directorio del proyecto y ejecuta el archivo consultas.sql en tu nueva base de datos.
 Este script creará las tablas necesarias y un usuario administrador por defecto para que el sistema funcione correctamente.
 
-2. **Abrir el prooyecto en Apache NetBeans IDE**
+2. **Abrir el proyecto en Apache NetBeans IDE**
 
 Abres el Apache NetBeans IDE, en la barra superior das click en ***File > Open Project*** buscas la ruta en donde clonaste el proyecto, lo seleccionas y das click en ***Open Project***.
 
