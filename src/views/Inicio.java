@@ -32,7 +32,7 @@ public class Inicio extends javax.swing.JPanel {
         setBackground(new java.awt.Color(242, 247, 251));
 
         jlbltitulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jlbltitulo.setForeground(new java.awt.Color(0, 0, 0));
+        jlbltitulo.setForeground(new java.awt.Color(0, 51, 51));
         jlbltitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbltitulo.setText("INICIO");
 
@@ -41,14 +41,13 @@ public class Inicio extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(458, 458, 458)
-                        .addComponent(jlbltitulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jlbltitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(270, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(254, 254, 254))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

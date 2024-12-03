@@ -104,6 +104,7 @@ public class AsientoContable extends javax.swing.JPanel {
         jlblEmpresa = new javax.swing.JLabel();
         jlblDescripcion = new javax.swing.JLabel();
         jlblTipoCuenta3 = new javax.swing.JLabel();
+        jlblIndicaciones = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(242, 247, 251));
         setPreferredSize(new java.awt.Dimension(1051, 835));
@@ -198,7 +199,7 @@ public class AsientoContable extends javax.swing.JPanel {
             .addGroup(jpnlCuentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpnlCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(jpnlCuentasLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblIconSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,6 +241,7 @@ public class AsientoContable extends javax.swing.JPanel {
         jtblMovimientos.setSelectionBackground(new java.awt.Color(26, 173, 220));
         jtblMovimientos.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jtblMovimientos.setShowGrid(true);
+        jtblMovimientos.getTableHeader().setReorderingAllowed(false);
         jtblMovimientos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtblMovimientosMouseClicked(evt);
@@ -322,6 +324,11 @@ public class AsientoContable extends javax.swing.JPanel {
         jlblTipoCuenta3.setForeground(new java.awt.Color(0, 51, 51));
         jlblTipoCuenta3.setText("TOTALES:");
 
+        jlblIndicaciones.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jlblIndicaciones.setForeground(new java.awt.Color(0, 102, 153));
+        jlblIndicaciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblIndicaciones.setText("PARA MODIFICAR EL MONTO DEL [DEBE] O [HABER], DAR DOBLE CLICK EN LA CASIILA CORRESPONDIENTE AL MOVIMIENTO");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -340,8 +347,8 @@ public class AsientoContable extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtxtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(85, 85, 85)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,7 +373,8 @@ public class AsientoContable extends javax.swing.JPanel {
                                         .addComponent(jlblDescripcion)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jlblIndicaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpnlCuentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -415,6 +423,8 @@ public class AsientoContable extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jlblIndicaciones)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -804,6 +814,7 @@ public class AsientoContable extends javax.swing.JPanel {
     private javax.swing.JLabel jlblDescripcion;
     private javax.swing.JLabel jlblEmpresa;
     private javax.swing.JLabel jlblFecha;
+    private javax.swing.JLabel jlblIndicaciones;
     private javax.swing.JLabel jlblTipoCuenta;
     private javax.swing.JLabel jlblTipoCuenta3;
     private javax.swing.JLabel jlblTitulo;

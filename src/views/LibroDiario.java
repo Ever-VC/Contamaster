@@ -115,6 +115,7 @@ public class LibroDiario extends javax.swing.JPanel {
         jtblLibroDiario.setSelectionBackground(new java.awt.Color(26, 173, 220));
         jtblLibroDiario.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jtblLibroDiario.setShowGrid(false);
+        jtblLibroDiario.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jtblLibroDiario);
         if (jtblLibroDiario.getColumnModel().getColumnCount() > 0) {
             jtblLibroDiario.getColumnModel().getColumn(0).setResizable(false);

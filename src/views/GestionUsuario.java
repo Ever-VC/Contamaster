@@ -613,7 +613,7 @@ public class GestionUsuario extends javax.swing.JPanel {
             usuarioActualizado.setDireccion(direccion);
             usuarioActualizado.setEmail(email);
             usuarioActualizado.setUsername(username);
-            if (password.equals("")) {
+            if (password.equals("Ingrese la contraseña...")) {
                 usuarioActualizado.setPassword(null);
             } else {
                 usuarioActualizado.setPassword(password);

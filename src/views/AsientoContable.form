@@ -42,8 +42,8 @@
                       <Component id="jtxtTotalHaber" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" min="-2" pref="699" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -78,6 +78,7 @@
                                   <Component id="jtxtDescripcion" alignment="0" min="-2" pref="535" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="jlblIndicaciones" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -140,6 +141,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jtxtDescripcion" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jlblIndicaciones" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -287,7 +290,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" pref="297" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="lblIconSearch" min="-2" pref="24" max="-2" attributes="0"/>
@@ -436,7 +439,7 @@
             </Property>
             <Property name="showGrid" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+              <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
           <Events>
@@ -581,6 +584,18 @@
           <Color blue="33" green="33" red="0" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="TOTALES:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlblIndicaciones">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="66" red="0" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="PARA MODIFICAR EL MONTO DEL [DEBE] O [HABER], DAR DOBLE CLICK EN LA CASIILA CORRESPONDIENTE AL MOVIMIENTO"/>
       </Properties>
     </Component>
   </SubComponents>

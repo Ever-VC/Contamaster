@@ -37,13 +37,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new Inicio());
         
-        jlblNombreUsuario1.setText(UsuarioCache.GetNombreApellidoUsuario());
-        String url = "src/assets/avatarUserM.png";
-        if (UsuarioCache.Sexo.equals("Femenino")) {
-            url = "src/assets/avatarUserW.png";
-        }
-        SetImagLabel(jimgUsuario, url);
-        SetImagLabel(jimgLogo, "src/assets/logotipo-inicio.png");
+        MostrarInformacionDeUsuario(UsuarioCache.GetNombreApellidoUsuario(), UsuarioCache.Sexo);
         
         // Define los permisos
         if (UsuarioCache.RolUsuario.equals(rolUsuario.CONTADOR) || UsuarioCache.RolUsuario.equals(rolUsuario.AUXILIAR) || UsuarioCache.RolUsuario.equals(rolUsuario.GERENTE)) {
@@ -97,10 +91,11 @@ public class Principal extends javax.swing.JFrame {
         jbtnLibroDiario = new javax.swing.JButton();
         jbtnLibroMayor = new javax.swing.JButton();
         jbtnCerrarSesion = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbtnEstadosFinancieros = new javax.swing.JButton();
+        jbtnDocumentacion = new javax.swing.JButton();
         jpnlContenedor = new javax.swing.JPanel();
         jpnlTop = new javax.swing.JPanel();
-        jlblNombreUsuario1 = new javax.swing.JLabel();
+        jlblNombreUsuario = new javax.swing.JLabel();
         jimgUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -197,34 +192,52 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 51, 51));
-        jButton1.setText("ESTADOS FINANCIEROS");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnEstadosFinancieros.setBackground(new java.awt.Color(255, 255, 255));
+        jbtnEstadosFinancieros.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnEstadosFinancieros.setForeground(new java.awt.Color(0, 51, 51));
+        jbtnEstadosFinancieros.setText("ESTADOS FINANCIEROS");
+        jbtnEstadosFinancieros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnEstadosFinancieros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEstadosFinancierosActionPerformed(evt);
+            }
+        });
+
+        jbtnDocumentacion.setBackground(new java.awt.Color(255, 255, 255));
+        jbtnDocumentacion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnDocumentacion.setForeground(new java.awt.Color(0, 51, 51));
+        jbtnDocumentacion.setText("DOCUMENTACION ");
+        jbtnDocumentacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbtnDocumentacion.setName(""); // NOI18N
+        jbtnDocumentacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDocumentacionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnlMenuLayout = new javax.swing.GroupLayout(jpnlMenu);
         jpnlMenu.setLayout(jpnlMenuLayout);
         jpnlMenuLayout.setHorizontalGroup(
             jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnlMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbtnInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnCerrarSesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnLibroMayor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnLibroDiario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnAsientos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnEmpresas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnUsuarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlblNombreEmpresa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addGroup(jpnlMenuLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jimgLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(jpnlMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtnInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnEstadosFinancieros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnLibroMayor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnLibroDiario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnEmpresas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlblNombreEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnDocumentacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jpnlMenuLayout.setVerticalGroup(
             jpnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +261,9 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtnLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbtnEstadosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbtnDocumentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -272,13 +287,18 @@ public class Principal extends javax.swing.JFrame {
         jpnlTop.setBackground(new java.awt.Color(255, 255, 255));
         jpnlTop.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
 
-        jlblNombreUsuario1.setBackground(new java.awt.Color(0, 0, 51));
-        jlblNombreUsuario1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jlblNombreUsuario1.setForeground(new java.awt.Color(0, 102, 153));
-        jlblNombreUsuario1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jlblNombreUsuario1.setText("Nombre Usuario");
-        jlblNombreUsuario1.setToolTipText("Editar perfil...");
-        jlblNombreUsuario1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlblNombreUsuario.setBackground(new java.awt.Color(0, 0, 51));
+        jlblNombreUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jlblNombreUsuario.setForeground(new java.awt.Color(0, 102, 153));
+        jlblNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jlblNombreUsuario.setText("Nombre Usuario");
+        jlblNombreUsuario.setToolTipText("Editar perfil...");
+        jlblNombreUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jlblNombreUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlblNombreUsuarioMouseClicked(evt);
+            }
+        });
 
         jimgUsuario.setBackground(new java.awt.Color(0, 51, 51));
         jimgUsuario.setToolTipText("Cerrar sesión...");
@@ -292,14 +312,14 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jimgUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlblNombreUsuario1)
+                .addComponent(jlblNombreUsuario)
                 .addGap(17, 17, 17))
         );
         jpnlTopLayout.setVerticalGroup(
             jpnlTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnlTopLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jlblNombreUsuario1)
+                .addComponent(jlblNombreUsuario)
                 .addContainerGap(14, Short.MAX_VALUE))
             .addComponent(jimgUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -391,6 +411,30 @@ public class Principal extends javax.swing.JFrame {
         frmLibroMayor.SetFormularioPrincipal(this);
         MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, frmLibroMayor);
     }//GEN-LAST:event_jbtnLibroMayorActionPerformed
+
+    private void jlblNombreUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblNombreUsuarioMouseClicked
+        // TODO add your handling code here:
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new EditarPerfil());
+    }//GEN-LAST:event_jlblNombreUsuarioMouseClicked
+
+    private void jbtnEstadosFinancierosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEstadosFinancierosActionPerformed
+        // TODO add your handling code here:
+        MostrarPanel.Instancia().NuevoPanel(jpnlContenedor, new EstadosFinancieros());
+    }//GEN-LAST:event_jbtnEstadosFinancierosActionPerformed
+
+    private void jbtnDocumentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDocumentacionActionPerformed
+        // TODO add your handling code here:
+         try {
+        // URL carpeta drive para la documentacion
+        String url = "https://drive.google.com/drive/folders/1E29QiZGHEG_UkxOhQ5CQmhcxCPeACRwy";
+        // Abre en el navegador 
+        java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(this, "No se pudo abrir el enlace.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jbtnDocumentacionActionPerformed
   
     /**
      * @param args the command line arguments
@@ -450,13 +494,24 @@ public class Principal extends javax.swing.JFrame {
         sesionDeUsuario.setLogoutTimestamp(new Date());// Almacena la hora de cierre de sesión por parte del usuario
         SessionLogControlador.instancia().GuardarCierreDeSesion(sesionDeUsuario);// Guarda la información
     }
+    
+    public void MostrarInformacionDeUsuario(String nombres, String sexo) {
+        jlblNombreUsuario.setText(nombres);
+        String url = "src/assets/avatarUserM.png";
+        if (sexo.equals("Femenino")) {
+            url = "src/assets/avatarUserW.png";
+        }
+        SetImagLabel(jimgUsuario, url);
+        SetImagLabel(jimgLogo, "src/assets/logotipo-inicio.png");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnAsientos;
     private javax.swing.JButton jbtnCerrarSesion;
+    private javax.swing.JButton jbtnDocumentacion;
     private javax.swing.JButton jbtnEmpresas;
+    private javax.swing.JButton jbtnEstadosFinancieros;
     private javax.swing.JButton jbtnInicio;
     private javax.swing.JButton jbtnLibroDiario;
     private javax.swing.JButton jbtnLibroMayor;
@@ -464,7 +519,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jimgLogo;
     private javax.swing.JLabel jimgUsuario;
     private javax.swing.JLabel jlblNombreEmpresa;
-    private javax.swing.JLabel jlblNombreUsuario1;
+    private javax.swing.JLabel jlblNombreUsuario;
     private javax.swing.JPanel jpnlContenedor;
     private javax.swing.JPanel jpnlMenu;
     private javax.swing.JPanel jpnlTop;
